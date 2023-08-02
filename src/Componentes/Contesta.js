@@ -391,7 +391,7 @@ function Contesta({ company, clave }) {
         </div>
 
       )}
-      {/* {selectLlamada === "2" ||
+      {selectLlamada === "2" ||
       selectLlamada === "3" ||
       selectLlamada === "4" ? (
         <div className="row my-2">
@@ -414,9 +414,9 @@ function Contesta({ company, clave }) {
             </select>
           </div>
         </div>
-      ) : null} */}
+      ) : null}
 
-      {/* {Comunica_con_tercero_valido === "1" ||
+      {Comunica_con_tercero_valido === "1" ||
       Comunica_con_tercero_valido === "2" ||
       Comunica_con_tercero_valido === "4" ? (
         <div className="row my-2">
@@ -438,9 +438,9 @@ function Contesta({ company, clave }) {
             </select>
           </div>
         </div>
-      ) : null} */}
+      ) : null}
 
-      {/* {Comunica_con_tercero_valido === "3" ||
+      {Comunica_con_tercero_valido === "3" ||
       Comunica_con_tercero_valido === "5" ? (
         <div className="row my-2">
           <h4>
@@ -448,9 +448,9 @@ function Contesta({ company, clave }) {
             buen día.
           </h4>
         </div>
-      ) : null} */}
+      ) : null}
 
-      {/* {horario_tercero === "1" ||
+      {horario_tercero === "1" ||
       horario_tercero === "2" ||
       horario_tercero === "3" ? (
         <div className="row my-2">
@@ -459,16 +459,16 @@ function Contesta({ company, clave }) {
             buen día.
           </h4>
         </div>
-      ) : null} */}
+      ) : null}
 
-      {/* {selectLlamada === "5" && (
+      {selectLlamada === "5" && (
         <div>
           <h4>
             Agradecido(a) por su tiempo, disculpe las molestias y que tenga un
             buen día.
           </h4>
         </div>
-      )} */}
+      )}
 
       {/* <div className="row my-2">
         <div className="col-lg-12 col-sm-10 my-2">
