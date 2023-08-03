@@ -24,6 +24,7 @@ import Genero from "./Componentes/Genero";
 import Direccion from "./Componentes/Direccion";
 import Contesta from "./Componentes/Contesta";
 import NoContesta from "./Componentes/NoContesta";
+import Despedida from "."
 
 registerLocale("es", es);
 
@@ -249,6 +250,10 @@ const App = () => {
       toast.success("Registro Guardado Exitosamente");
       console.log("Registro Guardado Exitosamente");
     }
+
+
+
+
   }
 
 
