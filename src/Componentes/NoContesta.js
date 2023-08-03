@@ -33,8 +33,11 @@ function NoContesta({ company, clave }) {
     if (result.status === 200) {
       setOptionListMotivo(result.data);
 
-      // console.log(result.data)
+      console.log(result.data)
       //  console.log(optionList)
+    }
+    else {
+      setOptionListMotivo([]);
     }
   };
 
@@ -61,7 +64,7 @@ function NoContesta({ company, clave }) {
 
   return (
     <>
- <div className="row my-2">
+      <div className="row my-2">
         <div className="col-lg-4 col-sm-10 my-2">No Conecta</div>
         <div className="col-lg-3 col-sm-6 my-2">
           <select className="form-select" aria-label="Default select example">

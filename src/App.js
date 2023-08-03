@@ -46,8 +46,7 @@ const App = () => {
   const [optionList, setOptionList] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
-    useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState("0");
   const [openCalendar, setCalendar] = useState(false);
   const [openHistoricoGestiones, setHistoricoGestiones] = useState(false);
 
@@ -101,7 +100,7 @@ const App = () => {
   const ValidaCall = async () => {
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Validacall",
-      { userName: "user", password: "pass" }
+      { userName: "test", password: "test" }
     );
 
     const { datos } = result.data;
@@ -109,7 +108,7 @@ const App = () => {
 
     if (result.status === 200) {
       setDataValida(datos);
-      // console.log(result.data)
+      console.log(result.data)
 
       result.data.forEach((item) => {
         clave = item.token;
@@ -174,6 +173,21 @@ const App = () => {
     }
   };
 
+
+
+  const ChangeLlamada = (valor) => {
+
+    console.log(valor)
+    setSelectedLlamada(valor)
+
+    if (!selectLlamada) {
+      return <div>Loading...</div>;
+    }
+
+
+    console.log(selectLlamada)
+  }
+
   const HideLogo = () => {
     // setshowlogo(!showlogo);
     setHistoricoGestiones(!openHistoricoGestiones);
@@ -237,6 +251,11 @@ const App = () => {
     }
   }
 
+
+
+
+
+
   return (
     <>
       <ToastContainer autoClose={3000} />{" "}
@@ -282,7 +301,7 @@ const App = () => {
                       className="form-control form-select my-3"
                       id="selectLlamada"
                       value={selectLlamada}
-                      onChange={(e) => setSelectedLlamada(e.target.value)}
+                      onChange={(e) => ChangeLlamada(e.target.value)}
                     >
                       <option value="">Seleccione una opción</option>
                       <option value="1">Conecta</option>
@@ -307,7 +326,7 @@ const App = () => {
                             <div className="col-4">Nombre Completo</div>
                           </div>
                           <div className="row">
-                         
+
                             <div className="col-4">
                               <input
                                 name="roomRent"
@@ -436,11 +455,11 @@ const App = () => {
                             </div>
                           </div>
                           <div className="row mt-3">
-                          <div className="col-5">Observacion Agenda</div>
+                            <div className="col-5">Observacion Agenda</div>
 
                           </div>
                           <div className="row">
-                          <div className="col-5">
+                            <div className="col-5">
                               <textarea rows="3"
                                 name="roomRent"
                                 type="text"
@@ -456,11 +475,11 @@ const App = () => {
                     </div>
                   </div>
                 </div>
-                {selectLlamada === "1" && (
+                {selectLlamada === '1' && (
                   <div>
                     <hr />
                     <div className="container">
-                      <Contesta></Contesta>
+                      <Contesta company={selectLlamada} clave={token}></Contesta>
                     </div>
 
                     <div className="row my-3">
@@ -501,7 +520,7 @@ const App = () => {
                 <div>
                   <hr />
                   <div className="container">
-                    <NoContesta></NoContesta>
+                    <NoContesta company={selectLlamada} clave={token}></NoContesta>
                   </div>
 
                   <div className="row my-3">
