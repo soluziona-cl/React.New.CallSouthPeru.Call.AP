@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Orkesta/Generacc/Call/static/css/main.cb21f36e.css",
+    "main.js": "/Orkesta/Generacc/Call/static/js/main.8605d84a.js",
+    "index.html": "/Orkesta/Generacc/Call/index.html",
+    "main.cb21f36e.css.map": "/Orkesta/Generacc/Call/static/css/main.cb21f36e.css.map",
+    "main.8605d84a.js.map": "/Orkesta/Generacc/Call/static/js/main.8605d84a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cb21f36e.css",
+    "static/js/main.8605d84a.js"
+  ]
+}

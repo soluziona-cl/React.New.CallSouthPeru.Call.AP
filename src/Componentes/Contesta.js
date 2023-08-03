@@ -31,7 +31,7 @@ function Contesta({ company, clave }) {
 
   const Company = async (company) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/ConectaDetalle",
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -51,7 +51,7 @@ function Contesta({ company, clave }) {
       setSelectedLlamada("0");
     } else {
       const result = await axios.post(
-        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/ConectaDetalle",
+        "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
         { dato: event },
         { headers: { Authorization: `Bearer ${clave}` } }
       );
@@ -88,12 +88,8 @@ function Contesta({ company, clave }) {
           >
             <option selected>Seleccione</option>
             <option value="1">Comunica con cliente</option>
-            <option value="2">Comunica con secretaria </option>
-            <option value="3">Comunica con cónyuge</option>
-            <option value="4">Comunica con tercero válido</option>
-            <option value="5">
-              Comunica con registro no válido (no vive/ no trabaja ahí)
-            </option>
+            <option value="2">Comunica con tercero válido</option>
+            <option value="3">Comunica con tercero no válido</option>
           </select>
         </div>
       </div>
@@ -152,7 +148,7 @@ function Contesta({ company, clave }) {
             de tránsito, atropello, etc.. Teniendo así la tranquilidad de
             proteger a quienes más quiere cuando usted no este
           </p>
-          |{" "}
+          {" "}
           <p>
             Pero para que sea aún más atractivo y conveniente para usted de
             manera paralela al Seguro se creará una Cuenta de Capitalización y
@@ -162,120 +158,40 @@ function Contesta({ company, clave }) {
           </p>
           <p>
             {" "}
-            <table border="1">
-              <thead>
-                <tr>
-                  <th>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    &nbsp;&nbsp;&nbsp;
-                  </th>
-                  <th>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    Plan 1&nbsp;&nbsp;&nbsp;
-                  </th>
-                  <th>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    Plan 2&nbsp;&nbsp;&nbsp;
-                  </th>
-                  <th>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    Plan 3&nbsp;&nbsp;&nbsp;
-                  </th>
-                  <th>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    Plan 4&nbsp;&nbsp;&nbsp;
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    Capital Asegurado&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    UF&nbsp;&nbsp;&nbsp;500&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    UF 1.000&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    UF 1.500&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    UF 2.000&nbsp;&nbsp;&nbsp;
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    Prima&nbsp;&nbsp;&nbsp;Mensual UF&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    0,308&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    0,381&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    0,439&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    0,502&nbsp;&nbsp;&nbsp;
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    Prima&nbsp;&nbsp;&nbsp;Mensual $&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    $9.240&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    $11.430&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    $13.170&nbsp;&nbsp;&nbsp;
-                  </td>
-                  <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <br />
-                    $15.060&nbsp;&nbsp;&nbsp;
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <table border="1"  style={{ borderCollapse: 'collapse', width:'100%' }}>
+  <thead>
+    <tr>
+      <th style={{ border: '1px solid black', padding: '8px' }}></th>
+      <th style={{ border: '1px solid black', padding: '8px' }}>Plan 1</th>
+      <th style={{ border: '1px solid black', padding: '8px' }}>Plan 2</th>
+      <th style={{ border: '1px solid black', padding: '8px' }}>Plan 3</th>
+      <th style={{ border: '1px solid black', padding: '8px' }}>Plan 4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style={{ border: '1px solid black', padding: '8px' }}>Capital Asegurado</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>UF 500</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>UF 1.000</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>UF 1.500</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>UF 2.000</td>
+    </tr>
+    <tr>
+      <td style={{ border: '1px solid black', padding: '8px' }}>Prima Mensual UF</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>0,308</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>0,381</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>0,439</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>0,502</td>
+    </tr>
+    <tr>
+      <td style={{ border: '1px solid black', padding: '8px' }}>Prima Mensual $</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>$9.240</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>$11.430</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>$13.170</td>
+      <td style={{ border: '1px solid black', padding: '8px' }}>$15.060</td>
+    </tr>
+  </tbody>
+</table>
           </p>
           <p>Por ejemplo : </p>
           <p>
@@ -323,8 +239,8 @@ function Contesta({ company, clave }) {
             Como puede ver son Coberturas y Beneficios muy convenientes para
             usted y familia.
           </p>
-          <div className="row my-2">
-            <div className="col-lg-4 col-sm-10 my-2">
+          <div className="row my-2" style={{backgroundColor: "#E8E8E8"}}>
+            <div className="col-lg-4 col-sm-10 my-2" >
               Acepta la contratación de este Seguro ??
             </div>
             <div className="col-lg-3 col-sm-6 my-2">

@@ -25,7 +25,7 @@ function NoContesta({ company, clave }) {
 
   const Company = async (company) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/ConectaDetalle",
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -45,7 +45,7 @@ function NoContesta({ company, clave }) {
       setSelectedLlamada("0");
     } else {
       const result = await axios.post(
-        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/ConectaDetalle",
+        "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
         { dato: event },
         { headers: { Authorization: `Bearer ${clave}` } }
       );

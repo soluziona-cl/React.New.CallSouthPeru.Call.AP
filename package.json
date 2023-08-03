@@ -1,6 +1,6 @@
 {
-  "name": "Soluziona_Generacc_CallIntro_Televenta_Entel",
-  "homepage": "/Soluziona/Generacc/CallIntro/Televenta/Entel/",
+  "name": "soluziona_generacc_callintro_televenta_entel",
+  "homepage": "/Orkesta/Generacc/Call",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

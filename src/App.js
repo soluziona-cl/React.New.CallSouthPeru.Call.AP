@@ -100,7 +100,7 @@ const App = () => {
 
   const ValidaCall = async () => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Validacall",
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Validacall",
       { userName: "user", password: "pass" }
     );
 
@@ -123,28 +123,28 @@ const App = () => {
   };
   const DatosCliente = async (lead, clave) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/DatosCliente",
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/DatosCliente",
       { dato: lead },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
 
     if (result.status === 200) {
       var arr = result.data;
-      // setDataFull(result.data);
+      setDataFull(result.data);
 
       let datoscliente = "";
       arr.forEach((element) => {
         datoscliente = JSON.parse(element.detalle);
       });
 
-      setDataFull(datoscliente);
+      // setDataFull(datoscliente);
 
       console.log(datafull);
     }
   };
   const GuardaURL = async (agentes, url, clave) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/SaveURl",
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/SaveURl",
       { dato: agentes, dato_2: url },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -161,7 +161,7 @@ const App = () => {
   };
   const Conecta = async (clave) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/Conecta",
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/Conecta",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -211,7 +211,7 @@ const App = () => {
     item_sucess_llamada["sucess"] = true;
     item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
     item_sucess_llamada["campaign_id"] = list_id;
-    item_sucess_llamada["campaign"] = "Cobranza_INACAP";
+    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
@@ -226,7 +226,7 @@ const App = () => {
     id.push(item_sucess_llamada);
 
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/GuardaGestion",
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
       { dato: id },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -243,24 +243,38 @@ const App = () => {
       <Container className="p-3">
         <Container className="p-5 mb-4 bg-light rounded-3">
           <h1 className="header">
-            Script FALLECIMIENTO ACCIDENTAL CON AHORRO   
+            Script FALLECIMIENTO ACCIDENTAL CON AHORRO
             <br />
             Accidentes Personales con Ahorro
           </h1>
           <div className="highlight">
             <div className="centtro">
               <div className="row mt-2">
-
-                <div className="col-6 my-2">
+                <div className="col-4 my-2">
                   {" "}
-                  Duración de la LLamada:{" "}
-                  <span id="duracion">
-                    {get_elapsed_time_string(elapsedSeconds)}
-                  </span>
+                  <h4>
+                    {" "}
+                    Duración de la LLamada :{" "}
+                    <span id="duracion">
+                      {get_elapsed_time_string(elapsedSeconds)}
+                    </span>
+                  </h4>
+                </div>
+                <div className="col-4 d-flex justify-content-end " >
+                  <h4> Id cliente </h4>
+                </div>
+                <div className="col-4">
+                  <input
+                    name="roomRent"
+                    type="text"
+                    value={lead_id}
+                    className="form-control"
+                    disabled
+                  />
                 </div>
                 <hr />
               </div>
-              <div className="row mt-2">
+              <div className="row mt-2 ">
                 <section className="row ">
                   <div className="col-lg-2 col-sm-3 my-3">LLamada</div>
                   <div className="col-lg-4 col-sm-8">
@@ -273,21 +287,181 @@ const App = () => {
                       <option value="">Seleccione una opción</option>
                       <option value="1">Conecta</option>
                       <option value="2">No Conecta</option>
-
                     </select>
                   </div>
-
                 </section>
+
+                <div className="container-fluid">
+                  <div className="highlight">
+                    <div className="centtro">
+                      <div className="row">
+                        <h3>Datos Cliente</h3>
+                        <hr />
+                      </div>
+                      {datafull.map((data, index) => (
+                        <>
+                          {/* {console.log(data)} */}
+                          <div className="row">
+                            <div className="col-4">Rut</div>
+                            <div className="col-2">Intentos</div>
+                            <div className="col-4">Nombre Completo</div>
+                          </div>
+                          <div className="row">
+                         
+                            <div className="col-4">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.RUT_CON_GUION}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col-2">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.intentos}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col-4">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.NOMBRE_COMPLETO}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                          <div className="row mt-3">
+                            <div className="col-4">Email</div>
+                            <div className="col-4">Region</div>
+                            <div className="col-4">Grupo</div>
+                          </div>
+                          <div className="row">
+                            <div className="col-4">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.EMAIL}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col-4">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.REGION}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col-4">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.GRUPO}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                          </div>
+
+                          <div className="row mt-3">
+                            <div className="col">Telefono 1</div>
+                            <div className="col">Telefono 2</div>
+                            <div className="col">Telefono 3</div>
+                            <div className="col">Telefono 4</div>
+                            <div className="col">Telefono 5</div>
+                            <div className="col">Telefono 6</div>
+                          </div>
+                          <div className="row">
+                            <div className="col">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.TELÉFONO_1}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.TELÉFONO_2}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.TELÉFONO_3}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.TELÉFONO_4}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.TELÉFONO_5}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.TELÉFONO_6}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                          <div className="row mt-3">
+                          <div className="col-5">Observacion Agenda</div>
+
+                          </div>
+                          <div className="row">
+                          <div className="col-5">
+                              <textarea rows="3"
+                                name="roomRent"
+                                type="text"
+                                value={data.Observacion_Agenda}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+
+                          </div>
+                        </>
+                      ))}
+                    </div>
+                  </div>
+                </div>
                 {selectLlamada === "1" && (
                   <div>
-
-
                     <hr />
                     <div className="container">
                       <Contesta></Contesta>
                     </div>
-
-
 
                     <div className="row my-3">
                       <hr />
@@ -304,7 +478,6 @@ const App = () => {
                     </div>
                   </div>
                 )}
-
               </div>
 
               {/* <section className="row ">
@@ -326,14 +499,10 @@ const App = () => {
 
               {selectLlamada === "2" && (
                 <div>
-              
-
                   <hr />
                   <div className="container">
                     <NoContesta></NoContesta>
                   </div>
-
-                
 
                   <div className="row my-3">
                     <hr />

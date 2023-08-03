@@ -66,6 +66,8 @@ function Nombre({company,clave}) {
     return (
 
         <>
+        {/* style={{backgroundColor: "#E8E8E8"}} */}
+<section className='bg card p-3' style={{backgroundColor: "#E8E8E8"}} >
         <div className="row my-2">
           <div className="col-lg-2 col-sm-3 my-2">Nombres</div>
           <div className="col-lg-10 col-sm-9 my-2">
@@ -125,6 +127,7 @@ function Nombre({company,clave}) {
           />
         </div>
       </div>
+      </section>
         
 
             {/* <div className="row mb-2">              
