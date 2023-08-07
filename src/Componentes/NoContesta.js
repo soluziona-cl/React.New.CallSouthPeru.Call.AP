@@ -67,7 +67,10 @@ function NoContesta({ company, clave }) {
       <div className="row my-2">
         <div className="col-lg-3 col-sm-3 my-3">No Conecta</div>
         <div className="col-lg-4 col-sm-8">
-          <select className="form-select" aria-label="Default select example">
+          <select className="form-select" aria-label="Default select example"
+                                id="no_conecta"
+                                value={select_no_conecta}>
+
             <option selected>Seleccione</option>
             <option value="1"> Congestionado</option>
             <option value="2">Fuera de Area o Apagado</option>
