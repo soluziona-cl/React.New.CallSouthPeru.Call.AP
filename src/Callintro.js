@@ -24,7 +24,7 @@ import Genero from "./Componentes/Genero";
 import Direccion from "./Componentes/Direccion";
 import Contesta from "./Componentes/Contesta";
 import NoContesta from "./Componentes/NoContesta";
-import Despedida from "."
+import Despedida from ".";
 
 registerLocale("es", es);
 
@@ -47,7 +47,8 @@ const Callintro = () => {
   const [optionList, setOptionList] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
+    useState("0");
   const [openCalendar, setCalendar] = useState(false);
   const [openHistoricoGestiones, setHistoricoGestiones] = useState(false);
 
@@ -109,7 +110,7 @@ const Callintro = () => {
 
     if (result.status === 200) {
       setDataValida(datos);
-      console.log(result.data)
+      console.log(result.data);
 
       result.data.forEach((item) => {
         clave = item.token;
@@ -174,20 +175,16 @@ const Callintro = () => {
     }
   };
 
-
-
   const ChangeLlamada = (valor) => {
-
-    console.log(valor)
-    setSelectedLlamada(valor)
+    console.log(valor);
+    setSelectedLlamada(valor);
 
     if (!selectLlamada) {
       return <div>Loading...</div>;
     }
 
-
-    console.log(selectLlamada)
-  }
+    console.log(selectLlamada);
+  };
 
   const HideLogo = () => {
     // setshowlogo(!showlogo);
@@ -250,19 +247,10 @@ const Callintro = () => {
       toast.success("Registro Guardado Exitosamente");
       console.log("Registro Guardado Exitosamente");
       setTimeout(() => {
-        window.location.href = '/Orkesta/Generacc/Call/Fin';
+        window.location.href = "/Orkesta/Generacc/Call/Fin";
       }, 5000); // 5000 milisegundos = 5 segundos
     }
-
-
-
-
   }
-
-
-
-
-
 
   return (
     <>
@@ -287,7 +275,7 @@ const Callintro = () => {
                     </span>
                   </h4>
                 </div>
-                <div className="col-4 d-flex justify-content-end " >
+                <div className="col-4 d-flex justify-content-end ">
                   <h4> Id cliente </h4>
                 </div>
                 <div className="col-4">
@@ -303,7 +291,12 @@ const Callintro = () => {
               </div>
               <div className="row mt-2 ">
                 <section className="row ">
-                  <div className="col-lg-2 col-sm-3 my-3">LLamada</div>
+                  <div
+                    className="col-lg-3 col-sm-2 my-3"
+                    style={{ marginLeft: "13px" }}
+                  >
+                    LLamada
+                  </div>{" "}
                   <div className="col-lg-4 col-sm-8">
                     <select
                       className="form-control form-select my-3"
@@ -317,6 +310,26 @@ const Callintro = () => {
                     </select>
                   </div>
                 </section>
+                {selectLlamada === "2" && (
+                  <div>
+                    <div className="container">
+                      <NoContesta
+                        company={selectLlamada}
+                        clave={token}
+                      ></NoContesta>
+                    </div>
+
+                    <div className="d-flex justify-content-end">
+                      <button
+                        className="btn btn-success btn-md "
+                        value="GuardarRegistro"
+                        onClick={GuardarRegistro}
+                      >
+                        Finalizar
+                      </button>
+                    </div>
+                  </div>
+                )}
 
                 <div className="container-fluid">
                   <div className="highlight">
@@ -334,7 +347,6 @@ const Callintro = () => {
                             <div className="col-4">Nombre Completo</div>
                           </div>
                           <div className="row">
-
                             <div className="col-4">
                               <input
                                 name="roomRent"
@@ -464,11 +476,11 @@ const Callintro = () => {
                           </div>
                           <div className="row mt-3">
                             <div className="col-5">Observacion Agenda</div>
-
                           </div>
                           <div className="row">
                             <div className="col-5">
-                              <textarea rows="3"
+                              <textarea
+                                rows="3"
                                 name="roomRent"
                                 type="text"
                                 value={data.Observacion_Agenda}
@@ -476,18 +488,20 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-
                           </div>
                         </>
                       ))}
                     </div>
                   </div>
                 </div>
-                {selectLlamada === '1' && (
+                {selectLlamada === "1" && (
                   <div>
                     <hr />
                     <div className="container">
-                      <Contesta company={selectLlamada} clave={token}></Contesta>
+                      <Contesta
+                        company={selectLlamada}
+                        clave={token}
+                      ></Contesta>
                     </div>
 
                     <div className="row my-3">
@@ -523,29 +537,6 @@ const Callintro = () => {
                   </select>
                 </div>
               </section> */}
-
-              {selectLlamada === "2" && (
-                <div>
-                  <hr />
-                  <div className="container">
-                    <NoContesta company={selectLlamada} clave={token}></NoContesta>
-                  </div>
-
-                  <div className="row my-3">
-                    <hr />
-                  </div>
-
-                  <div className="d-flex justify-content-end">
-                    <button
-                      className="btn btn-success btn-md "
-                      value="GuardarRegistro"
-                      onClick={GuardarRegistro}
-                    >
-                      Finalizar
-                    </button>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
 

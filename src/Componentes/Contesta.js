@@ -11,6 +11,11 @@ function Contesta({ company, clave }) {
   const [selectcorreo, setselectcorreo] = useState("");
   const [selectaceptaseguro, setselectaceptaseguro] = useState("");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
+  const [selectinteresa, setselectinteresa] = useState("");
+  const [selectnointeresa, setselectnointeresa] = useState("");
+  const [datafull, setDataFull] = useState([]);
+  const [otra_razon_noacepta, setotra_razon_noacepta] = useState('');
+
 
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
@@ -78,7 +83,7 @@ function Contesta({ company, clave }) {
       <p>Le informo que para su respaldo la conversación es grabada.</p>
       <hr />
       <div className="row my-2">
-        <div className="col-lg-4 col-sm-10 my-2">Registro Válido</div>
+        <div className="col-lg-3 col-sm-6 my-2">Registro Válido</div>
         <div className="col-lg-3 col-sm-6 my-2">
           <select
             className="form-select"
@@ -86,15 +91,33 @@ function Contesta({ company, clave }) {
             value={selectLlamada}
             onChange={(e) => setSelectedLlamada(e.target.value)}
           >
-            <option selected>Seleccione</option>
+            <option value="0">Seleccione</option>
             <option value="1">Comunica con cliente</option>
             <option value="2">Comunica con tercero válido</option>
             <option value="3">Comunica con tercero no válido</option>
           </select>
         </div>
-      </div>
+        </div>
+        {selectLlamada === "1" && (
+        <div className="row my-2"> <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
+        <div className="col-lg-3 col-sm-6 my-2">
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            value={selectinteresa}
+            onChange={(e) => setselectinteresa(e.target.value)}
+          >
+            <option value="0">Seleccione</option>
+            <option value="1">Interesa</option>
+            <option value="2">No Interesa</option>
+          </select>
+        </div></div>
+)}
+      
 
-      {selectLlamada === "1" && (
+
+
+      {selectLlamada === "1" && selectinteresa === "1" && (
         <div>
           <p>
             Hoy queremos agradecer la permanencia con sus productos Entel y por
@@ -125,7 +148,7 @@ function Contesta({ company, clave }) {
               <select
                 className="form-select"
                 aria-label="Default select example"
-                value={setselectcorreo}
+                value={selectcorreo}
                 onChange={(e) => setselectcorreo(e.target.value)}
               >
                 <option selected>Seleccione</option>
@@ -133,6 +156,57 @@ function Contesta({ company, clave }) {
                 <option value="2">No</option>
               </select>
             </div>
+          </div>
+        </div>
+      )}
+      {selectinteresa === "2" && (
+        <div className="row my-2">
+          <div className="col-lg-4 col-sm-10 my-2">Motivos no interesa</div>
+          <div className="col-lg-3 col-sm-6 my-2">
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              value={selectnointeresa}
+              onChange={(e) => setselectnointeresa(e.target.value)}
+            >
+              <option value="0">Seleccione</option>
+              <option value="1">Mala experiencia con MetLife</option>
+              <option value="2">Cliente cerrará cuenta</option>
+              <option value="3">Cliente molesto (No volver a llamar)</option>
+              <option value="4">Uniformado Activo</option>
+              <option value="5">Ya tiene Seguro</option>
+              <option value="6">
+                Mala experiencia con Compañía/Entel/Corredora
+              </option>
+              <option value="7">Mejor oferta en la Competencia</option>
+              <option value="8">No interesa seguro</option>
+              <option value="9">No le gusta la venta telefonica</option>
+              <option value="10">Ya no es cliente</option>
+              <option value="11">Problemas de señal con Entel</option>
+              <option value="12">No quiere más seguros</option>
+              <option value="13">Problemas Economicos</option>
+              <option value="14">No es titular</option>
+              <option value="15">Producto le parece caro</option>
+              <option value="16">Otro (Registrar)</option>
+              <option value="17">
+                Ya tiene un seguro similar con otra compañía
+              </option>
+            </select>
+          </div>
+        </div>
+      )}
+      {selectnointeresa === "16" && (
+        <div>
+          <div className="col-lg-2 col-sm-3 my-2">Otro</div>
+          <div className="col-lg-4 col-sm-9 my-2">
+            <textarea
+              type="text"
+              rows="3"
+              value={otra_razon_noacepta}
+              onChange={(e) => setotra_razon_noacepta(e.target.value)}
+              required
+              className="form-control"
+            />
           </div>
         </div>
       )}
@@ -147,8 +221,7 @@ function Contesta({ company, clave }) {
             fallecer por cualquier tipo de accidente, me refiero a un accidente
             de tránsito, atropello, etc.. Teniendo así la tranquilidad de
             proteger a quienes más quiere cuando usted no este
-          </p>
-          {" "}
+          </p>{" "}
           <p>
             Pero para que sea aún más atractivo y conveniente para usted de
             manera paralela al Seguro se creará una Cuenta de Capitalización y
@@ -158,40 +231,83 @@ function Contesta({ company, clave }) {
           </p>
           <p>
             {" "}
-            <table border="1"  style={{ borderCollapse: 'collapse', width:'100%' }}>
-  <thead>
-    <tr>
-      <th style={{ border: '1px solid black', padding: '8px' }}></th>
-      <th style={{ border: '1px solid black', padding: '8px' }}>Plan 1</th>
-      <th style={{ border: '1px solid black', padding: '8px' }}>Plan 2</th>
-      <th style={{ border: '1px solid black', padding: '8px' }}>Plan 3</th>
-      <th style={{ border: '1px solid black', padding: '8px' }}>Plan 4</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style={{ border: '1px solid black', padding: '8px' }}>Capital Asegurado</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>UF 500</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>UF 1.000</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>UF 1.500</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>UF 2.000</td>
-    </tr>
-    <tr>
-      <td style={{ border: '1px solid black', padding: '8px' }}>Prima Mensual UF</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>0,308</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>0,381</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>0,439</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>0,502</td>
-    </tr>
-    <tr>
-      <td style={{ border: '1px solid black', padding: '8px' }}>Prima Mensual $</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>$9.240</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>$11.430</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>$13.170</td>
-      <td style={{ border: '1px solid black', padding: '8px' }}>$15.060</td>
-    </tr>
-  </tbody>
-</table>
+            <table
+              border="1"
+              style={{ borderCollapse: "collapse", width: "100%" }}
+            >
+              <thead>
+                <tr>
+                  <th
+                    style={{ border: "1px solid black", padding: "8px" }}
+                  ></th>
+                  <th style={{ border: "1px solid black", padding: "8px" }}>
+                    Plan 1
+                  </th>
+                  <th style={{ border: "1px solid black", padding: "8px" }}>
+                    Plan 2
+                  </th>
+                  <th style={{ border: "1px solid black", padding: "8px" }}>
+                    Plan 3
+                  </th>
+                  <th style={{ border: "1px solid black", padding: "8px" }}>
+                    Plan 4
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    Capital Asegurado
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    UF 500
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    UF 1.000
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    UF 1.500
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    UF 2.000
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    Prima Mensual UF
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    0,308
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    0,381
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    0,439
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    0,502
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    Prima Mensual $
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    $9.240
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    $11.430
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    $13.170
+                  </td>
+                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                    $15.060
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </p>
           <p>Por ejemplo : </p>
           <p>
@@ -239,15 +355,15 @@ function Contesta({ company, clave }) {
             Como puede ver son Coberturas y Beneficios muy convenientes para
             usted y familia.
           </p>
-          <div className="row my-2" style={{backgroundColor: "#E8E8E8"}}>
-            <div className="col-lg-4 col-sm-10 my-2" >
+          <div className="row my-2" style={{ backgroundColor: "#E8E8E8" }}>
+            <div className="col-lg-4 col-sm-10 my-2">
               Acepta la contratación de este Seguro ??
             </div>
             <div className="col-lg-3 col-sm-6 my-2">
               <select
                 className="form-select"
                 aria-label="Default select example"
-                value={setselectaceptaseguro}
+                value={selectaceptaseguro}
                 onChange={(e) => setselectaceptaseguro(e.target.value)}
               >
                 <option selected>Seleccione</option>
@@ -298,14 +414,27 @@ function Contesta({ company, clave }) {
             </li>
             <li>4. Negligencia, imprudencia o culpa grave del asegurado</li>
           </ul>
-          <h4>	• 	AUTOCERTIFICACIÓN   </h4>
-          <p>Entonces hoy con fecha xx/xx/2023 ¿Ud. acepta la contratación el SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO, y autoriza el cargo de la prima mensual de 0.38 UF, $11.400 aprox. en su cuenta Entel, ¿VERDAD?  </p>
-          <p>Esperar respuesta del cliente.  </p>
-          <p>“Don xxxxx el código de compra es XXXXXXX  </p>
-          <p>Además, para garantizar su completa satisfacción que usted cuenta con 35 días desde recibida la póliza para retractarse de su decisión, esto lo puede hacer a través de la web dispuesta por Entel para este propósito o directamente ante la Compañía al correo teayudamos@metlife.cl</p>
-          <p>Le damos la más cordial bienvenida a Seguros Entel, que tenga un buen día/tarde</p>
+          <h4> • AUTOCERTIFICACIÓN </h4>
+          <p>
+            Entonces hoy con fecha xx/xx/2023 ¿Ud. acepta la contratación el
+            SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO, y autoriza el cargo
+            de la prima mensual de 0.38 UF, $11.400 aprox. en su cuenta Entel,
+            ¿VERDAD?{" "}
+          </p>
+          <p>Esperar respuesta del cliente. </p>
+          <p>“Don xxxxx el código de compra es XXXXXXX </p>
+          <p>
+            Además, para garantizar su completa satisfacción que usted cuenta
+            con 35 días desde recibida la póliza para retractarse de su
+            decisión, esto lo puede hacer a través de la web dispuesta por Entel
+            para este propósito o directamente ante la Compañía al correo
+            teayudamos@metlife.cl
+          </p>
+          <p>
+            Le damos la más cordial bienvenida a Seguros Entel, que tenga un
+            buen día/tarde
+          </p>
         </div>
-
       )}
       {selectLlamada === "2" ||
       selectLlamada === "3" ||
@@ -321,18 +450,18 @@ function Contesta({ company, clave }) {
               value={Comunica_con_tercero_valido}
               onChange={(e) => setComunica_con_tercero_valido(e.target.value)}
             >
-              <option selected>Seleccione</option>
-              <option value="1">Tercero pide dejar pendiente</option>
-              <option value="2">Viaje</option>
-              <option value="3">Fallecido</option>
+              <option value="0">Seleccione</option>
+              <option value="1">Cliente no Vive Ahí</option>
+              <option value="2">No desesa contestar</option>
+              <option value="3">Número equivocado</option>
               <option value="4">Problema de horario</option>
-              <option value="5">No desea contestar</option>
+              <option value="5">Tercero pide dejar pendiente</option>
             </select>
           </div>
         </div>
       ) : null}
 
-      {Comunica_con_tercero_valido === "1" ||
+      {/* {Comunica_con_tercero_valido === "1" ||
       Comunica_con_tercero_valido === "2" ||
       Comunica_con_tercero_valido === "4" ? (
         <div className="row my-2">
@@ -354,9 +483,9 @@ function Contesta({ company, clave }) {
             </select>
           </div>
         </div>
-      ) : null}
+      ) : null} */}
 
-      {Comunica_con_tercero_valido === "3" ||
+      {/* {Comunica_con_tercero_valido === "3" ||
       Comunica_con_tercero_valido === "5" ? (
         <div className="row my-2">
           <h4>
@@ -375,16 +504,16 @@ function Contesta({ company, clave }) {
             buen día.
           </h4>
         </div>
-      ) : null}
+      ) : null} */}
 
-      {selectLlamada === "5" && (
+      {/* {selectLlamada === "5" && (
         <div>
           <h4>
             Agradecido(a) por su tiempo, disculpe las molestias y que tenga un
             buen día.
           </h4>
         </div>
-      )}
+      )} */}
 
       {/* <div className="row my-2">
         <div className="col-lg-12 col-sm-10 my-2">
