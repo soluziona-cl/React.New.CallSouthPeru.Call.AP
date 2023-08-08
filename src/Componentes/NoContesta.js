@@ -69,7 +69,8 @@ function NoContesta({ company, clave }) {
         <div className="col-lg-4 col-sm-8">
           <select className="form-select" aria-label="Default select example"
                                 id="no_conecta"
-                                value={select_no_conecta}>
+                                // value={select_no_conecta}
+                                >
 
             <option selected>Seleccione</option>
             <option value="1"> Congestionado</option>

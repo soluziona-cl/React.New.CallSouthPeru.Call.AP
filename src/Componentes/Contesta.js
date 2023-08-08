@@ -366,7 +366,7 @@ function Contesta({ company, clave }) {
                 value={selectaceptaseguro}
                 onChange={(e) => setselectaceptaseguro(e.target.value)}
               >
-                <option selected>Seleccione</option>
+                <option value="0">Seleccione</option>
                 <option value="1">Si</option>
                 <option value="2">No</option>
               </select>
