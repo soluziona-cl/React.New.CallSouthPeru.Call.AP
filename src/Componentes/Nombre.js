@@ -10,6 +10,8 @@ function Nombre({company,clave}) {
     const [rut, setRut] = useState('');
     const [direccion, setDireccion] = useState('');
     const [email, setEmail] = useState('');
+    const [apellido_1, setApellido1] = useState('');
+    const [apellido_2, setApellido2] = useState('');
 
     const [optionListMotivo, setOptionListMotivo] = useState([]);
     const [optionListDetalle, setOptionListDetalle] = useState([]);
@@ -42,6 +44,7 @@ function Nombre({company,clave}) {
         }
 
     })
+    
 
     const ChangeConecta_nombre = (async (event) => {
 
@@ -77,11 +80,11 @@ function Nombre({company,clave}) {
         <div className="row">
           <div className="col-lg-2 col-sm-3 my-2">Apellido 1</div>
           <div className="col-lg-4 col-sm-9 my-2">
-            <input name="roomRent" type="text"  id='apellido_1' className="form-control" />
+            <input name="roomRent" type="text"  id='apellido_1'onChange={(e) => setApellido1(e.target.value)} className="form-control" />
           </div>
           <div className="col-lg-2 col-sm-3 my-2">Apellido 2</div>
           <div className="col-lg-4 col-sm-9 my-2">
-            <input name="roomRent" type="text" id='apellido_2' className="form-control" />
+            <input name="roomRent" type="text" id='apellido_2' onChange={(e) => setApellido2(e.target.value)} className="form-control" />
           </div>
         </div>
         <div className='row'>
@@ -106,16 +109,7 @@ function Nombre({company,clave}) {
             className="form-control"
           />
         </div>
-        <div className="col-lg-2 col-sm-3 my-2">Dirección:</div>
-        <div className="col-lg-4 col-sm-9 my-2">
-          <input
-            type="text"
-            value={direccion}
-            onChange={(e) => setDireccion(e.target.value)}
-            required
-            className="form-control"
-          />
-        </div>
+       
         <div className="col-lg-2 col-sm-3 my-2">Email:</div>
         <div className="col-lg-4 col-sm-9 my-2">
           <input
@@ -126,6 +120,27 @@ function Nombre({company,clave}) {
             className="form-control"
           />
         </div>
+        <div className="col-lg-2 col-sm-3 my-2">Tipo Contrato:</div>
+        <div className="col-lg-4 col-sm-9 my-2">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="form-control"
+          />
+        </div>
+        <div className="col-lg-2 col-sm-3 my-2">Planes:</div>
+        <div className="col-lg-4 col-sm-9 my-2">
+        <select className="form-control form-select" id="planes"
+                        disabled={false}>
+                        <option value="0">Seleccione el sexo</option>
+                        <option value="1">Plan 1 UF 500</option>
+                        <option value="2">Plan 2 UF 1.000</option>
+                        </select>
+
+        </div>
+
       </div>
       </section>
         

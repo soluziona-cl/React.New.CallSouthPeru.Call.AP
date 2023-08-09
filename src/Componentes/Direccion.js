@@ -12,6 +12,7 @@ function Direccion({ company, clave }) {
     const [optionListDetalle, setOptionListDetalle] = useState([]);
     const [optionListDetalleEstadoDireccion, setOptionListDetalleEstadoDireccion] = useState(true);
     const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState('0');
+    const [direccion, setDireccion] = useState('');
     const sesiones = {
         sgui: localStorage.getItem("localgui"),
         scliente: localStorage.getItem("localcliente"),
@@ -21,20 +22,21 @@ function Direccion({ company, clave }) {
     };
 
     useEffect(() => {
-        Company()
+        Ciudad()
+        
     }, []);
 
 
 
-    const Company = (async () => {
+    const Ciudad = (async () => {
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/listas', 
-        { dato: 'S21', dato_1: '', dato_2: '', dato_3: '' }, { headers: { "Authorization": `Bearer ${clave}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/Ciudad', 
+        { dato: '11740594', dato_1: '', dato_2: '', dato_3: '' }, { headers: { "Authorization": `Bearer ${clave}` } })
 
         if (result.status === 200) {
             setOptionListDireccion(result.data)
-
-            // console.log(result.data)
+            ChangeConecta_Direccion()
+            console.log(result.data)
             //  console.log(optionList)
 
         }
@@ -49,8 +51,8 @@ function Direccion({ company, clave }) {
             setSelectedLlamada('0')
         } else {
             const result =
-                await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/listas', //cambiar endpoint para ciudad y provincia
-                    { dato: 'S22', dato_1: event, dato_2: '', dato_3: '' }, { headers: { "Authorization": `Bearer ${clave}` } })
+                await axios.post('https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/Comuna', //cambiar endpoint para ciudad y provincia
+                    { dato: '11740594', dato_1: event, dato_2: '', dato_3: '' }, { headers: { "Authorization": `Bearer ${clave}` } })
 
             setSelectedLlamada(event)
 
@@ -58,6 +60,10 @@ function Direccion({ company, clave }) {
 
                 setOptionListDetalle(result.data)
                 setOptionListDetalleEstadoDireccion(false)
+                Ciudad()
+                console.log(result.data)
+
+
 
             }
         }
@@ -79,7 +85,7 @@ function Direccion({ company, clave }) {
         <>
 
             <div className="col-lg-2 col-sm-3 my-2">
-                <label htmlFor="ddl_departamento_lesionado"> Dpto. </label> </div>
+                <label htmlFor="ddl_departamento_lesionado"> Ciudad. </label> </div>
             <div className="form rounded-3 col-lg-4 col-sm-9 my-2">
                 <select className="form-control form form-select" id="ddl_departamento_lesionado"
                     disabled={false}
@@ -95,7 +101,7 @@ function Direccion({ company, clave }) {
             </div>
 
             <div className="col-lg-2 col-sm-3 my-2">
-                <label htmlFor="ddl_ciudad_lesionado">Provincia</label>
+                <label htmlFor="ddl_ciudad_lesionado">Comuna</label>
             </div>
             <div className="form rounded-3 col-lg-4 col-sm-9 my-2">
                 <select className="form-control form-select" id="ddl_ciudad_lesionado"
@@ -111,7 +117,25 @@ function Direccion({ company, clave }) {
                 </select>
             </div>
 
-            <div className="col-lg-2 col-sm-3 my-2 ">Dirección</div>
+            <div className="col-lg-2 col-sm-3 my-2">Calle:</div>
+        <div className="col-lg-4 col-sm-9 my-2">
+          <input
+            type="text"
+            value={direccion}
+            onChange={(e) => setDireccion(e.target.value)}
+            required
+            className="form-control"
+          />
+        </div>
+            <div className="col-lg-2 col-sm-3 my-2 ">Numero</div>
+            <div className="col-lg-10 col-sm-9 my-2">
+                <input name="roomRent" type="text" className="form-control" />
+            </div>
+            <div className="col-lg-2 col-sm-3 my-2 ">Depto</div>
+            <div className="col-lg-10 col-sm-9 my-2">
+                <input name="roomRent" type="text" className="form-control" />
+            </div>
+            <div className="col-lg-2 col-sm-3 my-2 ">Referencia</div>
             <div className="col-lg-10 col-sm-9 my-2">
                 <input name="roomRent" type="text" className="form-control" />
             </div>

@@ -76,10 +76,10 @@ function Genero({ company, clave }) {
                        
                     </select>
       </div>
-      <div className="col-lg-2 col-sm-3 my-2 ">Email</div>
+      {/* <div className="col-lg-2 col-sm-3 my-2 ">Email</div>
       <div className="col-lg-4 col-sm-9 my-2">
         <input name="roomRent" type="text" className="form-control" />
-      </div>
+      </div> */}
       {/* <div className="row mb-2">              
                 <div className="col-sm-12 col-md-12 col-lg-6">
                 <div className="col-lg-2 col-sm-3 ">Motivo</div>

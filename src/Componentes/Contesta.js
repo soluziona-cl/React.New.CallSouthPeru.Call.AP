@@ -2,11 +2,14 @@ import React, { useEffect, useState, useRef } from "react";
 import * as bootstrap from "bootstrap";
 import axios from "axios";
 import Nombre from "./Nombre";
+import Direccion from "./Direccion";
+import Genero from "./Genero";
 
 function Contesta({ company, clave }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
     useState("");
+  const [token, setToken] = useState("");
   const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
   const [selectaceptaseguro, setselectaceptaseguro] = useState("");
@@ -246,12 +249,12 @@ function Contesta({ company, clave }) {
                   <th style={{ border: "1px solid black", padding: "8px" }}>
                     Plan 2
                   </th>
-                  <th style={{ border: "1px solid black", padding: "8px" }}>
+                  {/* <th style={{ border: "1px solid black", padding: "8px" }}>
                     Plan 3
                   </th>
                   <th style={{ border: "1px solid black", padding: "8px" }}>
                     Plan 4
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody>
@@ -265,12 +268,12 @@ function Contesta({ company, clave }) {
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     UF 1.000
                   </td>
-                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                  {/* <td style={{ border: "1px solid black", padding: "8px" }}>
                     UF 1.500
                   </td>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     UF 2.000
-                  </td>
+                  </td> */}
                 </tr>
                 <tr>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
@@ -282,12 +285,12 @@ function Contesta({ company, clave }) {
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     0,381
                   </td>
-                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                  {/* <td style={{ border: "1px solid black", padding: "8px" }}>
                     0,439
                   </td>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     0,502
-                  </td>
+                  </td> */}
                 </tr>
                 <tr>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
@@ -299,12 +302,12 @@ function Contesta({ company, clave }) {
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     $11.430
                   </td>
-                  <td style={{ border: "1px solid black", padding: "8px" }}>
+                  {/* <td style={{ border: "1px solid black", padding: "8px" }}>
                     $13.170
                   </td>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     $15.060
-                  </td>
+                  </td> */}
                 </tr>
               </tbody>
             </table>
@@ -395,6 +398,11 @@ function Contesta({ company, clave }) {
             indíqueme por favor:
           </p>
           <Nombre></Nombre>
+          <Genero></Genero>
+          <Direccion>  
+           company={selectLlamada}
+           clave={token}
+          </Direccion>
           <h4> • EXCLUSIONES: (MENCIONAR OBLIGATORIO Y TEXTUAL) </h4>
           <p>
             Ahora le mencionaré las principales exclusiones de este seguro, de
