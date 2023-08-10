@@ -141,9 +141,9 @@ function Nombre({company,clave}) {
           <input
             type="text"
             id='tipo_contrato'
-           // value={email}
+            value={'Solo Titular'}
             //onChange={(e) => setEmail(e.target.value)}
-            required
+            disabled
             className="cliente form-control"
           />
         </div>
