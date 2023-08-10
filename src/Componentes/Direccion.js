@@ -28,14 +28,11 @@ function Direccion({ company, clave }) {
 
     const Company = (async () => {
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/listas', 
-        { dato: 'S21', dato_1: '', dato_2: '', dato_3: '' }, { headers: { "Authorization": `Bearer ${clave}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/Comuna', 
+        { dato: company }, { headers: { "Authorization": `Bearer ${clave}` } })
 
         if (result.status === 200) {
             setOptionListDireccion(result.data)
-
-            // console.log(result.data)
-            //  console.log(optionList)
 
         }
 
@@ -49,8 +46,8 @@ function Direccion({ company, clave }) {
             setSelectedLlamada('0')
         } else {
             const result =
-                await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/listas', //cambiar endpoint para ciudad y provincia
-                    { dato: 'S22', dato_1: event, dato_2: '', dato_3: '' }, { headers: { "Authorization": `Bearer ${clave}` } })
+                await axios.post('https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/Ciudad', //cambiar endpoint para ciudad y provincia
+                    { dato: event,  dato_2: company }, { headers: { "Authorization": `Bearer ${clave}` } })
 
             setSelectedLlamada(event)
 
