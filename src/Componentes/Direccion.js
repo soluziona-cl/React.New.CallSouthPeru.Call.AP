@@ -12,6 +12,7 @@ function Direccion({ company, clave }) {
     const [optionListDetalle, setOptionListDetalle] = useState([]);
     const [optionListDetalleEstadoDireccion, setOptionListDetalleEstadoDireccion] = useState(true);
     const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState('0');
+    const [direccion, setDireccion] = useState('');
     const sesiones = {
         sgui: localStorage.getItem("localgui"),
         scliente: localStorage.getItem("localcliente"),
@@ -21,15 +22,15 @@ function Direccion({ company, clave }) {
     };
 
     useEffect(() => {
-        Company()
+        Ciudad()
+
     }, []);
 
 
 
-    const Company = (async () => {
+    const Ciudad = (async() => {
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/Comuna', 
-        { dato: company }, { headers: { "Authorization": `Bearer ${clave}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/Comuna', { dato: company }, { headers: { "Authorization": `Bearer ${clave}` } })
 
         if (result.status === 200) {
             setOptionListDireccion(result.data)
@@ -38,7 +39,7 @@ function Direccion({ company, clave }) {
 
     })
 
-    const ChangeConecta_Direccion = (async (event) => {
+    const ChangeConecta_Direccion = (async(event) => {
 
         if (event === '0') {
             setOptionListDetalleEstadoDireccion(true)
@@ -47,7 +48,7 @@ function Direccion({ company, clave }) {
         } else {
             const result =
                 await axios.post('https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/Ciudad', //cambiar endpoint para ciudad y provincia
-                    { dato: event,  dato_2: company }, { headers: { "Authorization": `Bearer ${clave}` } })
+                    { dato: event, dato_2: company }, { headers: { "Authorization": `Bearer ${clave}` } })
 
             setSelectedLlamada(event)
 
@@ -55,6 +56,10 @@ function Direccion({ company, clave }) {
 
                 setOptionListDetalle(result.data)
                 setOptionListDetalleEstadoDireccion(false)
+                Ciudad()
+                console.log(result.data)
+
+
 
             }
         }
@@ -62,7 +67,7 @@ function Direccion({ company, clave }) {
 
     })
 
-    const ChangeConectaDetalle_Direccion = (async (event) => {
+    const ChangeConectaDetalle_Direccion = (async(event) => {
 
         setOptionListDetalleEstadoDireccion(false)
         setOptionListDetalleEstadoSelect(event)
@@ -73,49 +78,97 @@ function Direccion({ company, clave }) {
 
     return (
 
-        <>
+        <
+        >
 
-            <div className="col-lg-2 col-sm-3 my-2">
-                <label htmlFor="ddl_departamento_lesionado"> Dpto. </label> </div>
-            <div className="form rounded-3 col-lg-4 col-sm-9 my-2">
-                <select className="form-control form form-select" id="ddl_departamento_lesionado"
-                    disabled={false}
-                    // value={select}
-                    onChange={(e) => (ChangeConecta_Direccion(e.target.value))}>
-                    <option value="0">Departamento</option>
-                    {optionListDireccion.map((item) => (
-                        <option key={item.id} value={item.id}>
-                            {item.detalle}
-                        </option>
-                    ))}
-                </select>
-            </div>
+        <
+        div className = "col-lg-2 col-sm-3 my-2" >
+        <
+        label htmlFor = "ddl_departamento_lesionado" > Ciudad. < /label> </div >
+        <
+        div className = "form rounded-3 col-lg-4 col-sm-9 my-2" >
+        <
+        select className = "form-control form form-select"
+        id = "ddl_departamento_lesionado"
+        disabled = { false }
+        // value={select}
+        onChange = {
+            (e) => (ChangeConecta_Direccion(e.target.value)) } >
+        <
+        option value = "0" > Departamento < /option> {
+            optionListDireccion.map((item) => ( <
+                option key = { item.id }
+                value = { item.id } > { item.detalle } <
+                /option>
+            ))
+        } <
+        /select> <
+        /div>
 
-            <div className="col-lg-2 col-sm-3 my-2">
-                <label htmlFor="ddl_ciudad_lesionado">Provincia</label>
-            </div>
-            <div className="form rounded-3 col-lg-4 col-sm-9 my-2">
-                <select className="form-control form-select" id="ddl_ciudad_lesionado"
-                    disabled={optionListDetalleEstadoDireccion}
-                    value={optionListDetalleEstadoSelect}
-                    onChange={(e) => (ChangeConectaDetalle_Direccion(e.target.value))}>
-                    <option value="0">Ciudad</option>
-                    {optionListDetalle.map((item) => (
-                        <option key={item.id} value={item.id}>
-                            {item.detalle}
-                        </option>
-                    ))}
-                </select>
-            </div>
+        <
+        div className = "col-lg-2 col-sm-3 my-2" >
+        <
+        label htmlFor = "ddl_ciudad_lesionado" > Comuna < /label> <
+        /div> <
+        div className = "form rounded-3 col-lg-4 col-sm-9 my-2" >
+        <
+        select className = "form-control form-select"
+        id = "ddl_ciudad_lesionado"
+        disabled = { optionListDetalleEstadoDireccion }
+        value = { optionListDetalleEstadoSelect }
+        onChange = {
+            (e) => (ChangeConectaDetalle_Direccion(e.target.value)) } >
+        <
+        option value = "0" > Ciudad < /option> {
+            optionListDetalle.map((item) => ( <
+                option key = { item.id }
+                value = { item.id } > { item.detalle } <
+                /option>
+            ))
+        } <
+        /select> <
+        /div>
 
-            <div className="col-lg-2 col-sm-3 my-2 ">Dirección</div>
-            <div className="col-lg-10 col-sm-9 my-2">
-                <input name="roomRent" type="text" className="form-control" />
-            </div>
+        <
+        div className = "col-lg-2 col-sm-3 my-2" > Calle: < /div> <
+        div className = "col-lg-4 col-sm-9 my-2" >
+        <
+        input type = "text"
+        value = { direccion }
+        onChange = {
+            (e) => setDireccion(e.target.value) }
+        required className = "form-control" /
+        >
+        <
+        /div> <
+        div className = "col-lg-2 col-sm-3 my-2 " > Numero < /div> <
+        div className = "col-lg-10 col-sm-9 my-2" >
+        <
+        input name = "roomRent"
+        type = "text"
+        className = "form-control" / >
+        <
+        /div> <
+        div className = "col-lg-2 col-sm-3 my-2 " > Depto < /div> <
+        div className = "col-lg-10 col-sm-9 my-2" >
+        <
+        input name = "roomRent"
+        type = "text"
+        className = "form-control" / >
+        <
+        /div> <
+        div className = "col-lg-2 col-sm-3 my-2 " > Referencia < /div> <
+        div className = "col-lg-10 col-sm-9 my-2" >
+        <
+        input name = "roomRent"
+        type = "text"
+        className = "form-control" / >
+        <
+        /div>
 
 
-        </>
+        <
+        />
     )
 }
 export default Direccion
-

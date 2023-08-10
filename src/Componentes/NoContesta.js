@@ -2,9 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import * as bootstrap from "bootstrap";
 import axios from "axios";
 
-function NoContesta({ company, clave }) {
+function NoContesta({ company, clave, onNoConectaChange }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
+
+  
 
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
@@ -45,7 +47,9 @@ function NoContesta({ company, clave }) {
     if (event === "0") {
       setOptionListDetalleEstado(true);
       setOptionListDetalleEstadoSelect("0");
-      setSelectedLlamada("0");
+      setSelectedLlamada(event);
+      onNoConectaChange(event); // Llama a la función callback con el valor seleccionado
+   
     } else {
       const result = await axios.post(
         "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
@@ -61,18 +65,18 @@ function NoContesta({ company, clave }) {
       }
     }
   };
-
+  console.log(onNoConectaChange)
   return (
     <>
       <div className="row my-2">
         <div className="col-lg-3 col-sm-3 my-3">No Conecta</div>
         <div className="col-lg-4 col-sm-8">
           <select className="form-select" aria-label="Default select example"
-                                id="no_conecta"
-                                // value={select_no_conecta}
-                                >
+                                 id="no_conecta"
+                                 onChange={(e) => onNoConectaChange(e.target.value)} 
+                                 >
 
-            <option selected>Seleccione</option>
+            <option value="0">Seleccione</option>
             <option value="1"> Congestionado</option>
             <option value="2">Fuera de Area o Apagado</option>
             <option value="3">Fuera de servicio</option>

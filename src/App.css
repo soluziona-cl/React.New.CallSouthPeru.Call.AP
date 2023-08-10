@@ -4,6 +4,13 @@
   text-align: center;
 }
 
+#nombre_sroll{
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9999;
+
+}
 
 .container-fluid
 

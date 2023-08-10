@@ -37,6 +37,8 @@ const Callintro = () => {
   const [token, setToken] = useState("");
   const [company, setCompany] = useState("100");
   const [select, setSelected] = useState("");
+  const [select_no_conecta, setselect_no_conecta] = useState("");
+
 
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
@@ -59,6 +61,11 @@ const Callintro = () => {
   const [datafullIntervalo, setDataFullIntervalo] = useState([]);
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [selectedValueApp, setSelectedValueApp] = useState('1');
+
+  const handleNoConectaChange = (value) => {
+    setselect_no_conecta(value);
+  };
 
   function get_elapsed_time_string(total_seconds) {
     function pretty_time_string(num) {
@@ -251,6 +258,7 @@ const Callintro = () => {
       }, 5000); // 5000 milisegundos = 5 segundos
     }
   }
+  // console.log("select_no_conecta:", select_no_conecta);
 
   return (
     <>
@@ -311,23 +319,25 @@ const Callintro = () => {
                   </div>
                 </section>
                 {selectLlamada === "2" && (
-                  <div>
                     <div className="container">
                       <NoContesta
                         company={selectLlamada}
                         clave={token}
-                      ></NoContesta>
-                    </div>
+                        onNoConectaChange={handleNoConectaChange}
 
-                    <div className="d-flex justify-content-end">
-                      <button
-                        className="btn btn-success btn-md "
-                        value="GuardarRegistro"
-                        onClick={GuardarRegistro}
-                      >
-                        Finalizar
-                      </button>
-                    </div>
+                      ></NoContesta>
+                      
+                    </div>                )}
+                    
+                    {(select_no_conecta !== "" && select_no_conecta !== "0") &&(
+                  <div className="d-flex justify-content-end">
+                    <button
+                      className="btn btn-success btn-md "
+                      value="GuardarRegistro"
+                      onClick={GuardarRegistro}
+                    >
+                      Finalizar
+                    </button>
                   </div>
                 )}
 
@@ -341,10 +351,33 @@ const Callintro = () => {
                       {datafull.map((data, index) => (
                         <>
                           {/* {console.log(data)} */}
+                          <div className="container" id="nombre_scroll">
+                            <div className="row">
+                              <div
+                                className="col-4 offset-8 text-right position-fixed"
+                                style={{ top: 0, right: 0, zIndex: 9999 }}
+                              >
+                                Nombre Completo
+                              </div>
+                              <div
+                                className="col-4 offset-8 position-fixed"
+                                style={{ top: 30, right: 0, zIndex: 9999 }}
+                              >
+                                <input
+                                  name="roomRent"
+                                  type="text"
+                                  value={data.NOMBRE_COMPLETO}
+                                  className="form-control text-right"
+                                  disabled
+                                />
+                              </div>
+                            </div>
+                          </div>
+
                           <div className="row">
                             <div className="col-4">Rut</div>
                             <div className="col-2">Intentos</div>
-                            <div className="col-4">Nombre Completo</div>
+                            <div className="col-4  ">Nombre Completo</div>
                           </div>
                           <div className="row">
                             <div className="col-4">
@@ -365,12 +398,13 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col-4">
+                            <div className="col-4 ">
                               <input
                                 name="roomRent"
                                 type="text"
                                 value={data.NOMBRE_COMPLETO}
                                 className="form-control"
+                                style={{ textAlign: "right" }}
                                 disabled
                               />
                             </div>
@@ -484,6 +518,20 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.Observacion_Agenda}
+                                className="form-control"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="col-4 position-fixed bg-secondary">
+                              Nombre Completo
+                            </div>
+                            <div className="col-4 position-fixed bg-secondary">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.NOMBRE_COMPLETO}
                                 className="form-control"
                                 disabled
                               />
