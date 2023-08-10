@@ -4,9 +4,13 @@ import axios from 'axios';
 
 
 
-function Direccion({ company, clave }) {
+function Direccion({ company,clave}) {
     const [selectLlamada, setSelectedLlamada] = useState('');
     const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState('');
+
+    // const [token, setToken] = useState(clave);
+
+
 
     const [optionListDireccion, setOptionListDireccion] = useState([]);
     const [optionListDetalle, setOptionListDetalle] = useState([]);
@@ -23,10 +27,10 @@ function Direccion({ company, clave }) {
 
     useEffect(() => {
         Ciudad()
-        
+
     }, []);
 
-
+   
 
     const Ciudad = (async () => {
 

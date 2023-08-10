@@ -9,8 +9,12 @@ function Contesta({ company, clave }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
     useState("");
-  const [token, setToken] = useState("");
-  const [horario_tercero, sethorario_tercero] = useState("");
+ const [token, setToken] = useState(clave);
+
+
+
+ 
+ const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
   const [selectaceptaseguro, setselectaceptaseguro] = useState("");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
@@ -36,7 +40,6 @@ function Contesta({ company, clave }) {
   useEffect(() => {
     Company(company);
   }, []);
-
   const Company = async (company) => {
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
@@ -45,12 +48,15 @@ function Contesta({ company, clave }) {
     );
 
     if (result.status === 200) {
+      setToken(clave); // Actualiza el valor del estado 'token' con 'clave'
+
       setOptionListMotivo(result.data);
 
       // console.log(result.data)
       //  console.log(optionList)
     }
   };
+  console.log(token)
 
   const ChangeConecta_nombre = async (event) => {
     if (event === "0") {
@@ -113,6 +119,7 @@ function Contesta({ company, clave }) {
             <option value="0">Seleccione</option>
             <option value="1">Interesa</option>
             <option value="2">No Interesa</option>
+            <option value="3">Lo Pensara</option>
           </select>
         </div></div>
 )}
@@ -402,6 +409,7 @@ function Contesta({ company, clave }) {
           <Direccion>  
            company={selectLlamada}
            clave={token}
+           
           </Direccion>
           <h4> • EXCLUSIONES: (MENCIONAR OBLIGATORIO Y TEXTUAL) </h4>
           <p>
