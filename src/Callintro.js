@@ -215,7 +215,7 @@ const Callintro = () => {
       item_sucess_gestion[title] = valor;
     });
     
-    let title = "Seleccione_una_opción";
+    let title = "seleccione_una_opcion";
     let valor = ddl_tipificacion;
     item_sucess_gestion[title] = valor;
 
