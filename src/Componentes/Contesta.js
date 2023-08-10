@@ -27,20 +27,22 @@ function Contesta({ company, clave }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
-    useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =   useState("0");
   const sesiones = {
+
     sgui: localStorage.getItem("localgui"),
     scliente: localStorage.getItem("localcliente"),
     sid: localStorage.getItem("localid"),
     sid_usuario: localStorage.getItem("localid_usuario"),
     stoken: localStorage.getItem("token"),
+
   };
 
   useEffect(() => {
     Company(company);
   }, []);
   const Company = async (company) => {
+
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
       { dato: company },
@@ -405,10 +407,10 @@ function Contesta({ company, clave }) {
             indíqueme por favor:
           </p>
           <Nombre></Nombre>
-          <Genero></Genero>
-          <Direccion>  
-           company={selectLlamada}
-           clave={token}
+          {/* <Genero></Genero> */}
+          <Direccion  
+           company={company}
+           clave={token}>
            
           </Direccion>
           <h4> • EXCLUSIONES: (MENCIONAR OBLIGATORIO Y TEXTUAL) </h4>

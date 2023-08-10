@@ -86,13 +86,13 @@ function Direccion({ company,clave}) {
         <>
 
             <div className="col-lg-2 col-sm-3 my-2">
-                <label htmlFor="ddl_departamento_lesionado"> Ciudad. </label> </div>
+                <label htmlFor="ddl_departamento_lesionado"> Comuna. </label> </div>
             <div className="form rounded-3 col-lg-4 col-sm-9 my-2">
                 <select className="form-control form form-select" id="ddl_departamento_lesionado"
                     disabled={false}
                     // value={select}
                     onChange={(e) => (ChangeConecta_Direccion(e.target.value))}>
-                    <option value="0">Departamento</option>
+                    <option value="0">Selec.</option>
                     {optionListDireccion.map((item) => (
                         <option key={item.id} value={item.id}>
                             {item.detalle}
@@ -102,14 +102,14 @@ function Direccion({ company,clave}) {
             </div>
 
             <div className="col-lg-2 col-sm-3 my-2">
-                <label htmlFor="ddl_ciudad_lesionado">Comuna</label>
+                <label htmlFor="ddl_ciudad_lesionado">Ciudad</label>
             </div>
             <div className="form rounded-3 col-lg-4 col-sm-9 my-2">
                 <select className="form-control form-select" id="ddl_ciudad_lesionado"
                     disabled={optionListDetalleEstadoDireccion}
                     value={optionListDetalleEstadoSelect}
                     onChange={(e) => (ChangeConectaDetalle_Direccion(e.target.value))}>
-                    <option value="0">Ciudad</option>
+                    <option value="0">Selec.</option>
                     {optionListDetalle.map((item) => (
                         <option key={item.id} value={item.id}>
                             {item.detalle}

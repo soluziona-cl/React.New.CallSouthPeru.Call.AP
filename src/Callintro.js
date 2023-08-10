@@ -35,7 +35,7 @@ const Callintro = () => {
 
   const [show, toggleShow] = useState(true);
   const [token, setToken] = useState("");
-  const [company, setCompany] = useState("100");
+  const [company, setCompany] = useState("11740594");
   const [select, setSelected] = useState("");
   const [select_no_conecta, setselect_no_conecta] = useState("");
 
@@ -319,17 +319,17 @@ const Callintro = () => {
                   </div>
                 </section>
                 {selectLlamada === "2" && (
-                    <div className="container">
-                      <NoContesta
-                        company={selectLlamada}
-                        clave={token}
-                        onNoConectaChange={handleNoConectaChange}
+                  <div className="container">
+                    <NoContesta
+                      company={selectLlamada}
+                      clave={token}
+                      onNoConectaChange={handleNoConectaChange}
 
-                      ></NoContesta>
-                      
-                    </div>                )}
-                    
-                    {(select_no_conecta !== "" && select_no_conecta !== "0") &&(
+                    ></NoContesta>
+
+                  </div>)}
+
+                {(select_no_conecta !== "" && select_no_conecta !== "0") && (
                   <div className="d-flex justify-content-end">
                     <button
                       className="btn btn-success btn-md "
@@ -547,7 +547,7 @@ const Callintro = () => {
                     <hr />
                     <div className="container">
                       <Contesta
-                        company={selectLlamada}
+                        company={company}
                         clave={token}
                       ></Contesta>
                     </div>
