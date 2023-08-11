@@ -21,7 +21,7 @@ import Producto from "./Componentes/Producto";
 import Nombre from "./Componentes/Nombre";
 import Fono from "./Componentes/Fono";
 import Genero from "./Componentes/Genero";
-import Direccion from "./Componentes/Direccion";
+//import Direccion from "./Componentes/Direccion";
 import Contesta from "./Componentes/Contesta";
 import NoContesta from "./Componentes/NoContesta";
 import Despedida from ".";
@@ -35,7 +35,7 @@ const Callintro = () => {
 
   const [show, toggleShow] = useState(true);
   const [token, setToken] = useState("");
-  const [company, setCompany] = useState("100");
+  const [company, setCompany] = useState("11740594");
   const [select, setSelected] = useState("");
   const [select_no_conecta, setselect_no_conecta] = useState("");
 
@@ -208,8 +208,14 @@ const Callintro = () => {
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
     let item_sucess_gestion = {};
-
-    let title = "Seleccione_una_opción";
+    const preguntas = document.querySelectorAll(".cliente");
+    preguntas.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion[title] = valor;
+    });
+    
+    let title = "seleccione_una_opcion";
     let valor = ddl_tipificacion;
     item_sucess_gestion[title] = valor;
 
@@ -291,23 +297,23 @@ const Callintro = () => {
                     name="roomRent"
                     type="text"
                     value={lead_id}
-                    className="form-control"
+                    id="lead_id"
+                    className="cliente form-control"
                     disabled
                   />
                 </div>
                 <hr />
               </div>
               <div className="row mt-2 ">
-                <section className="row ">
+                <section className="row my-2">
                   <div
-                    className="col-lg-3 col-sm-2 my-3"
-                    style={{ marginLeft: "13px" }}
-                  >
+                    className="col-lg-3 col-sm-2 my-3 ms-1"
+                   >
                     LLamada
                   </div>{" "}
                   <div className="col-lg-4 col-sm-8">
                     <select
-                      className="form-control form-select my-3"
+                      className="cliente form-control form-select my-3"
                       id="selectLlamada"
                       value={selectLlamada}
                       onChange={(e) => ChangeLlamada(e.target.value)}
@@ -319,17 +325,17 @@ const Callintro = () => {
                   </div>
                 </section>
                 {selectLlamada === "2" && (
-                    <div className="container">
-                      <NoContesta
-                        company={selectLlamada}
-                        clave={token}
-                        onNoConectaChange={handleNoConectaChange}
+                  <div className="container">
+                    <NoContesta
+                      company={selectLlamada}
+                      clave={token}
+                      onNoConectaChange={handleNoConectaChange}
 
-                      ></NoContesta>
-                      
-                    </div>                )}
-                    
-                    {(select_no_conecta !== "" && select_no_conecta !== "0") &&(
+                    ></NoContesta>
+
+                  </div>)}
+
+                {(select_no_conecta !== "" && select_no_conecta !== "0") && (
                   <div className="d-flex justify-content-end">
                     <button
                       className="btn btn-success btn-md "
@@ -367,7 +373,7 @@ const Callintro = () => {
                                   name="roomRent"
                                   type="text"
                                   value={data.NOMBRE_COMPLETO}
-                                  className="form-control text-right"
+                                  className=" form-control text-right"
                                   disabled
                                 />
                               </div>
@@ -385,7 +391,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.RUT_CON_GUION}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -394,7 +400,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.intentos}
-                                className="form-control"
+                                className="  form-control"
                                 disabled
                               />
                             </div>
@@ -403,7 +409,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.NOMBRE_COMPLETO}
-                                className="form-control"
+                                className=" form-control"
                                 style={{ textAlign: "right" }}
                                 disabled
                               />
@@ -420,7 +426,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.EMAIL}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -429,7 +435,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.REGION}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -438,7 +444,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.GRUPO}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -458,7 +464,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.TELÉFONO_1}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -467,7 +473,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.TELÉFONO_2}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -476,7 +482,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.TELÉFONO_3}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -485,7 +491,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.TELÉFONO_4}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -494,7 +500,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.TELÉFONO_5}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -503,7 +509,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.TELÉFONO_6}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -518,21 +524,7 @@ const Callintro = () => {
                                 name="roomRent"
                                 type="text"
                                 value={data.Observacion_Agenda}
-                                className="form-control"
-                                disabled
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="col-4 position-fixed bg-secondary">
-                              Nombre Completo
-                            </div>
-                            <div className="col-4 position-fixed bg-secondary">
-                              <input
-                                name="roomRent"
-                                type="text"
-                                value={data.NOMBRE_COMPLETO}
-                                className="form-control"
+                                className=" form-control"
                                 disabled
                               />
                             </div>
@@ -547,7 +539,7 @@ const Callintro = () => {
                     <hr />
                     <div className="container">
                       <Contesta
-                        company={selectLlamada}
+                        company={company}
                         clave={token}
                       ></Contesta>
                     </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as bootstrap from 'bootstrap';
 import axios from 'axios';
+import Direccion from './Direccion';
 
 
 
@@ -24,6 +25,7 @@ function Nombre({company,clave}) {
         sid_usuario: localStorage.getItem("localid_usuario"),
         stoken: localStorage.getItem("token")
     };
+    const [token, setToken] = useState(clave);
 
     useEffect(() => {
         Company(company)
@@ -37,7 +39,7 @@ function Nombre({company,clave}) {
 
         if (result.status === 200) {
             setOptionListMotivo(result.data)
-
+            setToken(clave); 
             // console.log(result.data)
             //  console.log(optionList)
 
@@ -70,43 +72,57 @@ function Nombre({company,clave}) {
 
         <>
         {/* style={{backgroundColor: "#E8E8E8"}} */}
-<section className='bg card p-3' style={{backgroundColor: "#E8E8E8"}} >
+<section  >
         <div className="row my-2">
           <div className="col-lg-2 col-sm-3 my-2">Nombres</div>
           <div className="col-lg-10 col-sm-9 my-2">
-            <input name="roomRent"  id='nombres' onChange={(e) => (ChangeConecta_nombre(e.target.value))}type="text" className="form-control" />
+            <input name="roomRent"  id='nombres' onChange={(e) => (ChangeConecta_nombre(e.target.value))}type="text" className="cliente form-control" />
           </div>
         </div>
         <div className="row">
           <div className="col-lg-2 col-sm-3 my-2">Apellido 1</div>
           <div className="col-lg-4 col-sm-9 my-2">
-            <input name="roomRent" type="text"  id='apellido_1'onChange={(e) => setApellido1(e.target.value)} className="form-control" />
+            <input name="roomRent" type="text"  id='apellido_paterno'onChange={(e) => setApellido1(e.target.value)} className="cliente form-control" />
           </div>
           <div className="col-lg-2 col-sm-3 my-2">Apellido 2</div>
           <div className="col-lg-4 col-sm-9 my-2">
-            <input name="roomRent" type="text" id='apellido_2' onChange={(e) => setApellido2(e.target.value)} className="form-control" />
+            <input name="roomRent" type="text" id='apellido_materno' onChange={(e) => setApellido2(e.target.value)} className="cliente form-control" />
           </div>
         </div>
         <div className='row'>
-            
         <div className="col-lg-2 col-sm-3 my-2">Fecha de Nacimiento:</div>
         <div className="col-lg-4 col-sm-9 my-2">
-          <input
-            type="date"
-            value={fechaNacimiento}
-            onChange={(e) => setFechaNacimiento(e.target.value)}
+        <input
+            type="text"
+            value={rut}
+            onChange={(e) => setRut(e.target.value)}
             required
-            className="form-control cliente"
+            id='rut'
+            maxLength={8}
+            className="cliente form-control"
           />
         </div>
         <div className="col-lg-2 col-sm-3 my-2">N. Rut:</div>
-        <div className="col-lg-4 col-sm-9 my-2">
+        <div className="col-lg-3 col-sm-3 my-2">
           <input
             type="text"
             value={rut}
             onChange={(e) => setRut(e.target.value)}
             required
-            className="form-control"
+            id='rut'
+            maxLength={8}
+            className="cliente form-control"
+          />
+          </div>
+           <div className="col-lg-1 col-sm-1 my-2">
+           <input
+            type="text"
+           // value={rut} digito verificador
+           // onChange={(e) => setRut(e.target.value)}
+            required
+            maxLength={1}
+            id='dv'
+            className="cliente form-control"
           />
         </div>
        
@@ -115,26 +131,28 @@ function Nombre({company,clave}) {
           <input
             type="email"
             value={email}
+            id='email'
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="form-control"
+            className="cliente form-control"
           />
         </div>
         <div className="col-lg-2 col-sm-3 my-2">Tipo Contrato:</div>
         <div className="col-lg-4 col-sm-9 my-2">
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="form-control"
+            type="text"
+            id='tipo_contrato'
+            value={'Solo Titular'}
+            //onChange={(e) => setEmail(e.target.value)}
+            disabled
+            className="cliente form-control"
           />
         </div>
         <div className="col-lg-2 col-sm-3 my-2">Planes:</div>
         <div className="col-lg-4 col-sm-9 my-2">
-        <select className="form-control form-select" id="planes"
+        <select className="cliente form-control form-select" id="planes"
                         disabled={false}>
-                        <option value="0">Seleccione el sexo</option>
+                        <option value="0">Seleccione el plan</option>
                         <option value="1">Plan 1 UF 500</option>
                         <option value="2">Plan 2 UF 1.000</option>
                         </select>
@@ -145,23 +163,6 @@ function Nombre({company,clave}) {
       </section>
         
 
-            {/* <div className="row mb-2">              
-                <div className="col-sm-12 col-md-12 col-lg-6">
-                <div className="col-lg-2 col-sm-3 ">Motivo</div>
-                    <select className="form-control form-select" id="ddl_motivo_1"
-                        disabled={false}
-                        // value={select}
-                        onChange={(e) => (ChangeConecta_nombre(e.target.value))}>
-                        <option value="0">Motivo</option>
-                        {optionListMotivo.map((item) => (
-                            <option key={item.id} value={item.id}>
-                                {item.detalle}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-               
-            </div> */}
         </>
     )
 }

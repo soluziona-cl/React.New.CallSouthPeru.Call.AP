@@ -69,9 +69,9 @@ function NoContesta({ company, clave, onNoConectaChange }) {
   return (
     <>
       <div className="row my-2">
-        <div className="col-lg-3 col-sm-3 my-3">No Conecta</div>
+        <div className="col-lg-3 col-sm-3 ">No Conecta</div>
         <div className="col-lg-4 col-sm-8">
-          <select className="form-select" aria-label="Default select example"
+          <select className="form-select cliente" aria-label="Default select example"
                                  id="no_conecta"
                                  onChange={(e) => onNoConectaChange(e.target.value)} 
                                  >

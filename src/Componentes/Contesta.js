@@ -27,20 +27,22 @@ function Contesta({ company, clave }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
-    useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =   useState("0");
   const sesiones = {
+
     sgui: localStorage.getItem("localgui"),
     scliente: localStorage.getItem("localcliente"),
     sid: localStorage.getItem("localid"),
     sid_usuario: localStorage.getItem("localid_usuario"),
     stoken: localStorage.getItem("token"),
+
   };
 
   useEffect(() => {
     Company(company);
   }, []);
   const Company = async (company) => {
+
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
       { dato: company },
@@ -93,9 +95,9 @@ function Contesta({ company, clave }) {
       <hr />
       <div className="row my-2">
         <div className="col-lg-3 col-sm-6 my-2">Registro Válido</div>
-        <div className="col-lg-3 col-sm-6 my-2">
+        <div className="col-lg-4 col-sm-6 my-2">
           <select
-            className="form-select"
+            className="cliente form-select" id="registro_valido"
             aria-label="Default select example"
             value={selectLlamada}
             onChange={(e) => setSelectedLlamada(e.target.value)}
@@ -108,10 +110,11 @@ function Contesta({ company, clave }) {
         </div>
         </div>
         {selectLlamada === "1" && (
-        <div className="row my-2"> <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
-        <div className="col-lg-3 col-sm-6 my-2">
-          <select
-            className="form-select"
+        <div className="row my-2">
+           <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
+        <div className="col-lg-4 col-sm-6 my-2">
+          <select id="interesa"
+            className="cliente form-select"
             aria-label="Default select example"
             value={selectinteresa}
             onChange={(e) => setselectinteresa(e.target.value)}
@@ -151,12 +154,12 @@ function Contesta({ company, clave }) {
           </p>
 
           <div className="row my-2">
-            <div className="col-lg-4 col-sm-10 my-2">
+            <div className=" col-lg-3 col-sm-10 my-2">
               tiene correo electrónico verdad???
             </div>
-            <div className="col-lg-3 col-sm-6 my-2">
-              <select
-                className="form-select"
+            <div className="col-lg-4 col-sm-6 my-2">
+              <select id="tiene_correo"
+                className="cliente form-select"
                 aria-label="Default select example"
                 value={selectcorreo}
                 onChange={(e) => setselectcorreo(e.target.value)}
@@ -171,10 +174,11 @@ function Contesta({ company, clave }) {
       )}
       {selectinteresa === "2" && (
         <div className="row my-2">
-          <div className="col-lg-4 col-sm-10 my-2">Motivos no interesa</div>
-          <div className="col-lg-3 col-sm-6 my-2">
+          <div className="col-lg-3 col-sm-10 my-2">Motivos no interesa</div>
+          <div className="col-lg-4 col-sm-6 my-2">
             <select
-              className="form-select"
+            id="motivos_no_interesa"
+              className="cliente form-select"
               aria-label="Default select example"
               value={selectnointeresa}
               onChange={(e) => setselectnointeresa(e.target.value)}
@@ -212,10 +216,11 @@ function Contesta({ company, clave }) {
             <textarea
               type="text"
               rows="3"
+              id="otro"
               value={otra_razon_noacepta}
               onChange={(e) => setotra_razon_noacepta(e.target.value)}
               required
-              className="form-control"
+              className="cliente form-control"
             />
           </div>
         </div>
@@ -256,12 +261,6 @@ function Contesta({ company, clave }) {
                   <th style={{ border: "1px solid black", padding: "8px" }}>
                     Plan 2
                   </th>
-                  {/* <th style={{ border: "1px solid black", padding: "8px" }}>
-                    Plan 3
-                  </th>
-                  <th style={{ border: "1px solid black", padding: "8px" }}>
-                    Plan 4
-                  </th> */}
                 </tr>
               </thead>
               <tbody>
@@ -275,12 +274,7 @@ function Contesta({ company, clave }) {
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     UF 1.000
                   </td>
-                  {/* <td style={{ border: "1px solid black", padding: "8px" }}>
-                    UF 1.500
-                  </td>
-                  <td style={{ border: "1px solid black", padding: "8px" }}>
-                    UF 2.000
-                  </td> */}
+                 
                 </tr>
                 <tr>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
@@ -292,12 +286,6 @@ function Contesta({ company, clave }) {
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     0,381
                   </td>
-                  {/* <td style={{ border: "1px solid black", padding: "8px" }}>
-                    0,439
-                  </td>
-                  <td style={{ border: "1px solid black", padding: "8px" }}>
-                    0,502
-                  </td> */}
                 </tr>
                 <tr>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
@@ -309,12 +297,6 @@ function Contesta({ company, clave }) {
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     $11.430
                   </td>
-                  {/* <td style={{ border: "1px solid black", padding: "8px" }}>
-                    $13.170
-                  </td>
-                  <td style={{ border: "1px solid black", padding: "8px" }}>
-                    $15.060
-                  </td> */}
                 </tr>
               </tbody>
             </table>
@@ -366,12 +348,12 @@ function Contesta({ company, clave }) {
             usted y familia.
           </p>
           <div className="row my-2" style={{ backgroundColor: "#E8E8E8" }}>
-            <div className="col-lg-4 col-sm-10 my-2">
-              Acepta la contratación de este Seguro ??
+            <div className="col-lg-2 col-sm-10 my-2">
+            ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
             </div>
-            <div className="col-lg-3 col-sm-6 my-2">
-              <select
-                className="form-select"
+            <div className="col-lg-4 col-sm-6 my-2">
+              <select id="acepta_seguro"
+                className="cliente form-select"
                 aria-label="Default select example"
                 value={selectaceptaseguro}
                 onChange={(e) => setselectaceptaseguro(e.target.value)}
@@ -404,13 +386,14 @@ function Contesta({ company, clave }) {
             y para efectos de grabación vamos a corroborar sus datos personales,
             indíqueme por favor:
           </p>
+          <div className='row bg card p-3 my-3' style={{backgroundColor: "#E8E8E8"}}>
           <Nombre></Nombre>
-          <Genero></Genero>
-          <Direccion>  
-           company={selectLlamada}
-           clave={token}
-           
+          {/* <Genero></Genero> */}
+          <Direccion  
+           company={company}
+           clave={token}>
           </Direccion>
+          </div>
           <h4> • EXCLUSIONES: (MENCIONAR OBLIGATORIO Y TEXTUAL) </h4>
           <p>
             Ahora le mencionaré las principales exclusiones de este seguro, de
@@ -456,12 +439,12 @@ function Contesta({ company, clave }) {
       selectLlamada === "3" ||
       selectLlamada === "4" ? (
         <div className="row my-2">
-          <div className="col-lg-4 col-sm-10 my-2">
+          <div className="col-lg-3 col-sm-10 my-2">
             4. Comunica con tercero válido{" "}
           </div>
-          <div className="col-lg-3 col-sm-6 my-2">
-            <select
-              className="form-select"
+          <div className="col-lg-4 col-sm-6 my-2">
+            <select id="comunica_tercero_valido"
+              className="cliente form-select"
               aria-label="Default select example"
               value={Comunica_con_tercero_valido}
               onChange={(e) => setComunica_con_tercero_valido(e.target.value)}
