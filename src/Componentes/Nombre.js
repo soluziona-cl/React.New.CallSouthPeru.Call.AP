@@ -93,11 +93,9 @@ function Nombre({company,clave}) {
         <div className="col-lg-2 col-sm-3 my-2">Fecha de Nacimiento:</div>
         <div className="col-lg-4 col-sm-9 my-2">
         <input
-            type="text"
-            value={rut}
-            onChange={(e) => setRut(e.target.value)}
+            type="date"
             required
-            id='rut'
+            id='fecha_nacimiento'
             maxLength={8}
             className="cliente form-control"
           />
