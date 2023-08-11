@@ -96,7 +96,7 @@ function Nombre({company,clave}) {
             value={fechaNacimiento}
             onChange={(e) => setFechaNacimiento(e.target.value)}
             required
-            className="form-control"
+            className="form-control cliente"
           />
         </div>
         <div className="col-lg-2 col-sm-3 my-2">N. Rut:</div>
