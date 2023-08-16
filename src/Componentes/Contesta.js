@@ -348,7 +348,7 @@ function Contesta({ company, clave }) {
             usted y familia.
           </p>
           <div className="row my-2" style={{ backgroundColor: "#E8E8E8" }}>
-            <div className="col-lg-2 col-sm-10 my-2">
+            <div className="col-lg-12 col-sm-10 my-2">
             ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
             </div>
             <div className="col-lg-4 col-sm-6 my-2">

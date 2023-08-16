@@ -8,9 +8,13 @@ import Direccion from './Direccion';
 function Nombre({company,clave}) {
     const [selectLlamada, setSelectedLlamada] = useState('');
     const [fechaNacimiento, setFechaNacimiento] = useState('');
+
     const [rut, setRut] = useState('');
+    const [valido, setValido] = useState(null);
+    const [sexo, setSexo] = useState('');
+
     const [direccion, setDireccion] = useState('');
-    const [email, setEmail] = useState('');
+   // const [email, setEmail] = useState('');
     const [apellido_1, setApellido1] = useState('');
     const [apellido_2, setApellido2] = useState('');
 
@@ -18,6 +22,9 @@ function Nombre({company,clave}) {
     const [optionListDetalle, setOptionListDetalle] = useState([]);
     const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
     const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState('0');
+
+    const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
     const sesiones = {
         sgui: localStorage.getItem("localgui"),
         scliente: localStorage.getItem("localcliente"),
@@ -31,7 +38,69 @@ function Nombre({company,clave}) {
         Company(company)
     }, []);
 
+    function handleEmailChange(e) {
+      const emailInput = e.target;
+      const emailValidationMessage = document.getElementById("emailValidationMessage");
+      
+      const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+      const isValid = regex.test(emailInput.value);
+      
+      if (isValid) {
+        emailValidationMessage.textContent = "El correo electrónico es válido.";
+        emailValidationMessage.classList.remove("text-danger");
+        emailValidationMessage.classList.add("text-success");
+      } else {
+        emailValidationMessage.textContent = "El correo electrónico no es válido.";
+        emailValidationMessage.classList.remove("text-success");
+        emailValidationMessage.classList.add("text-danger");
+      }
+    }
 
+    const handleChangeRut = (event) => {
+      setRut(event.target.value);
+      validarRut(event.target.value);
+    };
+  
+    const validarRut = (rut) => {
+      let regex = /^[0-9]+-[0-9kK]{1}$/;
+  
+      if (!regex.test(rut)) {
+        // alert('Formato Rut No valido');
+        // setRut('');
+        setValido(false);
+        console.log(valido);
+        return;
+      }
+  
+  
+  
+      let rutSinGuion = rut.replace("-", "");
+      let rutSinDigitoVerificador = rutSinGuion.slice(0, -1);
+      let digitoVerificador = rutSinGuion.slice(-1).toUpperCase();
+      let factor = 2;
+      let suma = 0;
+  
+      for (let i = rutSinDigitoVerificador.length - 1; i >= 0; i--) {
+        suma += factor * rutSinDigitoVerificador[i];
+        factor = factor === 7 ? 2 : factor + 1;
+      }
+  
+      let digitoCalculado = 11 - (suma % 11);
+  
+      if (digitoCalculado === 11) {
+        digitoCalculado = "0";
+      } else if (digitoCalculado === 10) {
+        digitoCalculado = "K";
+      } else {
+        digitoCalculado = digitoCalculado.toString();
+      }
+  
+      if (digitoCalculado === digitoVerificador) {
+        setValido(true);
+      } else {
+        setValido(false);
+      }
+    };
 
     const Company = (async (company) => {
 
@@ -101,47 +170,47 @@ function Nombre({company,clave}) {
           />
         </div>
         <div className="col-lg-2 col-sm-3 my-2">N. Rut:</div>
-        <div className="col-lg-3 col-sm-3 my-2">
+        <div className="col-lg-4 col-sm-3 my-2">
+
+        <input type="text" className="form-control cliente" required id="RutCliente" value={rut} onChange={handleChangeRut} />
+                            {valido ? (
+                              <p style={{ color: "green" }}>Rut válido</p>
+                            ) : (
+                              <p style={{ color: "red" }}>Rut inválido</p>
+                            )}
+          </div>
+          
+          <div className="col-lg-2 col-sm-3 my-2">Sexo:</div>
+        <div className="col-lg-4 col-sm-9 my-2">
           <input
             type="text"
-            value={rut}
-            onChange={(e) => setRut(e.target.value)}
+            value={sexo}
+            id='sexo'
+            onChange={(e) => setSexo(e.target.value)}
             required
-            id='rut'
-            maxLength={8}
-            className="cliente form-control"
-          />
-          </div>
-           <div className="col-lg-1 col-sm-1 my-2">
-           <input
-            type="text"
-           // value={rut} digito verificador
-           // onChange={(e) => setRut(e.target.value)}
-            required
-            maxLength={1}
-            id='dv'
             className="cliente form-control"
           />
         </div>
        
         <div className="col-lg-2 col-sm-3 my-2">Email:</div>
-        <div className="col-lg-4 col-sm-9 my-2">
-          <input
-            type="email"
-            value={email}
-            id='email'
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="cliente form-control"
-          />
-        </div>
+<div className="col-lg-4 col-sm-9 my-2">
+  <input
+    type="email"
+    id="email"
+    required
+    className="cliente form-control"
+    onChange={handleEmailChange}
+  />
+  <div id="emailValidationMessage"  className="validation-message"></div>
+</div>
+
+
         <div className="col-lg-2 col-sm-3 my-2">Tipo Contrato:</div>
         <div className="col-lg-4 col-sm-9 my-2">
           <input
             type="text"
             id='tipo_contrato'
             value={'Solo Titular'}
-            //onChange={(e) => setEmail(e.target.value)}
             disabled
             className="cliente form-control"
           />

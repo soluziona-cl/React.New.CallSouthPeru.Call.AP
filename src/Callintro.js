@@ -197,7 +197,29 @@ const Callintro = () => {
     // setshowlogo(!showlogo);
     setHistoricoGestiones(!openHistoricoGestiones);
   };
+
+
   async function GuardarRegistro() {
+    const nombres = document.getElementById('nombres').value
+   const apellido_paterno = document.getElementById('apellido_paterno').value
+    const apellido_materno = document.getElementById('apellido_materno').value
+    const fecha_nacimiento = document.getElementById('fecha_nacimiento').value
+    const RutCliente = document.getElementById('RutCliente').value
+    const sexo = document.getElementById('sexo').value
+    const email = document.getElementById('email').value
+    const planes = document.getElementById('planes').value
+    const comuna = document.getElementById('comuna').value
+     const ciudad = document.getElementById('ciudad').value 
+     const calle = document.getElementById('calle').value 
+     const numero = document.getElementById('numero').value 
+     const depto = document.getElementById('depto').value
+     const referencia = document.getElementById('referencia').value
+
+
+if( nombres === '' ||  apellido_paterno === '' ||  apellido_materno === ''||  fecha_nacimiento === ''||  RutCliente === ''||  sexo === ''||  email === '' ||  planes === ''||  comuna === ''||  ciudad === ''||  calle === ''||  numero === ''||  depto === ''||  referencia === '')
+{console.log('campo vacio')}
+else{
+
     let ddl_tipificacion = selectLlamada;
     let ddl_detalle_tipificacion = selectLlamadaDetalle;
 
@@ -250,12 +272,14 @@ const Callintro = () => {
     item_sucess_llamada["gestion"] = json_sucess_gestion;
     id.push(item_sucess_llamada);
 
+
+  
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
       { dato: id },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-
+    
     if (result.status === 200) {
       toast.success("Registro Guardado Exitosamente");
       console.log("Registro Guardado Exitosamente");
@@ -263,6 +287,8 @@ const Callintro = () => {
         window.location.href = "/Orkesta/Generacc/Call/Fin";
       }, 5000); // 5000 milisegundos = 5 segundos
     }
+  }
+  
   }
   // console.log("select_no_conecta:", select_no_conecta);
 
