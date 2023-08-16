@@ -118,13 +118,25 @@ function Contesta({ company, clave }) {
             <select id="interesa"
               className="cliente form-select"
               aria-label="Default select example"
-              value={selectinteresa}
+             value={selectinteresa}
               onChange={(e) => setselectinteresa(e.target.value)}
+              // value={
+              //   edadIngresada >= 70 ? "edad_mayor" : selectinteresa
+              // }
+              // onChange={(e) => {
+              //   const newValue = e.target.value;
+              //   if (edadIngresada >= 70) {
+              //     setselectinteresa("edad_mayor");
+              //   } else {
+              //     setselectinteresa(newValue);
+              //   }
+              // }}
             >
               <option value="0">Seleccione</option>
               <option value="1">Interesa</option>
               <option value="2">No Interesa</option>
               <option value="3">Lo Pensara</option>
+              <option value="edad_mayor">Edad mayor a 70 años</option>
             </select>
           </div></div>
       )}
@@ -154,8 +166,8 @@ function Contesta({ company, clave }) {
             Seguro. Sólo deberá activarlo a través de un link que recibirá a su
             correo electrónico, tiene correo electrónico verdad???
           </p>
-
-          <div className="row my-2">
+{/* esto sirve */}
+          {/* <div className="row my-2">
             <div className=" col-lg-3 col-sm-10 my-2">
               Ingrese su edad por favor
             </div>
@@ -167,20 +179,39 @@ function Contesta({ company, clave }) {
               >
               </input>
             </div>
+          </div> */}
+           <div className="row my-2">
+          <div className=" col-lg-3 col-sm-10 my-2">
+            tiene correo electrónico verdad???
+          </div>
+          <div className="col-lg-4 col-sm-6 my-2">
+            <select id="tiene_correo"
+              className="cliente form-select"
+              aria-label="Default select example"
+              value={selectcorreo}
+              onChange={(e) => setselectcorreo(e.target.value)}
+            >
+              <option selected>Seleccione</option>
+              <option value="1">Si</option>
+              <option value="2">No</option>
+            </select>
           </div>
         </div>
-      )}
-      {edadIngresada >= "70" && (
-
-        <div>
-          <p>
-            Sr, Lamentablemente no podremos continuar con la información ya que su edad supera la edad maxima para contratar un servicio
-          </p>
         </div>
-
       )}
+{/* esto sirve */}
+     
+   {/* {edadIngresada >= 70 && selectinteresa === "edad_mayor" && (
+  <div>
+    <p>
+      Sr, Lamentablemente no podremos continuar con la información ya que su edad supera la edad máxima para contratar un servicio
+    </p>
+  </div>
+)} */}
 
-      {edadIngresada <= "69" && edadIngresada != null && (
+{/* esto sirve */}
+
+      {/* {edadIngresada <= "69" && edadIngresada != null && (
         <div className="row my-2">
           <div className=" col-lg-3 col-sm-10 my-2">
             tiene correo electrónico verdad???
@@ -198,7 +229,7 @@ function Contesta({ company, clave }) {
             </select>
           </div>
         </div>
-      )}
+      )} */}
       {selectinteresa === "2" && (
         <div className="row my-2">
           <div className="col-lg-3 col-sm-10 my-2">Motivos no interesa</div>
