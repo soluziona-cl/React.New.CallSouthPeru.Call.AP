@@ -9,12 +9,12 @@ function Contesta({ company, clave }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
     useState("");
- const [token, setToken] = useState(clave);
+  const [token, setToken] = useState(clave);
 
 
 
- 
- const [horario_tercero, sethorario_tercero] = useState("");
+
+  const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
   const [selectaceptaseguro, setselectaceptaseguro] = useState("");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
@@ -22,12 +22,14 @@ function Contesta({ company, clave }) {
   const [selectnointeresa, setselectnointeresa] = useState("");
   const [datafull, setDataFull] = useState([]);
   const [otra_razon_noacepta, setotra_razon_noacepta] = useState('');
+  const [edadIngresada, setEdadIngresada] = useState(null);
+
 
 
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =   useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState("0");
   const sesiones = {
 
     sgui: localStorage.getItem("localgui"),
@@ -108,25 +110,25 @@ function Contesta({ company, clave }) {
             <option value="3">Comunica con tercero no válido</option>
           </select>
         </div>
-        </div>
-        {selectLlamada === "1" && (
+      </div>
+      {selectLlamada === "1" && (
         <div className="row my-2">
-           <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
-        <div className="col-lg-4 col-sm-6 my-2">
-          <select id="interesa"
-            className="cliente form-select"
-            aria-label="Default select example"
-            value={selectinteresa}
-            onChange={(e) => setselectinteresa(e.target.value)}
-          >
-            <option value="0">Seleccione</option>
-            <option value="1">Interesa</option>
-            <option value="2">No Interesa</option>
-            <option value="3">Lo Pensara</option>
-          </select>
-        </div></div>
-)}
-      
+          <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
+          <div className="col-lg-4 col-sm-6 my-2">
+            <select id="interesa"
+              className="cliente form-select"
+              aria-label="Default select example"
+              value={selectinteresa}
+              onChange={(e) => setselectinteresa(e.target.value)}
+            >
+              <option value="0">Seleccione</option>
+              <option value="1">Interesa</option>
+              <option value="2">No Interesa</option>
+              <option value="3">Lo Pensara</option>
+            </select>
+          </div></div>
+      )}
+
 
 
 
@@ -155,20 +157,45 @@ function Contesta({ company, clave }) {
 
           <div className="row my-2">
             <div className=" col-lg-3 col-sm-10 my-2">
-              tiene correo electrónico verdad???
+              Ingrese su edad por favor
             </div>
             <div className="col-lg-4 col-sm-6 my-2">
-              <select id="tiene_correo"
-                className="cliente form-select"
-                aria-label="Default select example"
-                value={selectcorreo}
-                onChange={(e) => setselectcorreo(e.target.value)}
+              <input id="edad_ingresada"
+                className="cliente form-control"
+                value={edadIngresada}
+                onChange={(e) => setEdadIngresada(e.target.value)}
               >
-                <option selected>Seleccione</option>
-                <option value="1">Si</option>
-                <option value="2">No</option>
-              </select>
+              </input>
             </div>
+          </div>
+        </div>
+      )}
+      {edadIngresada >= "70" && (
+
+        <div>
+          <p>
+            Sr, Lamentablemente no podremos continuar con la información ya que su edad supera la edad maxima para contratar un servicio
+          </p>
+        </div>
+
+      )}
+
+      {edadIngresada <= "69" && edadIngresada != null && (
+        <div className="row my-2">
+          <div className=" col-lg-3 col-sm-10 my-2">
+            tiene correo electrónico verdad???
+          </div>
+          <div className="col-lg-4 col-sm-6 my-2">
+            <select id="tiene_correo"
+              className="cliente form-select"
+              aria-label="Default select example"
+              value={selectcorreo}
+              onChange={(e) => setselectcorreo(e.target.value)}
+            >
+              <option selected>Seleccione</option>
+              <option value="1">Si</option>
+              <option value="2">No</option>
+            </select>
           </div>
         </div>
       )}
@@ -177,7 +204,7 @@ function Contesta({ company, clave }) {
           <div className="col-lg-3 col-sm-10 my-2">Motivos no interesa</div>
           <div className="col-lg-4 col-sm-6 my-2">
             <select
-            id="motivos_no_interesa"
+              id="motivos_no_interesa"
               className="cliente form-select"
               aria-label="Default select example"
               value={selectnointeresa}
@@ -274,7 +301,7 @@ function Contesta({ company, clave }) {
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     UF 1.000
                   </td>
-                 
+
                 </tr>
                 <tr>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
@@ -349,7 +376,7 @@ function Contesta({ company, clave }) {
           </p>
           <div className="row my-2" style={{ backgroundColor: "#E8E8E8" }}>
             <div className="col-lg-12 col-sm-10 my-2">
-            ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
+              ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
             </div>
             <div className="col-lg-4 col-sm-6 my-2">
               <select id="acepta_seguro"
@@ -386,13 +413,13 @@ function Contesta({ company, clave }) {
             y para efectos de grabación vamos a corroborar sus datos personales,
             indíqueme por favor:
           </p>
-          <div className='row bg card p-3 my-3' style={{backgroundColor: "#E8E8E8"}}>
-          <Nombre></Nombre>
-          {/* <Genero></Genero> */}
-          <Direccion  
-           company={company}
-           clave={token}>
-          </Direccion>
+          <div className='row bg card p-3 my-3' style={{ backgroundColor: "#E8E8E8" }}>
+            <Nombre></Nombre>
+            {/* <Genero></Genero> */}
+            <Direccion
+              company={company}
+              clave={token}>
+            </Direccion>
           </div>
           <h4> • EXCLUSIONES: (MENCIONAR OBLIGATORIO Y TEXTUAL) </h4>
           <p>
@@ -435,9 +462,12 @@ function Contesta({ company, clave }) {
           </p>
         </div>
       )}
+
+
+
       {selectLlamada === "2" ||
-      selectLlamada === "3" ||
-      selectLlamada === "4" ? (
+        selectLlamada === "3" ||
+        selectLlamada === "4" ? (
         <div className="row my-2">
           <div className="col-lg-3 col-sm-10 my-2">
             4. Comunica con tercero válido{" "}
