@@ -28,13 +28,10 @@ import Despedida from ".";
 
 registerLocale("es", es);
 
-function Callintro() {
+const Callintro = () => {
   const { Alert } = bootstrap;
   var [message, setMessage] = useState("...");
   const alertRef = useRef();
-
-  const [nombreError, setNombreError] = useState(""); // Estado para el error de nombre
-
 
   const [show, toggleShow] = useState(true);
   const [token, setToken] = useState("");
@@ -65,12 +62,6 @@ function Callintro() {
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [selectedValueApp, setSelectedValueApp] = useState('1');
-
-    // Función para manejar el cambio del error de nombre
-  const handleNombreError = (error) => {
-    setNombreError(error);
-    console.log(error)
-  };
 
   const handleNoConectaChange = (value) => {
     setselect_no_conecta(value);
@@ -210,45 +201,87 @@ function Callintro() {
 
   async function GuardarRegistro() {
 
-    const edad_ingresada = document.getElementById('edad_ingresada').value
-// if(error === ''){
-//   console.log('BIen')
-// }
-if(edad_ingresada >= 70){
-  let ddl_tipificacion = selectLlamada;
-  let ddl_detalle_tipificacion = selectLlamadaDetalle;
+    const Edad = document.getElementById("fecha_nacimiento").value
+    const anio = (Edad.slice(0,4))
+    console.log(anio)
+    const anioActual = new Date().getFullYear();
+    const edadMaxima = anioActual - 70; 
+    
+    if (anio <= edadMaxima) {
+        console.log("mayor de 70");
+        let ddl_tipificacion = selectLlamada;
+    let ddl_detalle_tipificacion = selectLlamadaDetalle;
 
-  // let fecha_compromiso = format(startdateini, "yyyyMMdd");
-  // let observacion = selectObservacion;
+    // let fecha_compromiso = format(startdateini, "yyyyMMdd");
+    // let observacion = selectObservacion;
 
-  let id = []; //final
-  let item_sucess_llamada = {};
-  let json_sucess_gestion = [];
-  let item_sucess_gestion = {};
-  const preguntas = document.querySelectorAll(".cliente");
-  preguntas.forEach((obj) => {
-    let title = obj.id;
-    let valor = obj.value;
+    let id = []; //final
+    let item_sucess_llamada = {};
+    let json_sucess_gestion = [];
+    let item_sucess_gestion = {};
+    const preguntas = document.querySelectorAll(".cliente");
+    preguntas.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion[title] = valor;
+    });
+    
+    let title = "seleccione_una_opcion";
+    let valor = ddl_tipificacion;
     item_sucess_gestion[title] = valor;
-  });
 
-  const result = await axios.post(
-    "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
-    { dato: id },
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
+    title = "detalle_tipificacion";
+    valor = ddl_detalle_tipificacion;
+    item_sucess_gestion[title] = valor;
 
-  if (result.status === 200) {
-    toast.success("Registro Guardado Exitosamente");
-    console.log("Registro Guardado Exitosamente");
-    setTimeout(() => {
-      window.location.href = "/Orkesta/Generacc/Call/Fin";
-    }, 5000); // 5000 milisegundos = 5 segundos
-  }
-}else{
+    // title = "fecha";
+    // valor = fecha_compromiso;
+    // item_sucess_gestion[title] = valor;
+
+    // title = "observacion";
+    // valor = observacion;
+    // item_sucess_gestion[title] = valor;
+
+    json_sucess_gestion.push(item_sucess_gestion);
+
+    item_sucess_llamada["sucess"] = true;
+    item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
+    item_sucess_llamada["campaign_id"] = list_id;
+    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+    item_sucess_llamada["lead_id"] = lead_id;
+    item_sucess_llamada["list_id"] = list_id;
+    item_sucess_llamada["agente"] = agente;
+    item_sucess_llamada["recording_filename"] = recording_filename;
+    item_sucess_llamada["epoch"] = epoch;
+    item_sucess_llamada["fecha_gestion"] = new Date();
+    //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+    // item_sucess_llamada["duracion_time"] =
+    // get_elapsed_time_string(elapsed_seconds);
+    item_sucess_llamada["phone_number"] = phone_number;
+    item_sucess_llamada["gestion"] = json_sucess_gestion;
+    id.push(item_sucess_llamada);
+
+
+  
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+      { dato: id },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    
+    if (result.status === 200) {
+      toast.success("Registro Guardado Exitosamente");
+      console.log("Registro Guardado Exitosamente");
+      setTimeout(() => {
+        window.location.href = "/Orkesta/Generacc/Call/Fin";
+      }, 5000); // 5000 milisegundos = 5 segundos
+    }
 
 
 
+
+
+    } else {
     const nombres = document.getElementById('nombres').value
     const apellido_paterno = document.getElementById('apellido_paterno').value
     const apellido_materno = document.getElementById('apellido_materno').value
@@ -258,85 +291,88 @@ if(edad_ingresada >= 70){
     const email = document.getElementById('email').value
     const planes = document.getElementById('planes').value
     const comuna = document.getElementById('comuna').value
-    const ciudad = document.getElementById('ciudad').value
-    const calle = document.getElementById('calle').value
-    const numero = document.getElementById('numero').value
+    const ciudad = document.getElementById('ciudad').value 
+    const calle = document.getElementById('calle').value 
+    const numero = document.getElementById('numero').value 
     const depto = document.getElementById('depto').value
     const referencia = document.getElementById('referencia').value
 
 
-    if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '' || referencia === '') { console.log('campo vacio') }
-    else {
+if( nombres === '' ||  apellido_paterno === '' ||  apellido_materno === ''||  fecha_nacimiento === ''||  RutCliente === ''||  sexo === ''||  email === '' ||  planes === ''||  comuna === ''||  ciudad === ''||  calle === ''||  numero === ''||  depto === ''||  referencia === '')
+{console.log('campo vacio')}
+else{
 
-      let ddl_tipificacion = selectLlamada;
-      let ddl_detalle_tipificacion = selectLlamadaDetalle;
+    let ddl_tipificacion = selectLlamada;
+    let ddl_detalle_tipificacion = selectLlamadaDetalle;
 
-      // let fecha_compromiso = format(startdateini, "yyyyMMdd");
-      // let observacion = selectObservacion;
+    // let fecha_compromiso = format(startdateini, "yyyyMMdd");
+    // let observacion = selectObservacion;
 
-      let id = []; //final
-      let item_sucess_llamada = {};
-      let json_sucess_gestion = [];
-      let item_sucess_gestion = {};
-      const preguntas = document.querySelectorAll(".cliente");
-      preguntas.forEach((obj) => {
-        let title = obj.id;
-        let valor = obj.value;
-        item_sucess_gestion[title] = valor;
-      });
-
-      let title = "seleccione_una_opcion";
-      let valor = ddl_tipificacion;
+    let id = []; //final
+    let item_sucess_llamada = {};
+    let json_sucess_gestion = [];
+    let item_sucess_gestion = {};
+    const preguntas = document.querySelectorAll(".cliente");
+    preguntas.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
       item_sucess_gestion[title] = valor;
+    });
+    
+    let title = "seleccione_una_opcion";
+    let valor = ddl_tipificacion;
+    item_sucess_gestion[title] = valor;
 
-      title = "detalle_tipificacion";
-      valor = ddl_detalle_tipificacion;
-      item_sucess_gestion[title] = valor;
+    title = "detalle_tipificacion";
+    valor = ddl_detalle_tipificacion;
+    item_sucess_gestion[title] = valor;
 
-      // title = "fecha";
-      // valor = fecha_compromiso;
-      // item_sucess_gestion[title] = valor;
+    // title = "fecha";
+    // valor = fecha_compromiso;
+    // item_sucess_gestion[title] = valor;
 
-      // title = "observacion";
-      // valor = observacion;
-      // item_sucess_gestion[title] = valor;
+    // title = "observacion";
+    // valor = observacion;
+    // item_sucess_gestion[title] = valor;
 
-      json_sucess_gestion.push(item_sucess_gestion);
+    json_sucess_gestion.push(item_sucess_gestion);
 
-      item_sucess_llamada["sucess"] = true;
-      item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
-      item_sucess_llamada["campaign_id"] = list_id;
-      item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
-      item_sucess_llamada["lead_id"] = lead_id;
-      item_sucess_llamada["list_id"] = list_id;
-      item_sucess_llamada["agente"] = agente;
-      item_sucess_llamada["recording_filename"] = recording_filename;
-      item_sucess_llamada["epoch"] = epoch;
-      item_sucess_llamada["fecha_gestion"] = new Date();
-      //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
-      // item_sucess_llamada["duracion_time"] =
-      // get_elapsed_time_string(elapsed_seconds);
-      item_sucess_llamada["phone_number"] = phone_number;
-      item_sucess_llamada["gestion"] = json_sucess_gestion;
-      id.push(item_sucess_llamada);
+    item_sucess_llamada["sucess"] = true;
+    item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
+    item_sucess_llamada["campaign_id"] = list_id;
+    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+    item_sucess_llamada["lead_id"] = lead_id;
+    item_sucess_llamada["list_id"] = list_id;
+    item_sucess_llamada["agente"] = agente;
+    item_sucess_llamada["recording_filename"] = recording_filename;
+    item_sucess_llamada["epoch"] = epoch;
+    item_sucess_llamada["fecha_gestion"] = new Date();
+    //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+    // item_sucess_llamada["duracion_time"] =
+    // get_elapsed_time_string(elapsed_seconds);
+    item_sucess_llamada["phone_number"] = phone_number;
+    item_sucess_llamada["gestion"] = json_sucess_gestion;
+    id.push(item_sucess_llamada);
 
 
-
-      const result = await axios.post(
-        "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
-        { dato: id },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-
-      if (result.status === 200) {
-        toast.success("Registro Guardado Exitosamente");
-        console.log("Registro Guardado Exitosamente");
-        setTimeout(() => {
-          window.location.href = "/Orkesta/Generacc/Call/Fin";
-        }, 5000); // 5000 milisegundos = 5 segundos
-      }
+  
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+      { dato: id },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    
+    if (result.status === 200) {
+      toast.success("Registro Guardado Exitosamente");
+      console.log("Registro Guardado Exitosamente");
+      setTimeout(() => {
+        window.location.href = "/Orkesta/Generacc/Call/Fin";
+      }, 5000); // 5000 milisegundos = 5 segundos
     }
   }
+  }
+  
+  
   }
   // console.log("select_no_conecta:", select_no_conecta);
 
@@ -382,7 +418,7 @@ if(edad_ingresada >= 70){
                 <section className="row my-2">
                   <div
                     className="col-lg-3 col-sm-2 my-3 ms-1"
-                  >
+                   >
                     LLamada
                   </div>{" "}
                   <div className="col-lg-4 col-sm-8">
@@ -615,7 +651,6 @@ if(edad_ingresada >= 70){
                       <Contesta
                         company={company}
                         clave={token}
-                        onNombreErrorChange={handleNombreError} 
                       ></Contesta>
                     </div>
 
