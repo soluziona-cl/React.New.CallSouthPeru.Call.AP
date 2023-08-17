@@ -118,19 +118,19 @@ function Contesta({ company, clave }) {
             <select id="interesa"
               className="cliente form-select"
               aria-label="Default select example"
-             value={selectinteresa}
-              onChange={(e) => setselectinteresa(e.target.value)}
-              // value={
-              //   edadIngresada >= 70 ? "edad_mayor" : selectinteresa
-              // }
-              // onChange={(e) => {
-              //   const newValue = e.target.value;
-              //   if (edadIngresada >= 70) {
-              //     setselectinteresa("edad_mayor");
-              //   } else {
-              //     setselectinteresa(newValue);
-              //   }
-              // }}
+            //  value={selectinteresa}
+            //   onChange={(e) => setselectinteresa(e.target.value)}
+              value={
+                edadIngresada >= 70 ? "edad_mayor" : selectinteresa
+              }
+              onChange={(e) => {
+                const newValue = e.target.value;
+                if (edadIngresada >= 70) {
+                  setselectinteresa("edad_mayor");
+                } else {
+                  setselectinteresa(newValue);
+                }
+              }}
             >
               <option value="0">Seleccione</option>
               <option value="1">Interesa</option>
@@ -166,8 +166,8 @@ function Contesta({ company, clave }) {
             Seguro. Sólo deberá activarlo a través de un link que recibirá a su
             correo electrónico, tiene correo electrónico verdad???
           </p>
-{/* esto sirve */}
-          {/* <div className="row my-2">
+
+          <div className="row my-2">
             <div className=" col-lg-3 col-sm-10 my-2">
               Ingrese su edad por favor
             </div>
@@ -179,8 +179,8 @@ function Contesta({ company, clave }) {
               >
               </input>
             </div>
-          </div> */}
-           <div className="row my-2">
+          </div>
+           {/* <div className="row my-2">
           <div className=" col-lg-3 col-sm-10 my-2">
             tiene correo electrónico verdad???
           </div>
@@ -197,21 +197,22 @@ function Contesta({ company, clave }) {
             </select>
           </div>
         </div>
-        </div>
+         */}
+         </div>
       )}
 {/* esto sirve */}
      
-   {/* {edadIngresada >= 70 && selectinteresa === "edad_mayor" && (
+   {edadIngresada >= 70 && selectinteresa === "edad_mayor" && (
   <div>
     <p>
       Sr, Lamentablemente no podremos continuar con la información ya que su edad supera la edad máxima para contratar un servicio
     </p>
   </div>
-)} */}
+)}
 
 {/* esto sirve */}
 
-      {/* {edadIngresada <= "69" && edadIngresada != null && (
+      {edadIngresada <= 69 && edadIngresada != null && (
         <div className="row my-2">
           <div className=" col-lg-3 col-sm-10 my-2">
             tiene correo electrónico verdad???
@@ -229,7 +230,7 @@ function Contesta({ company, clave }) {
             </select>
           </div>
         </div>
-      )} */}
+      )}
       {selectinteresa === "2" && (
         <div className="row my-2">
           <div className="col-lg-3 col-sm-10 my-2">Motivos no interesa</div>
