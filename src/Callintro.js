@@ -28,10 +28,13 @@ import Despedida from ".";
 
 registerLocale("es", es);
 
-const Callintro = () => {
+function Callintro() {
   const { Alert } = bootstrap;
   var [message, setMessage] = useState("...");
   const alertRef = useRef();
+
+  const [nombreError, setNombreError] = useState(""); // Estado para el error de nombre
+
 
   const [show, toggleShow] = useState(true);
   const [token, setToken] = useState("");
@@ -62,6 +65,12 @@ const Callintro = () => {
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [selectedValueApp, setSelectedValueApp] = useState('1');
+
+    // Función para manejar el cambio del error de nombre
+  const handleNombreError = (error) => {
+    setNombreError(error);
+    console.log(error)
+  };
 
   const handleNoConectaChange = (value) => {
     setselect_no_conecta(value);
@@ -606,6 +615,7 @@ if(edad_ingresada >= 70){
                       <Contesta
                         company={company}
                         clave={token}
+                        onNombreErrorChange={handleNombreError} 
                       ></Contesta>
                     </div>
 

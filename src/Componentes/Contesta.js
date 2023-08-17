@@ -5,7 +5,7 @@ import Nombre from "./Nombre";
 import Direccion from "./Direccion";
 import Genero from "./Genero";
 
-function Contesta({ company, clave }) {
+function Contesta({ company, clave,onNombreErrorChange }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
     useState("");
@@ -44,7 +44,8 @@ function Contesta({ company, clave }) {
 
   useEffect(() => {
     Company(company);
-  }, []);
+    onNombreErrorChange(nombreError);
+  }, [nombreError, onNombreErrorChange]);
   const Company = async (company) => {
 
     const result = await axios.post(
@@ -91,10 +92,7 @@ function Contesta({ company, clave }) {
 
   return (
     <>
-<div>
-      <Nombre onError={handleNombreError} />
-      {nombreError && <p>Error en Nombre: {nombreError}</p>}
-    </div>
+
       <h6>
         {" "}
         Buenos días/tardes hablo con el Sr. /Sra. xxxxx, (primer nombre más los
@@ -121,6 +119,7 @@ function Contesta({ company, clave }) {
           </select>
         </div>
       </div>
+  
       {selectLlamada === "1" && (
         <div className="row my-2">
           <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
@@ -460,6 +459,10 @@ function Contesta({ company, clave }) {
             <Nombre>                         
             company={company}
             clave={token}
+            onError={handleNombreError}
+            onNombreErrorChange={handleNombreError}
+            {nombreError && <p>Error en Nombre: {nombreError}</p>}
+
             </Nombre>
             {/* <Genero></Genero> */}
             <Direccion
@@ -535,6 +538,7 @@ function Contesta({ company, clave }) {
           </div>
         </div>
       ) : null}
+
 
       {/* {Comunica_con_tercero_valido === "1" ||
       Comunica_con_tercero_valido === "2" ||
