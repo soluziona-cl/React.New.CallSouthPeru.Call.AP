@@ -202,7 +202,7 @@ function Contesta({ company, clave }) {
       )}
 {/* esto sirve */}
      
-   {edadIngresada >= 70 && selectinteresa === "edad_mayor" && (
+   {edadIngresada >= 70  && (
   <div>
     <p>
       Sr, Lamentablemente no podremos continuar con la información ya que su edad supera la edad máxima para contratar un servicio

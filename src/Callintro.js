@@ -201,6 +201,41 @@ const Callintro = () => {
 
   async function GuardarRegistro() {
 
+    const edad_ingresada = document.getElementById('edad_ingresada').value
+
+if(edad_ingresada >= 70){
+  let ddl_tipificacion = selectLlamada;
+  let ddl_detalle_tipificacion = selectLlamadaDetalle;
+
+  // let fecha_compromiso = format(startdateini, "yyyyMMdd");
+  // let observacion = selectObservacion;
+
+  let id = []; //final
+  let item_sucess_llamada = {};
+  let json_sucess_gestion = [];
+  let item_sucess_gestion = {};
+  const preguntas = document.querySelectorAll(".cliente");
+  preguntas.forEach((obj) => {
+    let title = obj.id;
+    let valor = obj.value;
+    item_sucess_gestion[title] = valor;
+  });
+
+  const result = await axios.post(
+    "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+    { dato: id },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+
+  if (result.status === 200) {
+    toast.success("Registro Guardado Exitosamente");
+    console.log("Registro Guardado Exitosamente");
+    setTimeout(() => {
+      window.location.href = "/Orkesta/Generacc/Call/Fin";
+    }, 5000); // 5000 milisegundos = 5 segundos
+  }
+}else{
+
 
 
     const nombres = document.getElementById('nombres').value
@@ -290,6 +325,7 @@ const Callintro = () => {
         }, 5000); // 5000 milisegundos = 5 segundos
       }
     }
+  }
   }
   // console.log("select_no_conecta:", select_no_conecta);
 
