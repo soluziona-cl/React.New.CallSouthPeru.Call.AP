@@ -9,12 +9,12 @@ function Contesta({ company, clave }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
     useState("");
- const [token, setToken] = useState(clave);
+  const [token, setToken] = useState(clave);
 
 
 
- 
- const [horario_tercero, sethorario_tercero] = useState("");
+
+  const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
   const [selectaceptaseguro, setselectaceptaseguro] = useState("");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
@@ -27,7 +27,7 @@ function Contesta({ company, clave }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =   useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState("0");
   const sesiones = {
 
     sgui: localStorage.getItem("localgui"),
@@ -108,25 +108,25 @@ function Contesta({ company, clave }) {
             <option value="3">Comunica con tercero no válido</option>
           </select>
         </div>
-        </div>
-        {selectLlamada === "1" && (
+      </div>
+      {selectLlamada === "1" && (
         <div className="row my-2">
-           <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
-        <div className="col-lg-4 col-sm-6 my-2">
-          <select id="interesa"
-            className="cliente form-select"
-            aria-label="Default select example"
-            value={selectinteresa}
-            onChange={(e) => setselectinteresa(e.target.value)}
-          >
-            <option value="0">Seleccione</option>
-            <option value="1">Interesa</option>
-            <option value="2">No Interesa</option>
-            <option value="3">Lo Pensara</option>
-          </select>
-        </div></div>
-)}
-      
+          <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
+          <div className="col-lg-4 col-sm-6 my-2">
+            <select id="interesa"
+              className="cliente form-select"
+              aria-label="Default select example"
+              value={selectinteresa}
+              onChange={(e) => setselectinteresa(e.target.value)}
+            >
+              <option value="0">Seleccione</option>
+              <option value="1">Interesa</option>
+              <option value="2">No Interesa</option>
+              <option value="3">Lo Pensara</option>
+            </select>
+          </div></div>
+      )}
+
 
 
 
@@ -177,7 +177,7 @@ function Contesta({ company, clave }) {
           <div className="col-lg-3 col-sm-10 my-2">Motivos no interesa</div>
           <div className="col-lg-4 col-sm-6 my-2">
             <select
-            id="motivos_no_interesa"
+              id="motivos_no_interesa"
               className="cliente form-select"
               aria-label="Default select example"
               value={selectnointeresa}
@@ -189,9 +189,7 @@ function Contesta({ company, clave }) {
               <option value="3">Cliente molesto (No volver a llamar)</option>
               <option value="4">Uniformado Activo</option>
               <option value="5">Ya tiene Seguro</option>
-              <option value="6">
-                Mala experiencia con Compañía/Entel/Corredora
-              </option>
+              <option value="6">Mala experiencia con Compañía/Entel/Corredora</option>
               <option value="7">Mejor oferta en la Competencia</option>
               <option value="8">No interesa seguro</option>
               <option value="9">No le gusta la venta telefonica</option>
@@ -202,9 +200,7 @@ function Contesta({ company, clave }) {
               <option value="14">No es titular</option>
               <option value="15">Producto le parece caro</option>
               <option value="16">Otro (Registrar)</option>
-              <option value="17">
-                Ya tiene un seguro similar con otra compañía
-              </option>
+              <option value="17">Ya tiene un seguro similar con otra compañía </option>
             </select>
           </div>
         </div>
@@ -274,7 +270,7 @@ function Contesta({ company, clave }) {
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     UF 1.000
                   </td>
-                 
+
                 </tr>
                 <tr>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
@@ -349,7 +345,7 @@ function Contesta({ company, clave }) {
           </p>
           <div className="row my-2" style={{ backgroundColor: "#E8E8E8" }}>
             <div className="col-lg-12 col-sm-10 my-2">
-            ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
+              ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
             </div>
             <div className="col-lg-4 col-sm-6 my-2">
               <select id="acepta_seguro"
@@ -386,13 +382,13 @@ function Contesta({ company, clave }) {
             y para efectos de grabación vamos a corroborar sus datos personales,
             indíqueme por favor:
           </p>
-          <div className='row bg card p-3 my-3' style={{backgroundColor: "#E8E8E8"}}>
-          <Nombre></Nombre>
-          {/* <Genero></Genero> */}
-          <Direccion  
-           company={company}
-           clave={token}>
-          </Direccion>
+          <div className='row bg card p-3 my-3' style={{ backgroundColor: "#E8E8E8" }}>
+            <Nombre></Nombre>
+            {/* <Genero></Genero> */}
+            <Direccion
+              company={company}
+              clave={token}>
+            </Direccion>
           </div>
           <h4> • EXCLUSIONES: (MENCIONAR OBLIGATORIO Y TEXTUAL) </h4>
           <p>
@@ -436,8 +432,8 @@ function Contesta({ company, clave }) {
         </div>
       )}
       {selectLlamada === "2" ||
-      selectLlamada === "3" ||
-      selectLlamada === "4" ? (
+        selectLlamada === "3" ||
+        selectLlamada === "4" ? (
         <div className="row my-2">
           <div className="col-lg-3 col-sm-10 my-2">
             4. Comunica con tercero válido{" "}
