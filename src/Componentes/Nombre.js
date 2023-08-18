@@ -275,16 +275,16 @@ function Nombre({ company, clave }) {
           </div>
           {selectplan === "1" && (
         <div>
-                    <div className="col-lg-2 col-sm-3 my-2">Prima Mensual UF:0,308</div>
-                    <div className="col-lg-2 col-sm-3 my-2">Prima Mensual $: $9.240</div>
+                    <div className="col-lg-2 col-sm-3 my-2"id='primauf_p1'value="UF.0,308">Prima Mensual UF:0,308</div>
+                    <div className="col-lg-2 col-sm-3 my-2"id="primaclp_p1"value="$9.240">Prima Mensual $: $9.240</div>
 
 
         </div>
       )}
         {selectplan === "2" && (
         <div>
-                    <div className="col-lg-2 col-sm-3 my-2">Prima Mensual UF:0,381</div>
-                    <div className="col-lg-2 col-sm-3 my-2">Prima Mensual $: $11.430</div>
+                    <div className="col-lg-2 col-sm-3 my-2 cliente"id='primauf_p2'value="UF.0,381">Prima Mensual UF:0,381</div>
+                    <div className="col-lg-2 col-sm-3 my-2 cliente"id="primaclp_p2"value="$11.430">Prima Mensual $: $11.430</div>
 
 
         </div>

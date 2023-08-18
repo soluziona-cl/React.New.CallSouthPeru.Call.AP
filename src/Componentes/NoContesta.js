@@ -72,9 +72,9 @@ function NoContesta({ company, clave, onNoConectaChange }) {
         <div className="col-lg-3 col-sm-3 ">No Conecta</div>
         <div className="col-lg-4 col-sm-8">
           <select className="form-select cliente" aria-label="Default select example"
-                                 id="no_conecta"
-                                 onChange={(e) => onNoConectaChange(e.target.value)} 
-                                 >
+           id="no_conecta"
+           onChange={(e) => onNoConectaChange(e.target.value)} 
+           >
 
             <option value="0">Seleccione</option>
             <option value="1"> Congestionado</option>
