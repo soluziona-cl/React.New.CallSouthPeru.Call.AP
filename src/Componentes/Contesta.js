@@ -5,14 +5,11 @@ import Nombre from "./Nombre";
 import Direccion from "./Direccion";
 import Genero from "./Genero";
 
-function Contesta({ company, clave }) {
+function Contesta({ company, clave, onConectaTerceroValido }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
     useState("");
   const [token, setToken] = useState(clave);
-
-
-
 
   const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
@@ -81,6 +78,18 @@ function Contesta({ company, clave }) {
     }
   };
 
+  // const segundaFuncion = (event) => {
+  //   //const [selectLlamada, setSelectedLlamada] = useState("");
+  //   // const newValue = (event.target.value);
+  //    const newValue = document.getElementById('registro_valido').value
+  //    onConectaTerceroValido()
+  //    setSelectedLlamada(event); 
+  //     console.log('Segundo evento onchange:',newValue );
+  //      // Agregar aquí el código que deseas ejecutar para el segundo evento
+  // }
+
+
+
   return (
     <>
       <h6>
@@ -100,6 +109,7 @@ function Contesta({ company, clave }) {
             className="cliente form-select" id="registro_valido"
             aria-label="Default select example"
             value={selectLlamada}
+           // onChange={(e) => segundaFuncion(e.target.value)}
             onChange={(e) => setSelectedLlamada(e.target.value)}
           >
             <option value="0">Seleccione</option>

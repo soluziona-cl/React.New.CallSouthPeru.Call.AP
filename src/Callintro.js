@@ -39,6 +39,8 @@ const Callintro = () => {
   const [select, setSelected] = useState("");
   const [select_no_conecta, setselect_no_conecta] = useState("");
 
+  const [select_conecta_tercero, setselect_conecta_tercero] = useState("");
+
 
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
@@ -66,6 +68,9 @@ const Callintro = () => {
   const handleNoConectaChange = (value) => {
     setselect_no_conecta(value);
   };
+  const handlesegundafuncionChange = (value) => {
+    setselect_conecta_tercero(value);
+  };
 
   function get_elapsed_time_string(total_seconds) {
     function pretty_time_string(num) {
@@ -86,7 +91,7 @@ const Callintro = () => {
   let queryString = window.location.search;
   let urlParams = new URLSearchParams(queryString);
   const list_id = urlParams.get("list_id");
-  const lead_id = urlParams.get("address2");
+  const lead_id = urlParams.get("lead_id");
   // const rut = urlParams.get("address2");
   const epoch = urlParams.get("epoch");
   const lead_id_2 = urlParams.get("lead_id");
@@ -197,6 +202,57 @@ const Callintro = () => {
     // setshowlogo(!showlogo);
     setHistoricoGestiones(!openHistoricoGestiones);
   };
+
+  async function GuardarRegistroTercero() {
+
+    let id = []; //final
+    let item_sucess_llamada = {};
+    let json_sucess_gestion = [];
+    let item_sucess_gestion = {};
+    const preguntas = document.querySelectorAll(".cliente");
+    preguntas.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion[title] = valor;
+    });
+
+    json_sucess_gestion.push(item_sucess_gestion);
+
+    item_sucess_llamada["sucess"] = true;
+    item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
+    item_sucess_llamada["campaign_id"] = list_id;
+    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+    item_sucess_llamada["lead_id"] = lead_id;
+    item_sucess_llamada["list_id"] = list_id;
+    item_sucess_llamada["agente"] = agente;
+    item_sucess_llamada["recording_filename"] = recording_filename;
+    item_sucess_llamada["epoch"] = epoch;
+    item_sucess_llamada["fecha_gestion"] = new Date();
+    //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+    // item_sucess_llamada["duracion_time"] =
+    // get_elapsed_time_string(elapsed_seconds);
+    item_sucess_llamada["phone_number"] = phone_number;
+    item_sucess_llamada["gestion"] = json_sucess_gestion;
+    id.push(item_sucess_llamada);
+
+
+
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+      { dato: id },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (result.status === 200) {
+      toast.success("Registro Guardado Exitosamente");
+      console.log("Registro Guardado Exitosamente");
+      setTimeout(() => {
+        window.location.href = "/Orkesta/Generacc/Call/Fin";
+      }, 5000); // 5000 milisegundos = 5 segundos
+    }
+
+  }
+
 
   async function GuardarRegistroNoContesta() {
 
@@ -525,7 +581,7 @@ const Callintro = () => {
                         <>
                           {/* {console.log(data)} */}
                           <div className="container" id="nombre_scroll">
-                            <div className="row">
+                            <div className="row my-3">
                               <div className="col-4 offset-8 text-right position-fixed" style={{ top: 0, right: 0, zIndex: 9999 }}>
                                 Nombre Completo
                               </div>
@@ -544,13 +600,10 @@ const Callintro = () => {
                             </div>
                           </div>
 
-                          <div className="row">
-                            <div className="col-4">Rut</div>
-                            <div className="col-2">Intentos</div>
-                            <div className="col-6">Nombre Completo</div>
-                          </div>
-                          <div className="row">
-                            <div className="col-4">
+                        
+                          <div className="row my-3">
+                          <div className="col-lg-1 col-md-2">Rut</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -559,7 +612,8 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col-2">
+                            <div className="col-lg-1">Intentos</div>
+                            <div className="col-lg-1 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -568,7 +622,8 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col-6">
+                            <div className="col-lg-2">Nombre Completo</div>
+                            <div className="col-lg-5 col-md-12">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -579,13 +634,10 @@ const Callintro = () => {
                               />
                             </div>
                           </div>
-                          <div className="row mt-3">
-                            <div className="col-4">Email</div>
-                            <div className="col-4">Region</div>
-                            <div className="col-4">Grupo</div>
-                          </div>
-                          <div className="row">
-                            <div className="col-4">
+                         
+                          <div className="row my-3">
+                          <div className="col-lg-1">Email</div>
+                            <div className="col-lg-3 col-md-12">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -594,7 +646,8 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col-4">
+                            <div className="col-lg-1">Region</div>
+                            <div className="col-lg-4 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -603,7 +656,8 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col-4">
+                            <div className="col-lg-1">Grupo</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -614,16 +668,10 @@ const Callintro = () => {
                             </div>
                           </div>
 
-                          <div className="row mt-3">
-                            <div className="col">Telefono 1</div>
-                            <div className="col">Telefono 2</div>
-                            <div className="col">Telefono 3</div>
-                            <div className="col">Telefono 4</div>
-                            <div className="col">Telefono 5</div>
-                            <div className="col">Telefono 6</div>
-                          </div>
-                          <div className="row">
-                            <div className="col">
+                         
+                          <div className="row my-3">
+                          <div className="col-lg-2">Telefono 1</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -632,7 +680,8 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col">
+                            <div className="col-lg-2">Telefono 2</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -641,7 +690,8 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col">
+                            <div className="col-lg-2">Telefono 3</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -650,7 +700,8 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col">
+                            <div className="col-lg-2">Telefono 4</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -659,7 +710,8 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col">
+                            <div className="col-lg-2">Telefono 5</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -668,7 +720,8 @@ const Callintro = () => {
                                 disabled
                               />
                             </div>
-                            <div className="col">
+                            <div className="col-lg-2">Telefono 6</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -678,11 +731,11 @@ const Callintro = () => {
                               />
                             </div>
                           </div>
-                          <div className="row mt-3">
-                            <div className="col-5">Observacion Agenda</div>
+                          <div className="row my-3">
+                            <div className="col-lg-5 col-md-12">Observacion Agenda</div>
                           </div>
                           <div className="row">
-                            <div className="col-5">
+                            <div className="col-lg-12 col-md-6">
                               <textarea
                                 rows="3"
                                 name="roomRent"
@@ -716,31 +769,17 @@ const Callintro = () => {
                       <button
                         className="btn btn-success btn-md "
                         value="GuardarRegistro"
-                        onClick={GuardarRegistro}
+                        onClick={GuardarRegistro} 
                       >
                         Finalizar
                       </button>
                     </div>
                   </div>
                 )}
+
               </div>
 
-              {/* <section className="row ">
-                <div className="col-lg-2 col-sm-3 my-3">LLamada</div>
-                <div className="col-lg-4 col-sm-8">
-                  <select
-                    className="form-control form-select my-3"
-                    id="selectLlamada"
-                    value={selectLlamada}
-                    onChange={(e) => setSelectedLlamada(e.target.value)}
-                  >
-                    <option value="">Seleccione una opción</option>
-                    <option value="1">Si</option>
-                    <option value="2">No</option>
-
-                  </select>
-                </div>
-              </section> */}
+             
             </div>
           </div>
 
