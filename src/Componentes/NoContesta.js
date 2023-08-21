@@ -11,8 +11,7 @@ function NoContesta({ company, clave, onNoConectaChange }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
-    useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =useState("0");
   const sesiones = {
     sgui: localStorage.getItem("localgui"),
     scliente: localStorage.getItem("localcliente"),
@@ -43,38 +42,35 @@ function NoContesta({ company, clave, onNoConectaChange }) {
     }
   };
 
-  const ChangeConecta_nombre = async (event) => {
-    if (event === "0") {
-      setOptionListDetalleEstado(true);
-      setOptionListDetalleEstadoSelect("0");
-      setSelectedLlamada(event);
-      onNoConectaChange(event); // Llama a la función callback con el valor seleccionado
+  // const ChangeConecta_nombre = async (event) => {
+  //   if (event === "0") {
+  //     setOptionListDetalleEstado(true);
+  //     setOptionListDetalleEstadoSelect("0");
+  //     setSelectedLlamada(event);
+  //     onNoConectaChange(event); // Llama a la función callback con el valor seleccionado
    
-    } else {
-      const result = await axios.post(
-        "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
-        { dato: event },
-        { headers: { Authorization: `Bearer ${clave}` } }
-      );
+  //   } else {
+  //     const result = await axios.post(
+  //       "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle",
+  //       { dato: event },
+  //       { headers: { Authorization: `Bearer ${clave}` } }
+  //     );
 
-      setSelectedLlamada(event);
+  //     setSelectedLlamada(event);
 
-      if (result.status === 200) {
-        setOptionListDetalle(result.data);
-        setOptionListDetalleEstado(false);
-      }
-    }
-  };
-  console.log(onNoConectaChange)
+  //     if (result.status === 200) {
+  //       setOptionListDetalle(result.data);
+  //       setOptionListDetalleEstado(false);
+  //     }
+  //   }
+  // };
+  //console.log(onNoConectaChange)
   return (
     <>
       <div className="row my-2">
         <div className="col-lg-3 col-sm-3 ">No Conecta</div>
         <div className="col-lg-4 col-sm-8">
-          <select className="form-select cliente" aria-label="Default select example"
-           id="no_conecta"
-           onChange={(e) => onNoConectaChange(e.target.value)} 
-           >
+          <select className="form-select cliente" aria-label="Default select example" id="no_conecta" onChange={(e) => onNoConectaChange(e.target.value)}  >
 
             <option value="0">Seleccione</option>
             <option value="1"> Congestionado</option>

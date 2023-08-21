@@ -39,6 +39,8 @@ const Callintro = () => {
   const [select, setSelected] = useState("");
   const [select_no_conecta, setselect_no_conecta] = useState("");
 
+  const [select_conecta_tercero, setselect_conecta_tercero] = useState("");
+
 
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
@@ -66,6 +68,9 @@ const Callintro = () => {
   const handleNoConectaChange = (value) => {
     setselect_no_conecta(value);
   };
+  const handlesegundafuncionChange = (value) => {
+    setselect_conecta_tercero(value);
+  };
 
   function get_elapsed_time_string(total_seconds) {
     function pretty_time_string(num) {
@@ -86,7 +91,7 @@ const Callintro = () => {
   let queryString = window.location.search;
   let urlParams = new URLSearchParams(queryString);
   const list_id = urlParams.get("list_id");
-  const lead_id = urlParams.get("address2");
+  const lead_id = urlParams.get("lead_id");
   // const rut = urlParams.get("address2");
   const epoch = urlParams.get("epoch");
   const lead_id_2 = urlParams.get("lead_id");
@@ -145,9 +150,9 @@ const Callintro = () => {
         datoscliente = JSON.parse(element.detalle);
       });
 
-      // setDataFull(datoscliente);
+      setDataFull(datoscliente);
 
-      console.log(datafull);
+      // console.log(datafull);
     }
   };
   const GuardaURL = async (agentes, url, clave) => {
@@ -198,22 +203,7 @@ const Callintro = () => {
     setHistoricoGestiones(!openHistoricoGestiones);
   };
 
-
-  async function GuardarRegistro() {
-
-    const Edad = document.getElementById("fecha_nacimiento").value
-    const anio = (Edad.slice(0,4))
-    console.log(anio)
-    const anioActual = new Date().getFullYear();
-    const edadMaxima = anioActual - 70; 
-    
-    if (anio <= edadMaxima) {
-        console.log("mayor de 70");
-        let ddl_tipificacion = selectLlamada;
-    let ddl_detalle_tipificacion = selectLlamadaDetalle;
-
-    // let fecha_compromiso = format(startdateini, "yyyyMMdd");
-    // let observacion = selectObservacion;
+  async function GuardarRegistroTercero() {
 
     let id = []; //final
     let item_sucess_llamada = {};
@@ -225,22 +215,6 @@ const Callintro = () => {
       let valor = obj.value;
       item_sucess_gestion[title] = valor;
     });
-    
-    let title = "seleccione_una_opcion";
-    let valor = ddl_tipificacion;
-    item_sucess_gestion[title] = valor;
-
-    title = "detalle_tipificacion";
-    valor = ddl_detalle_tipificacion;
-    item_sucess_gestion[title] = valor;
-
-    // title = "fecha";
-    // valor = fecha_compromiso;
-    // item_sucess_gestion[title] = valor;
-
-    // title = "observacion";
-    // valor = observacion;
-    // item_sucess_gestion[title] = valor;
 
     json_sucess_gestion.push(item_sucess_gestion);
 
@@ -262,13 +236,68 @@ const Callintro = () => {
     id.push(item_sucess_llamada);
 
 
-  
+
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
       { dato: id },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    
+
+    if (result.status === 200) {
+      toast.success("Registro Guardado Exitosamente");
+      console.log("Registro Guardado Exitosamente");
+      setTimeout(() => {
+        window.location.href = "/Orkesta/Generacc/Call/Fin";
+      }, 5000); // 5000 milisegundos = 5 segundos
+    }
+
+  }
+
+
+  async function GuardarRegistroNoContesta() {
+
+
+
+    let id = []; //final
+    let item_sucess_llamada = {};
+    let json_sucess_gestion = [];
+    let item_sucess_gestion = {};
+    const preguntas = document.querySelectorAll(".cliente");
+    preguntas.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion[title] = valor;
+    });
+
+
+
+    json_sucess_gestion.push(item_sucess_gestion);
+
+    item_sucess_llamada["sucess"] = true;
+    item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
+    item_sucess_llamada["campaign_id"] = list_id;
+    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+    item_sucess_llamada["lead_id"] = lead_id;
+    item_sucess_llamada["list_id"] = list_id;
+    item_sucess_llamada["agente"] = agente;
+    item_sucess_llamada["recording_filename"] = recording_filename;
+    item_sucess_llamada["epoch"] = epoch;
+    item_sucess_llamada["fecha_gestion"] = new Date();
+    //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+    // item_sucess_llamada["duracion_time"] =
+    // get_elapsed_time_string(elapsed_seconds);
+    item_sucess_llamada["phone_number"] = phone_number;
+    item_sucess_llamada["gestion"] = json_sucess_gestion;
+    id.push(item_sucess_llamada);
+
+
+
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+      { dato: id },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
     if (result.status === 200) {
       toast.success("Registro Guardado Exitosamente");
       console.log("Registro Guardado Exitosamente");
@@ -281,7 +310,13 @@ const Callintro = () => {
 
 
 
-    } else {
+
+  }
+
+  async function GuardarRegistro() {
+
+
+
     const nombres = document.getElementById('nombres').value
     const apellido_paterno = document.getElementById('apellido_paterno').value
     const apellido_materno = document.getElementById('apellido_materno').value
@@ -291,22 +326,19 @@ const Callintro = () => {
     const email = document.getElementById('email').value
     const planes = document.getElementById('planes').value
     const comuna = document.getElementById('comuna').value
-    const ciudad = document.getElementById('ciudad').value 
-    const calle = document.getElementById('calle').value 
-    const numero = document.getElementById('numero').value 
+    const ciudad = document.getElementById('ciudad').value
+    const calle = document.getElementById('calle').value
+    const numero = document.getElementById('numero').value
     const depto = document.getElementById('depto').value
     const referencia = document.getElementById('referencia').value
 
 
-if( nombres === '' ||  apellido_paterno === '' ||  apellido_materno === ''||  fecha_nacimiento === ''||  RutCliente === ''||  sexo === ''||  email === '' ||  planes === ''||  comuna === ''||  ciudad === ''||  calle === ''||  numero === ''||  depto === ''||  referencia === '')
-{console.log('campo vacio')}
-else{
 
-    let ddl_tipificacion = selectLlamada;
-    let ddl_detalle_tipificacion = selectLlamadaDetalle;
+    if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '') {
+      alert('Debe completar todos los campos');
+    }
 
-    // let fecha_compromiso = format(startdateini, "yyyyMMdd");
-    // let observacion = selectObservacion;
+
 
     let id = []; //final
     let item_sucess_llamada = {};
@@ -318,22 +350,8 @@ else{
       let valor = obj.value;
       item_sucess_gestion[title] = valor;
     });
-    
-    let title = "seleccione_una_opcion";
-    let valor = ddl_tipificacion;
-    item_sucess_gestion[title] = valor;
 
-    title = "detalle_tipificacion";
-    valor = ddl_detalle_tipificacion;
-    item_sucess_gestion[title] = valor;
 
-    // title = "fecha";
-    // valor = fecha_compromiso;
-    // item_sucess_gestion[title] = valor;
-
-    // title = "observacion";
-    // valor = observacion;
-    // item_sucess_gestion[title] = valor;
 
     json_sucess_gestion.push(item_sucess_gestion);
 
@@ -355,13 +373,13 @@ else{
     id.push(item_sucess_llamada);
 
 
-  
+
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
       { dato: id },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    
+
     if (result.status === 200) {
       toast.success("Registro Guardado Exitosamente");
       console.log("Registro Guardado Exitosamente");
@@ -369,11 +387,14 @@ else{
         window.location.href = "/Orkesta/Generacc/Call/Fin";
       }, 5000); // 5000 milisegundos = 5 segundos
     }
+
+
+
+
   }
-  }
+
+
   
-  
-  }
   // console.log("select_no_conecta:", select_no_conecta);
 
   return (
@@ -394,7 +415,7 @@ else{
                   <h4>
                     {" "}
                     Duración de la LLamada :{" "}
-                    <span id="duracion">
+                    <span id="duracion" className="cliente">
                       {get_elapsed_time_string(elapsedSeconds)}
                     </span>
                   </h4>
@@ -416,9 +437,7 @@ else{
               </div>
               <div className="row mt-2 ">
                 <section className="row my-2">
-                  <div
-                    className="col-lg-3 col-sm-2 my-3 ms-1"
-                   >
+                  <div className="col-lg-3 col-sm-2 my-3 ms-1">
                     LLamada
                   </div>{" "}
                   <div className="col-lg-4 col-sm-8">
@@ -450,7 +469,7 @@ else{
                     <button
                       className="btn btn-success btn-md "
                       value="GuardarRegistro"
-                      onClick={GuardarRegistro}
+                      onClick={GuardarRegistroNoContesta}
                     >
                       Finalizar
                     </button>
@@ -468,11 +487,8 @@ else{
                         <>
                           {/* {console.log(data)} */}
                           <div className="container" id="nombre_scroll">
-                            <div className="row">
-                              <div
-                                className="col-4 offset-8 text-right position-fixed"
-                                style={{ top: 0, right: 0, zIndex: 9999 }}
-                              >
+                            <div className="row my-3">
+                              <div className="col-4 offset-8 text-right position-fixed" style={{ top: 0, right: 0, zIndex: 9999 }}>
                                 Nombre Completo
                               </div>
                               <div
@@ -482,7 +498,7 @@ else{
                                 <input
                                   name="roomRent"
                                   type="text"
-                                  value={data.NOMBRE_COMPLETO}
+                                  value={data.ENTEL_NOMBRE_COMPLETO}
                                   className=" form-control text-right"
                                   disabled
                                 />
@@ -490,22 +506,20 @@ else{
                             </div>
                           </div>
 
-                          <div className="row">
-                            <div className="col-4">Rut</div>
-                            <div className="col-2">Intentos</div>
-                            <div className="col-4  ">Nombre Completo</div>
-                          </div>
-                          <div className="row">
-                            <div className="col-4">
+
+                          <div className="row my-3">
+                            <div className="col-lg-1 col-md-2">Rut</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
-                                value={data.RUT_CON_GUION}
-                                className=" form-control"
+                                value={data.ENTEL_RUT_CON_GUION}
+                                className="form-control"
                                 disabled
                               />
                             </div>
-                            <div className="col-2">
+                            <div className="col-lg-1">Intentos</div>
+                            <div className="col-lg-1 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
@@ -514,121 +528,120 @@ else{
                                 disabled
                               />
                             </div>
-                            <div className="col-4 ">
+                            <div className="col-lg-2">Nombre Completo</div>
+                            <div className="col-lg-5 col-md-12">
                               <input
                                 name="roomRent"
                                 type="text"
-                                value={data.NOMBRE_COMPLETO}
+                                value={data.ENTEL_NOMBRE_COMPLETO}
                                 className=" form-control"
-                                style={{ textAlign: "right" }}
+
                                 disabled
                               />
                             </div>
                           </div>
-                          <div className="row mt-3">
-                            <div className="col-4">Email</div>
-                            <div className="col-4">Region</div>
-                            <div className="col-4">Grupo</div>
-                          </div>
-                          <div className="row">
-                            <div className="col-4">
+
+                          <div className="row my-3">
+                            <div className="col-lg-1">Email</div>
+                            <div className="col-lg-3 col-md-12">
                               <input
                                 name="roomRent"
                                 type="text"
-                                value={data.EMAIL}
+                                value={data.ENTEL_EMAIL}
                                 className=" form-control"
                                 disabled
                               />
                             </div>
-                            <div className="col-4">
+                            <div className="col-lg-1">Region</div>
+                            <div className="col-lg-4 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
-                                value={data.REGION}
+                                value={data.ENTEL_REGION}
                                 className=" form-control"
                                 disabled
                               />
                             </div>
-                            <div className="col-4">
+                            <div className="col-lg-1">Grupo</div>
+                            <div className="col-lg-2 col-md-6">
                               <input
                                 name="roomRent"
                                 type="text"
-                                value={data.GRUPO}
+                                value={data.ENTEL_GRUPO}
                                 className=" form-control"
                                 disabled
                               />
                             </div>
                           </div>
 
-                          <div className="row mt-3">
-                            <div className="col">Telefono 1</div>
-                            <div className="col">Telefono 2</div>
-                            <div className="col">Telefono 3</div>
-                            <div className="col">Telefono 4</div>
-                            <div className="col">Telefono 5</div>
-                            <div className="col">Telefono 6</div>
+
+                          <div className="row my-3">
+                            <div className="col-lg-2">Telefono 1</div>
+                            <div className="col-lg-2 col-md-6">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.ENTEL_TELEFONO_1}
+                                className=" form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col-lg-2">Telefono 2</div>
+                            <div className="col-lg-2 col-md-6">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.ENTEL_TELEFONO_2}
+                                className=" form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col-lg-2">Telefono 3</div>
+                            <div className="col-lg-2 col-md-6">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.ENTEL_TELEFONO_3}
+                                className=" form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col-lg-2">Telefono 4</div>
+                            <div className="col-lg-2 col-md-6">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.ENTEL_TELEFONO_4}
+                                className=" form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col-lg-2">Telefono 5</div>
+                            <div className="col-lg-2 col-md-6">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.ENTEL_TELEFONO_5}
+                                className=" form-control"
+                                disabled
+                              />
+                            </div>
+                            <div className="col-lg-2">Telefono 6</div>
+                            <div className="col-lg-2 col-md-6">
+                              <input
+                                name="roomRent"
+                                type="text"
+                                value={data.ENTEL_TELEFONO_6}
+                                className=" form-control"
+                                disabled
+                              />
+                            </div>
+                          </div>
+                          <div className="row my-3">
+                            <div className="col-lg-5 col-md-12">Observacion Agenda</div>
                           </div>
                           <div className="row">
-                            <div className="col">
-                              <input
-                                name="roomRent"
-                                type="text"
-                                value={data.TELÉFONO_1}
-                                className=" form-control"
-                                disabled
-                              />
-                            </div>
-                            <div className="col">
-                              <input
-                                name="roomRent"
-                                type="text"
-                                value={data.TELÉFONO_2}
-                                className=" form-control"
-                                disabled
-                              />
-                            </div>
-                            <div className="col">
-                              <input
-                                name="roomRent"
-                                type="text"
-                                value={data.TELÉFONO_3}
-                                className=" form-control"
-                                disabled
-                              />
-                            </div>
-                            <div className="col">
-                              <input
-                                name="roomRent"
-                                type="text"
-                                value={data.TELÉFONO_4}
-                                className=" form-control"
-                                disabled
-                              />
-                            </div>
-                            <div className="col">
-                              <input
-                                name="roomRent"
-                                type="text"
-                                value={data.TELÉFONO_5}
-                                className=" form-control"
-                                disabled
-                              />
-                            </div>
-                            <div className="col">
-                              <input
-                                name="roomRent"
-                                type="text"
-                                value={data.TELÉFONO_6}
-                                className=" form-control"
-                                disabled
-                              />
-                            </div>
-                          </div>
-                          <div className="row mt-3">
-                            <div className="col-5">Observacion Agenda</div>
-                          </div>
-                          <div className="row">
-                            <div className="col-5">
+                            <div className="col-lg-12 col-md-6">
                               <textarea
                                 rows="3"
                                 name="roomRent"
@@ -651,6 +664,7 @@ else{
                       <Contesta
                         company={company}
                         clave={token}
+
                       ></Contesta>
                     </div>
 
@@ -669,24 +683,10 @@ else{
                     </div>
                   </div>
                 )}
+
               </div>
 
-              {/* <section className="row ">
-                <div className="col-lg-2 col-sm-3 my-3">LLamada</div>
-                <div className="col-lg-4 col-sm-8">
-                  <select
-                    className="form-control form-select my-3"
-                    id="selectLlamada"
-                    value={selectLlamada}
-                    onChange={(e) => setSelectedLlamada(e.target.value)}
-                  >
-                    <option value="">Seleccione una opción</option>
-                    <option value="1">Si</option>
-                    <option value="2">No</option>
 
-                  </select>
-                </div>
-              </section> */}
             </div>
           </div>
 

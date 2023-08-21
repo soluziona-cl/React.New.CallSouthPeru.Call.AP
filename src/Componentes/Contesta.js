@@ -4,22 +4,20 @@ import axios from "axios";
 import Nombre from "./Nombre";
 import Direccion from "./Direccion";
 import Genero from "./Genero";
+import { ToastContainer, toast } from "react-toastify";
 
-function Contesta({ company, clave }) {
+
+function Contesta({ company, clave, onConectaTerceroValido }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
-  const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
-    useState("");
- const [token, setToken] = useState(clave);
+  const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] = useState("0");
+  const [token, setToken] = useState(clave);
 
-
-
- 
- const [horario_tercero, sethorario_tercero] = useState("");
+  const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
   const [selectaceptaseguro, setselectaceptaseguro] = useState("");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
-  const [selectinteresa, setselectinteresa] = useState("");
-  const [selectnointeresa, setselectnointeresa] = useState("");
+  const [selectinteresa, setselectinteresa] = useState("0");
+  const [selectnointeresa, setselectnointeresa] = useState("0");
   const [datafull, setDataFull] = useState([]);
   const [otra_razon_noacepta, setotra_razon_noacepta] = useState('');
 
@@ -27,7 +25,7 @@ function Contesta({ company, clave }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =   useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState("0");
   const sesiones = {
 
     sgui: localStorage.getItem("localgui"),
@@ -37,6 +35,35 @@ function Contesta({ company, clave }) {
     stoken: localStorage.getItem("token"),
 
   };
+
+  function get_elapsed_time_string(total_seconds) {
+    function pretty_time_string(num) {
+      return (num < 10 ? "0" : "") + num;
+    }
+    var hours = Math.floor(total_seconds / 3600);
+    total_seconds = total_seconds % 3600;
+    var minutes = Math.floor(total_seconds / 60);
+    total_seconds = total_seconds % 60;
+    var seconds = Math.floor(total_seconds);
+    hours = pretty_time_string(hours);
+    minutes = pretty_time_string(minutes);
+    seconds = pretty_time_string(seconds);
+    var currentTimeString = hours + ":" + minutes + ":" + seconds;
+    return currentTimeString;
+  }
+
+  let queryString = window.location.search;
+  let urlParams = new URLSearchParams(queryString);
+  const list_id = urlParams.get("list_id");
+  const lead_id = urlParams.get("lead_id");
+  // const rut = urlParams.get("address2");
+  const epoch = urlParams.get("epoch");
+  const lead_id_2 = urlParams.get("lead_id");
+  const rut_2 = urlParams.get("lead_id");
+  const phone_number = urlParams.get("phone_number");
+  const uniqueid = urlParams.get("uniqueid");
+  const agente = urlParams.get("user");
+  const recording_filename = urlParams.get("recording_filename");
 
   useEffect(() => {
     Company(company);
@@ -81,6 +108,86 @@ function Contesta({ company, clave }) {
     }
   };
 
+
+  async function GuardarRegistroNoValido() {
+
+
+
+    let id = []; //final
+    let item_sucess_llamada = {};
+    let json_sucess_gestion = [];
+    let item_sucess_gestion = {};
+    const preguntas = document.querySelectorAll(".cliente");
+    preguntas.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion[title] = valor;
+    });
+
+
+
+    json_sucess_gestion.push(item_sucess_gestion);
+
+    item_sucess_llamada["sucess"] = true;
+    item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
+    item_sucess_llamada["campaign_id"] = list_id;
+    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+    item_sucess_llamada["lead_id"] = lead_id;
+    item_sucess_llamada["list_id"] = list_id;
+    item_sucess_llamada["agente"] = agente;
+    item_sucess_llamada["recording_filename"] = recording_filename;
+    item_sucess_llamada["epoch"] = epoch;
+    item_sucess_llamada["fecha_gestion"] = new Date();
+    //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+    // item_sucess_llamada["duracion_time"] =
+    // get_elapsed_time_string(elapsed_seconds);
+    item_sucess_llamada["phone_number"] = phone_number;
+    item_sucess_llamada["gestion"] = json_sucess_gestion;
+    id.push(item_sucess_llamada);
+
+
+
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+      { dato: id },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+
+    if (result.status === 200) {
+      toast.success("Registro Guardado Exitosamente");
+      console.log("Registro Guardado Exitosamente");
+      setTimeout(() => {
+        window.location.href = "/Orkesta/Generacc/Call/Fin";
+      }, 5000); // 5000 milisegundos = 5 segundos
+    }
+
+
+  }
+
+
+  const SelectedLlamadaChange = (event) => {
+
+    setComunica_con_tercero_valido('0')
+    setSelectedLlamada(event)
+
+  };
+  const setselectinteresaChange = (event) => {
+
+    setselectnointeresa('0')
+    setselectinteresa(event)
+
+  };
+  const setselectnointeresaChange = (event) => {
+
+    setselectnointeresa('0')
+    setselectnointeresa(event)
+
+  };
+
+
+
+
+
   return (
     <>
       <h6>
@@ -100,33 +207,44 @@ function Contesta({ company, clave }) {
             className="cliente form-select" id="registro_valido"
             aria-label="Default select example"
             value={selectLlamada}
-            onChange={(e) => setSelectedLlamada(e.target.value)}
+            // onChange={(e) => segundaFuncion(e.target.value)}
+            onChange={(e) => SelectedLlamadaChange(e.target.value)}
           >
             <option value="0">Seleccione</option>
             <option value="1">Comunica con cliente</option>
             <option value="2">Comunica con tercero válido</option>
-            <option value="3">Comunica con tercero no válido</option>
+            {/* <option value="3">Comunica con tercero no válido</option> */}
           </select>
         </div>
-        </div>
-        {selectLlamada === "1" && (
+      </div>
+      {selectLlamada === "1" && (
         <div className="row my-2">
-           <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
-        <div className="col-lg-4 col-sm-6 my-2">
-          <select id="interesa"
-            className="cliente form-select"
-            aria-label="Default select example"
-            value={selectinteresa}
-            onChange={(e) => setselectinteresa(e.target.value)}
-          >
-            <option value="0">Seleccione</option>
-            <option value="1">Interesa</option>
-            <option value="2">No Interesa</option>
-            <option value="3">Lo Pensara</option>
-          </select>
-        </div></div>
-)}
-      
+          <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
+          <div className="col-lg-4 col-sm-6 my-2">
+            <select id="interesa"
+              className="cliente form-select"
+              aria-label="Default select example"
+              value={selectinteresa}
+              onChange={(e) => setselectinteresaChange(e.target.value)}
+            >
+              <option value="0">Seleccione</option>
+              <option value="1">Interesa</option>
+              <option value="2">No Interesa</option>
+              <option value="3">Lo Pensara</option>
+            </select>
+          </div>
+          {selectinteresa === "3" &&
+            <div className="d-flex justify-content-end">
+              <button
+                className="btn btn-success btn-md "
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoValido}
+              >
+                Finalizar
+              </button>
+            </div>}
+        </div>
+      )}
 
 
 
@@ -177,11 +295,11 @@ function Contesta({ company, clave }) {
           <div className="col-lg-3 col-sm-10 my-2">Motivos no interesa</div>
           <div className="col-lg-4 col-sm-6 my-2">
             <select
-            id="motivos_no_interesa"
+              id="motivos_no_interesa"
               className="cliente form-select"
               aria-label="Default select example"
               value={selectnointeresa}
-              onChange={(e) => setselectnointeresa(e.target.value)}
+              onChange={(e) => setselectnointeresaChange(e.target.value)}
             >
               <option value="0">Seleccione</option>
               <option value="1">Mala experiencia con MetLife</option>
@@ -189,9 +307,7 @@ function Contesta({ company, clave }) {
               <option value="3">Cliente molesto (No volver a llamar)</option>
               <option value="4">Uniformado Activo</option>
               <option value="5">Ya tiene Seguro</option>
-              <option value="6">
-                Mala experiencia con Compañía/Entel/Corredora
-              </option>
+              <option value="6">Mala experiencia con Compañía/Entel/Corredora</option>
               <option value="7">Mejor oferta en la Competencia</option>
               <option value="8">No interesa seguro</option>
               <option value="9">No le gusta la venta telefonica</option>
@@ -202,12 +318,26 @@ function Contesta({ company, clave }) {
               <option value="14">No es titular</option>
               <option value="15">Producto le parece caro</option>
               <option value="16">Otro (Registrar)</option>
-              <option value="17">
-                Ya tiene un seguro similar con otra compañía
-              </option>
+              <option value="17">Ya tiene un seguro similar con otra compañía </option>
             </select>
           </div>
+
+          {selectnointeresa !== "0" &&
+            <div className="d-flex justify-content-end">
+              <button
+                className="btn btn-success btn-md "
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoValido}
+              >
+                Finalizar
+              </button>
+            </div>}
+
         </div>
+
+
+
+
       )}
       {selectnointeresa === "16" && (
         <div>
@@ -274,7 +404,7 @@ function Contesta({ company, clave }) {
                   <td style={{ border: "1px solid black", padding: "8px" }}>
                     UF 1.000
                   </td>
-                 
+
                 </tr>
                 <tr>
                   <td style={{ border: "1px solid black", padding: "8px" }}>
@@ -349,7 +479,7 @@ function Contesta({ company, clave }) {
           </p>
           <div className="row my-2" style={{ backgroundColor: "#E8E8E8" }}>
             <div className="col-lg-12 col-sm-10 my-2">
-            ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
+              ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
             </div>
             <div className="col-lg-4 col-sm-6 my-2">
               <select id="acepta_seguro"
@@ -386,13 +516,13 @@ function Contesta({ company, clave }) {
             y para efectos de grabación vamos a corroborar sus datos personales,
             indíqueme por favor:
           </p>
-          <div className='row bg card p-3 my-3' style={{backgroundColor: "#E8E8E8"}}>
-          <Nombre></Nombre>
-          {/* <Genero></Genero> */}
-          <Direccion  
-           company={company}
-           clave={token}>
-          </Direccion>
+          <div className='row bg card p-3 my-3' style={{ backgroundColor: "#E8E8E8" }}>
+            <Nombre company={company} clave={token}></Nombre>
+            {/* <Genero></Genero> */}
+            <Direccion
+              company={company}
+              clave={token}>
+            </Direccion>
           </div>
           <h4> • EXCLUSIONES: (MENCIONAR OBLIGATORIO Y TEXTUAL) </h4>
           <p>
@@ -436,11 +566,11 @@ function Contesta({ company, clave }) {
         </div>
       )}
       {selectLlamada === "2" ||
-      selectLlamada === "3" ||
-      selectLlamada === "4" ? (
+        selectLlamada === "3" ||
+        selectLlamada === "4" ? (
         <div className="row my-2">
           <div className="col-lg-3 col-sm-10 my-2">
-            4. Comunica con tercero válido{" "}
+            Seleccione{" "}
           </div>
           <div className="col-lg-4 col-sm-6 my-2">
             <select id="comunica_tercero_valido"
@@ -457,6 +587,18 @@ function Contesta({ company, clave }) {
               <option value="5">Tercero pide dejar pendiente</option>
             </select>
           </div>
+          {Comunica_con_tercero_valido !== "0" &&
+            <div className="d-flex justify-content-end">
+              <button
+                className="btn btn-success btn-md "
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoValido}
+              >
+                Finalizar
+              </button>
+            </div>}
+
+
         </div>
       ) : null}
     </>

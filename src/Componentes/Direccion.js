@@ -127,7 +127,7 @@ function Direccion({ company,clave}) {
             type="text"
             value={direccion}
             onChange={(e) => setDireccion(e.target.value)}
-            required
+            
             className="cliente form-control"
             id='calle'
           />
