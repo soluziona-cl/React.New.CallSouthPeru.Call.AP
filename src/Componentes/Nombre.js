@@ -412,14 +412,17 @@ function Nombre({ company, clave }) {
 
                     <div className="col-lg-2 col-sm-3 my-2">Sexo:</div>
                     <div className="col-lg-4 col-sm-9 my-2">
-                        <input
+                        <select
                             type="text"
-                            value={sexo}
                             id="sexo"
                             onChange={(e) => setSexo(e.target.value)}
                             required
-                            className="cliente form-control"
-                        />
+                            className="cliente form-select">
+                            <option value="0">Seleccione el Genero</option>
+                            <option value="1">M</option>
+                            <option value="2">F</option>
+                        </select>
+                        
                     </div>
 
                     <div className="col-lg-2 col-sm-3 my-2">Email:</div>
