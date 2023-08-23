@@ -81,11 +81,11 @@ function Nombre({ company, clave }) {
             "emailValidationMessage"
         );
 
-        const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const isValid = regex.test(emailInput.value);
 
-        if (isValid) {
-            emailValidationMessage.textContent = "El correo electrónico es válido.";
+        if (regex.test(e) || e === "") {
+          emailValidationMessage.textContent = "El correo electrónico es válido.";
             emailValidationMessage.classList.remove("text-danger");
             emailValidationMessage.classList.add("text-success");
         } else {
@@ -201,6 +201,21 @@ function Nombre({ company, clave }) {
         }
     };
 
+    function getMaxDateFor18YearsAgo() {
+      const currentDate = new Date();
+      const eighteenYearsAgo = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+  
+      const yyyy = eighteenYearsAgo.getFullYear();
+      const mm = String(eighteenYearsAgo.getMonth() + 1).padStart(2, '0');
+      const dd = String(eighteenYearsAgo.getDate()).padStart(2, '0');
+  
+      return `${yyyy}-${mm}-${dd}`;
+  }
+  
+  function handleDateChange(newValue) {
+      setBirthdate(newValue);
+      // Aquí puedes realizar validaciones adicionales si es necesario
+  }
 
     function desahabilitar() {
 
@@ -381,7 +396,8 @@ function Nombre({ company, clave }) {
                             className="cliente form-control"
                             value={birthdate}
                             onBlur={handleDateBlur}
-                            onChange={(e) => setBirthdate(e.target.value)}
+                            max={getMaxDateFor18YearsAgo()}
+                            onChange={(e) => handleDateChange(e.target.value)}
                         />{" "}
                         <ErrorModal
                             show={showErrorModal}
@@ -401,8 +417,17 @@ function Nombre({ company, clave }) {
                             required
                             id="RutCliente"
                             value={rut}
-                            onChange={handleChangeRut}
-                        />
+                            minLength={8}
+                            maxLength={10}
+                            onChange={(e) => {
+                              const inputValue = e.target.value;
+                              const rutRegex = /^[\dKk.-]*$/;
+                      
+                              if (rutRegex.test(inputValue) || inputValue === "") {
+                                  handleChangeRut(e);
+                              }
+                          }}
+                      />
                         {valido ? (
                             <p style={{ color: "green" }}>Rut válido</p>
                         ) : (
