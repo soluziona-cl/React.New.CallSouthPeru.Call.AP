@@ -11,6 +11,8 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] = useState("0");
   const [token, setToken] = useState(clave);
+  const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
+
 
   const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
@@ -147,21 +149,26 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
 
 
 
-    const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
-      { dato: id },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    try {
+      const result = await axios.post(
+        "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+        { dato: id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    if (result.status === 200) {
-      toast.success("Registro Guardado Exitosamente");
-      console.log("Registro Guardado Exitosamente");
-      setTimeout(() => {
-        window.location.href = "/Orkesta/Generacc/Call/Fin";
-      }, 5000); // 5000 milisegundos = 5 segundos
+      if (result.status === 200) {
+        toast.success("Registro Guardado Exitosamente");
+        console.log("Registro Guardado Exitosamente");
+        setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
+        setTimeout(() => {
+          window.location.href = "/Orkesta/Generacc/Call/Fin";
+        }, 5000);
+      }
+    } catch (error) {
+      toast.success("Error Con Guardado");
+      console.log("Error Con Guardado");
+      // Manejo de errores
     }
-
-
   }
 
 
@@ -282,14 +289,27 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
                 value={selectcorreo}
                 onChange={(e) => setselectcorreo(e.target.value)}
               >
-                <option selected>Seleccione</option>
+                <option value="0">Seleccione</option>
                 <option value="1">Si</option>
                 <option value="2">No</option>
               </select>
             </div>
           </div>
         </div>
+        
       )}
+       {selectcorreo === "2" &&
+            <div className="d-flex justify-content-end">
+              <button
+                className="btn btn-success btn-md "
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoValido}
+                disabled={botonDeshabilitado}
+
+              >
+                Finalizar
+              </button>
+            </div>}
       {selectinteresa === "2" && (
         <div className="row my-2">
           <div className="col-lg-3 col-sm-10 my-2">Motivos no interesa</div>
@@ -328,6 +348,8 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
                 className="btn btn-success btn-md "
                 value="GuardarRegistro"
                 onClick={GuardarRegistroNoValido}
+                disabled={botonDeshabilitado}
+
               >
                 Finalizar
               </button>
@@ -496,6 +518,18 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
           </div>
         </div>
       )}
+        {selectaceptaseguro === "2" &&
+            <div className="d-flex justify-content-end">
+              <button
+                className="btn btn-success btn-md "
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoValido}
+                disabled={botonDeshabilitado}
+
+              >
+                Finalizar
+              </button>
+            </div>}
 
       {selectcorreo === "2" && (
         <div>
@@ -593,6 +627,8 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
                 className="btn btn-success btn-md "
                 value="GuardarRegistro"
                 onClick={GuardarRegistroNoValido}
+                disabled={botonDeshabilitado}
+
               >
                 Finalizar
               </button>

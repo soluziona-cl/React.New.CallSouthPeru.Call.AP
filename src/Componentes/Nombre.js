@@ -12,10 +12,15 @@ function Nombre({ company, clave }) {
     const [rut, setRut] = useState("");
     const [valido, setValido] = useState(null);
     const [sexo, setSexo] = useState("");
+    const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
+
 
     const [direccion, setDireccion] = useState("");
     const [viewedad, setViewEdad] = useState("0");
-    // const [email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
+    const [isValidEmail, setIsValidEmail] = useState(true);
+
+
     const [apellido_1, setApellido1] = useState("");
     const [apellido_2, setApellido2] = useState("");
 
@@ -75,26 +80,40 @@ function Nombre({ company, clave }) {
         Company(company);
     }, []);
 
-    function handleEmailChange(e) {
-        const emailInput = e.target;
-        const emailValidationMessage = document.getElementById(
-            "emailValidationMessage"
-        );
+    // function handleEmailChange(e) {
+    //     const emailInput = e.target;
+    //     const emailValidationMessage = document.getElementById(
+    //         "emailValidationMessage"
+    //     );
 
-        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        const isValid = regex.test(emailInput.value);
+    //     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    //     const isValid = regex.test(emailInput.value);
 
-        if (regex.test(e) || e === "") {
-          emailValidationMessage.textContent = "El correo electrónico es válido.";
-            emailValidationMessage.classList.remove("text-danger");
-            emailValidationMessage.classList.add("text-success");
-        } else {
-            emailValidationMessage.textContent =
-                "El correo electrónico no es válido.";
-            emailValidationMessage.classList.remove("text-success");
-            emailValidationMessage.classList.add("text-danger");
-        }
-    }
+    //     if (regex.test(e) || e === "") {
+    //       emailValidationMessage.textContent = "El correo electrónico es válido.";
+    //         emailValidationMessage.classList.remove("text-danger");
+    //         emailValidationMessage.classList.add("text-success");
+    //     } else {
+    //         emailValidationMessage.textContent =
+    //             "El correo electrónico no es válido.";
+    //         emailValidationMessage.classList.remove("text-success");
+    //         emailValidationMessage.classList.add("text-danger");
+    //     }
+    // }
+
+    const validateEmail = (value) => {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      return emailRegex.test(value);
+  };
+
+  const handleEmailBlur = () => {
+      const isValid = validateEmail(email);
+      setIsValidEmail(isValid);
+
+      if (!isValid) {
+          setEmail('');
+      }
+  };
 
     const handleChangeRut = (event) => {
         setRut(event.target.value);
@@ -328,22 +347,28 @@ function Nombre({ company, clave }) {
 
 
 
-        const result = await axios.post(
+        try {
+          const result = await axios.post(
             "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
             { dato: id },
             { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        if (result.status === 200) {
+          );
+    
+          if (result.status === 200) {
             toast.success("Registro Guardado Exitosamente");
             console.log("Registro Guardado Exitosamente");
+            setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
             setTimeout(() => {
-                window.location.href = "/Orkesta/Generacc/Call/Fin";
-            }, 5000); // 5000 milisegundos = 5 segundos
+              window.location.href = "/Orkesta/Generacc/Call/Fin";
+            }, 5000);
+          }
+        } catch (error) {
+          // Manejo de errores
+          toast.success("Error Con Guardado");
+          console.log("Error Con Guardado");
         }
+      }
 
-
-    }
     return (
         <>
             {/* style={{backgroundColor: "#E8E8E8"}} */}
@@ -452,17 +477,16 @@ function Nombre({ company, clave }) {
 
                     <div className="col-lg-2 col-sm-3 my-2">Email:</div>
                     <div className="col-lg-4 col-sm-9 my-2">
-                        <input
-                            type="email"
-                            id="email"
-                            required
-                            className="cliente form-control"
-                            onChange={handleEmailChange}
-                        />
-                        <div
-                            id="emailValidationMessage"
-                            className="validation-message"
-                        ></div>
+                    <input
+                type="email"
+                id="email"
+                required
+                className={`cliente form-control ${isValidEmail ? '' : 'invalid'}`}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                onBlur={handleEmailBlur}
+            />
+            {!isValidEmail && <p className="error-message">Correo electrónico no válido.</p>}
                     </div>
 
                     <div className="col-lg-2 col-sm-3 my-2">Tipo Contrato:</div>
@@ -483,8 +507,7 @@ function Nombre({ company, clave }) {
                             disabled={false}
                             value={selectplan}
 
-                            onChange={(e) => setselectplan(e.target.value)}
-                        >
+                            onChange={(e) => setselectplan(e.target.value)}>
                             <option value="0">Seleccione el plan</option>
                             <option value="1">Plan 1 UF 500</option>
                             <option value="2">Plan 2 UF 1.000</option>
@@ -561,6 +584,7 @@ function Nombre({ company, clave }) {
                                 className="btn btn-success btn-md "
                                 value="Guardar Registro  Mayor 70"
                                 onClick={GuardarRegistro70}
+                                disabled={botonDeshabilitado}
                             >
                                 Finalizar por mayor de 70
                             </button>

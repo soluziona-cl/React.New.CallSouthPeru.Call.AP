@@ -40,6 +40,8 @@ const Callintro = () => {
   const [select_no_conecta, setselect_no_conecta] = useState("");
 
   const [select_conecta_tercero, setselect_conecta_tercero] = useState("");
+  const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
+  const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] = useState(false); // Estado para controlar la habilitación del botón
 
 
   const [selectLlamada, setSelectedLlamada] = useState("");
@@ -292,25 +294,26 @@ const Callintro = () => {
 
 
 
-    const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
-      { dato: id },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
+    try {
+      const result = await axios.post(
+        "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+        { dato: id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
 
-    if (result.status === 200) {
-      toast.success("Registro Guardado Exitosamente");
-      console.log("Registro Guardado Exitosamente");
-      setTimeout(() => {
-        window.location.href = "/Orkesta/Generacc/Call/Fin";
-      }, 5000); // 5000 milisegundos = 5 segundos
+      if (result.status === 200) {
+        toast.success("Registro Guardado Exitosamente");
+        console.log("Registro Guardado Exitosamente");
+        setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
+        setTimeout(() => {
+          window.location.href = "/Orkesta/Generacc/Call/Fin";
+        }, 5000);
+      }
+    } catch (error) {
+      // Manejo de errores
+      toast.success("Error Con Guardado");
+      console.log("Error Con Guardado");
     }
-
-
-
-
-
-
   }
 
   async function GuardarRegistro() {
@@ -331,6 +334,7 @@ const Callintro = () => {
 
     if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '') {
         alert('Debe completar todos los campos');
+        
     } else {
         let id = []; //final
         let item_sucess_llamada = {};
@@ -359,20 +363,27 @@ const Callintro = () => {
         item_sucess_llamada["gestion"] = json_sucess_gestion;
         id.push(item_sucess_llamada);
 
-        const result = await axios.post(
+        try {
+          const result = await axios.post(
             "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
             { dato: id },
             { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        if (result.status === 200) {
+          );
+    
+          if (result.status === 200) {
             toast.success("Registro Guardado Exitosamente");
             console.log("Registro Guardado Exitosamente");
+            setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
             setTimeout(() => {
-                window.location.href = "/Orkesta/Generacc/Call/Fin";
+              window.location.href = "/Orkesta/Generacc/Call/Fin";
             }, 5000);
+          }
+        } catch (error) {
+          // Manejo de errores
+          toast.success("Error Con Guardado");
+          console.log("Error Con Guardado");
         }
-    }
+      }
 }
 
 
@@ -453,6 +464,7 @@ const Callintro = () => {
                       className="btn btn-success btn-md "
                       value="GuardarRegistro"
                       onClick={GuardarRegistroNoContesta}
+                      disabled={botonDeshabilitado}
                     >
                       Finalizar
                     </button>
@@ -660,6 +672,7 @@ const Callintro = () => {
                         className="btn btn-success btn-md "
                         value="GuardarRegistro"
                         onClick={GuardarRegistro}
+                        disabled={botonDeshabilitado_guardar}
                       >
                         Finalizar
                       </button>
