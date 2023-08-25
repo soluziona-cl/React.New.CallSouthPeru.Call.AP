@@ -165,7 +165,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
         }, 5000);
       }
     } catch (error) {
-      toast.success("Error Con Guardado");
+      toast.error("Error Con Guardado");
       console.log("Error Con Guardado");
       // Manejo de errores
     }
@@ -342,7 +342,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
             </select>
           </div>
 
-          {selectnointeresa !== "0" &&
+          {selectnointeresa !== "0" &&  (
             <div className="d-flex justify-content-end">
               <button
                 className="btn btn-success btn-md "
@@ -353,7 +353,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
               >
                 Finalizar
               </button>
-            </div>}
+            </div>)}
 
         </div>
 
@@ -375,6 +375,17 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
               className="cliente form-control"
             />
           </div>
+          <div className="d-flex justify-content-end">
+              <button
+                className="btn btn-success btn-md "
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoValido}
+                disabled={botonDeshabilitado}
+
+              >
+                Finalizar
+              </button>
+            </div>
         </div>
       )}
       {selectcorreo === "1" && (

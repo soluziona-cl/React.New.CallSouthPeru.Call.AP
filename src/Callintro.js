@@ -332,7 +332,7 @@ const Callintro = () => {
     const depto = document.getElementById('depto').value
     const referencia = document.getElementById('referencia').value
 
-    if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '') {
+    if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '' || referencia === '')  {
         alert('Debe completar todos los campos');
         
     } else {
@@ -348,6 +348,7 @@ const Callintro = () => {
         });
 
         json_sucess_gestion.push(item_sucess_gestion);
+
 
         item_sucess_llamada["sucess"] = true;
         item_sucess_llamada["campaign_name"] = company;
@@ -666,7 +667,8 @@ const Callintro = () => {
                     <div className="row my-3">
                       <hr />
                     </div>
-
+                   
+                    
                     <div className="d-flex justify-content-end">
                       <button
                         className="btn btn-success btn-md "
@@ -678,8 +680,7 @@ const Callintro = () => {
                       </button>
                     </div>
                   </div>
-                )}
-
+               )}
               </div>
 
 
