@@ -1,30 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import * as bootstrap from "bootstrap";
-import axios from "axios";
-import Nombre from "./Nombre";
-import Direccion from "./Direccion";
-import Genero from "./Genero";
-import { ToastContainer, toast } from "react-toastify";
 
-
-function Text_Interesa({ company, clave, onConectaTerceroValido }) {
-
-
-
-  let queryString = window.location.search;
-  let urlParams = new URLSearchParams(queryString);
-  const list_id = urlParams.get("list_id");
-  const lead_id = urlParams.get("lead_id");
-  // const rut = urlParams.get("address2");
-  const epoch = urlParams.get("epoch");
-  const lead_id_2 = urlParams.get("lead_id");
-  const rut_2 = urlParams.get("lead_id");
-  const phone_number = urlParams.get("phone_number");
-  const uniqueid = urlParams.get("uniqueid");
-  const agente = urlParams.get("user");
-  const recording_filename = urlParams.get("recording_filename");
-
-
+function Text_Interesa() {
 
   return (
     <>
@@ -50,7 +27,7 @@ function Text_Interesa({ company, clave, onConectaTerceroValido }) {
             correo electrónico, tiene correo electrónico verdad???
           </p>
 
-        
+    
         </div>
         
   </>

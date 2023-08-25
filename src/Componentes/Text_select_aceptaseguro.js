@@ -1,20 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import * as bootstrap from "bootstrap";
-import axios from "axios";
-import Nombre from "./Nombre";
-import Direccion from "./Direccion";
-import Genero from "./Genero";
-import { ToastContainer, toast } from "react-toastify";
 
-
-function Text_select_aceptaseguro({ company, clave, onConectaTerceroValido }) {
-  const [token, setToken] = useState(clave);
-
-
-
-
-  let queryString = window.location.search;
-  let urlParams = new URLSearchParams(queryString); 
+function Text_select_aceptaseguro() {
 
   return (
     <>
@@ -60,10 +46,7 @@ function Text_select_aceptaseguro({ company, clave, onConectaTerceroValido }) {
             buen día/tarde
           </p>
         </div>
-      
-
-
-      
+    
 
     </>
   );
