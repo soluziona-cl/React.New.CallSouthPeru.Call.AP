@@ -24,7 +24,6 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   const [datafull, setDataFull] = useState([]);
   const [otra_razon_noacepta, setotra_razon_noacepta] = useState('');
 
-
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
@@ -176,9 +175,6 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   };
 
 
-
-
-
   return (
     <>
       <h6>
@@ -194,13 +190,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       <div className="row my-2">
         <div className="col-lg-3 col-sm-6 my-2">Registro Válido</div>
         <div className="col-lg-4 col-sm-6 my-2">
-          <select
-            className="cliente form-select" id="registro_valido"
-            aria-label="Default select example"
-            value={selectLlamada}
-            // onChange={(e) => segundaFuncion(e.target.value)}
-            onChange={(e) => SelectedLlamadaChange(e.target.value)}
-          >
+          <select className="cliente form-select" id="registro_valido" aria-label="Default select example" value={selectLlamada} onChange={(e) => SelectedLlamadaChange(e.target.value)} >
             <option value="0">Seleccione</option>
             <option value="1">Comunica con cliente</option>
             <option value="2">Comunica con tercero válido</option>
@@ -212,12 +202,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
         <div className="row my-2">
           <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
           <div className="col-lg-4 col-sm-6 my-2">
-            <select id="interesa"
-              className="cliente form-select"
-              aria-label="Default select example"
-              value={selectinteresa}
-              onChange={(e) => setselectinteresaChange(e.target.value)}
-            >
+            <select id="interesa" className="cliente form-select" aria-label="Default select example" value={selectinteresa} onChange={(e) => setselectinteresaChange(e.target.value)}>
               <option value="0">Seleccione</option>
               <option value="1">Interesa</option>
               <option value="2">No Interesa</option>
@@ -226,11 +211,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
           </div>
           {selectinteresa === "3" &&
             <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-success btn-md "
-                value="GuardarRegistro"
-                onClick={GuardarRegistroNoValido}
-              >
+              <button className="btn btn-success btn-md" value="GuardarRegistro" onClick={GuardarRegistroNoValido}>
                 Finalizar
               </button>
             </div>}
@@ -248,12 +229,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
               tiene correo electrónico verdad???
             </div>
             <div className="col-lg-4 col-sm-6 my-2">
-              <select id="tiene_correo"
-                className="cliente form-select"
-                aria-label="Default select example"
-                value={selectcorreo}
-                onChange={(e) => setselectcorreo(e.target.value)}
-              >
+              <select id="tiene_correo" className="cliente form-select" aria-label="Default select example" value={selectcorreo} onChange={(e) => setselectcorreo(e.target.value)}>
                 <option value="0">Seleccione</option>
                 <option value="1">Si</option>
                 <option value="2">No</option>
@@ -265,13 +241,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       )}
        {selectcorreo === "2" &&
             <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-success btn-md "
-                value="GuardarRegistro"
-                onClick={GuardarRegistroNoValido}
-                disabled={botonDeshabilitado}
-
-              >
+              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado} >
                 Finalizar
               </button>
             </div>}
@@ -279,12 +249,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
         <div className="row my-2">
           <div className="col-lg-3 col-sm-10 my-2">Motivos no interesa</div>
           <div className="col-lg-4 col-sm-6 my-2">
-            <select
-              id="motivos_no_interesa"
-              className="cliente form-select"
-              aria-label="Default select example"
-              value={selectnointeresa}
-              onChange={(e) => setselectnointeresaChange(e.target.value)}
+            <select id="motivos_no_interesa" className="cliente form-select" aria-label="Default select example" value={selectnointeresa} onChange={(e) => setselectnointeresaChange(e.target.value)}
             >
               <option value="0">Seleccione</option>
               <option value="1">Mala experiencia con MetLife</option>
@@ -309,13 +274,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
 
           {selectnointeresa !== "0" &&  (
             <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-success btn-md "
-                value="GuardarRegistro"
-                onClick={GuardarRegistroNoValido}
-                disabled={botonDeshabilitado}
-
-              >
+              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado}>
                 Finalizar
               </button>
             </div>)}
@@ -330,24 +289,10 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
         <div>
           <div className="col-lg-2 col-sm-3 my-2">Otro</div>
           <div className="col-lg-4 col-sm-9 my-2">
-            <textarea
-              type="text"
-              rows="3"
-              id="otro"
-              value={otra_razon_noacepta}
-              onChange={(e) => setotra_razon_noacepta(e.target.value)}
-              required
-              className="cliente form-control"
-            />
+            <textarea type="text" rows="3" id="otro" value={otra_razon_noacepta} onChange={(e) => setotra_razon_noacepta(e.target.value)} required className="cliente form-control" />
           </div>
           <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-success btn-md "
-                value="GuardarRegistro"
-                onClick={GuardarRegistroNoValido}
-                disabled={botonDeshabilitado}
-
-              >
+              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado}>
                 Finalizar
               </button>
             </div>
@@ -361,12 +306,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
               ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
             </div>
             <div className="col-lg-4 col-sm-6 my-2">
-              <select id="acepta_seguro"
-                className="cliente form-select"
-                aria-label="Default select example"
-                value={selectaceptaseguro}
-                onChange={(e) => setselectaceptaseguro(e.target.value)}
-              >
+              <select id="acepta_seguro" className="cliente form-select" aria-label="Default select example" value={selectaceptaseguro} onChange={(e) => setselectaceptaseguro(e.target.value)}>
                 <option value="0">Seleccione</option>
                 <option value="1">Si</option>
                 <option value="2">No</option>
@@ -377,13 +317,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       )}
         {selectaceptaseguro === "2" &&
             <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-success btn-md "
-                value="GuardarRegistro"
-                onClick={GuardarRegistroNoValido}
-                disabled={botonDeshabilitado}
-
-              >
+              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado}>
                 Finalizar
               </button>
             </div>}
@@ -409,11 +343,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
           </p>
           <div className='row bg card p-3 my-3' style={{ backgroundColor: "#E8E8E8" }}>
             <Nombre company={company} clave={token}></Nombre>
-            {/* <Genero></Genero> */}
-            <Direccion
-              company={company}
-              clave={token}>
-            </Direccion>
+            <Direccion company={company} clave={token}></Direccion>
           </div>
       <Text_select_aceptaseguro></Text_select_aceptaseguro>
         </div>
@@ -426,12 +356,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
             Seleccione{" "}
           </div>
           <div className="col-lg-4 col-sm-6 my-2">
-            <select id="comunica_tercero_valido"
-              className="cliente form-select"
-              aria-label="Default select example"
-              value={Comunica_con_tercero_valido}
-              onChange={(e) => setComunica_con_tercero_valido(e.target.value)}
-            >
+            <select id="comunica_tercero_valido" className="cliente form-select" aria-label="Default select example" value={Comunica_con_tercero_valido} onChange={(e) => setComunica_con_tercero_valido(e.target.value)}>
               <option value="0">Seleccione</option>
               <option value="1">Cliente no Vive Ahí</option>
               <option value="2">No desesa contestar</option>
@@ -442,18 +367,10 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
           </div>
           {Comunica_con_tercero_valido !== "0" &&
             <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-success btn-md "
-                value="GuardarRegistro"
-                onClick={GuardarRegistroNoValido}
-                disabled={botonDeshabilitado}
-
-              >
+              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado}>
                 Finalizar
               </button>
             </div>}
-
-
         </div>
       ) : null}
     </>
