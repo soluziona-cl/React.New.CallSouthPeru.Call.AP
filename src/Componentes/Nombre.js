@@ -102,18 +102,18 @@ function Nombre({ company, clave }) {
     // }
 
     const validateEmail = (value) => {
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      return emailRegex.test(value);
-  };
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailRegex.test(value);
+    };
 
-  const handleEmailBlur = () => {
-      const isValid = validateEmail(email);
-      setIsValidEmail(isValid);
+    const handleEmailBlur = () => {
+        const isValid = validateEmail(email);
+        setIsValidEmail(isValid);
 
-      if (!isValid) {
-          setEmail('');
-      }
-  };
+        if (!isValid) {
+            setEmail('');
+        }
+    };
 
     const handleChangeRut = (event) => {
         setRut(event.target.value);
@@ -221,20 +221,20 @@ function Nombre({ company, clave }) {
     };
 
     function getMaxDateFor18YearsAgo() {
-      const currentDate = new Date();
-      const eighteenYearsAgo = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
-  
-      const yyyy = eighteenYearsAgo.getFullYear();
-      const mm = String(eighteenYearsAgo.getMonth() + 1).padStart(2, '0');
-      const dd = String(eighteenYearsAgo.getDate()).padStart(2, '0');
-  
-      return `${yyyy}-${mm}-${dd}`;
-  }
-  
-  function handleDateChange(newValue) {
-      setBirthdate(newValue);
-      // Aquí puedes realizar validaciones adicionales si es necesario
-  }
+        const currentDate = new Date();
+        const eighteenYearsAgo = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+
+        const yyyy = eighteenYearsAgo.getFullYear();
+        const mm = String(eighteenYearsAgo.getMonth() + 1).padStart(2, '0');
+        const dd = String(eighteenYearsAgo.getDate()).padStart(2, '0');
+
+        return `${yyyy}-${mm}-${dd}`;
+    }
+
+    function handleDateChange(newValue) {
+        setBirthdate(newValue);
+        // Aquí puedes realizar validaciones adicionales si es necesario
+    }
 
     function desahabilitar() {
 
@@ -253,23 +253,23 @@ function Nombre({ company, clave }) {
         const depto = document.getElementById('depto');
         const referencia = document.getElementById('referencia');
 
-        
-            // Disable form elements
-            nombres.disabled = true;
-            apellido_paterno.disabled = true;
-            apellido_materno.disabled = true;
-            // fecha_nacimiento.disabled = true;
-            RutCliente.disabled = true;
-            sexo.disabled = true;
-            email.disabled = true;
-            planes.disabled = true;
-            comuna.disabled = true;
-            ciudad.disabled = true;
-            calle.disabled = true;
-            numero.disabled = true;
-            depto.disabled = true;
-            referencia.disabled = true;
-       
+
+        // Disable form elements
+        nombres.disabled = true;
+        apellido_paterno.disabled = true;
+        apellido_materno.disabled = true;
+        // fecha_nacimiento.disabled = true;
+        RutCliente.disabled = true;
+        sexo.disabled = true;
+        email.disabled = true;
+        planes.disabled = true;
+        comuna.disabled = true;
+        ciudad.disabled = true;
+        calle.disabled = true;
+        numero.disabled = true;
+        depto.disabled = true;
+        referencia.disabled = true;
+
     }
 
     function habilitar() {
@@ -289,23 +289,23 @@ function Nombre({ company, clave }) {
         const depto = document.getElementById('depto');
         const referencia = document.getElementById('referencia');
 
-        
-            // Disable form elements
-            nombres.disabled = false;
-            apellido_paterno.disabled = false;
-            apellido_materno.disabled = false;
-            // fecha_nacimiento.disabled = false;
-            RutCliente.disabled = false;
-            sexo.disabled = false;
-            email.disabled = false;
-            planes.disabled = false;
-            comuna.disabled = false;
-            ciudad.disabled = false;
-            calle.disabled = false;
-            numero.disabled = false;
-            depto.disabled = false;
-            referencia.disabled = false;
-       
+
+        // Disable form elements
+        nombres.disabled = false;
+        apellido_paterno.disabled = false;
+        apellido_materno.disabled = false;
+        // fecha_nacimiento.disabled = false;
+        RutCliente.disabled = false;
+        sexo.disabled = false;
+        email.disabled = false;
+        planes.disabled = false;
+        comuna.disabled = false;
+        ciudad.disabled = false;
+        calle.disabled = false;
+        numero.disabled = false;
+        depto.disabled = false;
+        referencia.disabled = false;
+
     }
 
 
@@ -348,26 +348,26 @@ function Nombre({ company, clave }) {
 
 
         try {
-          const result = await axios.post(
-            "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
-            { dato: id },
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-    
-          if (result.status === 200) {
-            toast.success("Registro Guardado Exitosamente");
-            console.log("Registro Guardado Exitosamente");
-            setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
-            setTimeout(() => {
-              window.location.href = "/Orkesta/Generacc/Call/Fin";
-            }, 5000);
-          }
+            const result = await axios.post(
+                "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+                { dato: id },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
+
+            if (result.status === 200) {
+                toast.success("Registro Guardado Exitosamente");
+                console.log("Registro Guardado Exitosamente");
+                setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
+                setTimeout(() => {
+                    window.location.href = "/Orkesta/Generacc/Call/Fin";
+                }, 5000);
+            }
         } catch (error) {
-          // Manejo de errores
-          toast.success("Error Con Guardado");
-          console.log("Error Con Guardado");
+            // Manejo de errores
+            toast.success("Error Con Guardado");
+            console.log("Error Con Guardado");
         }
-      }
+    }
 
     return (
         <>
@@ -445,14 +445,14 @@ function Nombre({ company, clave }) {
                             minLength={8}
                             maxLength={10}
                             onChange={(e) => {
-                              const inputValue = e.target.value;
-                              const rutRegex = /^[\dKk.-]*$/;
-                      
-                              if (rutRegex.test(inputValue) || inputValue === "") {
-                                  handleChangeRut(e);
-                              }
-                          }}
-                      />
+                                const inputValue = e.target.value;
+                                const rutRegex = /^[\dKk.-]*$/;
+
+                                if (rutRegex.test(inputValue) || inputValue === "") {
+                                    handleChangeRut(e);
+                                }
+                            }}
+                        />
                         {valido ? (
                             <p style={{ color: "green" }}>Rut válido</p>
                         ) : (
@@ -472,21 +472,21 @@ function Nombre({ company, clave }) {
                             <option value="1">M</option>
                             <option value="2">F</option>
                         </select>
-                        
+
                     </div>
 
                     <div className="col-lg-2 col-sm-3 my-2">Email:</div>
                     <div className="col-lg-4 col-sm-9 my-2">
-                    <input
-                type="email"
-                id="email"
-                required
-                className={`cliente form-control ${isValidEmail ? '' : 'invalid'}`}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onBlur={handleEmailBlur}
-            />
-            {!isValidEmail && <p className="error-message">Correo electrónico no válido.</p>}
+                        <input
+                            type="email"
+                            id="email"
+                            required
+                            className={`cliente form-control ${isValidEmail ? '' : 'invalid'}`}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            onBlur={handleEmailBlur}
+                        />
+                        {!isValidEmail && <p className="error-message">Correo electrónico no válido.</p>}
                     </div>
 
                     <div className="col-lg-2 col-sm-3 my-2">Tipo Contrato:</div>
