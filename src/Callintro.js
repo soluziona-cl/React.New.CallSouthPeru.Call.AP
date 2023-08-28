@@ -75,6 +75,8 @@ const Callintro = () => {
     setselect_conecta_tercero(value);
   };
 
+  
+
   function get_elapsed_time_string(total_seconds) {
     function pretty_time_string(num) {
       return (num < 10 ? "0" : "") + num;
@@ -197,6 +199,9 @@ const Callintro = () => {
     if (!selectLlamada) {
       return <div>Loading...</div>;
     }
+    if (valor === "1") {
+      setselect_no_conecta("0");
+    }
 
     console.log(selectLlamada);
   };
@@ -317,76 +322,76 @@ const Callintro = () => {
     }
   }
 
-  async function GuardarRegistro() {
-    const nombres = document.getElementById('nombres').value
-    const apellido_paterno = document.getElementById('apellido_paterno').value
-    const apellido_materno = document.getElementById('apellido_materno').value
-    const fecha_nacimiento = document.getElementById('fecha_nacimiento').value
-    const RutCliente = document.getElementById('RutCliente').value
-    const sexo = document.getElementById('sexo').value
-    const email = document.getElementById('email').value
-    const planes = document.getElementById('planes').value
-    const comuna = document.getElementById('comuna').value
-    const ciudad = document.getElementById('ciudad').value
-    const calle = document.getElementById('calle').value
-    const numero = document.getElementById('numero').value
-    const depto = document.getElementById('depto').value
-    const referencia = document.getElementById('referencia').value
+//   async function GuardarRegistro() {
+//     const nombres = document.getElementById('nombres').value
+//     const apellido_paterno = document.getElementById('apellido_paterno').value
+//     const apellido_materno = document.getElementById('apellido_materno').value
+//     const fecha_nacimiento = document.getElementById('fecha_nacimiento').value
+//     const RutCliente = document.getElementById('RutCliente').value
+//     const sexo = document.getElementById('sexo').value
+//     const email = document.getElementById('email').value
+//     const planes = document.getElementById('planes').value
+//     const comuna = document.getElementById('comuna').value
+//     const ciudad = document.getElementById('ciudad').value
+//     const calle = document.getElementById('calle').value
+//     const numero = document.getElementById('numero').value
+//     const depto = document.getElementById('depto').value
+//     const referencia = document.getElementById('referencia').value
 
-    if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '' || referencia === '')  {
-        alert('Debe completar todos los campos');
+//     if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '' || referencia === '')  {
+//         alert('Debe completar todos los campos');
         
-    } else {
-        let id = []; //final
-        let item_sucess_llamada = {};
-        let json_sucess_gestion = [];
-        let item_sucess_gestion = {};
-        const preguntas = document.querySelectorAll(".cliente");
-        preguntas.forEach((obj) => {
-            let title = obj.id;
-            let valor = obj.value;
-            item_sucess_gestion[title] = valor;
-        });
+//     } else {
+//         let id = []; //final
+//         let item_sucess_llamada = {};
+//         let json_sucess_gestion = [];
+//         let item_sucess_gestion = {};
+//         const preguntas = document.querySelectorAll(".cliente");
+//         preguntas.forEach((obj) => {
+//             let title = obj.id;
+//             let valor = obj.value;
+//             item_sucess_gestion[title] = valor;
+//         });
 
-        json_sucess_gestion.push(item_sucess_gestion);
+//         json_sucess_gestion.push(item_sucess_gestion);
 
 
-        item_sucess_llamada["sucess"] = true;
-        item_sucess_llamada["campaign_name"] = company;
-        item_sucess_llamada["campaign_id"] = list_id;
-        item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
-        item_sucess_llamada["lead_id"] = lead_id;
-        item_sucess_llamada["list_id"] = list_id;
-        item_sucess_llamada["agente"] = agente;
-        item_sucess_llamada["recording_filename"] = recording_filename;
-        item_sucess_llamada["epoch"] = epoch;
-        item_sucess_llamada["fecha_gestion"] = new Date();
-        item_sucess_llamada["phone_number"] = phone_number;
-        item_sucess_llamada["gestion"] = json_sucess_gestion;
-        id.push(item_sucess_llamada);
+//         item_sucess_llamada["sucess"] = true;
+//         item_sucess_llamada["campaign_name"] = company;
+//         item_sucess_llamada["campaign_id"] = list_id;
+//         item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+//         item_sucess_llamada["lead_id"] = lead_id;
+//         item_sucess_llamada["list_id"] = list_id;
+//         item_sucess_llamada["agente"] = agente;
+//         item_sucess_llamada["recording_filename"] = recording_filename;
+//         item_sucess_llamada["epoch"] = epoch;
+//         item_sucess_llamada["fecha_gestion"] = new Date();
+//         item_sucess_llamada["phone_number"] = phone_number;
+//         item_sucess_llamada["gestion"] = json_sucess_gestion;
+//         id.push(item_sucess_llamada);
 
-        try {
-          const result = await axios.post(
-            "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
-            { dato: id },
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
+//         try {
+//           const result = await axios.post(
+//             "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+//             { dato: id },
+//             { headers: { Authorization: `Bearer ${token}` } }
+//           );
     
-          if (result.status === 200) {
-            toast.success("Registro Guardado Exitosamente");
-            console.log("Registro Guardado Exitosamente");
-            setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
-            setTimeout(() => {
-              window.location.href = "/Orkesta/Generacc/Call/Fin";
-            }, 5000);
-          }
-        } catch (error) {
-          // Manejo de errores
-          toast.success("Error Con Guardado");
-          console.log("Error Con Guardado");
-        }
-      }
-}
+//           if (result.status === 200) {
+//             toast.success("Registro Guardado Exitosamente");
+//             console.log("Registro Guardado Exitosamente");
+//             setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
+//             setTimeout(() => {
+//               window.location.href = "/Orkesta/Generacc/Call/Fin";
+//             }, 5000);
+//           }
+//         } catch (error) {
+//           // Manejo de errores
+//           toast.success("Error Con Guardado");
+//           console.log("Error Con Guardado");
+//         }
+//       }
+// }
 
 
 
@@ -491,7 +496,7 @@ const Callintro = () => {
                     </div>
                    
                     
-                    <div className="d-flex justify-content-end">
+                    {/* <div className="d-flex justify-content-end">
                       <button
                         className="btn btn-success btn-md "
                         value="GuardarRegistro"
@@ -500,7 +505,7 @@ const Callintro = () => {
                       >
                         Finalizar
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                )}
               </div>

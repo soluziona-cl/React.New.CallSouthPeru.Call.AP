@@ -3,7 +3,7 @@ import * as bootstrap from "bootstrap";
 import axios from "axios";
 
 function NoContesta({ company, clave, onNoConectaChange }) {
- 
+
   const [optionListMotivo, setOptionListMotivo] = useState([]);
  
   // const sesiones = {
@@ -38,7 +38,7 @@ function NoContesta({ company, clave, onNoConectaChange }) {
       <div className="row my-2">
         <div className="col-lg-3 col-sm-3 ">No Conecta</div>
         <div className="col-lg-4 col-sm-8">
-          <select className="form-select cliente" aria-label="Default select example" id="no_conecta" onChange={(e) => onNoConectaChange(e.target.value)}  >
+          <select className="form-select cliente" aria-label="Default select example" id="no_conecta"  onChange={(e) => onNoConectaChange(e.target.value)}  >
             <option value="0">Seleccione</option>
             <option value="1"> Congestionado</option>
             <option value="2">Fuera de Area o Apagado</option>
