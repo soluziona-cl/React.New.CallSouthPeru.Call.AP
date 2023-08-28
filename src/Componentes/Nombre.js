@@ -116,8 +116,22 @@ function Nombre({ company, clave }) {
     };
 
     const handleChangeRut = (event) => {
-        setRut(event.target.value);
-        validarRut(event.target.value);
+        const newRutValue = event.target.value;
+        setRut(newRutValue); // Actualizar el estado con el nuevo valor de RUT
+    
+        // Validar el formato del RUT utilizando una expresión regular
+        const rutRegex = /^[0-9]+-[0-9kK]{1}$/;
+        if (!rutRegex.test(newRutValue) && newRutValue !== "") {
+            setValido(false); // Indicar que el RUT no es válido
+        } else {
+            validarRut(newRutValue);
+        }
+    };
+
+    const handleBlurRut = () => {
+        if (!valido) {
+            setRut(""); // Borrar el contenido del campo de texto si el RUT no es válido
+        }
     };
 
     const validarRut = (rut) => {
@@ -125,7 +139,7 @@ function Nombre({ company, clave }) {
 
         if (!regex.test(rut)) {
             // alert('Formato Rut No valido');
-            // setRut('');
+            setRut('');
             setValido(false);
             console.log(valido);
             return;
@@ -155,6 +169,7 @@ function Nombre({ company, clave }) {
         if (digitoCalculado === digitoVerificador) {
             setValido(true);
         } else {
+            setRut(""); // Borrar el contenido del campo de texto
             setValido(false);
         }
     };
@@ -438,20 +453,15 @@ function Nombre({ company, clave }) {
                     <div className="col-lg-4 col-sm-3 my-2">
                         <input
                             type="text"
-                            className="form-control cliente"
+                            className={`form-control cliente ${valido === false ? 'invalid' : ''}`}
                             required
                             id="RutCliente"
                             value={rut}
                             minLength={8}
                             maxLength={10}
-                            onChange={(e) => {
-                                const inputValue = e.target.value;
-                                const rutRegex = /^[\dKk.-]*$/;
+                            onChange={handleChangeRut}
+                            onBlur={handleBlurRut}
 
-                                if (rutRegex.test(inputValue) || inputValue === "") {
-                                    handleChangeRut(e);
-                                }
-                            }}
                         />
                         {valido ? (
                             <p style={{ color: "green" }}>Rut válido</p>

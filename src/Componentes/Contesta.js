@@ -8,10 +8,10 @@ import Text_Interesa from "./Text_interesa";
 import Text_select_aceptaseguro from "./Text_select_aceptaseguro";
 import Text_select_correo from "./Text_select_correo";
 
-
 function Contesta({ company, clave, onConectaTerceroValido }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
-  const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] = useState("0");
+  const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
+    useState("0");
   const [token, setToken] = useState(clave);
   const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
 
@@ -22,22 +22,21 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   const [selectinteresa, setselectinteresa] = useState("0");
   const [selectnointeresa, setselectnointeresa] = useState("0");
   const [datafull, setDataFull] = useState([]);
-  const [otra_razon_noacepta, setotra_razon_noacepta] = useState('');
-  const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] = useState(false); // Estado para controlar la habilitación del botón
-
+  const [otra_razon_noacepta, setotra_razon_noacepta] = useState("");
+  const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] =
+    useState(false); // Estado para controlar la habilitación del botón
 
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
+    useState("0");
   const sesiones = {
-
     sgui: localStorage.getItem("localgui"),
     scliente: localStorage.getItem("localcliente"),
     sid: localStorage.getItem("localid"),
     sid_usuario: localStorage.getItem("localid_usuario"),
     stoken: localStorage.getItem("token"),
-
   };
 
   function get_elapsed_time_string(total_seconds) {
@@ -57,75 +56,88 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   }
 
   async function GuardarRegistro() {
-    const nombres = document.getElementById('nombres').value
-    const apellido_paterno = document.getElementById('apellido_paterno').value
-    const apellido_materno = document.getElementById('apellido_materno').value
-    const fecha_nacimiento = document.getElementById('fecha_nacimiento').value
-    const RutCliente = document.getElementById('RutCliente').value
-    const sexo = document.getElementById('sexo').value
-    const email = document.getElementById('email').value
-    const planes = document.getElementById('planes').value
-    const comuna = document.getElementById('comuna').value
-    const ciudad = document.getElementById('ciudad').value
-    const calle = document.getElementById('calle').value
-    const numero = document.getElementById('numero').value
-    const depto = document.getElementById('depto').value
-    const referencia = document.getElementById('referencia').value
+    const nombres = document.getElementById("nombres").value;
+    const apellido_paterno = document.getElementById("apellido_paterno").value;
+    const apellido_materno = document.getElementById("apellido_materno").value;
+    const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
+    const RutCliente = document.getElementById("RutCliente").value;
+    const sexo = document.getElementById("sexo").value;
+    const email = document.getElementById("email").value;
+    const planes = document.getElementById("planes").value;
+    const comuna = document.getElementById("comuna").value;
+    const ciudad = document.getElementById("ciudad").value;
+    const calle = document.getElementById("calle").value;
+    const numero = document.getElementById("numero").value;
+    const depto = document.getElementById("depto").value;
+    const referencia = document.getElementById("referencia").value;
 
-    if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '' || referencia === '')  {
-        alert('Debe completar todos los campos');
-        
+    if (
+      nombres === "" ||
+      apellido_paterno === "" ||
+      apellido_materno === "" ||
+      fecha_nacimiento === "" ||
+      RutCliente === "" ||
+      sexo === "" ||
+      email === "" ||
+      planes === "" ||
+      comuna === "" ||
+      ciudad === "" ||
+      calle === "" ||
+      numero === "" ||
+      depto === "" ||
+      referencia === ""
+    ) {
+      alert("Debe completar todos los campos");
     } else {
-        let id = []; //final
-        let item_sucess_llamada = {};
-        let json_sucess_gestion = [];
-        let item_sucess_gestion = {};
-        const preguntas = document.querySelectorAll(".cliente");
-        preguntas.forEach((obj) => {
-            let title = obj.id;
-            let valor = obj.value;
-            item_sucess_gestion[title] = valor;
-        });
+      let id = []; //final
+      let item_sucess_llamada = {};
+      let json_sucess_gestion = [];
+      let item_sucess_gestion = {};
+      const preguntas = document.querySelectorAll(".cliente");
+      preguntas.forEach((obj) => {
+        let title = obj.id;
+        let valor = obj.value;
+        item_sucess_gestion[title] = valor;
+      });
 
-        json_sucess_gestion.push(item_sucess_gestion);
+      json_sucess_gestion.push(item_sucess_gestion);
 
+      item_sucess_llamada["sucess"] = true;
+      item_sucess_llamada["campaign_name"] = company;
+      item_sucess_llamada["campaign_id"] = list_id;
+      item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+      item_sucess_llamada["lead_id"] = lead_id;
+      item_sucess_llamada["list_id"] = list_id;
+      item_sucess_llamada["agente"] = agente;
+      item_sucess_llamada["recording_filename"] = recording_filename;
+      item_sucess_llamada["epoch"] = epoch;
+      item_sucess_llamada["fecha_gestion"] = new Date();
+      item_sucess_llamada["phone_number"] = phone_number;
+      item_sucess_llamada["gestion"] = json_sucess_gestion;
+      id.push(item_sucess_llamada);
 
-        item_sucess_llamada["sucess"] = true;
-        item_sucess_llamada["campaign_name"] = company;
-        item_sucess_llamada["campaign_id"] = list_id;
-        item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
-        item_sucess_llamada["lead_id"] = lead_id;
-        item_sucess_llamada["list_id"] = list_id;
-        item_sucess_llamada["agente"] = agente;
-        item_sucess_llamada["recording_filename"] = recording_filename;
-        item_sucess_llamada["epoch"] = epoch;
-        item_sucess_llamada["fecha_gestion"] = new Date();
-        item_sucess_llamada["phone_number"] = phone_number;
-        item_sucess_llamada["gestion"] = json_sucess_gestion;
-        id.push(item_sucess_llamada);
+      try {
+        const result = await axios.post(
+          "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+          { dato: id },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
 
-        try {
-          const result = await axios.post(
-            "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
-            { dato: id },
-            { headers: { Authorization: `Bearer ${token}` } }
-          );
-    
-          if (result.status === 200) {
-            toast.success("Registro Guardado Exitosamente");
-            console.log("Registro Guardado Exitosamente");
-            setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
-            setTimeout(() => {
-              window.location.href = "/Orkesta/Generacc/Call/Fin";
-            }, 5000);
-          }
-        } catch (error) {
-          // Manejo de errores
-          toast.success("Error Con Guardado");
-          console.log("Error Con Guardado");
+        if (result.status === 200) {
+          toast.success("Registro Guardado Exitosamente");
+          console.log("Registro Guardado Exitosamente");
+          setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
+          setTimeout(() => {
+            window.location.href = "/Orkesta/Generacc/Call/Fin";
+          }, 5000);
         }
+      } catch (error) {
+        // Manejo de errores
+        toast.success("Error Con Guardado");
+        console.log("Error Con Guardado");
       }
-}
+    }
+  }
 
   let queryString = window.location.search;
   let urlParams = new URLSearchParams(queryString);
@@ -156,7 +168,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       setOptionListMotivo(result.data);
     }
   };
-  console.log(token)
+  console.log(token);
 
   const ChangeConecta_nombre = async (event) => {
     if (event === "0") {
@@ -233,20 +245,27 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   }
 
   const SelectedLlamadaChange = (event) => {
-    setComunica_con_tercero_valido('0')
-    setSelectedLlamada(event)
+    setComunica_con_tercero_valido("0");
+    setSelectedLlamada(event);
+    setselectnointeresa("0");
+    setselectinteresaChange("0");
+    setselectaceptaseguro("0");
+    setselectcorreo("0");
   };
 
   const setselectinteresaChange = (event) => {
-    setselectnointeresa('0')
-    setselectinteresa(event)
+    setselectinteresa(event);
+    setselectnointeresa("0");
+    setselectaceptaseguro("0");
+    setselectcorreo("0");
+
+
   };
 
   const setselectnointeresaChange = (event) => {
-    setselectnointeresa('0')
-    setselectnointeresa(event)
+    setselectnointeresa("0");
+    setselectnointeresa(event);
   };
-
 
   return (
     <>
@@ -263,7 +282,13 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       <div className="row my-2">
         <div className="col-lg-3 col-sm-6 my-2">Registro Válido</div>
         <div className="col-lg-4 col-sm-6 my-2">
-          <select className="cliente form-select" id="registro_valido" aria-label="Default select example" value={selectLlamada} onChange={(e) => SelectedLlamadaChange(e.target.value)} >
+          <select
+            className="cliente form-select"
+            id="registro_valido"
+            aria-label="Default select example"
+            value={selectLlamada}
+            onChange={(e) => SelectedLlamadaChange(e.target.value)}
+          >
             <option value="0">Seleccione</option>
             <option value="1">Comunica con cliente</option>
             <option value="2">Comunica con tercero válido</option>
@@ -275,34 +300,52 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
         <div className="row my-2">
           <div className="col-lg-3 col-sm-6 my-2">Interesa</div>
           <div className="col-lg-4 col-sm-6 my-2">
-            <select id="interesa" className="cliente form-select" aria-label="Default select example" value={selectinteresa} onChange={(e) => setselectinteresaChange(e.target.value)}>
+            <select
+              id="interesa"
+              className="cliente form-select"
+              aria-label="Default select example"
+              value={selectinteresa}
+              onChange={(e) => setselectinteresaChange(e.target.value)}
+            >
               <option value="0">Seleccione</option>
               <option value="1">Interesa</option>
               <option value="2">No Interesa</option>
               <option value="3">Lo Pensara</option>
             </select>
           </div>
-          {selectinteresa === "3" &&
+          {selectinteresa === "3" && (
             <div className="d-flex justify-content-end">
-              <button className="btn btn-success btn-md" value="GuardarRegistro" onClick={GuardarRegistroNoValido}>
+              <button
+                className="btn btn-success btn-md"
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoValido}
+              >
                 Finalizar
               </button>
-            </div>}
+            </div>
+          )}
         </div>
       )}
 
-
-
       {selectLlamada === "1" && selectinteresa === "1" && (
         <div>
-        <Text_Interesa></Text_Interesa>
+          <Text_Interesa></Text_Interesa>
 
           <div className="row my-2">
             <div className=" col-lg-3 col-sm-10 my-2">
               tiene correo electrónico verdad???
             </div>
             <div className="col-lg-4 col-sm-6 my-2">
-              <select id="tiene_correo" className="cliente form-select" aria-label="Default select example" value={selectcorreo} onChange={(e) => setselectcorreo(e.target.value)}>
+              <select
+                id="tiene_correo"
+                className="cliente form-select"
+                aria-label="Default select example"
+                value={selectcorreo}
+                onChange={(e) => {
+                  setselectcorreo(e.target.value);
+                  setselectaceptaseguro("0"); // Establecer selectaceptaseguro en "0" cuando cambie selectcorreo
+                }}
+              >
                 <option value="0">Seleccione</option>
                 <option value="1">Si</option>
                 <option value="2">No</option>
@@ -310,19 +353,29 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
             </div>
           </div>
         </div>
-        
       )}
-       {selectcorreo === "2" &&
-            <div className="d-flex justify-content-end">
-              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado} >
-                Finalizar
-              </button>
-            </div>}
+      {selectcorreo === "2" && (
+        <div className="d-flex justify-content-end">
+          <button
+            className="btn btn-success btn-md "
+            value="GuardarRegistro"
+            onClick={GuardarRegistroNoValido}
+            disabled={botonDeshabilitado}
+          >
+            Finalizar
+          </button>
+        </div>
+      )}
       {selectinteresa === "2" && (
         <div className="row my-2">
           <div className="col-lg-3 col-sm-10 my-2">Motivos no interesa</div>
           <div className="col-lg-4 col-sm-6 my-2">
-            <select id="motivos_no_interesa" className="cliente form-select" aria-label="Default select example" value={selectnointeresa} onChange={(e) => setselectnointeresaChange(e.target.value)}
+            <select
+              id="motivos_no_interesa"
+              className="cliente form-select"
+              aria-label="Default select example"
+              value={selectnointeresa}
+              onChange={(e) => setselectnointeresaChange(e.target.value)}
             >
               <option value="0">Seleccione</option>
               <option value="1">Mala experiencia con MetLife</option>
@@ -330,7 +383,9 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
               <option value="3">Cliente molesto (No volver a llamar)</option>
               <option value="4">Uniformado Activo</option>
               <option value="5">Ya tiene Seguro</option>
-              <option value="6">Mala experiencia con Compañía/Entel/Corredora</option>
+              <option value="6">
+                Mala experiencia con Compañía/Entel/Corredora
+              </option>
               <option value="7">Mejor oferta en la Competencia</option>
               <option value="8">No interesa seguro</option>
               <option value="9">No le gusta la venta telefonica</option>
@@ -341,45 +396,68 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
               <option value="14">No es titular</option>
               <option value="15">Producto le parece caro</option>
               <option value="16">Otro (Registrar)</option>
-              <option value="17">Ya tiene un seguro similar con otra compañía </option>
+              <option value="17">
+                Ya tiene un seguro similar con otra compañía{" "}
+              </option>
             </select>
           </div>
 
-          {selectnointeresa !== "0"  && selectnointeresa !== "16"  &&  (
+          {selectnointeresa !== "0" && selectnointeresa !== "16" && (
             <div className="d-flex justify-content-end">
-              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado}>
+              <button
+                className="btn btn-success btn-md "
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoValido}
+                disabled={botonDeshabilitado}
+              >
                 Finalizar
               </button>
-            </div>)}
-
+            </div>
+          )}
         </div>
-
-
-
-
       )}
       {selectnointeresa === "16" && (
         <div>
           <div className="col-lg-2 col-sm-3 my-2">Otro</div>
           <div className="col-lg-4 col-sm-9 my-2">
-            <textarea type="text" rows="3" id="otro" value={otra_razon_noacepta} onChange={(e) => setotra_razon_noacepta(e.target.value)} required className="cliente form-control" />
+            <textarea
+              type="text"
+              rows="3"
+              id="otro"
+              value={otra_razon_noacepta}
+              onChange={(e) => setotra_razon_noacepta(e.target.value)}
+              required
+              className="cliente form-control"
+            />
           </div>
           <div className="d-flex justify-content-end">
-              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado}>
-                Finalizar
-              </button>
-            </div>
+            <button
+              className="btn btn-success btn-md "
+              value="GuardarRegistro"
+              onClick={GuardarRegistroNoValido}
+              disabled={botonDeshabilitado}
+            >
+              Finalizar
+            </button>
+          </div>
         </div>
       )}
       {selectcorreo === "1" && (
         <div>
-         <Text_select_correo></Text_select_correo>
+          <Text_select_correo></Text_select_correo>
           <div className="row my-2" style={{ backgroundColor: "#E8E8E8" }}>
             <div className="col-lg-12 col-sm-10 my-2">
-              ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
+              ¿acepta la contratación del SEGURO DE FALLECIMIENTO ACCIDENTAL CON
+              AHORRO por un valor mensual de UF xx, aproximadamente $xxxx?
             </div>
             <div className="col-lg-4 col-sm-6 my-2">
-              <select id="acepta_seguro" className="cliente form-select" aria-label="Default select example" value={selectaceptaseguro} onChange={(e) => setselectaceptaseguro(e.target.value)}>
+              <select
+                id="acepta_seguro"
+                className="cliente form-select"
+                aria-label="Default select example"
+                value={selectaceptaseguro}
+                onChange={(e) => setselectaceptaseguro(e.target.value)}
+              >
                 <option value="0">Seleccione</option>
                 <option value="1">Si</option>
                 <option value="2">No</option>
@@ -388,12 +466,18 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
           </div>
         </div>
       )}
-        {selectaceptaseguro === "2" &&
-            <div className="d-flex justify-content-end">
-              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado}>
-                Finalizar
-              </button>
-            </div>}
+      {selectaceptaseguro === "2" && (
+        <div className="d-flex justify-content-end">
+          <button
+            className="btn btn-success btn-md "
+            value="GuardarRegistro"
+            onClick={GuardarRegistroNoValido}
+            disabled={botonDeshabilitado}
+          >
+            Finalizar
+          </button>
+        </div>
+      )}
 
       {selectcorreo === "2" && (
         <div>
@@ -414,32 +498,39 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
             y para efectos de grabación vamos a corroborar sus datos personales,
             indíqueme por favor:
           </p>
-          <div className='row bg card p-3 my-3' style={{ backgroundColor: "#E8E8E8" }}>
+          <div
+            className="row bg card p-3 my-3"
+            style={{ backgroundColor: "#E8E8E8" }}
+          >
             <Nombre company={company} clave={token}></Nombre>
             <Direccion company={company} clave={token}></Direccion>
           </div>
-      <Text_select_aceptaseguro></Text_select_aceptaseguro>
-      <div className="d-flex justify-content-end">
-                      <button
-                        className="btn btn-success btn-md "
-                        value="GuardarRegistro"
-                        onClick={GuardarRegistro}
-                        disabled={botonDeshabilitado_guardar}
-                      >
-                        Finalizar
-                      </button>
-                    </div>
+          <Text_select_aceptaseguro></Text_select_aceptaseguro>
+          <div className="d-flex justify-content-end">
+            <button
+              className="btn btn-success btn-md "
+              value="GuardarRegistro"
+              onClick={GuardarRegistro}
+              disabled={botonDeshabilitado_guardar}
+            >
+              Finalizar
+            </button>
+          </div>
         </div>
       )}
       {selectLlamada === "2" ||
-        selectLlamada === "3" ||
-        selectLlamada === "4" ? (
+      selectLlamada === "3" ||
+      selectLlamada === "4" ? (
         <div className="row my-2">
-          <div className="col-lg-3 col-sm-10 my-2">
-            Seleccione{" "}
-          </div>
+          <div className="col-lg-3 col-sm-10 my-2">Seleccione </div>
           <div className="col-lg-4 col-sm-6 my-2">
-            <select id="comunica_tercero_valido" className="cliente form-select" aria-label="Default select example" value={Comunica_con_tercero_valido} onChange={(e) => setComunica_con_tercero_valido(e.target.value)}>
+            <select
+              id="comunica_tercero_valido"
+              className="cliente form-select"
+              aria-label="Default select example"
+              value={Comunica_con_tercero_valido}
+              onChange={(e) => setComunica_con_tercero_valido(e.target.value)}
+            >
               <option value="0">Seleccione</option>
               <option value="1">Cliente no Vive Ahí</option>
               <option value="2">No desesa contestar</option>
@@ -448,15 +539,20 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
               <option value="5">Tercero pide dejar pendiente</option>
             </select>
           </div>
-          {Comunica_con_tercero_valido !== "0" &&
+          {Comunica_con_tercero_valido !== "0" && (
             <div className="d-flex justify-content-end">
-              <button className="btn btn-success btn-md " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={botonDeshabilitado}>
+              <button
+                className="btn btn-success btn-md "
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoValido}
+                disabled={botonDeshabilitado}
+              >
                 Finalizar
               </button>
-            </div>}
+            </div>
+          )}
         </div>
       ) : null}
-                        
     </>
   );
 }
