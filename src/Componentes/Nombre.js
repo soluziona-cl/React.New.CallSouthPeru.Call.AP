@@ -213,27 +213,36 @@ function Nombre({ company, clave }) {
     const handleDateBlur = (e) => {
         const selectedDate = new Date(e.target.value);
         const currentDate = new Date();
-
+      
         // Sumar 70 años a la fecha actual
+        const maxAllowedDate = new Date(currentDate);
+        maxAllowedDate.setFullYear(currentDate.getFullYear() - 18);
         const minAllowedDate = new Date(currentDate);
         minAllowedDate.setFullYear(currentDate.getFullYear() - 70);
+      
         if (!selectedDate) {
-            setError("La fecha de nacimiento es requerida.");
-            setShowErrorModal(true); // Mostrar el modal de error
-            setViewEdad('0')
-            habilitar()
-        } else if (selectedDate <= minAllowedDate) {
-            setError("Debes tener menos de 70 años.");
-            setShowErrorModal(true); // Mostrar el modal de error
-            setViewEdad('1')
-            desahabilitar()
+          setError("La fecha de nacimiento es requerida.");
+          setShowErrorModal(true);
+          setViewEdad("0");
+          habilitar();
+        } else if (selectedDate > maxAllowedDate) {
+          setError("Debes ser mayor de 18 años.");
+          setShowErrorModal(true);
+          setViewEdad("1");
+          desahabilitar();
+        } else if (selectedDate < minAllowedDate) {
+          setError("Debes tener menos de 70 años.");
+          setShowErrorModal(true);
+          setViewEdad("1");
+          desahabilitar();
         } else {
-            setError("");
-            setShowErrorModal(false); // Ocultar el modal de error
-            setViewEdad('0')
-            habilitar()
+          setError("");
+          setShowErrorModal(false);
+          setViewEdad("0");
+          habilitar();
         }
-    };
+      };
+      
 
     function getMaxDateFor18YearsAgo() {
         const currentDate = new Date();

@@ -71,24 +71,55 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
     const depto = document.getElementById("depto").value;
     const referencia = document.getElementById("referencia").value;
 
-    if (
-      nombres === "" ||
-      apellido_paterno === "" ||
-      apellido_materno === "" ||
-      fecha_nacimiento === "" ||
-      RutCliente === "" ||
-      sexo === "" ||
-      email === "" ||
-      planes === "" ||
-      comuna === "" ||
-      ciudad === "" ||
-      calle === "" ||
-      numero === "" ||
-      depto === "" ||
-      referencia === ""
-    ) {
-      alert("Debe completar todos los campos");
-    } else {
+    const campos = [
+      nombres,
+      apellido_paterno,
+      apellido_materno,
+      fecha_nacimiento,
+      RutCliente,
+      sexo,
+      email,
+      planes,
+      comuna,
+      ciudad,
+      calle,
+      numero,
+      depto,
+      referencia,
+    ];
+  
+    const nombresCampos = [
+      "Nombres",
+      "Apellido Paterno",
+      "Apellido Materno",
+      "Fecha Nacimiento",
+      "Rut Cliente",
+      "Sexo",
+      "Email",
+      "Planes",
+      "Comuna",
+      "ciudad",
+      "calle",
+      "numero",
+      "depto",
+      "referencia",
+      
+      // ... (otros nombres de campos en el mismo orden)
+    ];
+  
+    let camposIncompletos = [];
+  
+    for (let i = 0; i < campos.length; i++) {
+      if (campos[i] === "" || campos[i] === "0") {
+        camposIncompletos.push(nombresCampos[i]);
+      }
+    }
+    
+    if (camposIncompletos.length > 0) {
+      const camposFaltantesTexto = camposIncompletos.join(", ");
+      alert(`Debe completar los siguientes campos: ${camposFaltantesTexto}`);
+      return; // Detener la ejecución si hay campos faltantes
+    }else {
       let id = []; //final
       let item_sucess_llamada = {};
       let json_sucess_gestion = [];
