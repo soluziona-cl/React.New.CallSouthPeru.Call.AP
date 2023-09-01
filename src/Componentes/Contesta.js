@@ -237,7 +237,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
     json_sucess_gestion.push(item_sucess_gestion);
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
+    item_sucess_llamada["campaign_name"] = company; 
     item_sucess_llamada["campaign_id"] = list_id;
     item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
     item_sucess_llamada["lead_id"] = lead_id;
@@ -257,7 +257,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       const result = await axios.post(
         "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
         { dato: id },
-        { headers: { Authorization: `Bearer ${token}` } }
+        { headers: { Authorization: `Bearer ${clave}` } }
       );
 
       if (result.status === 200) {
