@@ -228,7 +228,7 @@ function Nombre({ company, clave }) {
         } else if (selectedDate > maxAllowedDate) {
           setError("Debes ser mayor de 18 años.");
           setShowErrorModal(true);
-          setViewEdad("1");
+          setViewEdad("2");
           desahabilitar();
         } else if (selectedDate < minAllowedDate) {
           setError("Debes tener menos de 70 años.");
@@ -597,15 +597,26 @@ function Nombre({ company, clave }) {
                         </div>
                     )}
 
-                    {viewedad !== "0" &&
+                    {viewedad === "1" &&
                         <div className="d-flex justify-content-end">
                             <button
                                 className="btn btn-success btn-md "
-                                value="Guardar Registro  Mayor 70"
+                                value="Guardar Registro Mayor 70"
                                 onClick={GuardarRegistro70}
                                 disabled={botonDeshabilitado}
                             >
                                 Finalizar por mayor de 70
+                            </button>
+                        </div>}
+                        {viewedad === "2" &&
+                        <div className="d-flex justify-content-end">
+                            <button
+                                className="btn btn-success btn-md "
+                                value="Guardar Registro Menor 18"
+                                onClick={GuardarRegistro70}
+                                disabled={botonDeshabilitado}
+                            >
+                                Finalizar por menor de 18
                             </button>
                         </div>}
 
