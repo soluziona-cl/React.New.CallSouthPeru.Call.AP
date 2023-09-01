@@ -40,16 +40,16 @@ function NoContesta({ company, clave, onNoConectaChange }) {
         <div className="col-lg-4 col-sm-8">
           <select className="form-select cliente" aria-label="Default select example" id="no_conecta"  onChange={(e) => onNoConectaChange(e.target.value)}  >
             <option value="0">Seleccione</option>
-            <option value="1"> Congestionado</option>
-            <option value="2">Fuera de Area o Apagado</option>
-            <option value="3">Fuera de servicio</option>
-            <option value="4">Teléfono conectado a Fax</option>
-            <option value="5">Grabadora o Buzón de voz</option>
-            <option value="6">No contesta</option>
-            <option value="7">No contesta último intento</option>
-            <option value="8">Numero No Valido</option>
-            <option value="9">Ocupado</option>
-            <option value="10">Fax o módem</option>
+            <option value="3">Congestionado</option>
+            <option value="4">Fuera de Area o Apagado</option>
+            <option value="5">Fuera de servicio</option>
+            <option value="6">Teléfono conectado a Fax</option>
+            <option value="7">Grabadora o Buzón de voz</option>
+            <option value="8">No contesta</option>
+            <option value="9">No contesta último intento</option>
+            <option value="10">Numero No Valido</option>
+            <option value="11">Ocupado</option>
+            <option value="12">Fax o módem</option>
 
           </select>
         </div>
