@@ -264,6 +264,7 @@ const Callintro = () => {
 
   async function GuardarRegistroNoContesta() {
 
+    setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
 
 
     let id = []; //final
@@ -310,7 +311,6 @@ const Callintro = () => {
       if (result.status === 200) {
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
-        setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
         setTimeout(() => {
           window.location.href = "/Orkesta/Generacc/Call/Fin";
         }, 5000);

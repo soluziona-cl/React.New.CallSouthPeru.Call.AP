@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Orkesta/Generacc/Call/static/css/main.b61412d5.css",
-    "main.js": "/Orkesta/Generacc/Call/static/js/main.3e6eecb0.js",
+    "main.js": "/Orkesta/Generacc/Call/static/js/main.d2967e7f.js",
     "index.html": "/Orkesta/Generacc/Call/index.html",
     "main.b61412d5.css.map": "/Orkesta/Generacc/Call/static/css/main.b61412d5.css.map",
-    "main.3e6eecb0.js.map": "/Orkesta/Generacc/Call/static/js/main.3e6eecb0.js.map"
+    "main.d2967e7f.js.map": "/Orkesta/Generacc/Call/static/js/main.d2967e7f.js.map"
   },
   "entrypoints": [
     "static/css/main.b61412d5.css",
-    "static/js/main.3e6eecb0.js"
+    "static/js/main.d2967e7f.js"
   ]
 }

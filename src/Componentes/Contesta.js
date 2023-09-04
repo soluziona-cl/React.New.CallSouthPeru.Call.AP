@@ -56,6 +56,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   }
 
   async function GuardarRegistro() {
+    setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
     const nombres = document.getElementById("nombres").value;
     const apellido_paterno = document.getElementById("apellido_paterno").value;
     const apellido_materno = document.getElementById("apellido_materno").value;
@@ -157,13 +158,13 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
         if (result.status === 200) {
           toast.success("Registro Guardado Exitosamente");
           console.log("Registro Guardado Exitosamente");
-          setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
           setTimeout(() => {
             window.location.href = "/Orkesta/Generacc/Call/Fin";
           }, 5000);
         }
       } catch (error) {
         // Manejo de errores
+        
         toast.success("Error Con Guardado");
         console.log("Error Con Guardado");
       }
@@ -223,6 +224,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   };
 
   async function GuardarRegistroNoValido() {
+    setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
     let id = []; //final
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
@@ -263,7 +265,6 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       if (result.status === 200) {
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
-        setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
         setTimeout(() => {
           window.location.href = "/Orkesta/Generacc/Call/Fin";
         }, 5000);
