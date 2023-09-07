@@ -5,7 +5,7 @@ import Direccion from "./Direccion";
 import ErrorModal from "./Modal";
 import { ToastContainer, toast } from "react-toastify";
 
-function Nombre({ company, clave }) {
+function Nombre({ company, clave, elapsedSeconds }) {
     const [selectLlamada, setSelectedLlamada] = useState("");
     const [fechaNacimiento, setFechaNacimiento] = useState("");
     const [selectplan, setselectplan] = useState('');
@@ -13,6 +13,9 @@ function Nombre({ company, clave }) {
     const [valido, setValido] = useState(null);
     const [sexo, setSexo] = useState("");
     const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
+
+
+    const [setduracion, setselectduracion] = useState("0");
 
 
     const [direccion, setDireccion] = useState("");
@@ -79,6 +82,9 @@ function Nombre({ company, clave }) {
     useEffect(() => {
         Company(company);
     }, []);
+    useEffect(() => {
+        setselectduracion(elapsedSeconds);
+    }, [elapsedSeconds]);
 
     // function handleEmailChange(e) {
     //     const emailInput = e.target;
@@ -118,7 +124,7 @@ function Nombre({ company, clave }) {
     const handleChangeRut = (event) => {
         const newRutValue = event.target.value;
         setRut(newRutValue); // Actualizar el estado con el nuevo valor de RUT
-    
+
         // Validar el formato del RUT utilizando una expresión regular
         const rutRegex = /^[0-9]+-[0-9kK]{1}$/;
         if (!rutRegex.test(newRutValue) && newRutValue !== "") {
@@ -213,36 +219,36 @@ function Nombre({ company, clave }) {
     const handleDateBlur = (e) => {
         const selectedDate = new Date(e.target.value);
         const currentDate = new Date();
-      
+
         // Sumar 70 años a la fecha actual
         const maxAllowedDate = new Date(currentDate);
         maxAllowedDate.setFullYear(currentDate.getFullYear() - 18);
         const minAllowedDate = new Date(currentDate);
         minAllowedDate.setFullYear(currentDate.getFullYear() - 70);
-      
+
         if (!selectedDate) {
-          setError("La fecha de nacimiento es requerida.");
-          setShowErrorModal(true);
-          setViewEdad("0");
-          habilitar();
+            setError("La fecha de nacimiento es requerida.");
+            setShowErrorModal(true);
+            setViewEdad("0");
+            habilitar();
         } else if (selectedDate > maxAllowedDate) {
-          setError("Debes ser mayor de 18 años.");
-          setShowErrorModal(true);
-          setViewEdad("2");
-          desahabilitar();
+            setError("Debes ser mayor de 18 años.");
+            setShowErrorModal(true);
+            setViewEdad("2");
+            desahabilitar();
         } else if (selectedDate < minAllowedDate) {
-          setError("Debes tener menos de 70 años.");
-          setShowErrorModal(true);
-          setViewEdad("1");
-          desahabilitar();
+            setError("Debes tener menos de 70 años.");
+            setShowErrorModal(true);
+            setViewEdad("1");
+            desahabilitar();
         } else {
-          setError("");
-          setShowErrorModal(false);
-          setViewEdad("0");
-          habilitar();
+            setError("");
+            setShowErrorModal(false);
+            setViewEdad("0");
+            habilitar();
         }
-      };
-      
+    };
+
 
     function getMaxDateFor18YearsAgo() {
         const currentDate = new Date();
@@ -362,7 +368,7 @@ function Nombre({ company, clave }) {
         item_sucess_llamada["recording_filename"] = recording_filename;
         item_sucess_llamada["epoch"] = epoch;
         item_sucess_llamada["fecha_gestion"] = new Date();
-        //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+        item_sucess_llamada["duracion_sec"] = elapsed_seconds;
         // item_sucess_llamada["duracion_time"] =
         // get_elapsed_time_string(elapsed_seconds);
         item_sucess_llamada["phone_number"] = phone_number;
@@ -608,7 +614,7 @@ function Nombre({ company, clave }) {
                                 Finalizar por mayor de 70
                             </button>
                         </div>}
-                        {viewedad === "2" &&
+                    {viewedad === "2" &&
                         <div className="d-flex justify-content-end">
                             <button
                                 className="btn btn-success btn-md "

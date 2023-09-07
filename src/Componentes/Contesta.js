@@ -8,7 +8,7 @@ import Text_Interesa from "./Text_interesa";
 import Text_select_aceptaseguro from "./Text_select_aceptaseguro";
 import Text_select_correo from "./Text_select_correo";
 
-function Contesta({ company, clave, onConectaTerceroValido }) {
+function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds }) {
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
     useState("0");
@@ -21,6 +21,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
   const [selectinteresa, setselectinteresa] = useState("0");
   const [selectnointeresa, setselectnointeresa] = useState("0");
+  const [setduracion, setselectduracion] = useState("0");
   const [datafull, setDataFull] = useState([]);
   const [otra_razon_noacepta, setotra_razon_noacepta] = useState("");
   const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] =
@@ -88,7 +89,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       depto,
       referencia,
     ];
-  
+
     const nombresCampos = [
       "Nombres",
       "Apellido Paterno",
@@ -104,23 +105,23 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       "numero",
       "depto",
       "referencia",
-      
+
       // ... (otros nombres de campos en el mismo orden)
     ];
-  
+
     let camposIncompletos = [];
-  
+
     for (let i = 0; i < campos.length; i++) {
       if (campos[i] === "" || campos[i] === "0") {
         camposIncompletos.push(nombresCampos[i]);
       }
     }
-    
+
     if (camposIncompletos.length > 0) {
       const camposFaltantesTexto = camposIncompletos.join(", ");
       alert(`Debe completar los siguientes campos: ${camposFaltantesTexto}`);
       return; // Detener la ejecución si hay campos faltantes
-    }else {
+    } else {
       let id = []; //final
       let item_sucess_llamada = {};
       let json_sucess_gestion = [];
@@ -146,6 +147,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
       item_sucess_llamada["fecha_gestion"] = new Date();
       item_sucess_llamada["phone_number"] = phone_number;
       item_sucess_llamada["gestion"] = json_sucess_gestion;
+      item_sucess_llamada["duracion_sec"] = setduracion;
       id.push(item_sucess_llamada);
 
       try {
@@ -164,7 +166,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
         }
       } catch (error) {
         // Manejo de errores
-        
+
         toast.success("Error Con Guardado");
         console.log("Error Con Guardado");
       }
@@ -187,6 +189,9 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
   useEffect(() => {
     Company(company);
   }, []);
+  useEffect(() => {
+    setselectduracion(elapsedSeconds);
+  }, [elapsedSeconds]);
 
   const Company = async (company) => {
     const result = await axios.post(
@@ -239,7 +244,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
     json_sucess_gestion.push(item_sucess_gestion);
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = company; 
+    item_sucess_llamada["campaign_name"] = company;
     item_sucess_llamada["campaign_id"] = list_id;
     item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
     item_sucess_llamada["lead_id"] = lead_id;
@@ -248,6 +253,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
     item_sucess_llamada["recording_filename"] = recording_filename;
     item_sucess_llamada["epoch"] = epoch;
     item_sucess_llamada["fecha_gestion"] = new Date();
+    item_sucess_llamada["duracion_sec"] = setduracion;
     //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
     // item_sucess_llamada["duracion_time"] =
     // get_elapsed_time_string(elapsed_seconds);
@@ -415,9 +421,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
               <option value="3">Cliente molesto (No volver a llamar)</option>
               <option value="4">Uniformado Activo</option>
               <option value="5">Ya tiene Seguro</option>
-              <option value="6">
-                Mala experiencia con Compañía/Entel/Corredora
-              </option>
+              <option value="6">Mala experiencia con Compañía/Entel/Corredora</option>
               <option value="7">Mejor oferta en la Competencia</option>
               <option value="8">No interesa seguro</option>
               <option value="9">No le gusta la venta telefonica</option>
@@ -428,9 +432,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
               <option value="14">No es titular</option>
               <option value="15">Producto le parece caro</option>
               <option value="16">Otro (Registrar)</option>
-              <option value="17">
-                Ya tiene un seguro similar con otra compañía{" "}
-              </option>
+              <option value="17">Ya tiene un seguro similar con otra compañía</option>
             </select>
           </div>
 
@@ -534,7 +536,7 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
             className="row bg card p-3 my-3"
             style={{ backgroundColor: "#E8E8E8" }}
           >
-            <Nombre company={company} clave={token}></Nombre>
+            <Nombre company={company} clave={token}  elapsedSeconds={setduracion}></Nombre>
             <Direccion company={company} clave={token}></Direccion>
           </div>
           <Text_select_aceptaseguro></Text_select_aceptaseguro>
@@ -551,8 +553,8 @@ function Contesta({ company, clave, onConectaTerceroValido }) {
         </div>
       )}
       {selectLlamada === "2" ||
-      selectLlamada === "3" ||
-      selectLlamada === "4" ? (
+        selectLlamada === "3" ||
+        selectLlamada === "4" ? (
         <div className="row my-2">
           <div className="col-lg-3 col-sm-10 my-2">Seleccione </div>
           <div className="col-lg-4 col-sm-6 my-2">

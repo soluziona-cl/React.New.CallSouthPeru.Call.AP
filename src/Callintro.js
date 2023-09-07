@@ -237,7 +237,7 @@ const Callintro = () => {
     item_sucess_llamada["recording_filename"] = recording_filename;
     item_sucess_llamada["epoch"] = epoch;
     item_sucess_llamada["fecha_gestion"] = new Date();
-    //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+    item_sucess_llamada["duracion_sec"] = elapsedSeconds;
     // item_sucess_llamada["duracion_time"] =
     // get_elapsed_time_string(elapsed_seconds);
     item_sucess_llamada["phone_number"] = phone_number;
@@ -293,7 +293,7 @@ const Callintro = () => {
     item_sucess_llamada["recording_filename"] = recording_filename;
     item_sucess_llamada["epoch"] = epoch;
     item_sucess_llamada["fecha_gestion"] = new Date();
-    //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+    item_sucess_llamada["duracion_sec"] = elapsedSeconds;
     // item_sucess_llamada["duracion_time"] =
     // get_elapsed_time_string(elapsed_seconds);
     item_sucess_llamada["phone_number"] = phone_number;
@@ -493,7 +493,7 @@ const Callintro = () => {
                       <Contesta
                         company={company}
                         clave={token}
-
+                        elapsedSeconds={elapsedSeconds}
                       ></Contesta>
                     </div>
 
