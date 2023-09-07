@@ -119,8 +119,8 @@ const Callintro = () => {
   const ValidaCall = async () => {
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Validacall",
-      // { userName: agente, password: agente }
-      { userName: "test", password: "test" }
+       { userName: agente, password: agente }
+      //{ userName: "test", password: "test" }
     );
 
     const { datos } = result.data;
@@ -158,7 +158,7 @@ const Callintro = () => {
 
       setDataFull(datoscliente);
 
-      console.log(datafull);
+      //console.log(datafull);
     }
   };
   const GuardaURL = async (agentes, url, clave) => {
@@ -479,7 +479,6 @@ const Callintro = () => {
                     </button>
                   </div>
                 )}
-                {console.log(datafull)}
                   <DatosClientes datafull={datafull}
                                           company={company}
                                           clave={token}

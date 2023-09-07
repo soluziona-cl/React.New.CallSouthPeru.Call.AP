@@ -210,7 +210,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds }) {
       setOptionListMotivo(result.data);
     }
   };
-  console.log(token);
+ // console.log(token);
 
   const ChangeConecta_nombre = async (event) => {
     if (event === "0") {
