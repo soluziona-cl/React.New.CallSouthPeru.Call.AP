@@ -120,7 +120,12 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds }) {
     if (camposIncompletos.length > 0) {
       const camposFaltantesTexto = camposIncompletos.join(", ");
       alert(`Debe completar los siguientes campos: ${camposFaltantesTexto}`);
+          // Establecer un temporizador para habilitar el botón después de 3 segundos
+    setTimeout(() => {
+      setbotonDeshabilitado_guardar(false); // Habilitar el botón después de 3 segundos
+    }, 3000); // 3000 milisegundos = 3 segundos
       return; // Detener la ejecución si hay campos faltantes
+      
     } else {
       let id = []; //final
       let item_sucess_llamada = {};
