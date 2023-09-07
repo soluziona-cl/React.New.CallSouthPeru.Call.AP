@@ -368,7 +368,7 @@ function Nombre({ company, clave, elapsedSeconds }) {
         item_sucess_llamada["recording_filename"] = recording_filename;
         item_sucess_llamada["epoch"] = epoch;
         item_sucess_llamada["fecha_gestion"] = new Date();
-        item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+        item_sucess_llamada["duracion_sec"] = setduracion;
         // item_sucess_llamada["duracion_time"] =
         // get_elapsed_time_string(elapsed_seconds);
         item_sucess_llamada["phone_number"] = phone_number;
