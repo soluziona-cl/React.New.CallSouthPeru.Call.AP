@@ -23,7 +23,7 @@ function DatosClientes({ company, clave, datafull }) {
 
     const Company = (async (company) => {
 
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/ConectaDetalle', { dato: company }, { headers: { "Authorization": `Bearer ${clave}` } })
+        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle', { dato: company }, { headers: { "Authorization": `Bearer ${clave}` } })
 
         if (result.status === 200) {
             setOptionListMotivo(result.data)
@@ -40,7 +40,7 @@ function DatosClientes({ company, clave, datafull }) {
             setOptionListDetalleEstadoSelect('0')
             setSelectedLlamada('0')
         } else {
-            const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/ConectaDetalle', { dato: event }, { headers: { "Authorization": `Bearer ${clave}` } })
+            const result = await axios.post('https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/ConectaDetalle', { dato: event }, { headers: { "Authorization": `Bearer ${clave}` } })
 
             setSelectedLlamada(event)
 

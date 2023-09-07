@@ -21,24 +21,11 @@ function Fono({company,clave}) {
     };
 
     useEffect(() => {
-        Company(company)
     }, []);
 
 
 
-    const Company = (async (company) => {
-
-        const result = await axios.post('https://app.soluziona.cl/API_v1_prod/CallSouthPeru/ApiCall_Retenciones/api/Ventas/Call/ConectaDetalle', { dato: company }, { headers: { "Authorization": `Bearer ${clave}` } })
-
-        if (result.status === 200) {
-            setOptionListMotivo(result.data)
-
-            // console.log(result.data)
-            //  console.log(optionList)
-
-        }
-
-    })
+    
 
     const ChangeConecta_fono = (async (event) => {
 
