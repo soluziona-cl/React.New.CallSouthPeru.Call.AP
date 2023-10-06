@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-//import './call'
-//import './func'
 import $ from "jquery";
 import * as bootstrap from "bootstrap";
 import axios from "axios";
@@ -14,25 +12,20 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
 
-import Motivo_Submotivo from "./Componentes/Motivo_Submotivo";
-import Producto from "./Componentes/Producto";
-
-// import Resultado from "./Componentes/Resultado";
-import Nombre from "./Componentes/Nombre";
-import Fono from "./Componentes/Fono";
-import Genero from "./Componentes/Genero";
-//import Direccion from "./Componentes/Direccion";
 import Contesta from "./Componentes/Contesta";
 import NoContesta from "./Componentes/NoContesta";
 import Despedida from ".";
-import DatosClientes from "./Componentes/DatosClientes"
+import DatosClientes from "./Componentes/DatosClientes";
+import Terceros from "./Componentes/Terceros";
 
 registerLocale("es", es);
 
 const Callintro = () => {
+  const [opcionSeleccionada, setOpcionSeleccionada] = useState(null);
+
   const { Alert } = bootstrap;
   var [message, setMessage] = useState("...");
-  const alertRef = useRef();
+  const [scrollToNoContesta, setScrollToNoContesta] = useState(false);
 
   const [show, toggleShow] = useState(true);
   const [token, setToken] = useState("");
@@ -42,10 +35,10 @@ const Callintro = () => {
 
   const [select_conecta_tercero, setselect_conecta_tercero] = useState("");
   const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
-  const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] = useState(false); // Estado para controlar la habilitación del botón
+  const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] =
+    useState(false); // Estado para controlar la habilitación del botón
 
-
-  const [selectLlamada, setSelectedLlamada] = useState("");
+  const [selectLlamada, setSelectLlamada] = useState("0");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
 
   const [selectObservacion, setSelectedObservacion] = useState("");
@@ -66,16 +59,7 @@ const Callintro = () => {
   const [datafullIntervalo, setDataFullIntervalo] = useState([]);
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const [selectedValueApp, setSelectedValueApp] = useState('1');
-
-  const handleNoConectaChange = (value) => {
-    setselect_no_conecta(value);
-  };
-  const handlesegundafuncionChange = (value) => {
-    setselect_conecta_tercero(value);
-  };
-
-  
+  const [selectedValueApp, setSelectedValueApp] = useState("1");
 
   function get_elapsed_time_string(total_seconds) {
     function pretty_time_string(num) {
@@ -118,9 +102,9 @@ const Callintro = () => {
 
   const ValidaCall = async () => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Validacall",
-       { userName: agente, password: agente }
-      //{ userName: "test", password: "test" }
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
+      //  { userName: agente, password: agente }
+      { userName: "test", password: "test" }
     );
 
     const { datos } = result.data;
@@ -142,7 +126,7 @@ const Callintro = () => {
   };
   const DatosCliente = async (lead, clave) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/DatosCliente",
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/DatosCliente",
       { dato: lead },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -163,7 +147,7 @@ const Callintro = () => {
   };
   const GuardaURL = async (agentes, url, clave) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/SaveURl",
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/SaveURl",
       { dato: agentes, dato_2: url },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -180,7 +164,7 @@ const Callintro = () => {
   };
   const Conecta = async (clave) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/Conecta",
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Conecta",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -193,19 +177,24 @@ const Callintro = () => {
     }
   };
 
-  const ChangeLlamada = (valor) => {
-    console.log(valor);
-    setSelectedLlamada(valor);
-
-    if (!selectLlamada) {
-      return <div>Loading...</div>;
-    }
-    if (valor === "1") {
-      setselect_no_conecta("0");
-    }
-
-    console.log(selectLlamada);
+  const handleSeleccion = () => {
+    alert("Seleccionaste 'Lo Pensara' en el hijo.");
+    // Aquí puedes realizar cualquier acción que necesites en el componente padre.
   };
+
+  const [select_si_conecta_llamada, setSelectSiConectaLlamada] = useState("0");
+
+  const ChangeLlamada = (value) => {
+    setSelectLlamada(value);
+  };
+
+  const handleSelectChange = (value) => {
+    setSelectSiConectaLlamada(value);
+  };
+  const handleSelectChangeLoPensara = (value) => {
+    setSelectSiConectaLlamada(value);
+  };
+  const [showContent, setShowContent] = useState(false);
 
   const HideLogo = () => {
     // setshowlogo(!showlogo);
@@ -213,7 +202,6 @@ const Callintro = () => {
   };
 
   async function GuardarRegistroTercero() {
-
     let id = []; //final
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
@@ -244,10 +232,8 @@ const Callintro = () => {
     item_sucess_llamada["gestion"] = json_sucess_gestion;
     id.push(item_sucess_llamada);
 
-
-
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
       { dato: id },
       { headers: { Authorization: `Bearer ${token}` } }
     );
@@ -259,14 +245,10 @@ const Callintro = () => {
         window.location.href = "/Orkesta/Generacc/Call/Fin";
       }, 5000); // 5000 milisegundos = 5 segundos
     }
-
   }
 
-
   async function GuardarRegistroNoContesta() {
-
     setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
-
 
     let id = []; //final
     let item_sucess_llamada = {};
@@ -278,8 +260,6 @@ const Callintro = () => {
       let valor = obj.value;
       item_sucess_gestion[title] = valor;
     });
-
-
 
     json_sucess_gestion.push(item_sucess_gestion);
 
@@ -300,11 +280,9 @@ const Callintro = () => {
     item_sucess_llamada["gestion"] = json_sucess_gestion;
     id.push(item_sucess_llamada);
 
-
-
     try {
       const result = await axios.post(
-        "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
+        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -323,205 +301,160 @@ const Callintro = () => {
     }
   }
 
-//   async function GuardarRegistro() {
-//     const nombres = document.getElementById('nombres').value
-//     const apellido_paterno = document.getElementById('apellido_paterno').value
-//     const apellido_materno = document.getElementById('apellido_materno').value
-//     const fecha_nacimiento = document.getElementById('fecha_nacimiento').value
-//     const RutCliente = document.getElementById('RutCliente').value
-//     const sexo = document.getElementById('sexo').value
-//     const email = document.getElementById('email').value
-//     const planes = document.getElementById('planes').value
-//     const comuna = document.getElementById('comuna').value
-//     const ciudad = document.getElementById('ciudad').value
-//     const calle = document.getElementById('calle').value
-//     const numero = document.getElementById('numero').value
-//     const depto = document.getElementById('depto').value
-//     const referencia = document.getElementById('referencia').value
+  //   async function GuardarRegistro() {
+  //     const nombres = document.getElementById('nombres').value
+  //     const apellido_paterno = document.getElementById('apellido_paterno').value
+  //     const apellido_materno = document.getElementById('apellido_materno').value
+  //     const fecha_nacimiento = document.getElementById('fecha_nacimiento').value
+  //     const RutCliente = document.getElementById('RutCliente').value
+  //     const sexo = document.getElementById('sexo').value
+  //     const email = document.getElementById('email').value
+  //     const planes = document.getElementById('planes').value
+  //     const comuna = document.getElementById('comuna').value
+  //     const ciudad = document.getElementById('ciudad').value
+  //     const calle = document.getElementById('calle').value
+  //     const numero = document.getElementById('numero').value
+  //     const depto = document.getElementById('depto').value
+  //     const referencia = document.getElementById('referencia').value
 
-//     if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '' || referencia === '')  {
-//         alert('Debe completar todos los campos');
-        
-//     } else {
-//         let id = []; //final
-//         let item_sucess_llamada = {};
-//         let json_sucess_gestion = [];
-//         let item_sucess_gestion = {};
-//         const preguntas = document.querySelectorAll(".cliente");
-//         preguntas.forEach((obj) => {
-//             let title = obj.id;
-//             let valor = obj.value;
-//             item_sucess_gestion[title] = valor;
-//         });
+  //     if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '' || referencia === '')  {
+  //         alert('Debe completar todos los campos');
 
-//         json_sucess_gestion.push(item_sucess_gestion);
+  //     } else {
+  //         let id = []; //final
+  //         let item_sucess_llamada = {};
+  //         let json_sucess_gestion = [];
+  //         let item_sucess_gestion = {};
+  //         const preguntas = document.querySelectorAll(".cliente");
+  //         preguntas.forEach((obj) => {
+  //             let title = obj.id;
+  //             let valor = obj.value;
+  //             item_sucess_gestion[title] = valor;
+  //         });
 
+  //         json_sucess_gestion.push(item_sucess_gestion);
 
-//         item_sucess_llamada["sucess"] = true;
-//         item_sucess_llamada["campaign_name"] = company;
-//         item_sucess_llamada["campaign_id"] = list_id;
-//         item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
-//         item_sucess_llamada["lead_id"] = lead_id;
-//         item_sucess_llamada["list_id"] = list_id;
-//         item_sucess_llamada["agente"] = agente;
-//         item_sucess_llamada["recording_filename"] = recording_filename;
-//         item_sucess_llamada["epoch"] = epoch;
-//         item_sucess_llamada["fecha_gestion"] = new Date();
-//         item_sucess_llamada["phone_number"] = phone_number;
-//         item_sucess_llamada["gestion"] = json_sucess_gestion;
-//         id.push(item_sucess_llamada);
+  //         item_sucess_llamada["sucess"] = true;
+  //         item_sucess_llamada["campaign_name"] = company;
+  //         item_sucess_llamada["campaign_id"] = list_id;
+  //         item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+  //         item_sucess_llamada["lead_id"] = lead_id;
+  //         item_sucess_llamada["list_id"] = list_id;
+  //         item_sucess_llamada["agente"] = agente;
+  //         item_sucess_llamada["recording_filename"] = recording_filename;
+  //         item_sucess_llamada["epoch"] = epoch;
+  //         item_sucess_llamada["fecha_gestion"] = new Date();
+  //         item_sucess_llamada["phone_number"] = phone_number;
+  //         item_sucess_llamada["gestion"] = json_sucess_gestion;
+  //         id.push(item_sucess_llamada);
 
-//         try {
-//           const result = await axios.post(
-//             "https://app.soluziona.cl/API_v1_prod/Soluziona/Generacc/Call/api/Ventas/Call/GuardaGestion",
-//             { dato: id },
-//             { headers: { Authorization: `Bearer ${token}` } }
-//           );
-    
-//           if (result.status === 200) {
-//             toast.success("Registro Guardado Exitosamente");
-//             console.log("Registro Guardado Exitosamente");
-//             setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
-//             setTimeout(() => {
-//               window.location.href = "/Orkesta/Generacc/Call/Fin";
-//             }, 5000);
-//           }
-//         } catch (error) {
-//           // Manejo de errores
-//           toast.success("Error Con Guardado");
-//           console.log("Error Con Guardado");
-//         }
-//       }
-// }
+  //         try {
+  //           const result = await axios.post(
+  //             "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
+  //             { dato: id },
+  //             { headers: { Authorization: `Bearer ${token}` } }
+  //           );
 
+  //           if (result.status === 200) {
+  //             toastr.success("Registro Guardado Exitosamente");
+  //             console.log("Registro Guardado Exitosamente");
+  //             setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
+  //             setTimeout(() => {
+  //               window.location.href = "/Orkesta/Generacc/Call/Fin";
+  //             }, 5000);
+  //           }
+  //         } catch (error) {
+  //           // Manejo de errores
+  //           toastr.success("Error Con Guardado");
+  //           console.log("Error Con Guardado");
+  //         }
+  //       }
+  // }
 
-
-  
   // console.log("select_no_conecta:", select_no_conecta);
 
   return (
     <>
       <ToastContainer autoClose={3000} />{" "}
-      <Container className="p-3">
-        <Container className="p-5 mb-4 bg-light rounded-3">
-          <h1 className="header">
-            Script FALLECIMIENTO ACCIDENTAL CON AHORRO
-            <br />
-            Accidentes Personales con Ahorro
-          </h1>
-          <div className="highlight">
-            <div className="centtro">
-              <div className="row mt-2">
-                <div className="col-4 my-2">
-                  {" "}
-                  <h4>
-                    {" "}
-                    Duración de la LLamada :{" "}
-                    <span id="duracion" className="cliente">
-                      {get_elapsed_time_string(elapsedSeconds)}
-                    </span>
-                  </h4>
-                </div>
-                <div className="col-4 d-flex justify-content-end ">
-                  <h4> Id cliente </h4>
-                </div>
-                <div className="col-4">
-                  <input
-                    name="roomRent"
-                    type="text"
-                    value={lead_id}
-                    id="lead_id"
-                    className="cliente form-control"
-                    disabled
-                  />
-                </div>
-                <hr />
+      <Container className="p-1 mb-4 rounded-3">
+        <div class="card card-header bg-black">
+          <h3 class="text-white  ms-3 ">
+            <h2 class="fw-bold "> Sonrie_Seguro </h2>
+            Tipo Base: <label id="id_tipo_base"></label>
+            <br /> Identificador de Llamada{" "}
+            <label id="ident_llamdaa">{lead_id}</label>
+            <br /> Duracion de la llamada{" "}
+            <span id="duracion" className="cliente">
+              {get_elapsed_time_string(elapsedSeconds)}
+            </span>
+          </h3>
+        </div>
+        <div class="card card-warning border-0 ">
+          <div class="card-body login-card-body row">
+            <div class="col-lg-3 col-md-3 col-sm-12">
+              <h3 class="mt-4">Tipificador</h3>
+
+              <label for="ddl_estado">Conecta:</label>
+              <div className="col-lg-12 col-sm-12">
+                <select
+                  className="cliente form-control form-select my-1"
+                  id="selectLlamada"
+                  value={selectLlamada}
+                  onChange={(e) => ChangeLlamada(e.target.value)}
+                >
+                  <option value="">Seleccione una opción</option>
+                  <option value="1">Conecta</option>
+                  <option value="no_conecta">No Conecta</option>
+                </select>
               </div>
-              <div className="row mt-2 ">
-                <section className="row my-2">
-                  <div className="col-lg-3 col-sm-2 my-3 ms-1">
-                    LLamada
-                  </div>{" "}
-                  <div className="col-lg-4 col-sm-8">
-                    <select
-                      className="cliente form-control form-select my-3"
-                      id="selectLlamada"
-                      value={selectLlamada}
-                      onChange={(e) => ChangeLlamada(e.target.value)}
-                    >
-                      <option value="">Seleccione una opción</option>
-                      <option value="1">Conecta</option>
-                      <option value="2">No Conecta</option>
-                    </select>
-                  </div>
+              <hr className="my-4" />
+
+              {selectLlamada === "no_conecta" && (
+                <section>
+                  <NoContesta conecta={selectLlamada} />
                 </section>
-                
-                {selectLlamada === "2" && (
-                  <div className="container">
-                    <NoContesta
-                      company={selectLlamada}
-                      clave={token}
-                      onNoConectaChange={handleNoConectaChange}
+              )}
 
-                    ></NoContesta>
-
-                  </div>)}
-
-                {(select_no_conecta !== "" && select_no_conecta !== "0") && (
-                  <div className="d-flex justify-content-end">
-                    <button
-                      className="btn btn-success btn-md "
-                      value="GuardarRegistro"
-                      onClick={GuardarRegistroNoContesta}
-                      disabled={botonDeshabilitado}
-                    >
-                      Finalizar
-                    </button>
-                  </div>
-                )}
-                  <DatosClientes datafull={datafull}
-                                          company={company}
-                                          clave={token}
-
-                                          ></DatosClientes>
-
-                {selectLlamada === "1" && (
-                  <div>
-                    <hr />
-                    <div className="container">
-                      <Contesta
-                        company={company}
-                        clave={token}
-                        elapsedSeconds={elapsedSeconds}
-                      ></Contesta>
-                    </div>
-
-                    <div className="row my-3">
-                      <hr />
-                    </div>
-                   
-                    
-                    {/* <div className="d-flex justify-content-end">
-                      <button
-                        className="btn btn-success btn-md "
-                        value="GuardarRegistro"
-                        onClick={GuardarRegistro}
-                        disabled={botonDeshabilitado_guardar}
-                      >
-                        Finalizar
-                      </button>
-                    </div> */}
-                  </div>
-               )}
-              </div>
-
-
+              {selectLlamada === "1" && select_si_conecta_llamada === "2" && (
+                <section>
+                  <Terceros
+                    conecta={selectLlamada}
+                    shouldScroll={scrollToNoContesta}
+                    select_si_conecta_llamada={select_si_conecta_llamada}
+                    handleSelectChange={handleSelectChange}
+                  />
+                </section>
+              )}
+              
+            </div>
+            <div className="col-lg-9 col-md-9 col-sm-12">
+              <DatosClientes
+                datafull={datafull}
+                company={company}
+                clave={token}
+              ></DatosClientes>
             </div>
           </div>
 
-          {/* </div>
-          </div> */}
-        </Container>
+          <div className=" mt-2 ">
+            {selectLlamada === "1" && (
+              <div>
+                <hr />
+                <div className="container">
+                  <Contesta
+                    tercerosComponent={<Terceros />}
+                    company={company}
+                    clave={token}
+                    elapsedSeconds={elapsedSeconds}
+                    select_si_conecta_llamada={select_si_conecta_llamada}
+                    handleSelectChange={handleSelectChange}
+                  ></Contesta>
+                </div>
+
+              </div>
+            )}
+          </div>
+        </div>
       </Container>
     </>
   );
