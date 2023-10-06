@@ -6,6 +6,8 @@ import TabsTabs from "./TabsTabs";
 import ValidaDatos from "./ValidaDatos";
 import NoContesta from "./NoContesta";
 import { Routes, Route, Link, Outlet, useNavigate } from "react-router-dom";
+import TextPromocionesRipley from "./TextPromocionesRipley";
+import TextPreCierre from "./TextPreCierre";
 
 function Contesta({
   company,
@@ -374,7 +376,7 @@ function Contesta({
                     <p className="col-5">
                       <select
                         id="select_si_conecta_llamada"
-                        className="form-control select cliente"
+                        className="form-select cliente"
                         value={select_si_conecta_llamada}
                         onChange={(event) => {
                           const value = event.target.value;
@@ -437,66 +439,7 @@ function Contesta({
                   )}
                 </div>
                 <div className="text-justify" id="adicional">
-                  <details>
-                    <summary className="">
-                      PROMOCIONES RIPLEY (Sólo si el cliente no las conoce -
-                      OPCIONAL)
-                    </summary>
-                    <div className="card-body login-card-body">
-                      <div className="form-row">
-                        <p>
-                          También queremos confirmar si conoce todos los
-                          beneficios y promociones de su Tarjeta de Crédito
-                          Ripley. (PROMOCIONES VARIABLES DE MES A MES) Le
-                          explico las promociones vigentes: (indicar la mejor
-                          promoción para captar al cliente)
-                        </p>
-                        <ul>
-                          <li>
-                            Tu pollito de Norky's a solo S/ 55.90. 1 pollo a la
-                            brasa + papas + ensalada. Promoción válida del 01 al
-                            31 de marzo de 2023. Válido para Tarjeta de Crédito
-                            y/o Débito Banco Ripley Mastercard.
-                          </li>
-                          <li>
-                            ADICIONAL A ESTO TENDRA En Pizza Hut, disfruta de
-                            una pizza familiar americana + 1 gaseosa 1L a solo
-                            S/29.90. Precio Regular S/ 58.90. Promoción válida
-                            del 01 al 31 de marzo de 2023 pagando con Tarjeta de
-                            Crédito Banco Ripley Mastercard.
-                          </li>
-                          <li>
-                            {" "}
-                            ADICIONAL A ESTO TENDRA ¡Obtén S/ 9 de dscto en tu
-                            recarga de balón Primax gas! Escribe al WhatsApp:
-                            978 292 052 o llama al: (01) 208-0100. Promoción
-                            válida del 01 al 31 de marzo del 2023. Válido para
-                            Tarjeta de Crédito y/o Débito Banco Ripley
-                            Mastercard.
-                          </li>
-                          <li>
-                            {" "}
-                            ADICIONAL A ESTO TENDRA ¡Ponte en modo Cine con
-                            Cinemark! 2x1 en Entradas 2D y además 20% de dscto
-                            en combo personal (1 pop corn grande salado + 1
-                            gaseosa mediana) Promoción válida del 01 al 31 de
-                            marzo del 2023. Válido para Tarjeta de Crédito y/o
-                            Débito Banco Ripley Mastercard.
-                          </li>
-                        </ul>
-                        <p>
-                          ADICIONAL A ESTO TENDRA Para más promociones y
-                          descuentos exclusivos visita
-                          www.bancoripley.com.pe/promociones y establecimientos
-                          afiliados. (Grifos, farmacias, restaurantes entre
-                          otros. ¿Les llegaron los beneficios y promociones de
-                          su tarjeta Ripley? **Respondió: ¡¡ SI!! LE LLEGÓ LA
-                          PROMOCIÓN: Perfecto señor, gracias. (PASAR A OFRECER
-                          EL SEGURO)
-                        </p>
-                      </div>
-                    </div>
-                  </details>
+                  <TextPromocionesRipley></TextPromocionesRipley>
                 </div>
               </div>
             </div>
@@ -505,11 +448,11 @@ function Contesta({
       </div>
       {select_si_conecta_llamada === "1" && (
         <div>
-          <div className=" p-4">
+          <div className="mb-5 p-4">
             <TabsTabs></TabsTabs>
           </div>
 
-          <div className="p-4">
+          <div className="mt-3 p-4">
             <h6>
               <strong> EJECUTIVO Y CORROBORACION DE DATOS </strong>
             </h6>
@@ -518,11 +461,7 @@ function Contesta({
           <div className="form-row ">
             <label for="observacion">
               {" "}
-              ¿Entonces Sr. … Siendo el día de hoy (DD/MM/AAAA) acepta la
-              contratación del seguro de Protección Accidental con Asistencia
-              Integral, con un cargo fijo mensual de S/. 29.90 en su tarjeta de
-              crédito Ripley? - Esperar respuesta afirmativa del cliente (Sí -
-              Sí acepto).
+              ¿Entonces Sr. … Siendo el día de hoy (DD/MM/AAAA) acepta la contratación de “Sonríe Seguro”, con un cargo fijo mensual de S/. 29.90 en su tarjeta de crédito Ripley? - Esperar respuesta afirmativa del cliente (Sí - Sí acepto).
             </label>
             <div className="col-lg-6 col-md-6 col-sm-12 my-2">
               <select
@@ -615,8 +554,7 @@ function Contesta({
               {/* <div id="vw_script_cliente_valida" class="d-none"> */}
               <section className="p-3">
               <p>
-            ¡¡Felicitaciones, desde este momento ya te encuentra protegido con
-            nuestro seguro de Accidentes Personales de Chubb Seguros…!
+              ¡Felicitaciones, desde este momento ya se encuentra protegido con Sonríe Seguro de Chubb Seguros…!
           </p>
           <p>
             Recuerde que el cargo mensual aparecerá en su estado de cuenta y
@@ -668,7 +606,7 @@ function Contesta({
                       <option value="1">Si</option>
                       <option value="2">No</option>
                     </select>
-
+                <TextPreCierre></TextPreCierre>
                     {selectConectaLlamadaPreguntaConfirma === "1" && (
                       <div className="my-4" id="si_correo">
                         <p>
@@ -709,14 +647,7 @@ function Contesta({
                 <div className="card card-body">
                   <div className="form-row col-12 text-justify">
                     <p>
-                      {" "}
-                      Por cualquier consulta puede comunicarse con nosotros al
-                      Banco Ripley al 611-5757 o a Chubb Seguros Perú al (01)
-                      3991212 de lunes a viernes de 9:00am a 6:00pm. Sr. XXX le
-                      agradezco su atención y su tiempo, a nombre del Banco
-                      Ripley y Chubb Seguros Perú le damos una cordial
-                      bienvenida; se despide que tenga buenos (días, tardes,
-                      noches).
+                    Por cualquier consulta puede comunicarse con nosotros al Banco Ripley al 611-5757 o a Chubb Seguros Perú al (01) 3991212 de lunes a viernes de 9:00am a 6:00pm. Sr. XXX le agradezco su atención y su tiempo, a nombre del Banco Ripley y Chubb Seguros Perú le damos una cordial bienvenida; se despide que tenga buenos (días, tardes, noches). 
                     </p>
                   </div>
                   <div className=" col-12 text-center align-center">
