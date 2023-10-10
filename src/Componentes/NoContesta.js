@@ -44,12 +44,7 @@ console.log(Conecta)
           <div className="" id="">
             <label htmlFor="ddl_detalle_cliente">Detalle:</label>
             <div className="col-lg-12 col-sm-12 my-2">
-            <select
-                className="browser-default form-select cliente validacion"
-                id="ddl_detalle_cliente"
-                onChange={handleOptionChange} // Manejar el cambio de opción
-                value={selectedOption}
-              >
+            <select className="browser-default form-select cliente validacion" id="ddl_detalle_cliente" onChange={handleOptionChange} >
                  <option value="0">Seleccione</option>
                  <option value="9">BUZON / FAX / GRABADORA</option>
                  <option value="3">CITA TELEFONICA CON TERCERO</option>
@@ -71,21 +66,13 @@ console.log(Conecta)
             <>
               <div className="col-lg-12 col-sm-12 my-2">
                 <label htmlFor="observacion_agenda">Observación Agenda</label>
-                <textarea
-                  rows="4"
-                  className="form-control textarea cliente"
-                  id="observacion_agenda"
-                ></textarea>
+                <textarea rows="4" className="form-control textarea cliente" id="observacion_agenda"></textarea>
               </div>
 
               <div className="col-lg-12 col-sm-12 my-2">
                 <label htmlFor="observacion_agenda">Fecha</label>
                 <div className="input-group">
-                  <input
-                    type="text"
-                    className="form-control pickadate-disable-dates cliente"
-                    id="fec_ini"
-                  />
+                  <input type="text" className="form-control pickadate-disable-dates cliente" id="fec_ini"/>
                   <span className="input-group-text">
                     <i className="fa-solid fa-calendar-days"></i>
                   </span>
@@ -95,11 +82,7 @@ console.log(Conecta)
               <div className="col-lg-12 col-sm-12 my-2">
                 <label htmlFor="observacion_agenda">Hora</label>
                 <div className="input-group">
-                  <input
-                    type="text"
-                    className="form-control  cliente"
-                    id="hor_ini"
-                  />
+                  <input type="text" className="form-control  cliente" id="hor_ini"/>
                   <span className="input-group-text">
                     <i className="fa-solid fa-clock "></i>
                   </span>
@@ -110,12 +93,7 @@ console.log(Conecta)
            {/* Mostrar el botón de guardar si se elige una opción distinta de "Seleccione" */}
            {showGuardarButton && (
             <div className="col-lg-12 col-sm-12 mt-4">
-              <button
-                type="button"
-                className="btn text-white form-control guardar my-2"
-                id="btn_guardar_agenda"
-                style={{ background: "#8362D6" }}
-              >
+              <button type="button" className="btn text-white form-control guardar my-2" id="btn_guardar_agenda" style={{ background: "#8362D6" }}>
                 <i className="fa fa-save"></i> Guardar
               </button>
             </div>

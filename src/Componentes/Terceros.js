@@ -38,57 +38,37 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta  })
   return (
     <>
       <div className=" row" id="">
-<section className="" id="mySection">
-            <div class="col-lg-12 col-sm-12 my-2">
-              <label for="observacion_agenda">Observación Agenda</label>
-              <textarea
-                rows="4"
-                class="form-control textarea cliente"
-                id="observacion_agenda"
-              ></textarea>
-            </div>
+        <section className="" id="mySection">
+          <div class="col-lg-12 col-sm-12 my-2">
+            <label for="observacion_agenda">Observación Agenda</label>
+              <textarea rows="4" class="form-control textarea cliente" id="observacion_agenda"></textarea>
+          </div>
 
-            <div class="col-lg-12 col-sm-12 my-2">
-              <label for="observacion_agenda">Fecha</label>
+          <div class="col-lg-12 col-sm-12 my-2">
+            <label for="observacion_agenda">Fecha</label>
               <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control pickadate-disable-dates cliente"
-                  id="fec_ini"
-                />
+                <input type="text" class="form-control pickadate-disable-dates cliente" id="fec_ini" />
                   <span class="input-group-text">
                     <i class="fa-solid fa-calendar-days"></i>
                   </span>
-               
               </div>
-            </div>
-
-            <div class="col-lg-12 col-sm-12 my-2">
-              <label for="observacion_agenda">Hora</label>
+          </div>
+          <div class="col-lg-12 col-sm-12 my-2">
+            <label for="observacion_agenda">Hora</label>
               <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control  cliente"
-                  id="hor_ini"
-                />
+                <input type="text" class="form-control  cliente" id="hor_ini" />
                   <span class="input-group-text">
                     <i class="fa-solid fa-clock "></i>
                   </span>
-               
               </div>
-            </div>
-            <div class="col-lg-12 col-sm-12 mt-4">
-            <button
-              type="button"
-              class="btn text-white form-control guardar my-2"
-              id="btn_guardar_agenda"
-              style={{ background: "#8362D6" }}
-            >
+          </div>
+          <div class="col-lg-12 col-sm-12 mt-4">
+            <button type="button" class="btn text-white form-control guardar my-2" id="btn_guardar_agenda" style={{ background: "#8362D6" }} >
               <i class="fa fa-save"></i> Guardar
             </button>
-            </div>
-          </section>
-        </div>
+          </div>
+        </section>
+      </div>
 
      
     

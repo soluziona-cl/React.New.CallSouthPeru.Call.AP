@@ -242,7 +242,7 @@ const Callintro = () => {
       toast.success("Registro Guardado Exitosamente");
       console.log("Registro Guardado Exitosamente");
       setTimeout(() => {
-        window.location.href = "/Orkesta/Generacc/Call/Fin";
+        window.location.href = "/Soluziona/CallSouth/SonrieSeguro/Call/Fin";
       }, 5000); // 5000 milisegundos = 5 segundos
     }
   }
@@ -291,7 +291,7 @@ const Callintro = () => {
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Orkesta/Generacc/Call/Fin";
+          window.location.href = "/Soluziona/CallSouth/SonrieSeguro/Call/Fin";
         }, 5000);
       }
     } catch (error) {

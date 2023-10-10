@@ -11,11 +11,11 @@ function TextPreCierre() {
         <div className="card-body login-card-body">
           <div className="form-row">
             <p>
-              En caso necesites utilizar las asistencias, Llamar al (01) 7018889 de E-Dental Perú S.A.C. (para Lima y provincia){" "}
+              En caso necesites utilizar las asistencias, Llamar al (01) 7018889 de E-Dental Perú S.A.C. (para Lima y provincia)
             </p>
-            <p> Luego de la contratación de su seguro, las asistencias se activarán en un plazo de 5 días para Urgencias y 30 días para Servicios Ambulatorios. Asimismo, hay excepciones favorables que serán informadas debidamente en su Solicitud-Certificado”.{" "}
+            <p> Luego de la contratación de su seguro, las asistencias se activarán en un plazo de 5 días para Urgencias y 30 días para Servicios Ambulatorios. Asimismo, hay excepciones favorables que serán informadas debidamente en su Solicitud-Certificado”.
             </p>
-            <p> Ante cualquier siniestro deberá avisar a CHUBB Seguros Perú, en un plazo no mayor a treinta (30) días calendario luego de ocurrido el suceso, el número de contacto es el (01) 417-5000 o al (01) 399-1212 de lunes a viernes de 9 a.m. a 6 p.m.{" "}
+            <p> Ante cualquier siniestro deberá avisar a CHUBB Seguros Perú, en un plazo no mayor a treinta (30) días calendario luego de ocurrido el suceso, el número de contacto es el (01) 417-5000 o al (01) 399-1212 de lunes a viernes de 9 a.m. a 6 p.m.
             </p>
             <p> Además, no olvides que debe presentar los documentos señalados en su Solicitud-Certificado según cobertura. El detalle completo de coberturas y condiciones del producto las podrás encontrar en tu Solicitud-Certificado.
             </p>

@@ -385,16 +385,9 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
           </div>
 
           <div className="col-lg-4 col-md-4 col-sm-12">
-    N° Documento
-    <input
-  type="text"
-  className="form-control cliente my-2"
-  value={numeroDocumento}
-  onChange={handleNumeroDocumentoChange}
-  onBlur={handleNumeroDocumentoBlur}
-  id="n_documento"
-/>
-  </div>
+             N° Documento
+          <input type="text" className="form-control cliente my-2" value={numeroDocumento} onChange={handleNumeroDocumentoChange} onBlur={handleNumeroDocumentoBlur} id="n_documento"/>
+          </div>
 
           <div className="col-lg-5 col-md-6 col-sm-12 ">
             Primer Nombre

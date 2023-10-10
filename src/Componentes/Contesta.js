@@ -181,7 +181,7 @@ function Contesta({
           toast.success("Registro Guardado Exitosamente");
           console.log("Registro Guardado Exitosamente");
           setTimeout(() => {
-            window.location.href = "/Orkesta/Generacc/Call/Fin";
+            window.location.href = "/Soluziona/CallSouth/SonrieSeguro/Call/Fin";
           }, 5000);
         }
       } catch (error) {
@@ -292,7 +292,7 @@ function Contesta({
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Orkesta/Generacc/Call/Fin";
+          window.location.href = "/Soluziona/CallSouth/SonrieSeguro/Call/Fin";
         }, 5000);
       }
     } catch (error) {

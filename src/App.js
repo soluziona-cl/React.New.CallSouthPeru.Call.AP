@@ -8,7 +8,7 @@ import Callintro from "./Callintro";
 function App() {
 
   // const rutaservidor="/"; //Pruebas
-  const rutaservidor = "/Orkesta/Generacc/Call"; //Produccion
+  const rutaservidor = "/Soluziona/CallSouth/SonrieSeguro/Call"; //Produccion
 
   return (
     <Router>
