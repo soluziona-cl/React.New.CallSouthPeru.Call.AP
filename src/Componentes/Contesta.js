@@ -16,9 +16,11 @@ function Contesta({
   elapsedSeconds,
   select_si_conecta_llamada,
   handleSelectChange,
-  tercerosComponent 
+  tercerosComponent,
+  datafull
 }) {
-  
+
+
 
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
@@ -33,7 +35,6 @@ function Contesta({
   const [selectinteresa, setselectinteresa] = useState("0");
   const [selectnointeresa, setselectnointeresa] = useState("0");
   const [setduracion, setselectduracion] = useState("0");
-  const [datafull, setDataFull] = useState([]);
   const [otra_razon_noacepta, setotra_razon_noacepta] = useState("");
   const [
     select_conecta_llamada_pregunta_interesa,
@@ -339,7 +340,7 @@ function Contesta({
   const handleLoPensaraClick = () => {
     // Realiza alguna lógica aquí si es necesario
     // Luego, llama a la función pasada desde Callintro para comunicar la selección
-    props.onLoPensaraSelected();
+    // props.onLoPensaraSelected();
   };
 
   return (
@@ -390,35 +391,43 @@ function Contesta({
                       </select>
                     </p>
                   </div>
-                  <div className="d-none" id="stock">
-                    {select_si_conecta_llamada === "1" && (
-                      <p>
-                        El motivo de mi llamada es agradecer la permanencia que
-                        tiene con la tarjeta, RIPLEY y gracias a los pagos
-                        puntuales que ha venido efectuando este año queremos
-                        ampliar sus beneficios.
-                      </p>
-                    )}
-                  </div>
-                  <div className="d-none" id="welcome">
-                    {select_si_conecta_llamada === "2" && (
-                      <p>
-                        El motivo de mi llamada es agradecer la CONFIANZA y su
-                        preferencia por haber obtenido recientemente su Tarjeta
-                        de crédito Ripley con nosotros.
-                      </p>
-                    )}
-                  </div>
-                  <div className="d-none" id="coross">
-                    {select_si_conecta_llamada === "3" && (
-                      <p>
-                        EL MOTIVO DE MI LLAMADA Es para agradecer el tiempo de
-                        permanencia con EL SEGURO (DETALLAR NOMBRE DE SEGURO)
-                        AMPLIANDO SUS BENEFICIOS CON EL NUEVO SEGURO : SONRIE
-                        SEGURO
-                      </p>
-                    )}
-                  </div>
+                  {select_si_conecta_llamada === "1" && (
+                    
+                   <div>
+                    {datafull.map((data, index) => (
+                     <div>
+                       <div className="" id="stock">
+                         {data.id_tipo_base === "Stock" && (
+                           <p>
+                             El motivo de mi llamada es agradecer la permanencia que tiene
+                             con la tarjeta, RIPLEY y gracias a los pagos puntuales que ha
+                             venido efectuando este año queremos ampliar sus beneficios.
+                           </p>
+                         )}
+                       </div>
+                       <div className="" id="welcome">
+                         {data.id_tipo_base  === "Welcome" && (
+                           <p>
+                             El motivo de mi llamada es agradecer la CONFIANZA y su
+                             preferencia por haber obtenido recientemente su Tarjeta de
+                             crédito Ripley con nosotros.
+                           </p>
+                         )}
+                       </div>
+                       <div className="" id="coross">
+                         {data.id_tipo_base  === "Cross" && (
+                           <p>
+                             EL MOTIVO DE MI LLAMADA Es para agradecer el tiempo de
+                             permanencia con EL SEGURO (DETALLAR NOMBRE DE SEGURO) AMPLIANDO
+                             SUS BENEFICIOS CON EL NUEVO SEGURO: SONRIE SEGURO
+                           </p>
+                         )}
+                       </div>
+                     </div>
+                   ))}
+                 </div>
+                  )}
+
                   <p>
                     Antes de continuar le informamos que por su seguridad esta
                     llamada está siendo grabada.
@@ -437,6 +446,7 @@ function Contesta({
                       </p>
                     </div>
                   )}
+                  
                 </div>
                 <div className="text-justify" id="adicional">
                   <TextPromocionesRipley></TextPromocionesRipley>

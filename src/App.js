@@ -8,7 +8,7 @@ import Callintro from "./Callintro";
 function App() {
 
   // const rutaservidor="/"; //Pruebas
-  const rutaservidor = "/Soluziona/CallSouth/SonrieSeguro/Call"; //Produccion
+  const rutaservidor = "/Soluziona/CallSouth/SonrieSeguro/Call_SonrieSeguro"; //Produccion
 
   return (
     <Router>
