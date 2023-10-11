@@ -63,35 +63,58 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
       { "dato": 'S21',  "dato_1": '',"dato_2": '', "dato_3": ''},
       { headers: { Authorization: `Bearer ${clave}` } }
     );
-
+      console.log(departamento)
     if (result.status === 200) {
       setOptionListDireccionD(result.data);
       ChangeConecta_Direccion()
     }
   };
 // revisar y agregar distrito y provincia
-  const ChangeConecta_Direccion = async (event) => {
-    if (event === "0") {
-      setOptionListDetalleEstadoDireccionD(true);
-      setOptionListDetalleEstadoSelectD("0");
-      setSelectedLlamadaD("0");
-    } else {
-      const result = await axios.post(
-        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas", //cambiar endpoint para ciudad y provincia y distrito
-        { "dato": 'S22',  "dato_1": '',"dato_2": '', "dato_3": '' },
-        { headers: { Authorization: `Bearer ${clave}` } }
-      );
+const ChangeConecta_Direccion = async (event) => {
+  if (event === "0") {
+    setOptionListDetalleEstadoDireccionD(true);
+    setOptionListDetalleEstadoSelectD("0");
+    setSelectedLlamadaD("0");
+  } else {
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas", //cambiar endpoint para ciudad y provincia y distrito
+      { "dato": 'S22',  "dato_1": departamento,"dato_2": '', "dato_3": '' },
+      { headers: { Authorization: `Bearer ${clave}` } }
+    );
 
-      setSelectedLlamadaD(event);
+    setSelectedLlamadaD(event);
 
-      if (result.status === 200) {
-        setOptionListDetalleD(result.data);
-        setOptionListDetalleEstadoDireccionD(false);
-        Departamento();
-        console.log(result.data);
-      }
+    if (result.status === 200) {
+      setOptionListDetalleD(result.data);
+      setOptionListDetalleEstadoDireccionD(false);
+      ChangeConecta_Distrito ()
+      // console.log(result.data);
     }
-  };
+  }
+};
+
+const ChangeConecta_Distrito = async (event) => {
+  if (event === "0") {
+    setOptionListDetalleEstadoDireccionD(true);
+    setOptionListDetalleEstadoSelectD("0");
+    setSelectedLlamadaD("0");
+  } else {
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas", //cambiar endpoint para ciudad y provincia y distrito
+      { "dato": 'S23',  "dato_1": departamento,"dato_2": provincia, "dato_3": '' },
+      { headers: { Authorization: `Bearer ${clave}` } }
+    );
+
+    setSelectedLlamadaD(event);
+
+    if (result.status === 200) {
+      setOptionListDetalleD(result.data);
+      setOptionListDetalleEstadoDireccionD(false);
+      // console.log(result.data);
+    }
+  }
+};
+
 
   const ChangeConectaDetalle_Direccion = async (event) => {
     setOptionListDetalleEstadoDireccionD(false);
@@ -513,7 +536,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
           className="cliente form-control form-select my-2 "
           id="ddl_listas_provincia"
           disabled={optionListDetalleEstadoDireccionD}
-          value={provincia} // Usar el estado 'provincia' en lugar de 'optionListDetalleEstadoSelect'
+          // value={provincia} // Usar el estado 'provincia' en lugar de 'optionListDetalleEstadoSelect'
           onChange={(e) => {
             setProvincia(e.target.value);
             ChangeConectaDetalle_Direccion(e.target.value);
@@ -528,17 +551,22 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
           ))}
         </select>
       </div>
-
       <div className="col-lg-4 col-md-6 col-sm-12 ">
         Distrito
-        <input
-           type="text"
+        <select
+          className="cliente form-control form-select my-2 "
            value={distrito}
            onChange={handleDistritoChange}
            onBlur={handleDistritoBlur}
-           className="my-2 cliente form-select"
            id="ddl_listas_distrito"
-        />
+           >
+          <option value="0">Selec.</option>
+          {optionListDetalleD.map((item) => (
+            <option key={item.id} value={item.id}>
+              {item.detalle}
+            </option>
+          ))}
+           </select>
       </div>
 
       <div className="col-lg-12 col-md-12 col-sm-12 ">

@@ -17,11 +17,8 @@ function Contesta({
   select_si_conecta_llamada,
   handleSelectChange,
   tercerosComponent,
-  datafull
+  datafull,
 }) {
-
-
-
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
     useState("0");
@@ -226,7 +223,6 @@ function Contesta({
       setOptionListMotivo(result.data);
     }
   };
-  
 
   const ChangeConecta_nombre = async (event) => {
     if (event === "0") {
@@ -327,15 +323,12 @@ function Contesta({
     selectConectaLlamadaPreguntaConfirma,
     setSelectConectaLlamadaPreguntaConfirma,
   ] = useState("");
- 
 
   const [camposCompletos, setCamposCompletos] = useState(false);
 
   const handleDatosCompletosChange = (completos) => {
     setCamposCompletos(completos);
   };
-
-
 
   const handleLoPensaraClick = () => {
     // Realiza alguna lógica aquí si es necesario
@@ -392,40 +385,43 @@ function Contesta({
                     </p>
                   </div>
                   {select_si_conecta_llamada === "1" && (
-                    
-                   <div>
-                    {datafull.map((data, index) => (
-                     <div>
-                       <div className="" id="stock">
-                       {data.id_tipo_base.toUpperCase() === "STOCK" && (
-                           <p>
-                             El motivo de mi llamada es agradecer la permanencia que tiene
-                             con la tarjeta, RIPLEY y gracias a los pagos puntuales que ha
-                             venido efectuando este año queremos ampliar sus beneficios.
-                           </p>
-                         )}
-                       </div>
-                       <div className="" id="welcome">
-                       {data.id_tipo_base.toUpperCase() === "WELCOME" && (
-                           <p>
-                             El motivo de mi llamada es agradecer la CONFIANZA y su
-                             preferencia por haber obtenido recientemente su Tarjeta de
-                             crédito Ripley con nosotros.
-                           </p>
-                         )}
-                       </div>
-                       <div className="" id="coross">
-                       {data.id_tipo_base.toUpperCase() === "CROSS" && (
-                           <p>
-                             EL MOTIVO DE MI LLAMADA Es para agradecer el tiempo de
-                             permanencia con EL SEGURO (DETALLAR NOMBRE DE SEGURO) AMPLIANDO
-                             SUS BENEFICIOS CON EL NUEVO SEGURO: SONRIE SEGURO
-                           </p>
-                         )}
-                       </div>
-                     </div>
-                   ))}
-                 </div>
+                    <div>
+                      {datafull.map((data, index) => (
+                        <div>
+                          <div className="" id="stock">
+                            {data.id_tipo_base.toUpperCase() === "STOCK" && (
+                              <p>
+                                El motivo de mi llamada es agradecer la
+                                permanencia que tiene con la tarjeta, RIPLEY y
+                                gracias a los pagos puntuales que ha venido
+                                efectuando este año queremos ampliar sus
+                                beneficios.
+                              </p>
+                            )}
+                          </div>
+                          <div className="" id="welcome">
+                            {data.id_tipo_base.toUpperCase() === "WELCOME" && (
+                              <p>
+                                El motivo de mi llamada es agradecer la
+                                CONFIANZA y su preferencia por haber obtenido
+                                recientemente su Tarjeta de crédito Ripley con
+                                nosotros.
+                              </p>
+                            )}
+                          </div>
+                          <div className="" id="coross">
+                            {data.id_tipo_base.toUpperCase() === "CROSS" && (
+                              <p>
+                                EL MOTIVO DE MI LLAMADA Es para agradecer el
+                                tiempo de permanencia con EL SEGURO (DETALLAR
+                                NOMBRE DE SEGURO) AMPLIANDO SUS BENEFICIOS CON
+                                EL NUEVO SEGURO: SONRIE SEGURO
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   )}
 
                   <p>
@@ -446,7 +442,6 @@ function Contesta({
                       </p>
                     </div>
                   )}
-                  
                 </div>
                 <div className="text-justify" id="adicional">
                   <TextPromocionesRipley></TextPromocionesRipley>
@@ -471,7 +466,10 @@ function Contesta({
           <div className="form-row ">
             <label for="observacion">
               {" "}
-              ¿Entonces Sr. … Siendo el día de hoy (DD/MM/AAAA) acepta la contratación de “Sonríe Seguro”, con un cargo fijo mensual de S/. 29.90 en su tarjeta de crédito Ripley? - Esperar respuesta afirmativa del cliente (Sí - Sí acepto).
+              ¿Entonces Sr. … Siendo el día de hoy (DD/MM/AAAA) acepta la
+              contratación de “Sonríe Seguro”, con un cargo fijo mensual de S/.
+              29.90 en su tarjeta de crédito Ripley? - Esperar respuesta
+              afirmativa del cliente (Sí - Sí acepto).
             </label>
             <div className="col-lg-6 col-md-6 col-sm-12 my-2">
               <select
@@ -491,9 +489,8 @@ function Contesta({
             </div>
           </div>
           <br />
-        
+
           <div className="d-none" id="no_acepta">
-           
             <p>
               <strong> Agendo:</strong> Por supuesto (Primer nombre del cliente)
               se programará la llamada para el día (validar fecha con cliente).
@@ -502,78 +499,85 @@ function Contesta({
           </div>
 
           {select_conecta_llamada_pregunta_interesa === "3" && (
-          <div className="col-12 pb-3 ">
-            <div id="vw_script_cliente_nointeresa" className="">
-              <div className=" card-body">
-               
-               <div className="CALLINTRO justify-content-center d-flex">
-        {/* Otras partes de "CALLINTRO" aquí */}
-        {tercerosComponent}
-      </div>
+            <div className="col-12 pb-3 ">
+              <div id="vw_script_cliente_nointeresa" className="">
+                <div className=" card-body">
+                  <div className="CALLINTRO justify-content-center d-flex">
+                    {/* Otras partes de "CALLINTRO" aquí */}
+                    {tercerosComponent}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-            )}
+          )}
 
           {select_conecta_llamada_pregunta_interesa === "2" && (
-          <div className="col-12 pb-3">
-            <div id="vw_script_cliente_nointeresa" className="">
-            <p>
-              <strong> En caso la respuesta es NO: </strong>
-            </p>
-            <p>
-              Cuando NO desea, me despido. Cuando solicita se le llame en otra
-              oportunidad, se agenda nueva llamada.
-            </p>
-              <div className=" card-body">
-                <div className="form-row">
-                  <label for="observacion">
-                    Me podria decir la razon por la cual no desea contratar el
-                    seguro ?
-                  </label>
-                </div>
+            <div className="col-12 pb-3">
+              <div id="vw_script_cliente_nointeresa" className="">
+                <p>
+                  <strong> En caso la respuesta es NO: </strong>
+                </p>
+                <p>
+                  Cuando NO desea, me despido. Cuando solicita se le llame en
+                  otra oportunidad, se agenda nueva llamada.
+                </p>
+                <div className=" card-body">
+                  <div className="form-row">
+                    <label for="observacion">
+                      Me podria decir la razon por la cual no desea contratar el
+                      seguro ?
+                    </label>
+                  </div>
 
-                <div className="form-row col-6">
-                  <select
-                    id="select_conecta_llamada_pregunta_no_interesa"
-                    className="form-select cliente"
-                    disabled={select_conecta_llamada_pregunta_interesa !== "0"}
-                  >
-                    <option value="0">Seleccione</option>
-                    <option value="1">Si</option>
-                    <option value="2">No</option>
-                  </select>
-                </div>
-                        
-                <div className="form-row col-6 mt-2">
-                  <button
-                    type="button"
-                    className="btn text-white guardar"
-                    id="btn_guardar_no_interesa"
-                    style={{ background: "#8362D6" }}
-                  >
-                    <i className="fa fa-save"></i>  Guardar
-                  </button>
+                  <div className="form-row col-6">
+                    <select
+                      id="select_conecta_llamada_pregunta_no_interesa"
+                      className="form-select cliente"
+                      disabled={
+                        select_conecta_llamada_pregunta_interesa !== "0"
+                      }
+                    >
+                      <option value="0">Seleccione</option>
+                      <option value="1">Si</option>
+                      <option value="2">No</option>
+                    </select>
+                  </div>
+
+                  <div className="form-row col-6 mt-2">
+                    <button
+                      type="button"
+                      className="btn text-white guardar"
+                      id="btn_guardar_no_interesa"
+                      style={{ background: "#8362D6" }}
+                    >
+                      <i className="fa fa-save"></i> Guardar
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-            )}
+          )}
           {select_conecta_llamada_pregunta_interesa === "1" && (
             <div id="vw_script_cliente_valida" class="">
               {/* <div id="vw_script_cliente_valida" class="d-none"> */}
               <section className="p-3">
-              <p>
-              ¡Felicitaciones, desde este momento ya se encuentra protegido con Sonríe Seguro de Chubb Seguros…!
-          </p>
-          <p>
-            Recuerde que el cargo mensual aparecerá en su estado de cuenta y
-            podrá acceder a todos los beneficios del seguro desde la fecha de
-            afiliación.
-          </p>
+                <p>
+                  ¡Felicitaciones, desde este momento ya se encuentra protegido
+                  con Sonríe Seguro de Chubb Seguros…!
+                </p>
+                <p>
+                  Recuerde que el cargo mensual aparecerá en su estado de cuenta
+                  y podrá acceder a todos los beneficios del seguro desde la
+                  fecha de afiliación.
+                </p>
                 <div class="   ">
-                  <h3 class="card-header text-white" style={{
-                      backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}}>
+                  <h3
+                    class="card-header text-white"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
+                    }}
+                  >
                     Valida Datos
                   </h3>
                 </div>
@@ -591,7 +595,12 @@ function Contesta({
                     onDatosCompletos={handleDatosCompletos}
                   ></ValidaDatos> */}
 
-                  <ValidaDatos company={company} clave={token} elapsedSeconds={setduracion} onDataComplete={handleDatosCompletosChange} />
+                  <ValidaDatos
+                    company={company}
+                    clave={token}
+                    elapsedSeconds={setduracion}
+                    onDataComplete={handleDatosCompletosChange}
+                  />
                   {/* {camposCompletos ? (
                     console.log('Todos los campos están completos.')
                   ) : (
@@ -601,22 +610,36 @@ function Contesta({
               </section>
               <div className=" " id="pre_cierre">
                 <div className="">
-                  <h3 className=" card-header text-white" style={{ backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}} >
+                  <h3
+                    className=" card-header text-white"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
+                    }}
+                  >
                     Continuar a Confirmacion de Datos y PreCierre
                   </h3>
                 </div>
                 <div className="card card-body">
                   <div>
                     <label for="observacion">
-                      ¿Don/Sra. XXXX, Usted desea que le enviemos su Póliza a través de su correo electrónico?
+                      ¿Don/Sra. XXXX, Usted desea que le enviemos su Póliza a
+                      través de su correo electrónico?
                     </label>
-                    <select value={selectConectaLlamadaPreguntaConfirma} onChange={(e) =>   setSelectConectaLlamadaPreguntaConfirma(e.target.value) } id="select_conecta_llamada_pregunta_confirma" className="form-select cliente my-2" disabled={!camposCompletos} // Deshabilitar si los campos no están completados
+                    <select
+                      value={selectConectaLlamadaPreguntaConfirma}
+                      onChange={(e) =>
+                        setSelectConectaLlamadaPreguntaConfirma(e.target.value)
+                      }
+                      id="select_conecta_llamada_pregunta_confirma"
+                      className="form-select cliente my-2"
+                      disabled={!camposCompletos} // Deshabilitar si los campos no están completados
                     >
                       <option value="0">Seleccione</option>
                       <option value="1">Si</option>
                       <option value="2">No</option>
                     </select>
-                <TextPreCierre></TextPreCierre>
+                    <TextPreCierre></TextPreCierre>
                     {selectConectaLlamadaPreguntaConfirma === "1" && (
                       <div className="my-4" id="si_correo">
                         <p>
@@ -650,18 +673,35 @@ function Contesta({
             <div className="col-12 my-3">
               <div id="vw_script_cliente_despedida" className="">
                 <div className="">
-                  <h3 className=" card-header text-white" style={{backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}}>
+                  <h3
+                    className=" card-header text-white"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
+                    }}
+                  >
                     DESPEDIDA
                   </h3>
                 </div>
                 <div className="card card-body">
                   <div className="form-row col-12 text-justify">
                     <p>
-                    Por cualquier consulta puede comunicarse con nosotros al Banco Ripley al 611-5757 o a Chubb Seguros Perú al (01) 3991212 de lunes a viernes de 9:00am a 6:00pm. Sr. XXX le agradezco su atención y su tiempo, a nombre del Banco Ripley y Chubb Seguros Perú le damos una cordial bienvenida; se despide que tenga buenos (días, tardes, noches). 
+                      Por cualquier consulta puede comunicarse con nosotros al
+                      Banco Ripley al 611-5757 o a Chubb Seguros Perú al (01)
+                      3991212 de lunes a viernes de 9:00am a 6:00pm. Sr. XXX le
+                      agradezco su atención y su tiempo, a nombre del Banco
+                      Ripley y Chubb Seguros Perú le damos una cordial
+                      bienvenida; se despide que tenga buenos (días, tardes,
+                      noches).
                     </p>
                   </div>
                   <div className=" col-12 text-center align-center">
-                    <button type="button" className="btn form-control text-white guardar" id="btn_guardar_fin" style={{ background: "#8362D6" }}>
+                    <button
+                      type="button"
+                      className="btn form-control text-white guardar"
+                      id="btn_guardar_fin"
+                      style={{ background: "#8362D6" }}
+                    >
                       <i className="fa fa-save mx-2"></i>
                       Guardar
                     </button>
