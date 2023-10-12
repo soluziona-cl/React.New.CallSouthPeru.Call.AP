@@ -379,7 +379,7 @@ const Callintro = () => {
       <Container className="p-1 mb-4 rounded-3">
         <div class="card card-header bg-black">
           <h3 class="text-white  ms-3 ">
-            <h2 class="fw-bold "> Sonríe Seguro Stock</h2>
+            <h2 class="fw-bold "> Sonríe Seguro </h2>
             Tipo Base: <label id="id_tipo_base"></label>
             <br /> Identificador de Llamada{" "}
             <label id="ident_llamdaa">{lead_id}</label>
