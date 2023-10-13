@@ -74,58 +74,169 @@ function DatosClientes({ company, clave, datafull }) {
               <>
                 {/* {console.log(data)} */}
                 <div className="row">
-                 <h3 className="card-header text-white" style={{backgroundImage: 'linear-gradient(90deg, #646464 10%, #ffffff 120%)'}}>Datos Cliente</h3>
-                  <hr />
-                </div>
+              <h3 className="card-header text-white" style={{backgroundImage: 'linear-gradient(90deg, #646464 10%, #ffffff 120%)'}}>Datos Cliente</h3>
+              <hr />
+            </div>
                 <div className="row my-3">
                  
                   <div className="col-lg-4 col-md-5 col-sm-12 my-1">ID Cliente
-                    <input name="roomRent" type="text" value={data.ENTEL_RUT_CON_GUION} className="form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.lead_id}
+                      className="form-control"
+                      disabled
+                    />
                   </div>
+                  
                   <div className="col-lg-4 col-md-4 col-sm-12 my-1">DNI
-                    <input name="roomRent" type="text" value={data.intentos} className="  form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_numero_documento}
+                      className="  form-control"
+                      disabled
+                    />
                   </div>
+                 
                   <div className="col-lg-2 col-md-3 col-sm-12 my-1">Edad
-                    <input name="roomRent" type="text" value={data.intentos} className="  form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_edad}
+                      className="  form-control"
+                      disabled
+                    />
                   </div>
                   <div className="col-lg-8 col-md-12 col-sm-12 my-1">Nombre
-                    <input name="roomRent" type="text" value={data.NOMBRE} className="  form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_nombre}
+                      className="  form-control"
+                      disabled
+                    />
                   </div>
+                 
                   <div className="col-lg-6 col-md-7 col-sm-12 my-1">Email
-                    <input name="roomRent" type="text" value={data.ENTEL_EMAIL} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_email}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+                 
                   <div className="col-lg-3 col-md-5 col-sm-12 my-1">Fecha de Nacimiento
-                    <input name="roomRent" type="date" value={data.ENTEL_EMAIL} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="date"
+                      value={data.Chubb_fecha_nacimiento == 'NULL' ? '' : data.Chubb_fecha_nacimiento}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+                  
                   <div className="col-lg-4 col-md-4 col-sm-12 my-1">Condicion Laboral
-                    <input name="roomRent" type="text" value={data.ENTEL_REGION} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_condicion_laboral == 'NULL' ? '' : data.Chubb_condicion_laboral}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+                  
                   <div className="col-lg-4 col-md-4 col-sm-12 my-1">Tipo Tarjeta
-                    <input name="roomRent" type="text" value={data.ENTEL_GRUPO} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_tipo_tarjeta}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+              
+             
                   <div className="col-lg-4 col-md-4 col-sm-12 my-1">Tienda Colocacion
-                    <input name="roomRent" type="text" value={data.ENTEL_TELEFONO_1} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_tienda_colocacion == 'NULL' ? '' : data.Chubb_tienda_colocacion}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+                  
                   <div className="col-lg-4 col-md-4 col-sm-12 my-1">Fecha Colocacion
-                    <input name="roomRent" type="text" value={data.ENTEL_TELEFONO_2} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_fecha_colocacion == 'NULL' ? '' : data.Chubb_fecha_colocacion}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+                
                    <div className="col-lg-4 col-md-4 col-sm-12 my-1">Cantidad Seguros
-                    <input name="roomRent" type="text" value={data.ENTEL_TELEFONO_3} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_cantidad_seguros == 'NULL' ? '' : data.Chubb_cantidad_seguros}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+               
                   <div className="col-lg-4 col-md-4 col-sm-12 my-1">Seguros Contratados
-                    <input name="roomRent" type="text" value={data.ENTEL_TELEFONO_4} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_seguros_contratados == 'NULL' ? '' : data.Chubb_seguros_contratados}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+                 
                   <div className="col-lg-10 col-md-12 col-sm-12 my-1">Dirección
-                    <input name="roomRent" type="text" value={data.ENTEL_TELEFONO_5} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_direccion}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+                
                   <div className="col-lg-4 col-md-4 col-sm-12 my-1">Departamento
-                    <input name="roomRent" type="text" value={data.ENTEL_TELEFONO_6} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_departamento}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+                  
                   <div className="col-lg-4 col-md-4 col-sm-12 my-1">Provincia
-                    <input name="roomRent" type="text" value={data.ENTEL_TELEFONO_6} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_provincia}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
+                
                   <div className="col-lg-4 col-md-4 col-sm-12 my-1">Distrito
-                    <input name="roomRent" type="text" value={data.ENTEL_TELEFONO_6} className=" form-control" disabled />
+                    <input
+                      name="roomRent"
+                      type="text"
+                      value={data.Chubb_distrito}
+                      className=" form-control"
+                      disabled
+                    />
                   </div>
                 </div>
               
