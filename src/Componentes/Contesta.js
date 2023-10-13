@@ -354,7 +354,7 @@ function Contesta({
                       {datafull.map((data, index) => (
                         <div>
                           <div className="" id="stock">
-                            {data.id_tipo_base.toUpperCase() === "STOCK" && (
+                            {data.Chubb_tipo_captacion.toUpperCase() === "STOCK" && (
                               <p>
                                 El motivo de mi llamada es agradecer la
                                 permanencia que tiene con la tarjeta, RIPLEY y
@@ -365,7 +365,7 @@ function Contesta({
                             )}
                           </div>
                           <div className="" id="welcome">
-                            {data.id_tipo_base.toUpperCase() === "WELCOME" && (
+                            {data.Chubb_tipo_captacion.toUpperCase() === "WELCOME" && (
                               <p>
                                 El motivo de mi llamada es agradecer la
                                 CONFIANZA y su preferencia por haber obtenido
@@ -375,7 +375,7 @@ function Contesta({
                             )}
                           </div>
                           <div className="" id="coross">
-                            {data.id_tipo_base.toUpperCase() === "CROSS" && (
+                            {data.Chubb_tipo_captacion.toUpperCase() === "CROSS" && (
                               <p>
                                 EL MOTIVO DE MI LLAMADA Es para agradecer el
                                 tiempo de permanencia con EL SEGURO (DETALLAR
