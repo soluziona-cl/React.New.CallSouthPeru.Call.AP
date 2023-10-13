@@ -120,7 +120,7 @@ const Callintro = () => {
 
       setToken(clave);
       Conecta(clave);
-     DatosCliente(rut_2, clave);
+      DatosCliente(rut_2, clave);
       GuardaURL(agente, queryString, clave);
     }
   };
@@ -380,7 +380,11 @@ const Callintro = () => {
         <div class="card card-header bg-black">
           <h3 class="text-white  ms-3 ">
             <h2 class="fw-bold "> Sonríe Seguro </h2>
-            Tipo Base: <label id="id_tipo_base"></label>
+            {datafull.map((data, index) => (
+              <div key={index} className="col-lg-4 col-md-5 col-sm-12 my-1">
+                Tipo Base: {data.Chubb_tipo_captacion.toUpperCase()}
+              </div>
+            ))}{" "}
             <br /> Identificador de Llamada{" "}
             <label id="ident_llamdaa">{lead_id}</label>
             <br /> Duracion de la llamada{" "}
@@ -411,25 +415,26 @@ const Callintro = () => {
 
               {selectLlamada === "no_conecta" && (
                 <section>
-                  <NoContesta conecta={selectLlamada}
-                              elapsedSeconds={elapsedSeconds}
-                              clave={token}    />
+                  <NoContesta
+                    conecta={selectLlamada}
+                    elapsedSeconds={elapsedSeconds}
+                    clave={token}
+                  />
                 </section>
               )}
 
               {selectLlamada === "1" && select_si_conecta_llamada === "2" && (
                 <section>
                   <Terceros
-                      conecta={selectLlamada}
-                      shouldScroll={scrollToNoContesta}
-                      select_si_conecta_llamada={select_si_conecta_llamada}
-                      handleSelectChange={handleSelectChange}
-                      elapsedSeconds={elapsedSeconds}
-                      clave={token}
+                    conecta={selectLlamada}
+                    shouldScroll={scrollToNoContesta}
+                    select_si_conecta_llamada={select_si_conecta_llamada}
+                    handleSelectChange={handleSelectChange}
+                    elapsedSeconds={elapsedSeconds}
+                    clave={token}
                   />
                 </section>
               )}
-              
             </div>
             <div className="col-lg-9 col-md-9 col-sm-12">
               <DatosClientes
@@ -454,10 +459,8 @@ const Callintro = () => {
                     select_si_conecta_llamada={select_si_conecta_llamada}
                     handleSelectChange={handleSelectChange}
                     shouldScroll={scrollToNoContesta}
-
                   ></Contesta>
                 </div>
-
               </div>
             )}
           </div>

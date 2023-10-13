@@ -131,7 +131,7 @@ function DatosClientes({ company, clave, datafull }) {
                   <div className="col-lg-3 col-md-5 col-sm-12 my-1">Fecha de Nacimiento
                     <input
                       name="roomRent"
-                      type="date"
+                      type="text"
                       value={data.Chubb_fecha_nacimiento == 'NULL' ? '' : data.Chubb_fecha_nacimiento}
                       className=" form-control"
                       disabled
