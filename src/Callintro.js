@@ -120,7 +120,7 @@ const Callintro = () => {
 
       setToken(clave);
       Conecta(clave);
-    //  DatosCliente(rut_2, clave);
+     DatosCliente(rut_2, clave);
       GuardaURL(agente, queryString, clave);
     }
   };
