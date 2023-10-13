@@ -218,7 +218,7 @@ const Callintro = () => {
     item_sucess_llamada["sucess"] = true;
     item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
     item_sucess_llamada["campaign_id"] = list_id;
-    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+    item_sucess_llamada["campaign"] = "Sonrie Seguro ";
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
@@ -266,7 +266,7 @@ const Callintro = () => {
     item_sucess_llamada["sucess"] = true;
     item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
     item_sucess_llamada["campaign_id"] = list_id;
-    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+    item_sucess_llamada["campaign"] = "Sonrie Seguro ";
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
@@ -337,7 +337,7 @@ const Callintro = () => {
   //         item_sucess_llamada["sucess"] = true;
   //         item_sucess_llamada["campaign_name"] = company;
   //         item_sucess_llamada["campaign_id"] = list_id;
-  //         item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+  //         item_sucess_llamada["campaign"] = "Sonrie Seguro ";
   //         item_sucess_llamada["lead_id"] = lead_id;
   //         item_sucess_llamada["list_id"] = list_id;
   //         item_sucess_llamada["agente"] = agente;
@@ -411,17 +411,21 @@ const Callintro = () => {
 
               {selectLlamada === "no_conecta" && (
                 <section>
-                  <NoContesta conecta={selectLlamada} />
+                  <NoContesta conecta={selectLlamada}
+                              elapsedSeconds={elapsedSeconds}
+                              clave={token}    />
                 </section>
               )}
 
               {selectLlamada === "1" && select_si_conecta_llamada === "2" && (
                 <section>
                   <Terceros
-                    conecta={selectLlamada}
-                    shouldScroll={scrollToNoContesta}
-                    select_si_conecta_llamada={select_si_conecta_llamada}
-                    handleSelectChange={handleSelectChange}
+                      conecta={selectLlamada}
+                      shouldScroll={scrollToNoContesta}
+                      select_si_conecta_llamada={select_si_conecta_llamada}
+                      handleSelectChange={handleSelectChange}
+                      elapsedSeconds={elapsedSeconds}
+                      clave={token}
                   />
                 </section>
               )}
@@ -449,6 +453,8 @@ const Callintro = () => {
                     elapsedSeconds={elapsedSeconds}
                     select_si_conecta_llamada={select_si_conecta_llamada}
                     handleSelectChange={handleSelectChange}
+                    shouldScroll={scrollToNoContesta}
+
                   ></Contesta>
                 </div>
 

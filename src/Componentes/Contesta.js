@@ -8,6 +8,8 @@ import NoContesta from "./NoContesta";
 import { Routes, Route, Link, Outlet, useNavigate } from "react-router-dom";
 import TextPromocionesRipley from "./TextPromocionesRipley";
 import TextPreCierre from "./TextPreCierre";
+import Terceros from "./Terceros";
+
 
 function Contesta({
   company,
@@ -18,12 +20,19 @@ function Contesta({
   handleSelectChange,
   tercerosComponent,
   datafull,
+  shouldScroll,
 }) {
+  const [puedeClickear, setPuedeClickear] = useState(true);
+
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
     useState("0");
   const [token, setToken] = useState(clave);
   const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
+  const [
+    select_conecta_llamada_pregunta_no_interesa,
+    setselect_conecta_llamada_pregunta_no_interesa,
+  ] = useState("0");
 
   const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
@@ -37,6 +46,8 @@ function Contesta({
     select_conecta_llamada_pregunta_interesa,
     setselect_conecta_llamada_pregunta_interesa,
   ] = useState("0");
+  const [no_interesa, setno_interesa] = useState("0");
+
 
   const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] =
     useState(false); // Estado para controlar la habilitación del botón
@@ -52,6 +63,21 @@ function Contesta({
     sid: localStorage.getItem("localid"),
     sid_usuario: localStorage.getItem("localid_usuario"),
     stoken: localStorage.getItem("token"),
+  };
+  useEffect(() => {
+    Nointeresa();
+  }, []);
+  const Nointeresa = async () => {
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaClienteNoInteresa",
+      { dato: "20367002" },
+      { headers: { Authorization: `Bearer ${clave}` } }
+    );
+
+    if (result.status === 200) {
+      setno_interesa(result.data);
+      // ChangeConecta_Direccion()
+    }
   };
 
   function get_elapsed_time_string(total_seconds) {
@@ -71,75 +97,8 @@ function Contesta({
   }
 
   async function GuardarRegistro() {
-    setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
-    const nombres = document.getElementById("nombres").value;
-    const apellido_paterno = document.getElementById("apellido_paterno").value;
-    const apellido_materno = document.getElementById("apellido_materno").value;
-    const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
-    const RutCliente = document.getElementById("RutCliente").value;
-    const sexo = document.getElementById("sexo").value;
-    const email = document.getElementById("email").value;
-    const planes = document.getElementById("planes").value;
-    const comuna = document.getElementById("comuna").value;
-    const ciudad = document.getElementById("ciudad").value;
-    const calle = document.getElementById("calle").value;
-    const numero = document.getElementById("numero").value;
-    const depto = document.getElementById("depto").value;
-    const referencia = document.getElementById("referencia").value;
-
-    const campos = [
-      nombres,
-      apellido_paterno,
-      apellido_materno,
-      fecha_nacimiento,
-      RutCliente,
-      sexo,
-      email,
-      planes,
-      comuna,
-      ciudad,
-      calle,
-      numero,
-      depto,
-      referencia,
-    ];
-
-    const nombresCampos = [
-      "Nombres",
-      "Apellido Paterno",
-      "Apellido Materno",
-      "Fecha Nacimiento",
-      "Rut Cliente",
-      "Sexo",
-      "Email",
-      "Planes",
-      "Comuna",
-      "ciudad",
-      "calle",
-      "numero",
-      "depto",
-      "referencia",
-
-      // ... (otros nombres de campos en el mismo orden)
-    ];
-
-    let camposIncompletos = [];
-
-    for (let i = 0; i < campos.length; i++) {
-      if (campos[i] === "" || campos[i] === "0") {
-        camposIncompletos.push(nombresCampos[i]);
-      }
-    }
-
-    if (camposIncompletos.length > 0) {
-      const camposFaltantesTexto = camposIncompletos.join(", ");
-      alert(`Debe completar los siguientes campos: ${camposFaltantesTexto}`);
-      // Establecer un temporizador para habilitar el botón después de 3 segundos
-      setTimeout(() => {
-        setbotonDeshabilitado_guardar(false); // Habilitar el botón después de 3 segundos
-      }, 3000); // 3000 milisegundos = 3 segundos
-      return; // Detener la ejecución si hay campos faltantes
-    } else {
+    setPuedeClickear(false);
+    
       let id = []; //final
       let item_sucess_llamada = {};
       let json_sucess_gestion = [];
@@ -156,7 +115,7 @@ function Contesta({
       item_sucess_llamada["sucess"] = true;
       item_sucess_llamada["campaign_name"] = company;
       item_sucess_llamada["campaign_id"] = list_id;
-      item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+      item_sucess_llamada["campaign"] = "Sonrie_Seguro";
       item_sucess_llamada["lead_id"] = lead_id;
       item_sucess_llamada["list_id"] = list_id;
       item_sucess_llamada["agente"] = agente;
@@ -179,16 +138,22 @@ function Contesta({
           toast.success("Registro Guardado Exitosamente");
           console.log("Registro Guardado Exitosamente");
           setTimeout(() => {
-            window.location.href = "/Soluziona/CallSouth/SonrieSeguro/Call/Fin";
+            window.location.href =
+              "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
           }, 5000);
         }
       } catch (error) {
         // Manejo de errores
-
+        setTimeout(() => {
+          setbotonDeshabilitado_guardar(false); // Habilitar el botón después de 3 segundos
+        }, 3000); // 3000 milisegundos = 3 segundos
         toast.success("Error Con Guardado");
         console.log("Error Con Guardado");
+        setTimeout(() => {
+          setPuedeClickear(true); // Reactivamos la capacidad de clickear después de 1 segundo.
+        }, 1000);
+    
       }
-    }
   }
 
   let queryString = window.location.search;
@@ -246,7 +211,7 @@ function Contesta({
   };
 
   async function GuardarRegistroNoValido() {
-    setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
+    setPuedeClickear(false);
     let id = []; //final
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
@@ -263,7 +228,7 @@ function Contesta({
     item_sucess_llamada["sucess"] = true;
     item_sucess_llamada["campaign_name"] = company;
     item_sucess_llamada["campaign_id"] = list_id;
-    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+    item_sucess_llamada["campaign"] = "Sonrie Seguro ";
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
@@ -289,7 +254,7 @@ function Contesta({
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Soluziona/CallSouth/SonrieSeguro/Call/Fin";
+          window.location.href = "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
         }, 5000);
       }
     } catch (error) {
@@ -429,17 +394,16 @@ function Contesta({
                     llamada está siendo grabada.
                   </p>
                   {select_si_conecta_llamada === "3" && (
-                    <div>
-                      <p className="col-3 " id="btn_tercero_no_valido">
-                        <button
-                          type="button"
-                          className="btn  guardar text-white"
-                          id="btn_guardar_tercero_no_valido"
-                          style={{ background: "#8362D6" }}
-                        >
-                          <i className="fa fa-save"></i> Guardar
-                        </button>
-                      </p>
+                    <div className="d-flex justify-content-end">
+                      <button
+                        className="btn text-white guardar"
+                        value="GuardarRegistro"
+                        onClick={GuardarRegistroNoValido}
+                        disabled={!puedeClickear}
+                        style={{ background: "#8362D6" }}
+                      >
+                        Finalizar
+                      </button>
                     </div>
                   )}
                 </div>
@@ -499,19 +463,19 @@ function Contesta({
           </div>
 
           {select_conecta_llamada_pregunta_interesa === "3" && (
-            <div className="col-12 pb-3 ">
-              <div id="vw_script_cliente_nointeresa" className="">
-                <div className=" card-body">
-                  <div className="CALLINTRO justify-content-center d-flex">
-                    {/* Otras partes de "CALLINTRO" aquí */}
-                    {tercerosComponent}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <section>
+              <Terceros
+                conecta={selectLlamada}
+                shouldScroll={shouldScroll}
+                select_si_conecta_llamada={select_si_conecta_llamada}
+                handleSelectChange={handleSelectChange}
+                elapsedSeconds={elapsedSeconds}
+                clave={token}
+              />
+            </section>
           )}
 
-          {select_conecta_llamada_pregunta_interesa === "2" && (
+{select_conecta_llamada_pregunta_interesa === "2" && (
             <div className="col-12 pb-3">
               <div id="vw_script_cliente_nointeresa" className="">
                 <p>
@@ -520,6 +484,12 @@ function Contesta({
                 <p>
                   Cuando NO desea, me despido. Cuando solicita se le llame en
                   otra oportunidad, se agenda nueva llamada.
+                </p>
+                <p>
+                  <strong> Agendo:</strong> Por supuesto (Primer nombre del
+                  cliente) se programará la llamada para el día (validar fecha
+                  con cliente). Muchas gracias, buenos días/buenas tardes/buenas
+                  noches
                 </p>
                 <div className=" card-body">
                   <div className="form-row">
@@ -534,25 +504,37 @@ function Contesta({
                       id="select_conecta_llamada_pregunta_no_interesa"
                       className="form-select cliente"
                       disabled={
-                        select_conecta_llamada_pregunta_interesa !== "0"
+                        select_conecta_llamada_pregunta_interesa !== "2"
                       }
+                      value={select_conecta_llamada_pregunta_no_interesa} // Establece el valor seleccionado del select
+                      onChange={(e) =>
+                        setselect_conecta_llamada_pregunta_no_interesa(
+                          e.target.value
+                        )
+                      } // Maneja el cambio del select
                     >
                       <option value="0">Seleccione</option>
-                      <option value="1">Si</option>
-                      <option value="2">No</option>
+                      {no_interesa.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.detalle}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
-                  <div className="form-row col-6 mt-2">
-                    <button
-                      type="button"
-                      className="btn text-white guardar"
-                      id="btn_guardar_no_interesa"
-                      style={{ background: "#8362D6" }}
-                    >
-                      <i className="fa fa-save"></i> Guardar
-                    </button>
-                  </div>
+                  {select_conecta_llamada_pregunta_no_interesa !== "0" && (
+                    <div className="form-row col-6 mt-2">
+                      <button
+                        className="btn text-white guardar"
+                        value="GuardarRegistro"
+                        disabled={!puedeClickear}
+                        onClick={GuardarRegistroNoValido}
+                        style={{ background: "#8362D6" }}
+                      >
+                        Finalizar
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -695,15 +677,17 @@ function Contesta({
                       noches).
                     </p>
                   </div>
-                  <div className=" col-12 text-center align-center">
+                  <div className="d-flex justify-content-end">
                     <button
-                      type="button"
-                      className="btn form-control text-white guardar"
-                      id="btn_guardar_fin"
+                        className="btn text-white guardar"
+                        value="GuardarRegistro"
+                      onClick={GuardarRegistro}
+                      disabled={!puedeClickear}
                       style={{ background: "#8362D6" }}
+
+                      
                     >
-                      <i className="fa fa-save mx-2"></i>
-                      Guardar
+                      Finalizar
                     </button>
                   </div>
                 </div>

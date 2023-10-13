@@ -218,7 +218,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
   };
   const handleDepartamentoBlur = () => {
 
-    if (departamento.trim() === "") { // Verifica el estado 'departamento'
+    if (optionValueMotivoDepartamento.trim() === "") { // Verifica el estado 'departamento'
       toast.error("El departamento es obligatorio.", {
         position: "top-right",
         autoClose: 5000,
@@ -228,7 +228,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
   };
   const handleProvinciaBlur = () => {
 
-    if (provincia.trim() === "") {
+    if (optionValueMotivoProvincia.trim() === "") {
       toast.error("La provincia es obligatoria.", {
         position: "top-right",
         autoClose: 5000,
@@ -238,7 +238,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
   };
   const handleDistritoBlur = () => {
 
-    if (distrito.trim() === "") {
+    if (optionValueMotivoDistrito.trim() === "") {
       toast.error("El distrito es obligatorio.", {
         position: "top-right",
         autoClose: 5000,
@@ -424,9 +424,9 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
       sexo !== "" &&
       estadoCivil !== "" &&
       telefonoMovil !== "" &&
-      departamento !== "" &&
-      provincia !== "" &&
-      distrito !== "" &&
+      optionValueMotivoDepartamento !== "" &&
+      optionValueMotivoProvincia !== "" &&
+      optionValueMotivoDistrito !== "" &&
       direccion !== "" &&
       email !== "";
 
