@@ -563,7 +563,7 @@ function Contesta({
                     type="radio"
                     id="buenestadoSalud"
                     name="buenEstadoSalud"
-                    value="SÍ"
+                    value= {buenEstadoSalud}
                     checked={buenEstadoSalud === "SÍ"}
                     onChange={() => setBuenEstadoSalud("SÍ")}
                   />
@@ -572,10 +572,9 @@ function Contesta({
                 <div>
                   <input
                     type="radio"
-                    className="ms-1 cliente"
-                    id="malestadoSalud"
+                    className="ms-1 "
                     name="buenEstadoSalud"
-                    value="NO"
+                    value= {buenEstadoSalud}
                     checked={buenEstadoSalud === "NO"}
                     onChange={() => setBuenEstadoSalud("NO")}
                   />
@@ -591,7 +590,8 @@ function Contesta({
                 <div className=" row col-6 ms-3">
                   <p>Para culminar, nos podría indicar su ocupación actual:</p>
                   <input
-                    className="my-2 form-control col-6"
+                    className="my-2 form-control col-6 cliente"
+                    id="ocupacion"
                     type="text"
                     value={ocupacionActual}
                     onChange={(e) => setOcupacionActual(e.target.value)}
