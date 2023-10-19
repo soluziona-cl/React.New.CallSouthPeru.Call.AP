@@ -552,15 +552,16 @@ function Contesta({
           )}
           {select_conecta_llamada_pregunta_interesa === "1" && (
             <div id="vw_script_cliente_valida" class="">
-                            <div className=" row  ms-3">
+              <div className=" row  mx-3" style={{ background: "#EDEDED" }}>
                 <h4>
                   Sr./Sra. Actualmente se encuentra en buen estado de salud. (SÍ
                   o NO).
                 </h4>
                 <div>
                   <input
-                    className="ms-1"
+                    className="ms-1 cliente"
                     type="radio"
+                    id="buenestadoSalud"
                     name="buenEstadoSalud"
                     value="SÍ"
                     checked={buenEstadoSalud === "SÍ"}
@@ -571,7 +572,8 @@ function Contesta({
                 <div>
                   <input
                     type="radio"
-                    className="ms-1"
+                    className="ms-1 cliente"
+                    id="malestadoSalud"
                     name="buenEstadoSalud"
                     value="NO"
                     checked={buenEstadoSalud === "NO"}

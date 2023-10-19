@@ -3,11 +3,7 @@ import * as bootstrap from "bootstrap";
 import axios from "axios";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import DataTable from "react-data-table-component";
-import TablaAdicionalChubb from "./TablaAdicionalChubb";
-import TablaAdicionalHogar from "./TablaAdicionalHogar";
-import TablaAdicionalVial from "./TablaAdicionalVial";
-import TablaAdicionalEducativo from "./TablaAdicionalEducativo";
+
 
 function Tabsinformacion({ company, clave, onNoConectaChange }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
