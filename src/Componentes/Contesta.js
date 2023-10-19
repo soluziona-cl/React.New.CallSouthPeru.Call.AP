@@ -22,6 +22,15 @@ function Contesta({
   datafull,
   shouldScroll,
 }) {
+
+  const [buenEstadoSalud, setBuenEstadoSalud] = useState(""); // Estado para la respuesta de buen estado de salud
+  const [ocupacionActual, setOcupacionActual] = useState(""); // Estado para la ocupación actual
+  const [mostrarMensajeOcupacion, setMostrarMensajeOcupacion] = useState(false); // Estado para mostrar el mensaje de ocupación
+  const handleBlur = () => {
+    if (ocupacionActual.trim() !== "") {
+      setMostrarMensajeOcupacion(true);
+    }
+  };
   const [puedeClickear, setPuedeClickear] = useState(true);
 
   const [selectLlamada, setSelectedLlamada] = useState("");
@@ -475,7 +484,7 @@ function Contesta({
             </section>
           )}
 
-{select_conecta_llamada_pregunta_interesa === "2" && (
+          {select_conecta_llamada_pregunta_interesa === "2" && (
             <div className="col-12 pb-3">
               <div id="vw_script_cliente_nointeresa" className="">
                 <p>
@@ -541,6 +550,64 @@ function Contesta({
           )}
           {select_conecta_llamada_pregunta_interesa === "1" && (
             <div id="vw_script_cliente_valida" class="">
+                            <div className=" row  ms-3">
+                <h4>
+                  Sr./Sra. Actualmente se encuentra en buen estado de salud. (SÍ
+                  o NO).
+                </h4>
+                <div>
+                  <input
+                    className="ms-1"
+                    type="radio"
+                    name="buenEstadoSalud"
+                    value="SÍ"
+                    checked={buenEstadoSalud === "SÍ"}
+                    onChange={() => setBuenEstadoSalud("SÍ")}
+                  />
+                  <label className="m-1">SÍ</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    className="ms-1"
+                    name="buenEstadoSalud"
+                    value="NO"
+                    checked={buenEstadoSalud === "NO"}
+                    onChange={() => setBuenEstadoSalud("NO")}
+                  />
+                  <label className="m-1">NO</label>
+                </div>
+                {buenEstadoSalud === "NO" && (
+                  <p>
+                    Salvedad: Recuerde Sr./Sra. que le vamos a cubrir por
+                    cualquier accidente que no sea consecuencia de alguna
+                    preexistencia.
+                  </p>
+                )}
+                <div className=" row col-6 ms-3">
+                  <p>Para culminar, nos podría indicar su ocupación actual:</p>
+                  <input
+                    className="my-2 form-control col-6"
+                    type="text"
+                    value={ocupacionActual}
+                    onChange={(e) => setOcupacionActual(e.target.value)}
+                    onBlur={handleBlur} // Manejar el clic fuera del input
+                  />
+                </div>
+
+                {mostrarMensajeOcupacion && (
+                  <div>
+                    <p>
+                      Si el cliente tiene una profesión de alto riesgo, se debe
+                      indicar lo siguiente.
+                    </p>
+                    <p>
+                      Salvedad: Recuerde Sr./Sra. que le vamos a cubrir por
+                      cualquier accidente fuera de sus horas de trabajo.
+                    </p>
+                  </div>
+                )}
+              </div>
               {/* <div id="vw_script_cliente_valida" class="d-none"> */}
               <section className="p-3">
                 <p>

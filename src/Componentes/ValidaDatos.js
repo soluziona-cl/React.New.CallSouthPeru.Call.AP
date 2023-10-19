@@ -3,37 +3,34 @@ import * as bootstrap from "bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-
+import { format, parse } from "date-fns";
 
 function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
   //console.log(clave)
 
-
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [setduracion, setselectduracion] = useState("0");
 
-
-
-
-
-
-
-
   const [optionListMotivo, setOptionListMotivo] = useState([]);
 
-  const [optionListMotivoDepartamento, setOptionListMotivoDepartamento] = useState([]);
-  const [optionListMotivoProvincia, setOptionListMotivoProvincia] = useState([]);
+  const [optionListMotivoDepartamento, setOptionListMotivoDepartamento] =
+    useState([]);
+  const [optionListMotivoProvincia, setOptionListMotivoProvincia] = useState(
+    []
+  );
   const [optionListMotivoDistrito, setOptionListMotivoDistrito] = useState([]);
 
-  const [optionValueMotivoDepartamento, setOptionValueMotivoDepartamento] = useState("0");
-  const [optionValueMotivoProvincia, setOptionValueMotivoProvincia] = useState("0");
-  const [optionValueMotivoDistrito, setOptionValueMotivoDistrito] = useState("0");
-
+  const [optionValueMotivoDepartamento, setOptionValueMotivoDepartamento] =
+    useState("0");
+  const [optionValueMotivoProvincia, setOptionValueMotivoProvincia] =
+    useState("0");
+  const [optionValueMotivoDistrito, setOptionValueMotivoDistrito] =
+    useState("0");
 
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
+    useState("0");
 
   const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -72,35 +69,25 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
 
   useEffect(() => {
     Departamento();
-
   }, []);
   //console.log(clave)
   const Departamento = async () => {
-
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas",
-      { "dato": 'S21', "dato_1": '', "dato_2": '', "dato_3": '' },
+      { dato: "S21", dato_1: "", dato_2: "", dato_3: "" },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
 
     if (result.status === 200) {
-
-      setOptionListMotivoDepartamento(result.data)
-      setOptionListDetalleEstado(false)
-      setOptionValueMotivoProvincia("0")
-      setOptionValueMotivoDistrito("0")
-
+      setOptionListMotivoDepartamento(result.data);
+      setOptionListDetalleEstado(false);
+      setOptionValueMotivoProvincia("0");
+      setOptionValueMotivoDistrito("0");
     }
   };
 
-
-
-
-
   // revisar y agregar distrito y provincia
   const ChangeConecta_Departamento = async (event) => {
-
-
     // console.log(event.value)
 
     // if (departamento === "0") {
@@ -114,29 +101,28 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
 
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas", //cambiar endpoint para ciudad y provincia y distrito
-      { "dato": 'S22', "dato_1": optionValueMotivoDepartamento, "dato_2": '', "dato_3": '' },
+      {
+        dato: "S22",
+        dato_1: optionValueMotivoDepartamento,
+        dato_2: "",
+        dato_3: "",
+      },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
 
     // setSelectedLlamadaD(event);
 
     if (result.status === 200) {
-
       setOptionListMotivoProvincia(result.data);
       setOptionListDetalleEstadoDireccionD(false);
-      setOptionValueMotivoDistrito("0")
+      setOptionValueMotivoDistrito("0");
       // ChangeConecta_Distrito ()
       // console.log(result.data);
     }
     // }
   };
 
-
-
-
   const ChangeConecta_Provincia = async (event) => {
-
-
     // console.log(provincia)
     // console.log(departamento)
     // if (provincia === "0") {
@@ -146,14 +132,18 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
     // } else {
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas", //cambiar endpoint para ciudad y provincia y distrito
-      { "dato": 'S23', "dato_1": optionValueMotivoDepartamento, "dato_2": optionValueMotivoProvincia, "dato_3": '' },
+      {
+        dato: "S23",
+        dato_1: optionValueMotivoDepartamento,
+        dato_2: optionValueMotivoProvincia,
+        dato_3: "",
+      },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
 
     // setSelectedLlamadaD(event);
 
     if (result.status === 200) {
-
       setOptionListMotivoDistrito(result.data);
       setOptionListDetalleEstadoDireccionD(false);
       // console.log(result.data);
@@ -161,32 +151,22 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
     // }
   };
 
-
   const ChangeConectaDetalle_Direccion = async (event) => {
-
-
-
-    console.log(event)
+    console.log(event);
 
     setOptionListDetalleEstadoDireccionD(false);
     setOptionListDetalleEstadoSelectD(event);
     setSelectedLlamadaDetalleD(event);
-
-
   };
 
-
-
-
-
-  const [tipoDocumento, setTipoDocumento] = useState('');
-  const [numeroDocumento, setNumeroDocumento] = useState('');
-  const [primerNombre, setPrimerNombre] = useState('');
-  const [segundoNombre, setSegundoNombre] = useState('');
-  const [apellidoPaterno, setApellidoPaterno] = useState('');
-  const [apellidoMaterno, setApellidoMaterno] = useState('');
-  const [fechaNacimiento, setFechaNacimiento] = useState('');
-  const [email, setEmail] = useState('');
+  const [tipoDocumento, setTipoDocumento] = useState("");
+  const [numeroDocumento, setNumeroDocumento] = useState("");
+  const [primerNombre, setPrimerNombre] = useState("");
+  const [segundoNombre, setSegundoNombre] = useState("");
+  const [apellidoPaterno, setApellidoPaterno] = useState("");
+  const [apellidoMaterno, setApellidoMaterno] = useState("");
+  const [fechaNacimiento, setFechaNacimiento] = useState("");
+  const [email, setEmail] = useState("");
   const [isValidEmail, setIsValidEmail] = useState(true);
   const [telefonoMovil, setTelefonoMovil] = useState("");
   const [isTelefonoMovilValid, setIsTelefonoMovilValid] = useState(true);
@@ -201,13 +181,14 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
   const [selectLlamadaD, setSelectedLlamadaD] = useState("");
   const [selectLlamadaDetalleD, setSelectedLlamadaDetalleD] = useState("");
 
-
-
-
   const [optionListDireccionD, setOptionListDireccionD] = useState([]);
   const [optionListDetalleD, setOptionListDetalleD] = useState([]);
-  const [optionListDetalleEstadoDireccionD, setOptionListDetalleEstadoDireccionD] = useState(true);
-  const [optionListDetalleEstadoSelectD, setOptionListDetalleEstadoSelectD] = useState("");
+  const [
+    optionListDetalleEstadoDireccionD,
+    setOptionListDetalleEstadoDireccionD,
+  ] = useState(true);
+  const [optionListDetalleEstadoSelectD, setOptionListDetalleEstadoSelectD] =
+    useState("");
 
   const handleDistritoChange = (e) => {
     setOptionValueMotivoDistrito(e.target.value);
@@ -217,34 +198,32 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
     setDireccion(e.target.value);
   };
   const handleDepartamentoBlur = () => {
-
-    if (optionValueMotivoDepartamento.trim() === "") { // Verifica el estado 'departamento'
+    if (optionValueMotivoDepartamento.trim() === "") {
+      // Verifica el estado 'departamento'
       toast.error("El departamento es obligatorio.", {
         position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
-
+    }
+    actualizarCamposCompletos();
   };
   const handleProvinciaBlur = () => {
-
     if (optionValueMotivoProvincia.trim() === "") {
       toast.error("La provincia es obligatoria.", {
         position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
-
+    }
+    actualizarCamposCompletos();
   };
   const handleDistritoBlur = () => {
-
     if (optionValueMotivoDistrito.trim() === "") {
       toast.error("El distrito es obligatorio.", {
         position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
-
+    }
+    actualizarCamposCompletos();
   };
 
   const handleDireccionBlur = () => {
@@ -253,38 +232,28 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
         position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
+    }
+    actualizarCamposCompletos();
   };
 
   const handleTipoDocumentoChange = (e) => {
     setTipoDocumento(e.target.value);
-
-  };
-
-  const handleNumeroDocumentoChange = (e) => {
-    setNumeroDocumento(e.target.value);
-
   };
 
   const handlePrimerNombreChange = (e) => {
     setPrimerNombre(e.target.value);
-
   };
   const handleSegundoNombreChange = (e) => {
     setSegundoNombre(e.target.value);
-
   };
   const handlePrimerApellidoChange = (e) => {
     setApellidoPaterno(e.target.value);
-
   };
   const handleSegundoApellidoChange = (e) => {
     setApellidoMaterno(e.target.value);
-
   };
   const handleFechaNacimientoChange = (e) => {
     setFechaNacimiento(e.target.value);
-
   };
   const handleTipoDocumentoBlur = () => {
     if (tipoDocumento.trim() === "") {
@@ -292,7 +261,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
         position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
+    }
+    actualizarCamposCompletos();
   };
   const handleNumeroDocumentoBlur = () => {
     // Validar que el valor tenga exactamente 8 dígitos en el evento onBlur
@@ -300,11 +270,13 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
       // El número de documento es válido
     } else {
       // Mostrar un mensaje de error con toast si no cumple con la longitud requerida
-      toast.error('El número de documento debe tener 8 dígitos numéricos.', {
-        position: 'top-right',
+      toast.error("El número de documento debe tener 8 dígitos numéricos.", {
+        position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
+      setNumeroDocumento("");
+    }
+    actualizarCamposCompletos();
   };
 
   const handlePrimerNombreBlur = () => {
@@ -313,7 +285,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
         position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
+    }
+    actualizarCamposCompletos();
   };
 
   const handleSegundoNombreBlur = () => {
@@ -322,7 +295,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
         position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
+    }
+    actualizarCamposCompletos();
   };
 
   const handlePrimerApellidoBlur = () => {
@@ -331,7 +305,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
         position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
+    }
+    actualizarCamposCompletos();
   };
 
   const handleSegundoApellidoBlur = () => {
@@ -340,16 +315,29 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
         position: "top-right",
         autoClose: 5000,
       });
-    } actualizarCamposCompletos();
+    }
+    actualizarCamposCompletos();
   };
 
   const handleFechaNacimientoBlur = () => {
-    if (fechaNacimiento.trim() === "") {
-      toast.error("La fecha de nacimiento es obligatoria.", {
-        position: "top-right",
-        autoClose: 5000,
-      });
-    } actualizarCamposCompletos();
+    if (fechaNacimiento) {
+      const fechaNacimientoDate = parse(
+        fechaNacimiento,
+        "yyyy-MM-dd",
+        new Date()
+      );
+      const edad = new Date().getFullYear() - fechaNacimientoDate.getFullYear();
+      if (edad < 18) {
+        // Si la edad es menor a 18 años, muestra un mensaje de error y borra el contenido del campo
+        toast.error("Debes ser mayor de 18 años.", {
+          position: "top-right",
+          autoClose: 5000,
+        });
+        setFechaNacimiento("");
+      }
+    }
+
+    actualizarCamposCompletos();
   };
   const handleTelefonoMovilChange = (e) => {
     const value = e.target.value;
@@ -364,8 +352,14 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
     } else {
       setIsTelefonoMovilValid(true);
       //(true); // Llama a  con true cuando los datos estén completos
-    } actualizarCamposCompletos();
+    }
+    actualizarCamposCompletos();
   };
+  function handleLettersOnlyChange(e, handleChange) {
+    const inputValue = e.target.value.replace(/[^A-Za-záéíóúÁÉÍÓÚüÜ\s]/g, ""); // Elimina caracteres no alfabéticos, acentos y no espacios
+    e.target.value = inputValue;
+    handleChange(e);
+  }
 
   const validateEmail = (value) => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -379,7 +373,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
 
     if (!isValid) {
       setEmail("");
-    } actualizarCamposCompletos();
+    }
+    actualizarCamposCompletos();
   };
   const handleSexoChange = (e) => {
     setSexo(e.target.value);
@@ -436,8 +431,6 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
 
   // Luego, en tus eventos onBlur o onChange de los campos relevantes, llama a esta función
 
-
-
   const Company = async (company, clave) => {
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
@@ -452,7 +445,6 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
     }
   };
 
-
   return (
     <>
       {/* style={{backgroundColor: "#E8E8E8"}} */}
@@ -461,7 +453,13 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
         <div className="row my-2">
           <div className="col-lg-4 col-md-4 col-sm-12 ">
             Tipo Documento
-            <select id="ddl_listas_tipodocumentodeidentidad" value={tipoDocumento} onChange={handleTipoDocumentoChange} onBlur={handleTipoDocumentoBlur} className="form-select cliente my-2" >
+            <select
+              id="ddl_listas_tipodocumentodeidentidad"
+              value={tipoDocumento}
+              onChange={handleTipoDocumentoChange}
+              onBlur={handleTipoDocumentoBlur}
+              className="form-select cliente my-2"
+            >
               <option>Seleccione una opcion</option>
               <option>D.N.I.</option>
               <option>carnet de Extranjeria</option>
@@ -476,7 +474,18 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
               type="text"
               className="form-control cliente my-2"
               value={numeroDocumento}
-              onChange={handleNumeroDocumentoChange}
+              inputMode="numeric" // Permite solo números en el teclado virtual
+              maxLength="8"
+              onChange={(e) => {
+                const inputValue = e.target.value.replace(/\D/g, ""); // Elimina caracteres no numéricos
+                if (inputValue.length > 8) {
+                  // Limita la longitud a 8 dígitos
+                  e.target.value = inputValue.slice(0, 8);
+                } else {
+                  e.target.value = inputValue;
+                }
+                setNumeroDocumento(e.target.value);
+              }}
               onBlur={handleNumeroDocumentoBlur}
               id="n_documento"
             />
@@ -484,38 +493,81 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
 
           <div className="col-lg-5 col-md-6 col-sm-12 ">
             Primer Nombre
-            <input name="roomRent" id="val_nombre1" value={primerNombre}
-              onChange={handlePrimerNombreChange} onBlur={handlePrimerNombreBlur} type="text" className="cliente form-control my-2" />
+            <input
+              name="roomRent"
+              id="val_nombre1"
+              value={primerNombre}
+              onChange={(e) =>
+                handleLettersOnlyChange(e, handlePrimerNombreChange)
+              }
+              onBlur={handlePrimerNombreBlur}
+              type="text"
+              className="cliente form-control my-2"
+            />
           </div>
 
           <div className="col-lg-5 col-md-6 col-sm-12 ">
             Segundo Nombre
-            <input name="roomRent" id="val_nombre2" value={segundoNombre}
-              onChange={handleSegundoNombreChange} onBlur={handleSegundoNombreBlur} type="text" className="cliente form-control my-2" />
+            <input
+              name="roomRent"
+              id="val_nombre2"
+              value={segundoNombre}
+              onChange={(e) =>
+                handleLettersOnlyChange(e, handleSegundoNombreChange)
+              }
+              onBlur={handleSegundoNombreBlur}
+              type="text"
+              className="cliente form-control my-2"
+            />
           </div>
 
           <div className="col-lg-5 col-md-6 col-sm-12 ">
             Apellido Paterno
-            <input name="roomRent" type="text" id="val_paterno" value={apellidoPaterno}
-              onChange={handlePrimerApellidoChange} onBlur={handlePrimerApellidoBlur} className="cliente form-control my-2" />
+            <input
+              name="roomRent"
+              type="text"
+              id="val_paterno"
+              value={apellidoPaterno}
+              onChange={(e) =>
+                handleLettersOnlyChange(e, handlePrimerApellidoChange)
+              }
+              onBlur={handlePrimerApellidoBlur}
+              className="cliente form-control my-2"
+            />
           </div>
 
           <div className="col-lg-5 col-md-6 col-sm-12 ">
             Apellido Materno
-            <input name="roomRent" type="text" id="val_materno" value={apellidoMaterno}
-              onChange={handleSegundoApellidoChange} onBlur={handleSegundoApellidoBlur} className="cliente form-control my-2" />
+            <input
+              name="roomRent"
+              type="text"
+              id="val_materno"
+              value={apellidoMaterno}
+              onChange={(e) =>
+                handleLettersOnlyChange(e, handleSegundoApellidoChange)
+              }
+              onBlur={handleSegundoApellidoBlur}
+              className="cliente form-control my-2"
+            />
           </div>
 
           <div className="col-lg-4 col-md-4 col-sm-12 ">
             Fecha de Nacimiento:
-            <input type="date" required id="fecha_nacimiento" value={fechaNacimiento}
-              onChange={handleFechaNacimientoChange} onBlur={handleFechaNacimientoBlur} className="cliente form-control my-2" />
+            <input
+              type="date"
+              required
+              id="fecha_nacimiento"
+              value={fechaNacimiento}
+              onChange={handleFechaNacimientoChange}
+              onBlur={handleFechaNacimientoBlur}
+              className="cliente form-control my-2"
+            />
           </div>
 
           <div className="col-lg-4 col-md-4 col-sm-12 ">
             Sexo
             <select
-              className="form-select my-2"
+              className="form-select cliente my-2"
               id="ddl_listas_sexo"
               value={sexo}
               onChange={handleSexoChange}
@@ -553,7 +605,10 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
               name="val_fono"
               id="val_fon_venta"
               type="text"
-              className={`form-control my-2 ${!isTelefonoMovilValid ? "invalid" : ""}`}
+              maxLength={9}
+              className={`cliente form-control my-2 ${
+                !isTelefonoMovilValid ? "invalid" : ""
+              }`}
               value={telefonoMovil}
               onChange={handleTelefonoMovilChange}
               onBlur={handleTelefonoMovilBlur}
@@ -565,8 +620,9 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
               type="email"
               id="val_email"
               required
-              className={`cliente form-control my-2 ${isValidEmail ? "" : "invalid"
-                }`}
+              className={`cliente form-control my-2 ${
+                isValidEmail ? "" : "invalid"
+              }`}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onBlur={handleEmailBlur}
@@ -575,7 +631,6 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
               <p className="error-message">Correo electrónico no válido.</p>
             )}
           </div>
-
 
           <div className="form rounded-3 col-lg-4 col-md-6 col-sm-12 ">
             Departamento
@@ -645,14 +700,19 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
               name="roomRent"
               type="text"
               value={direccion}
-              onChange={handleDireccionChange}
+              onChange={(e) => {
+                const inputValue = e.target.value.replace(
+                  /[^A-Za-z0-9\s]/g,
+                  ""
+                ); // Elimina caracteres especiales
+                e.target.value = inputValue;
+                handleDireccionChange(e);
+              }}
               onBlur={handleDireccionBlur}
               id="val_direccion"
               className="cliente my-2 form-control"
             />
           </div>
-
-
         </div>
       </section>
     </>
