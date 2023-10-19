@@ -692,7 +692,7 @@ function Contesta({
                       <option value="1">Si</option>
                       <option value="2">No</option>
                     </select>
-                    <TextPreCierre></TextPreCierre>
+                    
                     {selectConectaLlamadaPreguntaConfirma === "1" && (
                       <div className="my-4" id="si_correo">
                         <p>
