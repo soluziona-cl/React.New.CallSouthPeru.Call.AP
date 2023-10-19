@@ -9,6 +9,8 @@ import { Routes, Route, Link, Outlet, useNavigate } from "react-router-dom";
 import TextPromocionesRipley from "./TextPromocionesRipley";
 import TextPreCierre from "./TextPreCierre";
 import Terceros from "./Terceros";
+import Tabsinformacion from "./TabsInfotmacion";
+
 
 
 function Contesta({
@@ -711,6 +713,9 @@ function Contesta({
                         </p>
                       </div>
                     )}
+                  </div>
+                  <div>
+                    <Tabsinformacion></Tabsinformacion>
                   </div>
                 </div>
               </div>
