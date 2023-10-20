@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/css/main.dc048d47.css",
-    "main.js": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/js/main.dd2dd318.js",
+    "main.js": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/js/main.03e6c09e.js",
     "index.html": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/index.html",
     "main.dc048d47.css.map": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/css/main.dc048d47.css.map",
-    "main.dd2dd318.js.map": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/js/main.dd2dd318.js.map"
+    "main.03e6c09e.js.map": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/js/main.03e6c09e.js.map"
   },
   "entrypoints": [
     "static/css/main.dc048d47.css",
-    "static/js/main.dd2dd318.js"
+    "static/js/main.03e6c09e.js"
   ]
 }
