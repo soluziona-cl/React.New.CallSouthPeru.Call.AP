@@ -216,9 +216,11 @@ const Callintro = () => {
     json_sucess_gestion.push(item_sucess_gestion);
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
+    item_sucess_llamada["campaign_name"] = "Sonrie Seguro "; //nombre de la campana, en este caso: Cobranza_INCAP
     item_sucess_llamada["campaign_id"] = list_id;
-    item_sucess_llamada["campaign"] = "Sonrie Seguro ";
+    datafull.map((data, index) => {
+      item_sucess_llamada["campaign"] = data.campaign;
+    });
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
@@ -419,6 +421,8 @@ const Callintro = () => {
                     conecta={selectLlamada}
                     elapsedSeconds={elapsedSeconds}
                     clave={token}
+                    datafull={datafull}
+
                   />
                 </section>
               )}
@@ -432,6 +436,8 @@ const Callintro = () => {
                     handleSelectChange={handleSelectChange}
                     elapsedSeconds={elapsedSeconds}
                     clave={token}
+                    datafull={datafull}
+
                   />
                 </section>
               )}

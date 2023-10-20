@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 
-function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,elapsedSeconds,  }) {
+function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,elapsedSeconds,datafull  }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
   const [puedeClickear, setPuedeClickear] = useState(true);
@@ -59,9 +59,11 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
     json_sucess_gestion.push(item_sucess_gestion);
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: 
+    item_sucess_llamada["campaign_name"] = "Sonrie Seguro ";
     item_sucess_llamada["campaign_id"] = list_id;
-    item_sucess_llamada["campaign"] = " Sonrie_Seguro ";
+    datafull.map((data, index) => {
+      item_sucess_llamada["campaign"] = data.campaign;
+    });
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
