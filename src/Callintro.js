@@ -387,7 +387,7 @@ const Callintro = () => {
                 Tipo Base: {data.Chubb_tipo_captacion.toUpperCase()}
               </div>
             ))}{" "}
-            <br /> Identificador de Llamada{" "}
+             Identificador de Llamada{" "}
             <label id="ident_llamdaa">{lead_id}</label>
             <br /> Duracion de la llamada{" "}
             <span id="duracion" className="cliente">
