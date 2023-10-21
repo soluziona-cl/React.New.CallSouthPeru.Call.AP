@@ -13,24 +13,26 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
 
   const [optionListMotivo, setOptionListMotivo] = useState([]);
 
-  const [optionListMotivoDepartamento, setOptionListMotivoDepartamento] =
-    useState([]);
-  const [optionListMotivoProvincia, setOptionListMotivoProvincia] = useState(
-    []
-  );
+  const [optionListMotivoDepartamento, setOptionListMotivoDepartamento] = useState([]);
+  const [optionListMotivoProvincia, setOptionListMotivoProvincia] = useState([]);
   const [optionListMotivoDistrito, setOptionListMotivoDistrito] = useState([]);
 
-  const [optionValueMotivoDepartamento, setOptionValueMotivoDepartamento] =
-    useState("0");
-  const [optionValueMotivoProvincia, setOptionValueMotivoProvincia] =
-    useState("0");
-  const [optionValueMotivoDistrito, setOptionValueMotivoDistrito] =
-    useState("0");
+  const [optionValueMotivoDepartamento, setOptionValueMotivoDepartamento] = useState("0");
+  const [optionValueMotivoProvincia, setOptionValueMotivoProvincia] = useState("0");
+  const [optionValueMotivoDistrito, setOptionValueMotivoDistrito] = useState("0");
+
+  const [optionValueMotivoProvinciaView, setOptionValueMotivoProvinciaView] = useState(true);
+  const [optionValueMotivoDistritoView, setOptionValueMotivoDistritoView] = useState(true);
+
+
 
   const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
-    useState("0");
+  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState("0");
+
+
+
+
 
   const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
@@ -70,8 +72,10 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
   useEffect(() => {
     Departamento();
   }, []);
-  //console.log(clave)
+
+
   const Departamento = async () => {
+
     const result = await axios.post(
       "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas",
       { dato: "S21", dato_1: "", dato_2: "", dato_3: "" },
@@ -83,81 +87,134 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
       setOptionListDetalleEstado(false);
       setOptionValueMotivoProvincia("0");
       setOptionValueMotivoDistrito("0");
+
+      setOptionListDetalleEstado(false);
+      setOptionListDetalleEstadoSelect(false);
+
     }
   };
 
   // revisar y agregar distrito y provincia
-  const ChangeConecta_Departamento = async (event) => {
-    // console.log(event.value)
+  const ChangeConecta_Departamento = async (valor) => {
 
-    // if (departamento === "0") {
+    console.log(valor)
+    setOptionValueMotivoDepartamento(valor);
 
-    //   setOptionListDetalleEstadoDireccionD(true);
-    //   setOptionListDetalleEstadoSelectD("0");
-    //   setSelectedLlamadaD("0");
-    // } else {
+    setOptionValueMotivoProvincia("0")
+    setOptionValueMotivoDistrito("0")
 
-    //   console.log(departamento)
+    setOptionValueMotivoProvinciaView(true)
+    setOptionValueMotivoDistritoView(true)
 
-    const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas", //cambiar endpoint para ciudad y provincia y distrito
-      {
-        dato: "S22",
-        dato_1: optionValueMotivoDepartamento,
-        dato_2: "",
-        dato_3: "",
-      },
-      { headers: { Authorization: `Bearer ${clave}` } }
-    );
+    if (valor === "0") {
 
-    // setSelectedLlamadaD(event);
+      setOptionListDetalleEstadoDireccionD(true);
+      setOptionValueMotivoDepartamento("0");
+      setOptionValueMotivoProvincia("0")
+      setOptionValueMotivoDistrito("0")
 
-    if (result.status === 200) {
-      setOptionListMotivoProvincia(result.data);
-      setOptionListDetalleEstadoDireccionD(false);
-      setOptionValueMotivoDistrito("0");
-      // ChangeConecta_Distrito ()
-      // console.log(result.data);
+
+
+
+    } else {
+
+      setOptionValueMotivoDepartamento(valor);
+
+
+      const result = await axios.post(
+        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas", //cambiar endpoint para ciudad y provincia y distrito
+        {
+          dato: "S22",
+          dato_1: valor,
+          dato_2: "",
+          dato_3: "",
+        },
+        { headers: { Authorization: `Bearer ${clave}` } }
+      );
+
+      // setSelectedLlamadaD(event);
+
+      if (result.status === 200) {
+
+        setOptionListMotivoProvincia(result.data);
+        setOptionListDetalleEstadoDireccionD(false);
+        setOptionValueMotivoProvincia("0")
+        setOptionValueMotivoDistrito("0")
+        setOptionValueMotivoProvinciaView(false)
+        setOptionValueMotivoDistritoView(true)
+
+      }
     }
-    // }
   };
 
-  const ChangeConecta_Provincia = async (event) => {
-    // console.log(provincia)
-    // console.log(departamento)
-    // if (provincia === "0") {
-    //   setOptionListDetalleEstadoDireccionD(true);
-    //   setOptionListDetalleEstadoSelectD("0");
-    //   setSelectedLlamadaD("0");
-    // } else {
-    const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas", //cambiar endpoint para ciudad y provincia y distrito
-      {
-        dato: "S23",
-        dato_1: optionValueMotivoDepartamento,
-        dato_2: optionValueMotivoProvincia,
-        dato_3: "",
-      },
-      { headers: { Authorization: `Bearer ${clave}` } }
-    );
+  const ChangeConecta_Provincia = async (valor) => {
 
-    // setSelectedLlamadaD(event);
+    console.log(valor)
+    setOptionValueMotivoProvincia(valor);
+    setOptionValueMotivoDistrito("0");
+    setOptionValueMotivoDistritoView(true)
 
-    if (result.status === 200) {
-      setOptionListMotivoDistrito(result.data);
-      setOptionListDetalleEstadoDireccionD(false);
-      // console.log(result.data);
-    }
-    // }
+    if (valor === "0") {
+
+      setOptionValueMotivoDistritoView(true);
+      setOptionValueMotivoProvincia("0")
+      setOptionValueMotivoDistrito("0")
+
+    } else {
+
+      setOptionValueMotivoProvincia(valor);
+
+      const result = await axios.post(
+        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/listas", //cambiar endpoint para ciudad y provincia y distrito
+        {
+          dato: "S23",
+          dato_1: optionValueMotivoDepartamento,
+          dato_2: valor,
+          dato_3: "",
+        },
+        { headers: { Authorization: `Bearer ${clave}` } }
+      );
+      if (result.status === 200) {
+
+        setOptionListMotivoDistrito(result.data);
+        setOptionListDetalleEstadoDireccionD(false);
+        setOptionValueMotivoDistrito("0")
+        setOptionValueMotivoDistritoView(false)
+      }
+
+    };
+  }
+
+  const handleDistritoChange = (valor) => {
+
+    console.log(valor)
+
+    setOptionValueMotivoDistrito("0");
+
+
+    if (valor === "0") {
+
+
+      setOptionValueMotivoDistrito("0")
+
+
+    } else {
+
+      setOptionValueMotivoDistrito(valor);
+
+
+
+    };
+
   };
 
-  const ChangeConectaDetalle_Direccion = async (event) => {
-    console.log(event);
+  // const ChangeConectaDetalle_Direccion = async (event) => {
+  //   console.log(event);
 
-    setOptionListDetalleEstadoDireccionD(false);
-    setOptionListDetalleEstadoSelectD(event);
-    setSelectedLlamadaDetalleD(event);
-  };
+  //   setOptionListDetalleEstadoDireccionD(false);
+  //   setOptionListDetalleEstadoSelectD(event);
+  //   setSelectedLlamadaDetalleD(event);
+  // };
 
   const [tipoDocumento, setTipoDocumento] = useState("");
   const [numeroDocumento, setNumeroDocumento] = useState("");
@@ -183,20 +240,15 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
 
   const [optionListDireccionD, setOptionListDireccionD] = useState([]);
   const [optionListDetalleD, setOptionListDetalleD] = useState([]);
-  const [
-    optionListDetalleEstadoDireccionD,
-    setOptionListDetalleEstadoDireccionD,
-  ] = useState(true);
-  const [optionListDetalleEstadoSelectD, setOptionListDetalleEstadoSelectD] =
-    useState("");
+  const [optionListDetalleEstadoDireccionD, setOptionListDetalleEstadoDireccionD,] = useState(true);
+  const [optionListDetalleEstadoSelectD, setOptionListDetalleEstadoSelectD] = useState("");
 
-  const handleDistritoChange = (e) => {
-    setOptionValueMotivoDistrito(e.target.value);
-  };
+
 
   const handleDireccionChange = (e) => {
     setDireccion(e.target.value);
   };
+
   const handleDepartamentoBlur = () => {
     if (optionValueMotivoDepartamento.trim() === "") {
       // Verifica el estado 'departamento'
@@ -606,9 +658,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
               id="val_fon_venta"
               type="text"
               maxLength={9}
-              className={`cliente form-control my-2 ${
-                !isTelefonoMovilValid ? "invalid" : ""
-              }`}
+              className={`cliente form-control my-2 ${!isTelefonoMovilValid ? "invalid" : ""
+                }`}
               value={telefonoMovil}
               onChange={handleTelefonoMovilChange}
               onBlur={handleTelefonoMovilBlur}
@@ -620,9 +671,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
               type="email"
               id="val_email"
               required
-              className={`cliente form-control my-2 ${
-                isValidEmail ? "" : "invalid"
-              }`}
+              className={`cliente form-control my-2 ${isValidEmail ? "" : "invalid"
+                }`}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onBlur={handleEmailBlur}
@@ -640,7 +690,6 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
               disabled={false}
               value={optionValueMotivoDepartamento} // Usar el estado 'departamento' en lugar de 'select'
               onChange={(e) => {
-                setOptionValueMotivoDepartamento(e.target.value);
                 ChangeConecta_Departamento(e.target.value);
               }}
               onBlur={handleDepartamentoBlur}
@@ -659,10 +708,9 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
             <select
               className="cliente form-control form-select my-2 "
               id="ddl_listas_provincia"
-              disabled={optionListDetalleEstado}
+              disabled={optionValueMotivoProvinciaView}
               value={optionValueMotivoProvincia} // Usar el estado 'provincia' en lugar de 'optionListDetalleEstadoSelect'
               onChange={(e) => {
-                setOptionValueMotivoProvincia(e.target.value);
                 ChangeConecta_Provincia(e.target.value);
               }}
               onBlur={handleProvinciaBlur}
@@ -680,8 +728,11 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
             Distrito
             <select
               className="cliente form-control form-select my-2 "
+              disabled={optionValueMotivoDistritoView}
               value={optionValueMotivoDistrito}
-              onChange={handleDistritoChange}
+              onChange={(e) => {
+                handleDistritoChange(e.target.value);
+              }}
               onBlur={handleDistritoBlur}
               id="ddl_listas_distrito"
             >
