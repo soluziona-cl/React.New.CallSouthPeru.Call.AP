@@ -22,6 +22,7 @@ registerLocale("es", es);
 
 const Callintro = () => {
   const [opcionSeleccionada, setOpcionSeleccionada] = useState(null);
+  const [puedeClickear, setPuedeClickear] = useState(true);
 
   const { Alert } = bootstrap;
   var [message, setMessage] = useState("...");
@@ -39,6 +40,7 @@ const Callintro = () => {
     useState(false); // Estado para controlar la habilitación del botón
 
   const [selectLlamada, setSelectLlamada] = useState("0");
+  const [selectLlamada_2, setselectLlamada_2] = useState("0");
   const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
 
   const [selectObservacion, setSelectedObservacion] = useState("");
@@ -187,6 +189,9 @@ const Callintro = () => {
   const ChangeLlamada = (value) => {
     setSelectLlamada(value);
   };
+  const ChangeLlamada_2 = (value) => {
+    setselectLlamada_2(value);
+  };
 
   const handleSelectChange = (value) => {
     setSelectSiConectaLlamada(value);
@@ -250,7 +255,7 @@ const Callintro = () => {
   }
 
   async function GuardarRegistroNoContesta() {
-    setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
+    setPuedeClickear(false);
 
     let id = []; //final
     let item_sucess_llamada = {};
@@ -263,12 +268,27 @@ const Callintro = () => {
       item_sucess_gestion[title] = valor;
     });
 
+    let queryString = window.location.search;
+    let urlParams = new URLSearchParams(queryString);
+    const list_id = urlParams.get("list_id");
+    const lead_id = urlParams.get("lead_id");
+    // const rut = urlParams.get("address2");
+    const epoch = urlParams.get("epoch");
+    const lead_id_2 = urlParams.get("lead_id");
+    const rut_2 = urlParams.get("lead_id");
+    const phone_number = urlParams.get("phone_number");
+    const uniqueid = urlParams.get("uniqueid");
+    const agente = urlParams.get("user");
+    const recording_filename = urlParams.get("recording_filename");
+
     json_sucess_gestion.push(item_sucess_gestion);
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = company; //nombre de la campana, en este caso: Cobranza_INCAP
+    item_sucess_llamada["campaign_name"] = "Sonrie Seguro ";
     item_sucess_llamada["campaign_id"] = list_id;
-    item_sucess_llamada["campaign"] = "Sonrie Seguro ";
+    datafull.map((data, index) => {
+      item_sucess_llamada["campaign"] = data.campaign;
+    });
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
@@ -293,13 +313,16 @@ const Callintro = () => {
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Soluziona/CallSouth/SonrieSeguro/Call/Fin";
+          window.location.href = "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
         }, 5000);
       }
     } catch (error) {
       // Manejo de errores
       toast.success("Error Con Guardado");
       console.log("Error Con Guardado");
+      setTimeout(() => {
+        setPuedeClickear(true); // Reactivamos la capacidad de clickear después de 1 segundo.
+      }, 1000);
     }
   }
 
@@ -387,8 +410,7 @@ const Callintro = () => {
                 Tipo Base: {data.Chubb_tipo_captacion.toUpperCase()}
               </div>
             ))}{" "}
-             Identificador de Llamada{" "}
-            <label id="ident_llamdaa">{lead_id}</label>
+            Identificador de Llamada <label id="ident_llamdaa">{lead_id}</label>
             <br /> Duracion de la llamada{" "}
             <span id="duracion" className="cliente">
               {get_elapsed_time_string(elapsedSeconds)}
@@ -408,26 +430,95 @@ const Callintro = () => {
                   value={selectLlamada}
                   onChange={(e) => ChangeLlamada(e.target.value)}
                 >
-                  <option value="">Seleccione una opción</option>
-                  <option value="1">Conecta</option>
-                  <option value="no_conecta">No Conecta</option>
+                  <option value="0">Seleccione una opción</option>
+                  <option value="85">Contacto Efectivo Positivo</option>
+                  <option value="86">EFECTIVO</option>
+                  <option value="87">NO CONTACTO</option>
+                  <option value="88">NO EFECTIVO</option>
                 </select>
               </div>
+
+              <hr className="my-4" />
+              {(selectLlamada === "85" || selectLlamada === "86") && (
+                <div>
+                  <label for="ddl_estado">Sub-Conecta:</label>
+                  <div className="col-lg-12 col-sm-12">
+                    <select
+                      className="cliente form-control form-select my-1"
+                      id="selectsubllamada"
+                      value={selectLlamada_2}
+                      onChange={(e) => ChangeLlamada_2(e.target.value)}
+                    >
+                      <option value="0">Seleccione una opción</option>
+                      {selectLlamada === "85" && (
+                        <React.Fragment>
+                          <option value="89">Ampliacion de Linea</option>
+                        </React.Fragment>
+                      )}
+                      {selectLlamada === "86" && (
+                        <React.Fragment>
+                          <option value="90">
+                            ND LO LLAMARON MAS DE UNA VEZ
+                          </option>
+                          <option value="91">
+                            NO DESEA - YA LE OFRECIERON
+                          </option>
+                          <option value="92">ND POR COSTO</option>
+                          <option value="93">ND NO TIENE TARJETA</option>
+                          <option value="94">ND COYUNTURAL</option>
+                          <option value="96">ND NO CONFORME RIPLEY</option>
+                          <option value="97">REVALIDACION</option>
+                          <option value="98">VOLVER A LLAMAR</option>
+                          <option value="99">
+                            CLIENTE CORTO LLAMADA CON INFO
+                          </option>
+                          <option value="100">ND NO BRINDA MOTIVO</option>
+                          <option value="101">
+                            ND NO CONTRATA NADA POR TELF.
+                          </option>
+                        </React.Fragment>
+                      )}
+                      {(selectLlamada === "85" || selectLlamada === "86") && (
+                        <React.Fragment>
+                          <option value="95">VENTA</option>
+                        </React.Fragment>
+                      )}
+                    </select>
+                  </div>
+
+                  {selectLlamada_2 !== "95" &&
+                    selectLlamada_2 !== "89" &&
+                    selectLlamada_2 !== "0" &&
+                    selectLlamada_2 !== "" && (
+                      <div className="d-flex justify-content-end m-1 mt-2">
+                        <button
+                          className="btn text-white guardar"
+                          value="GuardarRegistro"
+                          onClick={GuardarRegistroNoContesta}
+                          disabled={!puedeClickear}
+                          style={{ background: "#8362D6" }}
+                        >
+                          Finalizar
+                        </button>
+                      </div>
+                    )}
+                </div>
+              )}
+
               <hr className="my-4" />
 
-              {selectLlamada === "no_conecta" && (
+              {(selectLlamada === "87" || selectLlamada === "88") && (
                 <section>
                   <NoContesta
                     conecta={selectLlamada}
                     elapsedSeconds={elapsedSeconds}
                     clave={token}
                     datafull={datafull}
-
                   />
                 </section>
               )}
 
-              {selectLlamada === "1" && select_si_conecta_llamada === "2" && (
+              {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
                 <section>
                   <Terceros
                     conecta={selectLlamada}
@@ -437,7 +528,6 @@ const Callintro = () => {
                     elapsedSeconds={elapsedSeconds}
                     clave={token}
                     datafull={datafull}
-
                   />
                 </section>
               )}
@@ -452,7 +542,7 @@ const Callintro = () => {
           </div>
 
           <div className=" mt-2 ">
-            {selectLlamada === "1" && (
+            {(selectLlamada_2 === "95" || selectLlamada_2 === "89") && (
               <div>
                 <hr />
                 <div className="container">

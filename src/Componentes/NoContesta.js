@@ -133,16 +133,22 @@ console.log(Conecta)
                 onChange={handleOptionChange} // Manejar el cambio de opción
                 value={selectedOption}
               >
-                 <option value="0">Seleccione</option>
-                 <option value="9">BUZON / FAX / GRABADORA</option>
-                 <option value="3">CITA TELEFONICA CON TERCERO</option>
-                 <option value="4">CLIENTE INUBICABLE</option>
-                 <option value="5">CONTACTO CON TERCEROS CASA</option>
-                 <option value="6">CONTACTO CON TERCEROS OFICINA</option>
-                 <option value="8">NO CONTACTADOS</option>
-                 <option value="10">NO CONTESTA</option>
-                 <option value="7">NO CORRESPONDE</option>
-                 <option value="11">TELEFONO OCUPADO</option>
+                 {conecta === "87" && (
+                  <React.Fragment>
+                    <option value="102">GRABADORA</option>
+                    <option value="103">NO CONTESTA / OCUPADO</option>
+                    <option value="104">FUERA DE SERVICIO / SUSPENDIDO</option>
+
+                  </React.Fragment>
+                )}
+                                 {conecta === "88" && (
+                  <React.Fragment>
+                    <option value="105">TITULAR INUBICABLE</option>
+                    <option value="106">CONTACTO CON TERCERO</option>
+                    <option value="107">CORTA LLAMADA SIN INFO</option>
+                    <option value="108">NUMERO EQUIVOCADO</option>
+                  </React.Fragment>
+                )}
                </select>
              
             </div>
