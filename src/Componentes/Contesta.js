@@ -392,7 +392,7 @@ function Contesta({
                             )}
                           </div>
                           <div className="" id="coross">
-                            {data.Chubb_tipo_captacion.toUpperCase() === "CROSS" && (
+                            {data.Chubb_tipo_captacion.toUpperCase().includes("CROSS")&& (
                               <p>
                                 EL MOTIVO DE MI LLAMADA Es para agradecer el
                                 tiempo de permanencia con EL SEGURO (DETALLAR

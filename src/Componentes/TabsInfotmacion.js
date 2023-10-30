@@ -106,7 +106,7 @@ function Tabsinformacion({ company, clave, onNoConectaChange }) {
         onSelect={(k) => setKey(k)}
         className="mb-3  "
       >
-        <Tab eventKey="Adicional1" title="Adicional1">
+        <Tab eventKey="Adicional1" title="Información Adicional">
           <div className=" p-2">
             <details>
               <summary className="">
