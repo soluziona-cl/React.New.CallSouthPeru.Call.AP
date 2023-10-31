@@ -469,13 +469,9 @@ const Callintro = () => {
                           <option value="96">ND NO CONFORME RIPLEY</option>
                           <option value="97">REVALIDACION</option>
                           <option value="98">VOLVER A LLAMAR</option>
-                          <option value="99">
-                            CLIENTE CORTO LLAMADA CON INFO
-                          </option>
+                          <option value="99">CLIENTE CORTO LLAMADA CON INFO </option>
                           <option value="100">ND NO BRINDA MOTIVO</option>
-                          <option value="101">
-                            ND NO CONTRATA NADA POR TELF.
-                          </option>
+                          <option value="101">ND NO CONTRATA NADA POR TELF. </option>
                         </React.Fragment>
                       )}
                       {(selectLlamada === "85" || selectLlamada === "86") && (

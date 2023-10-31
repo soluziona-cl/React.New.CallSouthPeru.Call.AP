@@ -661,6 +661,7 @@ function Contesta({
                     clave={token}
                     elapsedSeconds={setduracion}
                     onDataComplete={handleDatosCompletosChange}
+                    datafull={datafull}
                   />
                   {/* {camposCompletos ? (
                     console.log('Todos los campos están completos.')

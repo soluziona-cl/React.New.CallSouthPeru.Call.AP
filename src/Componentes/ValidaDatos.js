@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { format, parse } from "date-fns";
 
-function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
+function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull }) {
   //console.log(clave)
 
   const [selectLlamada, setSelectedLlamada] = useState("");
@@ -32,6 +32,41 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
 
 
 
+
+  const [tipoDocumento, setTipoDocumento] = useState("");
+  const [numeroDocumento, setNumeroDocumento] = useState("");
+  const [primerNombre, setPrimerNombre] = useState("");
+  const [segundoNombre, setSegundoNombre] = useState("");
+  const [apellidoPaterno, setApellidoPaterno] = useState("");
+  const [apellidoMaterno, setApellidoMaterno] = useState("");
+  const [fechaNacimiento, setFechaNacimiento] = useState("");
+  const [email, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [telefonoMovil, setTelefonoMovil] = useState("");
+  const [isTelefonoMovilValid, setIsTelefonoMovilValid] = useState(true);
+  const [sexo, setSexo] = useState("");
+  const [estadoCivil, setEstadoCivil] = useState("");
+
+
+
+
+
+  useEffect(() => {
+
+    console.log(datafull)
+    // Map through the data and set the primerNombre state
+    datafull.map((datos, index) => {
+      console.log(datos.Chubb_Variable3)
+      console.log(datos.Chubb_nombre.toUpperCase())
+
+      setPrimerNombre(datos.Chubb_nombre.toUpperCase())
+      setNumeroDocumento(datos.Chubb_numero_documento.toUpperCase())
+      setFechaNacimiento(datos.Chubb_fecha_nacimiento ? '' : datos.Chubb_fecha_nacimiento)
+      setTelefonoMovil(datos.Chubb_celular1)
+      setEmail(datos.Chubb_email.toUpperCase())
+    });
+
+  }, [datafull]);
 
 
   const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -216,19 +251,16 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
   //   setSelectedLlamadaDetalleD(event);
   // };
 
-  const [tipoDocumento, setTipoDocumento] = useState("");
-  const [numeroDocumento, setNumeroDocumento] = useState("");
-  const [primerNombre, setPrimerNombre] = useState("");
-  const [segundoNombre, setSegundoNombre] = useState("");
-  const [apellidoPaterno, setApellidoPaterno] = useState("");
-  const [apellidoMaterno, setApellidoMaterno] = useState("");
-  const [fechaNacimiento, setFechaNacimiento] = useState("");
-  const [email, setEmail] = useState("");
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [telefonoMovil, setTelefonoMovil] = useState("");
-  const [isTelefonoMovilValid, setIsTelefonoMovilValid] = useState(true);
-  const [sexo, setSexo] = useState("");
-  const [estadoCivil, setEstadoCivil] = useState("");
+  // data.map((datos, index) => {
+  //   console.log(datos.Chubb_Variable3)
+
+  //   setPrimerNombre(datos.Chubb_nombre)
+
+  // });
+
+
+
+
 
   const [departamento, setDepartamento] = useState("");
   const [provincia, setProvincia] = useState("");
@@ -391,6 +423,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete }) {
 
     actualizarCamposCompletos();
   };
+
+
   const handleTelefonoMovilChange = (e) => {
     const value = e.target.value;
     // Remover cualquier caracter que no sea un número
