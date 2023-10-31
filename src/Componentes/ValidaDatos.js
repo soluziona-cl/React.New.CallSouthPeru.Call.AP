@@ -32,7 +32,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
 
 
 
-
+//Esto lo hizo Christian..
   const [tipoDocumento, setTipoDocumento] = useState("");
   const [numeroDocumento, setNumeroDocumento] = useState("");
   const [primerNombre, setPrimerNombre] = useState("");
@@ -53,12 +53,10 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
 
   useEffect(() => {
 
-    console.log(datafull)
+    // console.log(datafull)
     // Map through the data and set the primerNombre state
     datafull.map((datos, index) => {
-      console.log(datos.Chubb_Variable3)
-      console.log(datos.Chubb_nombre.toUpperCase())
-
+     
       setPrimerNombre(datos.Chubb_nombre.toUpperCase())
       setNumeroDocumento(datos.Chubb_numero_documento.toUpperCase())
       setFechaNacimiento(datos.Chubb_fecha_nacimiento ? '' : datos.Chubb_fecha_nacimiento)
@@ -67,6 +65,9 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
     });
 
   }, [datafull]);
+
+//Esto lo hizo Christian..
+
 
 
   const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;

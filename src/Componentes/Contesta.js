@@ -126,6 +126,7 @@ function Contesta({
       item_sucess_llamada["sucess"] = true;
       item_sucess_llamada["campaign_name"] = "Sonrie_Seguro";
       item_sucess_llamada["campaign_id"] = list_id;
+      
       datafull.map((data, index) => {
         item_sucess_llamada["campaign"] = data.campaign;
       });
