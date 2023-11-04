@@ -431,7 +431,7 @@ const Callintro = () => {
                   onChange={(e) => ChangeLlamada(e.target.value)}
                 >
                   <option value="0">Seleccione una opción</option>
-                  <option value="85">Contacto Efectivo Positivo</option>
+                  {/* <option value="85">Contacto Efectivo Positivo</option> */}
                   <option value="86">EFECTIVO</option>
                   <option value="87">NO CONTACTO</option>
                   <option value="88">NO EFECTIVO</option>
@@ -457,12 +457,8 @@ const Callintro = () => {
                       )}
                       {selectLlamada === "86" && (
                         <React.Fragment>
-                          <option value="90">
-                            ND LO LLAMARON MAS DE UNA VEZ
-                          </option>
-                          <option value="91">
-                            NO DESEA - YA LE OFRECIERON
-                          </option>
+                          <option value="90">ND LO LLAMARON MAS DE UNA VEZ</option>
+                          <option value="91">NO DESEA - YA LE OFRECIERON </option>
                           <option value="92">ND POR COSTO</option>
                           <option value="93">ND NO TIENE TARJETA</option>
                           <option value="94">ND COYUNTURAL</option>
