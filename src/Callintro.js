@@ -406,7 +406,7 @@ const Callintro = () => {
           <h3 class="text-white  ms-3 ">
             <h2 class="fw-bold "> Sonríe Seguro </h2>
             {datafull.map((data, index) => (
-              <div key={index} className="col-lg-4 col-md-5 col-sm-12 my-1">
+              <div key={index} className="col-lg-12 col-md-12 col-sm-12 my-1">
                 Tipo Base: {data.Chubb_tipo_captacion.toUpperCase()}
               </div>
             ))}{" "}

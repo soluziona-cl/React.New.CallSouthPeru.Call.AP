@@ -36,37 +36,39 @@ function AsistenciasCoberturasb() {
 
   const columns2 = [
     {
-      name:<div className=" "> Coberturas </div>,
-      selector: "Coberturas",
+      name: <div className=" "> Coberturas </div>,
+      
+      selector: row => row.Coberturas,
+      
       center: true,
     },
     {
-      name: <div className=" ">	Plan Base: Sólo titula <br/><hr/>Suma Asegurada </div>,
-      selector: "Suma_Asegurada",
+      name: <div className=" ">	Plan Base: Sólo titula <br /><hr />Suma Asegurada </div>,
+      selector: row => row.Suma_Asegurada,
       center: true,
     }
   ];
-  
+
   const tableData2 = [
     {
       Coberturas: "Muerte Accidental (periodo de carencia 3 meses ",
-      "Suma_Asegurada": " S/2,000"
-    },  
+      Suma_Asegurada: " S/2,000"
+    },
     {
       Coberturas: "Reembolso de Gastos Médicos por Accidente  ",
-      "Suma_Asegurada": " S/1,000"
+      Suma_Asegurada: " S/1,000"
     },
     {
       Coberturas: "Prima Bruta Mensual* ",
-      "Suma_Asegurada": "S/29.90"
+      Suma_Asegurada: "S/29.90"
     }
-  
+
   ];
- 
+
 
   return (
     <>
-     <DataTable columns={columns2} data={tableData2} customStyles={customStyles} className="mb-3" />
+      <DataTable columns={columns2} data={tableData2} customStyles={customStyles} className="mb-3" />
     </>
   );
 }

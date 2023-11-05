@@ -36,14 +36,10 @@ function Contesta({
   const [puedeClickear, setPuedeClickear] = useState(true);
 
   const [selectLlamada, setSelectedLlamada] = useState("");
-  const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
-    useState("0");
+  const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] = useState("0");
   const [token, setToken] = useState(clave);
   const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
-  const [
-    select_conecta_llamada_pregunta_no_interesa,
-    setselect_conecta_llamada_pregunta_no_interesa,
-  ] = useState("0");
+  const [select_conecta_llamada_pregunta_no_interesa, setselect_conecta_llamada_pregunta_no_interesa] = useState("0");
 
   const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
@@ -53,10 +49,7 @@ function Contesta({
   const [selectnointeresa, setselectnointeresa] = useState("0");
   const [setduracion, setselectduracion] = useState("0");
   const [otra_razon_noacepta, setotra_razon_noacepta] = useState("");
-  const [
-    select_conecta_llamada_pregunta_interesa,
-    setselect_conecta_llamada_pregunta_interesa,
-  ] = useState("0");
+  const [select_conecta_llamada_pregunta_interesa, setselect_conecta_llamada_pregunta_interesa] = useState("0");
   const [no_interesa, setno_interesa] = useState("0");
 
 
@@ -65,6 +58,7 @@ function Contesta({
 
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
+  const [optionocupacion, setOptionListOcupacion] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
   const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
     useState("0");
@@ -109,66 +103,66 @@ function Contesta({
 
   async function GuardarRegistro() {
     setPuedeClickear(false);
-    
-      let id = []; //final
-      let item_sucess_llamada = {};
-      let json_sucess_gestion = [];
-      let item_sucess_gestion = {};
-      const preguntas = document.querySelectorAll(".cliente");
-      preguntas.forEach((obj) => {
-        let title = obj.id;
-        let valor = obj.value;
-        item_sucess_gestion[title] = valor;
-      });
 
-      json_sucess_gestion.push(item_sucess_gestion);
+    let id = []; //final
+    let item_sucess_llamada = {};
+    let json_sucess_gestion = [];
+    let item_sucess_gestion = {};
+    const preguntas = document.querySelectorAll(".cliente");
+    preguntas.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion[title] = valor;
+    });
 
-      item_sucess_llamada["sucess"] = true;
-      item_sucess_llamada["campaign_name"] = "Sonrie_Seguro";
-      item_sucess_llamada["campaign_id"] = list_id;
-      
-      datafull.map((data, index) => {
-        item_sucess_llamada["campaign"] = data.campaign;
-      });
-  
-      item_sucess_llamada["lead_id"] = lead_id;
-      item_sucess_llamada["list_id"] = list_id;
-      item_sucess_llamada["agente"] = agente;
-      item_sucess_llamada["recording_filename"] = recording_filename;
-      item_sucess_llamada["epoch"] = epoch;
-      item_sucess_llamada["fecha_gestion"] = new Date();
-      item_sucess_llamada["phone_number"] = phone_number;
-      item_sucess_llamada["gestion"] = json_sucess_gestion;
-      item_sucess_llamada["duracion_sec"] = setduracion;
-      id.push(item_sucess_llamada);
+    json_sucess_gestion.push(item_sucess_gestion);
 
-      try {
-        const result = await axios.post(
-          "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
-          { dato: id },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
+    item_sucess_llamada["sucess"] = true;
+    item_sucess_llamada["campaign_name"] = "Sonrie_Seguro";
+    item_sucess_llamada["campaign_id"] = list_id;
 
-        if (result.status === 200) {
-          toast.success("Registro Guardado Exitosamente");
-          console.log("Registro Guardado Exitosamente");
-          setTimeout(() => {
-            window.location.href =
-              "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
-          }, 5000);
-        }
-      } catch (error) {
-        // Manejo de errores
+    datafull.map((data, index) => {
+      item_sucess_llamada["campaign"] = data.campaign;
+    });
+
+    item_sucess_llamada["lead_id"] = lead_id;
+    item_sucess_llamada["list_id"] = list_id;
+    item_sucess_llamada["agente"] = agente;
+    item_sucess_llamada["recording_filename"] = recording_filename;
+    item_sucess_llamada["epoch"] = epoch;
+    item_sucess_llamada["fecha_gestion"] = new Date();
+    item_sucess_llamada["phone_number"] = phone_number;
+    item_sucess_llamada["gestion"] = json_sucess_gestion;
+    item_sucess_llamada["duracion_sec"] = setduracion;
+    id.push(item_sucess_llamada);
+
+    try {
+      const result = await axios.post(
+        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
+        { dato: id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (result.status === 200) {
+        toast.success("Registro Guardado Exitosamente");
+        console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          setbotonDeshabilitado_guardar(false); // Habilitar el botón después de 3 segundos
-        }, 3000); // 3000 milisegundos = 3 segundos
-        toast.success("Error Con Guardado");
-        console.log("Error Con Guardado");
-        setTimeout(() => {
-          setPuedeClickear(true); // Reactivamos la capacidad de clickear después de 1 segundo.
-        }, 1000);
-    
+          window.location.href =
+            "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
+        }, 5000);
       }
+    } catch (error) {
+      // Manejo de errores
+      setTimeout(() => {
+        setbotonDeshabilitado_guardar(false); // Habilitar el botón después de 3 segundos
+      }, 3000); // 3000 milisegundos = 3 segundos
+      toast.success("Error Con Guardado");
+      console.log("Error Con Guardado");
+      setTimeout(() => {
+        setPuedeClickear(true); // Reactivamos la capacidad de clickear después de 1 segundo.
+      }, 1000);
+
+    }
   }
 
   let queryString = window.location.search;
@@ -186,6 +180,7 @@ function Contesta({
 
   useEffect(() => {
     Company(company);
+    DataOcupacion()
   }, []);
   useEffect(() => {
     setselectduracion(elapsedSeconds);
@@ -223,6 +218,20 @@ function Contesta({
         setOptionListDetalleEstado(false);
       }
     }
+  };
+  const DataOcupacion = async () => {
+
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Profesiones",
+      { dato: null },
+      { headers: { Authorization: `Bearer ${clave}` } }
+    );
+
+    if (result.status === 200) {
+      setOptionListOcupacion(result.data);
+
+    }
+
   };
 
   async function GuardarRegistroNoValido() {
@@ -302,16 +311,19 @@ function Contesta({
     setselectnointeresa("0");
     setselectnointeresa(event);
   };
-  const [
-    selectConectaLlamadaPreguntaConfirma,
-    setSelectConectaLlamadaPreguntaConfirma,
-  ] = useState("");
+  const [selectConectaLlamadaPreguntaConfirma, setSelectConectaLlamadaPreguntaConfirma] = useState("");
 
   const [camposCompletos, setCamposCompletos] = useState(false);
+  const [optionValueOcupacion, setOcupacion] = useState('0');
 
   const handleDatosCompletosChange = (completos) => {
     setCamposCompletos(completos);
   };
+
+  const ChangeConecta_Ocupacion = (ocupacion) => {
+    setOcupacion(ocupacion);
+  };
+
 
   const handleLoPensaraClick = () => {
     // Realiza alguna lógica aquí si es necesario
@@ -393,7 +405,7 @@ function Contesta({
                             )}
                           </div>
                           <div className="" id="coross">
-                            {data.Chubb_tipo_captacion.toUpperCase().includes("CROSS")&& (
+                            {data.Chubb_tipo_captacion.toUpperCase().includes("CROSS") && (
                               <p>
                                 EL MOTIVO DE MI LLAMADA Es para agradecer el
                                 tiempo de permanencia con EL SEGURO (DETALLAR
@@ -572,7 +584,7 @@ function Contesta({
                     type="radio"
                     id="buenestadoSalud"
                     name="buenEstadoSalud"
-                    value= {buenEstadoSalud}
+                    value={buenEstadoSalud}
                     checked={buenEstadoSalud === "SÍ"}
                     onChange={() => setBuenEstadoSalud("SÍ")}
                   />
@@ -583,7 +595,7 @@ function Contesta({
                     type="radio"
                     className="ms-1 "
                     name="buenEstadoSalud"
-                    value= {buenEstadoSalud}
+                    value={buenEstadoSalud}
                     checked={buenEstadoSalud === "NO"}
                     onChange={() => setBuenEstadoSalud("NO")}
                   />
@@ -597,15 +609,36 @@ function Contesta({
                   </p>
                 )}
                 <div className=" row col-6 ms-3">
-                  <p>Para culminar, nos podría indicar su ocupación actual:</p>
-                  <input
+                  {/* <p>Para culminar, nos podría indicar su ocupación actual:</p> */}
+                  <div className="form rounded-3 col-lg-12 col-md-6 col-sm-12 ">
+                    <label for="ocupacion"> Para culminar, nos podría indicar su ocupación actual:</label>
+
+                    <select
+                      className="form-control form-select my-2 cliente"
+                      id="ocupacion"
+                      // disabled={optionValueMotivoProvinciaView}
+                      value={optionValueOcupacion} // Usar el estado 'provincia' en lugar de 'optionListDetalleEstadoSelect'
+                      onChange={(e) => {
+                        ChangeConecta_Ocupacion(e.target.value);
+                      }}
+                    // onBlur={handleProvinciaBlur}
+                    >
+                      <option value="0">Selec.</option>
+                      {optionocupacion.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.detalle}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {/* <input
                     className="my-2 form-control col-6 cliente"
                     id="ocupacion"
                     type="text"
                     value={ocupacionActual}
                     onChange={(e) => setOcupacionActual(e.target.value)}
                     onBlur={handleBlur} // Manejar el clic fuera del input
-                  />
+                  /> */}
                 </div>
 
                 {mostrarMensajeOcupacion && (
@@ -702,7 +735,7 @@ function Contesta({
                       <option value="1">Si</option>
                       <option value="2">No</option>
                     </select>
-                    
+
                     {selectConectaLlamadaPreguntaConfirma === "1" && (
                       <div className="my-4" id="si_correo">
                         <p>
@@ -736,48 +769,48 @@ function Contesta({
 
           {(selectConectaLlamadaPreguntaConfirma == "1" ||
             selectConectaLlamadaPreguntaConfirma == "2") && (
-            <div className="col-12 my-3">
-              <div id="vw_script_cliente_despedida" className="">
-                <div className="">
-                  <h3
-                    className=" card-header text-white"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
-                    }}
-                  >
-                    DESPEDIDA
-                  </h3>
-                </div>
-                <div className="card card-body">
-                  <div className="form-row col-12 text-justify">
-                    <p>
-                      Por cualquier consulta puede comunicarse con nosotros al
-                      Banco Ripley al 611-5757 o a Chubb Seguros Perú al (01)
-                      3991212 de lunes a viernes de 9:00am a 6:00pm. Sr. XXX le
-                      agradezco su atención y su tiempo, a nombre del Banco
-                      Ripley y Chubb Seguros Perú le damos una cordial
-                      bienvenida; se despide que tenga buenos (días, tardes,
-                      noches).
-                    </p>
+              <div className="col-12 my-3">
+                <div id="vw_script_cliente_despedida" className="">
+                  <div className="">
+                    <h3
+                      className=" card-header text-white"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
+                      }}
+                    >
+                      DESPEDIDA
+                    </h3>
                   </div>
-                  <div className="d-flex justify-content-end">
-                    <button
+                  <div className="card card-body">
+                    <div className="form-row col-12 text-justify">
+                      <p>
+                        Por cualquier consulta puede comunicarse con nosotros al
+                        Banco Ripley al 611-5757 o a Chubb Seguros Perú al (01)
+                        3991212 de lunes a viernes de 9:00am a 6:00pm. Sr. XXX le
+                        agradezco su atención y su tiempo, a nombre del Banco
+                        Ripley y Chubb Seguros Perú le damos una cordial
+                        bienvenida; se despide que tenga buenos (días, tardes,
+                        noches).
+                      </p>
+                    </div>
+                    <div className="d-flex justify-content-end">
+                      <button
                         className="btn text-white guardar"
                         value="GuardarRegistro"
-                      onClick={GuardarRegistro}
-                      disabled={!puedeClickear}
-                      style={{ background: "#8362D6" }}
+                        onClick={GuardarRegistro}
+                        disabled={!puedeClickear}
+                        style={{ background: "#8362D6" }}
 
-                      
-                    >
-                      Finalizar
-                    </button>
+
+                      >
+                        Finalizar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       )}
     </>

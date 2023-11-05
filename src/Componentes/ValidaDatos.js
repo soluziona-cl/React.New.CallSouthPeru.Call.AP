@@ -32,7 +32,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
 
 
 
-//Esto lo hizo Christian..
+  //Esto lo hizo Christian..
   const [tipoDocumento, setTipoDocumento] = useState("");
   const [numeroDocumento, setNumeroDocumento] = useState("");
   const [primerNombre, setPrimerNombre] = useState("");
@@ -47,8 +47,14 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
   const [sexo, setSexo] = useState("");
   const [estadoCivil, setEstadoCivil] = useState("");
 
+  const [departamento, setDepartamento] = useState("");
+  const [provincia, setProvincia] = useState("");
+  const [distrito, setDistrito] = useState("");
+  const [direccion, setDireccion] = useState("");
 
-
+  const underlineStyle = {
+    textDecoration: 'underline',
+  };
 
 
   useEffect(() => {
@@ -56,17 +62,23 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
     // console.log(datafull)
     // Map through the data and set the primerNombre state
     datafull.map((datos, index) => {
-     
+
       setPrimerNombre(datos.Chubb_nombre.toUpperCase())
+      setTipoDocumento(datos.Chubb_tipo_documento)
       setNumeroDocumento(datos.Chubb_numero_documento.toUpperCase())
       setFechaNacimiento(datos.Chubb_fecha_nacimiento ? '' : datos.Chubb_fecha_nacimiento)
       setTelefonoMovil(datos.Chubb_celular1)
+      setSexo(datos.Chubb_sexo === 'f' ? '2' : '1')
       setEmail(datos.Chubb_email.toUpperCase())
+      setDireccion(datos.Chubb_direccion.toUpperCase())
+      setDepartamento(datos.Chubb_departamento.toUpperCase())
+      setProvincia(datos.Chubb_provincia.toUpperCase())
+      setDistrito(datos.Chubb_distrito.toUpperCase())
     });
 
   }, [datafull]);
 
-//Esto lo hizo Christian..
+  //Esto lo hizo Christian..
 
 
 
@@ -263,10 +275,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
 
 
 
-  const [departamento, setDepartamento] = useState("");
-  const [provincia, setProvincia] = useState("");
-  const [distrito, setDistrito] = useState("");
-  const [direccion, setDireccion] = useState("");
+
 
   const [selectLlamadaD, setSelectedLlamadaD] = useState("");
   const [selectLlamadaDetalleD, setSelectedLlamadaDetalleD] = useState("");
@@ -540,18 +549,12 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
         <div className="row my-2">
           <div className="col-lg-4 col-md-4 col-sm-12 ">
             Tipo Documento
-            <select
-              id="ddl_listas_tipodocumentodeidentidad"
-              value={tipoDocumento}
-              onChange={handleTipoDocumentoChange}
-              onBlur={handleTipoDocumentoBlur}
-              className="form-select cliente my-2"
-            >
-              <option>Seleccione una opcion</option>
-              <option>D.N.I.</option>
-              <option>carnet de Extranjeria</option>
-              <option>Pasaporte</option>
-              <option>Otros</option>
+            <select id="ddl_listas_tipodocumentodeidentidad" value={tipoDocumento} onChange={handleTipoDocumentoChange} onBlur={handleTipoDocumentoBlur} className="form-select cliente my-2">
+              <option value="0">Seleccione una opcion</option>
+              <option value="1">D.N.I.</option>
+              <option value="2">carnet de Extranjeria</option>
+              {/* <option value="0">Pasaporte</option>
+              <option value="0">Otros</option> */}
             </select>
           </div>
 
@@ -718,7 +721,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </div>
 
           <div className="form rounded-3 col-lg-4 col-md-6 col-sm-12 ">
-            Departamento
+
+            <label for="ddl_listas_departamento"> Departamento - <span style={underlineStyle}> {departamento}</span></label>
             <select
               className="cliente form-control form form-select my-2"
               id="ddl_listas_departamento"
@@ -739,7 +743,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </div>
 
           <div className="form rounded-3 col-lg-4 col-md-6 col-sm-12 ">
-            Provincia
+            <label for="ddl_listas_provincia">  Provincia - <span style={underlineStyle}> {provincia}</span></label>
+
             <select
               className="cliente form-control form-select my-2 "
               id="ddl_listas_provincia"
@@ -760,7 +765,8 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </div>
 
           <div className="col-lg-4 col-md-6 col-sm-12 ">
-            Distrito
+            <label for="ddl_listas_provincia">  Distrito - <span style={underlineStyle}> {distrito}</span></label>
+
             <select
               className="cliente form-control form-select my-2 "
               disabled={optionValueMotivoDistritoView}

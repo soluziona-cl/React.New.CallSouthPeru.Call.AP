@@ -18,9 +18,9 @@ function DatosClientes({ company, clave, datafull }) {
     stoken: localStorage.getItem("token"),
   };
 
-  useEffect(() => {
-    Company(company);
-  }, []);
+  // useEffect(() => {
+  //   Company(company);
+  // }, []);
 
   const Company = async (company) => {
     const result = await axios.post(

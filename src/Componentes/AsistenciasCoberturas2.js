@@ -37,17 +37,20 @@ function AsistenciasCoberturas2() {
   const columns = [
     {
       name:<div className=" "> ATENCIÓN EN CASO DE URGENCIAS </div>,
-      selector: "ATENCIÓN_EN_CASO_DE_URGENCIAS",
+      selector: row => row.ATENCIN_EN_CASO_DE_URGENCIAS,
+      // selector: "ATENCIÓN_EN_CASO_DE_URGENCIAS",
       center: true,
     },
     {
       name: <div className=" ">Servicio</div>,
-      selector: "Servicio",
+      selector: row => row.Servicio,
+      // selector: "Servicio",
       center: true,
     },
     {
       name: <div className=" ">Carencia</div>,
-      selector: "Carencia",
+      selector: row => row.Carencia,
+      // selector: "Carencia",
       center: true,
     },
   ];

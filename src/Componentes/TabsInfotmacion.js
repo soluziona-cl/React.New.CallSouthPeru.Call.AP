@@ -47,36 +47,35 @@ function Tabsinformacion({ company, clave, onNoConectaChange }) {
   const columns = [
     {
       name: "Coberturas",
-      selector: "Coberturas",
+      selector: row => row.Coberturas,
       center: true,
     },
     {
       name: "Plan 1",
-      selector: "Plan 1",
+      selector: row => row.Plan_1,
       center: true,
     },
     {
       name: "Límites",
-      selector: "Límites",
+      selector: row => row.Límites,
       center: true,
     },
   ];
 
   const tableData = [
     {
-      Coberturas:
-        "AcciRobo de Contenido de Bolso* (con un deducible de 5%)dental",
-      "Plan 1": "S/1,500",
+      Coberturas: "AcciRobo de Contenido de Bolso* (con un deducible de 5%)dental",
+      "Plan_1": "S/1,500",
       Límites: "Máximo 2 eventos por año**// Límite Anual Asegurable: S/1,500",
     },
     {
       Coberturas: "Muerte Accidental",
-      "Plan 1": "S/30,000",
+      "Plan_1": "S/30,000",
       Límites: "",
     },
     {
       Coberturas: "Renta Hospitalaria por Accidente (máx. 30 días)",
-      "Plan 1": "S/500",
+      "Plan_1": "S/500",
       Límites: "	Límite Anual Asegurable: S/500",
     },
   ];
