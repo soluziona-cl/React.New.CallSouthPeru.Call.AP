@@ -8,6 +8,10 @@ import NoContesta from "./NoContesta";
 import { Routes, Route, Link, Outlet, useNavigate } from "react-router-dom";
 import TextPromocionesRipley from "./TextPromocionesRipley";
 import TextPreCierre from "./TextPreCierre";
+import Terceros from "./Terceros";
+import Tabsinformacion from "./TabsInfotmacion";
+
+
 
 function Contesta({
   company,
@@ -16,15 +20,26 @@ function Contesta({
   elapsedSeconds,
   select_si_conecta_llamada,
   handleSelectChange,
-  tercerosComponent 
+  tercerosComponent,
+  datafull,
+  shouldScroll,
 }) {
-  
+
+  const [buenEstadoSalud, setBuenEstadoSalud] = useState(""); // Estado para la respuesta de buen estado de salud
+  const [ocupacionActual, setOcupacionActual] = useState(""); // Estado para la ocupación actual
+  const [mostrarMensajeOcupacion, setMostrarMensajeOcupacion] = useState(false); // Estado para mostrar el mensaje de ocupación
+  const handleBlur = () => {
+    if (ocupacionActual.trim() !== "") {
+      setMostrarMensajeOcupacion(true);
+    }
+  };
+  const [puedeClickear, setPuedeClickear] = useState(true);
 
   const [selectLlamada, setSelectedLlamada] = useState("");
-  const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] =
-    useState("0");
+  const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] = useState("0");
   const [token, setToken] = useState(clave);
   const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
+  const [select_conecta_llamada_pregunta_no_interesa, setselect_conecta_llamada_pregunta_no_interesa] = useState("0");
 
   const [horario_tercero, sethorario_tercero] = useState("");
   const [selectcorreo, setselectcorreo] = useState("");
@@ -33,18 +48,17 @@ function Contesta({
   const [selectinteresa, setselectinteresa] = useState("0");
   const [selectnointeresa, setselectnointeresa] = useState("0");
   const [setduracion, setselectduracion] = useState("0");
-  const [datafull, setDataFull] = useState([]);
   const [otra_razon_noacepta, setotra_razon_noacepta] = useState("");
-  const [
-    select_conecta_llamada_pregunta_interesa,
-    setselect_conecta_llamada_pregunta_interesa,
-  ] = useState("0");
+  const [select_conecta_llamada_pregunta_interesa, setselect_conecta_llamada_pregunta_interesa] = useState("0");
+  const [no_interesa, setno_interesa] = useState("0");
+
 
   const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] =
     useState(false); // Estado para controlar la habilitación del botón
 
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionListDetalle, setOptionListDetalle] = useState([]);
+  const [optionocupacion, setOptionListOcupacion] = useState([]);
   const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
   const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
     useState("0");
@@ -54,6 +68,21 @@ function Contesta({
     sid: localStorage.getItem("localid"),
     sid_usuario: localStorage.getItem("localid_usuario"),
     stoken: localStorage.getItem("token"),
+  };
+  useEffect(() => {
+    Nointeresa();
+  }, []);
+  const Nointeresa = async () => {
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaClienteNoInteresa",
+      { dato: "20367002" },
+      { headers: { Authorization: `Bearer ${clave}` } }
+    );
+
+    if (result.status === 200) {
+      setno_interesa(result.data);
+      // ChangeConecta_Direccion()
+    }
   };
 
   function get_elapsed_time_string(total_seconds) {
@@ -73,123 +102,66 @@ function Contesta({
   }
 
   async function GuardarRegistro() {
-    setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
-    const nombres = document.getElementById("nombres").value;
-    const apellido_paterno = document.getElementById("apellido_paterno").value;
-    const apellido_materno = document.getElementById("apellido_materno").value;
-    const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
-    const RutCliente = document.getElementById("RutCliente").value;
-    const sexo = document.getElementById("sexo").value;
-    const email = document.getElementById("email").value;
-    const planes = document.getElementById("planes").value;
-    const comuna = document.getElementById("comuna").value;
-    const ciudad = document.getElementById("ciudad").value;
-    const calle = document.getElementById("calle").value;
-    const numero = document.getElementById("numero").value;
-    const depto = document.getElementById("depto").value;
-    const referencia = document.getElementById("referencia").value;
+    setPuedeClickear(false);
 
-    const campos = [
-      nombres,
-      apellido_paterno,
-      apellido_materno,
-      fecha_nacimiento,
-      RutCliente,
-      sexo,
-      email,
-      planes,
-      comuna,
-      ciudad,
-      calle,
-      numero,
-      depto,
-      referencia,
-    ];
+    let id = []; //final
+    let item_sucess_llamada = {};
+    let json_sucess_gestion = [];
+    let item_sucess_gestion = {};
+    const preguntas = document.querySelectorAll(".cliente");
+    preguntas.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion[title] = valor;
+    });
 
-    const nombresCampos = [
-      "Nombres",
-      "Apellido Paterno",
-      "Apellido Materno",
-      "Fecha Nacimiento",
-      "Rut Cliente",
-      "Sexo",
-      "Email",
-      "Planes",
-      "Comuna",
-      "ciudad",
-      "calle",
-      "numero",
-      "depto",
-      "referencia",
+    json_sucess_gestion.push(item_sucess_gestion);
 
-      // ... (otros nombres de campos en el mismo orden)
-    ];
+    item_sucess_llamada["sucess"] = true;
+    item_sucess_llamada["campaign_name"] = "Sonrie_Seguro";
+    item_sucess_llamada["campaign_id"] = list_id;
 
-    let camposIncompletos = [];
+    datafull.map((data, index) => {
+      item_sucess_llamada["campaign"] = data.campaign;
+    });
 
-    for (let i = 0; i < campos.length; i++) {
-      if (campos[i] === "" || campos[i] === "0") {
-        camposIncompletos.push(nombresCampos[i]);
+    item_sucess_llamada["lead_id"] = lead_id;
+    item_sucess_llamada["list_id"] = list_id;
+    item_sucess_llamada["agente"] = agente;
+    item_sucess_llamada["recording_filename"] = recording_filename;
+    item_sucess_llamada["epoch"] = epoch;
+    item_sucess_llamada["fecha_gestion"] = new Date();
+    item_sucess_llamada["phone_number"] = phone_number;
+    item_sucess_llamada["gestion"] = json_sucess_gestion;
+    item_sucess_llamada["duracion_sec"] = setduracion;
+    id.push(item_sucess_llamada);
+
+    try {
+      const result = await axios.post(
+        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
+        { dato: id },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (result.status === 200) {
+        toast.success("Registro Guardado Exitosamente");
+        console.log("Registro Guardado Exitosamente");
+        setTimeout(() => {
+          window.location.href =
+            "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
+        }, 5000);
       }
-    }
-
-    if (camposIncompletos.length > 0) {
-      const camposFaltantesTexto = camposIncompletos.join(", ");
-      alert(`Debe completar los siguientes campos: ${camposFaltantesTexto}`);
-      // Establecer un temporizador para habilitar el botón después de 3 segundos
+    } catch (error) {
+      // Manejo de errores
       setTimeout(() => {
         setbotonDeshabilitado_guardar(false); // Habilitar el botón después de 3 segundos
       }, 3000); // 3000 milisegundos = 3 segundos
-      return; // Detener la ejecución si hay campos faltantes
-    } else {
-      let id = []; //final
-      let item_sucess_llamada = {};
-      let json_sucess_gestion = [];
-      let item_sucess_gestion = {};
-      const preguntas = document.querySelectorAll(".cliente");
-      preguntas.forEach((obj) => {
-        let title = obj.id;
-        let valor = obj.value;
-        item_sucess_gestion[title] = valor;
-      });
+      toast.success("Error Con Guardado");
+      console.log("Error Con Guardado");
+      setTimeout(() => {
+        setPuedeClickear(true); // Reactivamos la capacidad de clickear después de 1 segundo.
+      }, 1000);
 
-      json_sucess_gestion.push(item_sucess_gestion);
-
-      item_sucess_llamada["sucess"] = true;
-      item_sucess_llamada["campaign_name"] = company;
-      item_sucess_llamada["campaign_id"] = list_id;
-      item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
-      item_sucess_llamada["lead_id"] = lead_id;
-      item_sucess_llamada["list_id"] = list_id;
-      item_sucess_llamada["agente"] = agente;
-      item_sucess_llamada["recording_filename"] = recording_filename;
-      item_sucess_llamada["epoch"] = epoch;
-      item_sucess_llamada["fecha_gestion"] = new Date();
-      item_sucess_llamada["phone_number"] = phone_number;
-      item_sucess_llamada["gestion"] = json_sucess_gestion;
-      item_sucess_llamada["duracion_sec"] = setduracion;
-      id.push(item_sucess_llamada);
-
-      try {
-        const result = await axios.post(
-          "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
-          { dato: id },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        if (result.status === 200) {
-          toast.success("Registro Guardado Exitosamente");
-          console.log("Registro Guardado Exitosamente");
-          setTimeout(() => {
-            window.location.href = "/Orkesta/Generacc/Call/Fin";
-          }, 5000);
-        }
-      } catch (error) {
-        // Manejo de errores
-
-        toast.success("Error Con Guardado");
-        console.log("Error Con Guardado");
-      }
     }
   }
 
@@ -208,6 +180,7 @@ function Contesta({
 
   useEffect(() => {
     Company(company);
+    DataOcupacion()
   }, []);
   useEffect(() => {
     setselectduracion(elapsedSeconds);
@@ -225,7 +198,6 @@ function Contesta({
       setOptionListMotivo(result.data);
     }
   };
-  
 
   const ChangeConecta_nombre = async (event) => {
     if (event === "0") {
@@ -247,9 +219,23 @@ function Contesta({
       }
     }
   };
+  const DataOcupacion = async () => {
+
+    const result = await axios.post(
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Profesiones",
+      { dato: null },
+      { headers: { Authorization: `Bearer ${clave}` } }
+    );
+
+    if (result.status === 200) {
+      setOptionListOcupacion(result.data);
+
+    }
+
+  };
 
   async function GuardarRegistroNoValido() {
-    setBotonDeshabilitado(true); // Deshabilitar el botón después de guardar exitosamente
+    setPuedeClickear(false);
     let id = []; //final
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
@@ -264,9 +250,12 @@ function Contesta({
     json_sucess_gestion.push(item_sucess_gestion);
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = company;
+    item_sucess_llamada["campaign_name"] = "Sonrie Seguro ";
     item_sucess_llamada["campaign_id"] = list_id;
-    item_sucess_llamada["campaign"] = "Ap_Con_Ahorro";
+    datafull.map((data, index) => {
+      item_sucess_llamada["campaign"] = data.campaign;
+    });
+
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
@@ -292,7 +281,7 @@ function Contesta({
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Orkesta/Generacc/Call/Fin";
+          window.location.href = "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
         }, 5000);
       }
     } catch (error) {
@@ -322,24 +311,24 @@ function Contesta({
     setselectnointeresa("0");
     setselectnointeresa(event);
   };
-  const [
-    selectConectaLlamadaPreguntaConfirma,
-    setSelectConectaLlamadaPreguntaConfirma,
-  ] = useState("");
- 
+  const [selectConectaLlamadaPreguntaConfirma, setSelectConectaLlamadaPreguntaConfirma] = useState("");
 
   const [camposCompletos, setCamposCompletos] = useState(false);
+  const [optionValueOcupacion, setOcupacion] = useState('0');
 
   const handleDatosCompletosChange = (completos) => {
     setCamposCompletos(completos);
   };
 
+  const ChangeConecta_Ocupacion = (ocupacion) => {
+    setOcupacion(ocupacion);
+  };
 
 
   const handleLoPensaraClick = () => {
     // Realiza alguna lógica aquí si es necesario
     // Luego, llama a la función pasada desde Callintro para comunicar la selección
-    props.onLoPensaraSelected();
+    // props.onLoPensaraSelected();
   };
 
   return (
@@ -390,51 +379,61 @@ function Contesta({
                       </select>
                     </p>
                   </div>
-                  <div className="d-none" id="stock">
-                    {select_si_conecta_llamada === "1" && (
-                      <p>
-                        El motivo de mi llamada es agradecer la permanencia que
-                        tiene con la tarjeta, RIPLEY y gracias a los pagos
-                        puntuales que ha venido efectuando este año queremos
-                        ampliar sus beneficios.
-                      </p>
-                    )}
-                  </div>
-                  <div className="d-none" id="welcome">
-                    {select_si_conecta_llamada === "2" && (
-                      <p>
-                        El motivo de mi llamada es agradecer la CONFIANZA y su
-                        preferencia por haber obtenido recientemente su Tarjeta
-                        de crédito Ripley con nosotros.
-                      </p>
-                    )}
-                  </div>
-                  <div className="d-none" id="coross">
-                    {select_si_conecta_llamada === "3" && (
-                      <p>
-                        EL MOTIVO DE MI LLAMADA Es para agradecer el tiempo de
-                        permanencia con EL SEGURO (DETALLAR NOMBRE DE SEGURO)
-                        AMPLIANDO SUS BENEFICIOS CON EL NUEVO SEGURO : SONRIE
-                        SEGURO
-                      </p>
-                    )}
-                  </div>
+                  {select_si_conecta_llamada === "1" && (
+                    <div>
+                      {datafull.map((data, index) => (
+                        <div>
+                          <div className="" id="stock">
+                            {data.Chubb_tipo_captacion.toUpperCase() === "STOCK" && (
+                              <p>
+                                El motivo de mi llamada es agradecer la
+                                permanencia que tiene con la tarjeta, RIPLEY y
+                                gracias a los pagos puntuales que ha venido
+                                efectuando este año queremos ampliar sus
+                                beneficios.
+                              </p>
+                            )}
+                          </div>
+                          <div className="" id="welcome">
+                            {data.Chubb_tipo_captacion.toUpperCase() === "WELCOME" && (
+                              <p>
+                                El motivo de mi llamada es agradecer la
+                                CONFIANZA y su preferencia por haber obtenido
+                                recientemente su Tarjeta de crédito Ripley con
+                                nosotros.
+                              </p>
+                            )}
+                          </div>
+                          <div className="" id="coross">
+                            {data.Chubb_tipo_captacion.toUpperCase().includes("CROSS") && (
+                              <p>
+                                EL MOTIVO DE MI LLAMADA Es para agradecer el
+                                tiempo de permanencia con EL SEGURO (DETALLAR
+                                NOMBRE DE SEGURO) AMPLIANDO SUS BENEFICIOS CON
+                                EL NUEVO SEGURO: SONRIE SEGURO
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
                   <p>
                     Antes de continuar le informamos que por su seguridad esta
                     llamada está siendo grabada.
                   </p>
                   {select_si_conecta_llamada === "3" && (
-                    <div>
-                      <p className="col-3 " id="btn_tercero_no_valido">
-                        <button
-                          type="button"
-                          className="btn  guardar text-white"
-                          id="btn_guardar_tercero_no_valido"
-                          style={{ background: "#8362D6" }}
-                        >
-                          <i className="fa fa-save"></i> Guardar
-                        </button>
-                      </p>
+                    <div className="d-flex justify-content-end">
+                      <button
+                        className="btn text-white guardar"
+                        value="GuardarRegistro"
+                        onClick={GuardarRegistroNoValido}
+                        disabled={!puedeClickear}
+                        style={{ background: "#8362D6" }}
+                      >
+                        Finalizar
+                      </button>
                     </div>
                   )}
                 </div>
@@ -461,7 +460,10 @@ function Contesta({
           <div className="form-row ">
             <label for="observacion">
               {" "}
-              ¿Entonces Sr. … Siendo el día de hoy (DD/MM/AAAA) acepta la contratación de “Sonríe Seguro”, con un cargo fijo mensual de S/. 29.90 en su tarjeta de crédito Ripley? - Esperar respuesta afirmativa del cliente (Sí - Sí acepto).
+              ¿Entonces Sr. … Siendo el día de hoy (DD/MM/AAAA) acepta la
+              contratación de “Sonríe Seguro”, con un cargo fijo mensual de S/.
+              29.90 en su tarjeta de crédito Ripley? - Esperar respuesta
+              afirmativa del cliente (Sí - Sí acepto).
             </label>
             <div className="col-lg-6 col-md-6 col-sm-12 my-2">
               <select
@@ -481,9 +483,8 @@ function Contesta({
             </div>
           </div>
           <br />
-        
+
           <div className="d-none" id="no_acepta">
-           
             <p>
               <strong> Agendo:</strong> Por supuesto (Primer nombre del cliente)
               se programará la llamada para el día (validar fecha con cliente).
@@ -492,78 +493,186 @@ function Contesta({
           </div>
 
           {select_conecta_llamada_pregunta_interesa === "3" && (
-          <div className="col-12 pb-3 ">
-            <div id="vw_script_cliente_nointeresa" className="">
-              <div className=" card-body">
-               
-               <div className="CALLINTRO justify-content-center d-flex">
-        {/* Otras partes de "CALLINTRO" aquí */}
-        {tercerosComponent}
-      </div>
-              </div>
-            </div>
-          </div>
-            )}
+            <section>
+              <Terceros
+                conecta={selectLlamada}
+                shouldScroll={shouldScroll}
+                select_si_conecta_llamada={select_si_conecta_llamada}
+                handleSelectChange={handleSelectChange}
+                elapsedSeconds={elapsedSeconds}
+                clave={token}
+                datafull={datafull}
+
+              />
+            </section>
+          )}
 
           {select_conecta_llamada_pregunta_interesa === "2" && (
-          <div className="col-12 pb-3">
-            <div id="vw_script_cliente_nointeresa" className="">
-            <p>
-              <strong> En caso la respuesta es NO: </strong>
-            </p>
-            <p>
-              Cuando NO desea, me despido. Cuando solicita se le llame en otra
-              oportunidad, se agenda nueva llamada.
-            </p>
-              <div className=" card-body">
-                <div className="form-row">
-                  <label for="observacion">
-                    Me podria decir la razon por la cual no desea contratar el
-                    seguro ?
-                  </label>
-                </div>
+            <div className="col-12 pb-3">
+              <div id="vw_script_cliente_nointeresa" className="">
+                <p>
+                  <strong> En caso la respuesta es NO: </strong>
+                </p>
+                <p>
+                  Cuando NO desea, me despido. Cuando solicita se le llame en
+                  otra oportunidad, se agenda nueva llamada.
+                </p>
+                <p>
+                  <strong> Agendo:</strong> Por supuesto (Primer nombre del
+                  cliente) se programará la llamada para el día (validar fecha
+                  con cliente). Muchas gracias, buenos días/buenas tardes/buenas
+                  noches
+                </p>
+                <div className=" card-body">
+                  <div className="form-row">
+                    <label for="observacion">
+                      Me podria decir la razon por la cual no desea contratar el
+                      seguro ?
+                    </label>
+                  </div>
 
-                <div className="form-row col-6">
-                  <select
-                    id="select_conecta_llamada_pregunta_no_interesa"
-                    className="form-select cliente"
-                    disabled={select_conecta_llamada_pregunta_interesa !== "0"}
-                  >
-                    <option value="0">Seleccione</option>
-                    <option value="1">Si</option>
-                    <option value="2">No</option>
-                  </select>
-                </div>
-                        
-                <div className="form-row col-6 mt-2">
-                  <button
-                    type="button"
-                    className="btn text-white guardar"
-                    id="btn_guardar_no_interesa"
-                    style={{ background: "#8362D6" }}
-                  >
-                    <i className="fa fa-save"></i>  Guardar
-                  </button>
+                  <div className="form-row col-6">
+                    <select
+                      id="select_conecta_llamada_pregunta_no_interesa"
+                      className="form-select cliente"
+                      disabled={
+                        select_conecta_llamada_pregunta_interesa !== "2"
+                      }
+                      value={select_conecta_llamada_pregunta_no_interesa} // Establece el valor seleccionado del select
+                      onChange={(e) =>
+                        setselect_conecta_llamada_pregunta_no_interesa(
+                          e.target.value
+                        )
+                      } // Maneja el cambio del select
+                    >
+                      <option value="0">Seleccione</option>
+                      {no_interesa.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.detalle}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {select_conecta_llamada_pregunta_no_interesa !== "0" && (
+                    <div className="form-row col-6 mt-2">
+                      <button
+                        className="btn text-white guardar"
+                        value="GuardarRegistro"
+                        disabled={!puedeClickear}
+                        onClick={GuardarRegistroNoValido}
+                        style={{ background: "#8362D6" }}
+                      >
+                        Finalizar
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-          </div>
-            )}
+          )}
           {select_conecta_llamada_pregunta_interesa === "1" && (
             <div id="vw_script_cliente_valida" class="">
+              <div className=" row  mx-3" style={{ background: "#EDEDED" }}>
+                <h4>
+                  Sr./Sra. Actualmente se encuentra en buen estado de salud. (SÍ
+                  o NO).
+                </h4>
+                <div>
+                  <input
+                    className="ms-1 cliente"
+                    type="radio"
+                    id="buenestadoSalud"
+                    name="buenEstadoSalud"
+                    value={buenEstadoSalud}
+                    checked={buenEstadoSalud === "SÍ"}
+                    onChange={() => setBuenEstadoSalud("SÍ")}
+                  />
+                  <label className="m-1">SÍ</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    className="ms-1 "
+                    name="buenEstadoSalud"
+                    value={buenEstadoSalud}
+                    checked={buenEstadoSalud === "NO"}
+                    onChange={() => setBuenEstadoSalud("NO")}
+                  />
+                  <label className="m-1">NO</label>
+                </div>
+                {buenEstadoSalud === "NO" && (
+                  <p>
+                    Salvedad: Recuerde Sr./Sra. que le vamos a cubrir por
+                    cualquier accidente que no sea consecuencia de alguna
+                    preexistencia.
+                  </p>
+                )}
+                <div className=" row col-6 ms-3">
+                  {/* <p>Para culminar, nos podría indicar su ocupación actual:</p> */}
+                  <div className="form rounded-3 col-lg-12 col-md-6 col-sm-12 ">
+                    <label for="ocupacion"> Para culminar, nos podría indicar su ocupación actual:</label>
+
+                    <select
+                      className="form-control form-select my-2 cliente"
+                      id="ocupacion"
+                      // disabled={optionValueMotivoProvinciaView}
+                      value={optionValueOcupacion} // Usar el estado 'provincia' en lugar de 'optionListDetalleEstadoSelect'
+                      onChange={(e) => {
+                        ChangeConecta_Ocupacion(e.target.value);
+                      }}
+                    // onBlur={handleProvinciaBlur}
+                    >
+                      <option value="0">Selec.</option>
+                      {optionocupacion.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.detalle}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  {/* <input
+                    className="my-2 form-control col-6 cliente"
+                    id="ocupacion"
+                    type="text"
+                    value={ocupacionActual}
+                    onChange={(e) => setOcupacionActual(e.target.value)}
+                    onBlur={handleBlur} // Manejar el clic fuera del input
+                  /> */}
+                </div>
+
+                {mostrarMensajeOcupacion && (
+                  <div>
+                    <p>
+                      Si el cliente tiene una profesión de alto riesgo, se debe
+                      indicar lo siguiente.
+                    </p>
+                    <p>
+                      Salvedad: Recuerde Sr./Sra. que le vamos a cubrir por
+                      cualquier accidente fuera de sus horas de trabajo.
+                    </p>
+                  </div>
+                )}
+              </div>
               {/* <div id="vw_script_cliente_valida" class="d-none"> */}
               <section className="p-3">
-              <p>
-              ¡Felicitaciones, desde este momento ya se encuentra protegido con Sonríe Seguro de Chubb Seguros…!
-          </p>
-          <p>
-            Recuerde que el cargo mensual aparecerá en su estado de cuenta y
-            podrá acceder a todos los beneficios del seguro desde la fecha de
-            afiliación.
-          </p>
+                <p>
+                  ¡Felicitaciones, desde este momento ya se encuentra protegido
+                  con Sonríe Seguro de Chubb Seguros…!
+                </p>
+                <p>
+                  Recuerde que el cargo mensual aparecerá en su estado de cuenta
+                  y podrá acceder a todos los beneficios del seguro desde la
+                  fecha de afiliación.
+                </p>
                 <div class="   ">
-                  <h3 class="card-header text-white" style={{
-                      backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}}>
+                  <h3
+                    class="card-header text-white"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
+                    }}
+                  >
                     Valida Datos
                   </h3>
                 </div>
@@ -581,7 +690,13 @@ function Contesta({
                     onDatosCompletos={handleDatosCompletos}
                   ></ValidaDatos> */}
 
-                  <ValidaDatos company={company} clave={token} elapsedSeconds={setduracion} onDataComplete={handleDatosCompletosChange} />
+                  <ValidaDatos
+                    company={company}
+                    clave={token}
+                    elapsedSeconds={setduracion}
+                    onDataComplete={handleDatosCompletosChange}
+                    datafull={datafull}
+                  />
                   {/* {camposCompletos ? (
                     console.log('Todos los campos están completos.')
                   ) : (
@@ -591,22 +706,36 @@ function Contesta({
               </section>
               <div className=" " id="pre_cierre">
                 <div className="">
-                  <h3 className=" card-header text-white" style={{ backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}} >
+                  <h3
+                    className=" card-header text-white"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
+                    }}
+                  >
                     Continuar a Confirmacion de Datos y PreCierre
                   </h3>
                 </div>
                 <div className="card card-body">
                   <div>
                     <label for="observacion">
-                      ¿Don/Sra. XXXX, Usted desea que le enviemos su Póliza a través de su correo electrónico?
+                      ¿Don/Sra. XXXX, Usted desea que le enviemos su Póliza a
+                      través de su correo electrónico?
                     </label>
-                    <select value={selectConectaLlamadaPreguntaConfirma} onChange={(e) =>   setSelectConectaLlamadaPreguntaConfirma(e.target.value) } id="select_conecta_llamada_pregunta_confirma" className="form-select cliente my-2" disabled={!camposCompletos} // Deshabilitar si los campos no están completados
+                    <select
+                      value={selectConectaLlamadaPreguntaConfirma}
+                      onChange={(e) =>
+                        setSelectConectaLlamadaPreguntaConfirma(e.target.value)
+                      }
+                      id="select_conecta_llamada_pregunta_confirma"
+                      className="form-select cliente my-2"
+                      disabled={!camposCompletos} // Deshabilitar si los campos no están completados
                     >
                       <option value="0">Seleccione</option>
                       <option value="1">Si</option>
                       <option value="2">No</option>
                     </select>
-                <TextPreCierre></TextPreCierre>
+
                     {selectConectaLlamadaPreguntaConfirma === "1" && (
                       <div className="my-4" id="si_correo">
                         <p>
@@ -630,6 +759,9 @@ function Contesta({
                       </div>
                     )}
                   </div>
+                  <div>
+                    <Tabsinformacion></Tabsinformacion>
+                  </div>
                 </div>
               </div>
             </div>
@@ -637,29 +769,48 @@ function Contesta({
 
           {(selectConectaLlamadaPreguntaConfirma == "1" ||
             selectConectaLlamadaPreguntaConfirma == "2") && (
-            <div className="col-12 my-3">
-              <div id="vw_script_cliente_despedida" className="">
-                <div className="">
-                  <h3 className=" card-header text-white" style={{backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}}>
-                    DESPEDIDA
-                  </h3>
-                </div>
-                <div className="card card-body">
-                  <div className="form-row col-12 text-justify">
-                    <p>
-                    Por cualquier consulta puede comunicarse con nosotros al Banco Ripley al 611-5757 o a Chubb Seguros Perú al (01) 3991212 de lunes a viernes de 9:00am a 6:00pm. Sr. XXX le agradezco su atención y su tiempo, a nombre del Banco Ripley y Chubb Seguros Perú le damos una cordial bienvenida; se despide que tenga buenos (días, tardes, noches). 
-                    </p>
+              <div className="col-12 my-3">
+                <div id="vw_script_cliente_despedida" className="">
+                  <div className="">
+                    <h3
+                      className=" card-header text-white"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
+                      }}
+                    >
+                      DESPEDIDA
+                    </h3>
                   </div>
-                  <div className=" col-12 text-center align-center">
-                    <button type="button" className="btn form-control text-white guardar" id="btn_guardar_fin" style={{ background: "#8362D6" }}>
-                      <i className="fa fa-save mx-2"></i>
-                      Guardar
-                    </button>
+                  <div className="card card-body">
+                    <div className="form-row col-12 text-justify">
+                      <p>
+                        Por cualquier consulta puede comunicarse con nosotros al
+                        Banco Ripley al 611-5757 o a Chubb Seguros Perú al (01)
+                        3991212 de lunes a viernes de 9:00am a 6:00pm. Sr. XXX le
+                        agradezco su atención y su tiempo, a nombre del Banco
+                        Ripley y Chubb Seguros Perú le damos una cordial
+                        bienvenida; se despide que tenga buenos (días, tardes,
+                        noches).
+                      </p>
+                    </div>
+                    <div className="d-flex justify-content-end">
+                      <button
+                        className="btn text-white guardar"
+                        value="GuardarRegistro"
+                        onClick={GuardarRegistro}
+                        disabled={!puedeClickear}
+                        style={{ background: "#8362D6" }}
+
+
+                      >
+                        Finalizar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       )}
     </>

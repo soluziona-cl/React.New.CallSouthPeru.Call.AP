@@ -18,9 +18,9 @@ function DatosClientes({ company, clave, datafull }) {
     stoken: localStorage.getItem("token"),
   };
 
-  useEffect(() => {
-    Company(company);
-  }, []);
+  // useEffect(() => {
+  //   Company(company);
+  // }, []);
 
   const Company = async (company) => {
     const result = await axios.post(
@@ -83,7 +83,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_RUT_CON_GUION}
+                      value={data.lead_id}
                       className="form-control"
                       disabled
                     />
@@ -93,7 +93,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.intentos}
+                      value={data.Chubb_numero_documento}
                       className="  form-control"
                       disabled
                     />
@@ -103,7 +103,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.intentos}
+                      value={data.Chubb_edad}
                       className="  form-control"
                       disabled
                     />
@@ -112,7 +112,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.NOMBRE}
+                      value={data.Chubb_nombre}
                       className="  form-control"
                       disabled
                     />
@@ -122,7 +122,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_EMAIL}
+                      value={data.Chubb_email}
                       className=" form-control"
                       disabled
                     />
@@ -131,8 +131,8 @@ function DatosClientes({ company, clave, datafull }) {
                   <div className="col-lg-3 col-md-5 col-sm-12 my-1">Fecha de Nacimiento
                     <input
                       name="roomRent"
-                      type="date"
-                      value={data.ENTEL_EMAIL}
+                      type="text"
+                      value={data.Chubb_fecha_nacimiento == 'NULL' ? '' : data.Chubb_fecha_nacimiento}
                       className=" form-control"
                       disabled
                     />
@@ -142,7 +142,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_REGION}
+                      value={data.Chubb_condicion_laboral == 'NULL' ? '' : data.Chubb_condicion_laboral}
                       className=" form-control"
                       disabled
                     />
@@ -152,7 +152,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_GRUPO}
+                      value={data.Chubb_tipo_tarjeta}
                       className=" form-control"
                       disabled
                     />
@@ -163,7 +163,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_TELEFONO_1}
+                      value={data.Chubb_tienda_colocacion == 'NULL' ? '' : data.Chubb_tienda_colocacion}
                       className=" form-control"
                       disabled
                     />
@@ -173,7 +173,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_TELEFONO_2}
+                      value={data.Chubb_fecha_colocacion == 'NULL' ? '' : data.Chubb_fecha_colocacion}
                       className=" form-control"
                       disabled
                     />
@@ -183,7 +183,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_TELEFONO_3}
+                      value={data.Chubb_cantidad_seguros == 'NULL' ? '' : data.Chubb_cantidad_seguros}
                       className=" form-control"
                       disabled
                     />
@@ -193,7 +193,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_TELEFONO_4}
+                      value={data.Chubb_seguros_contratados == 'NULL' ? '' : data.Chubb_seguros_contratados}
                       className=" form-control"
                       disabled
                     />
@@ -203,7 +203,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_TELEFONO_5}
+                      value={data.Chubb_direccion}
                       className=" form-control"
                       disabled
                     />
@@ -213,7 +213,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_TELEFONO_6}
+                      value={data.Chubb_departamento}
                       className=" form-control"
                       disabled
                     />
@@ -223,7 +223,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_TELEFONO_6}
+                      value={data.Chubb_provincia}
                       className=" form-control"
                       disabled
                     />
@@ -233,7 +233,7 @@ function DatosClientes({ company, clave, datafull }) {
                     <input
                       name="roomRent"
                       type="text"
-                      value={data.ENTEL_TELEFONO_6}
+                      value={data.Chubb_distrito}
                       className=" form-control"
                       disabled
                     />
