@@ -21,47 +21,25 @@ import Terceros from "./Componentes/Terceros";
 registerLocale("es", es);
 
 const Callintro = () => {
-  const [opcionSeleccionada, setOpcionSeleccionada] = useState(null);
   const [puedeClickear, setPuedeClickear] = useState(true);
 
   const { Alert } = bootstrap;
-  var [message, setMessage] = useState("...");
   const [scrollToNoContesta, setScrollToNoContesta] = useState(false);
 
   const [show, toggleShow] = useState(true);
   const [token, setToken] = useState("");
   const [company, setCompany] = useState("11740594");
-  const [select, setSelected] = useState("");
-  const [select_no_conecta, setselect_no_conecta] = useState("");
-
-  const [select_conecta_tercero, setselect_conecta_tercero] = useState("");
-  const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
-  const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] =
-    useState(false); // Estado para controlar la habilitación del botón
 
   const [selectLlamada, setSelectLlamada] = useState("0");
   const [selectLlamada_2, setselectLlamada_2] = useState("0");
-  const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
-
-  const [selectObservacion, setSelectedObservacion] = useState("");
 
   const [dataValida, setDataValida] = useState([]);
   const [optionList, setOptionList] = useState([]);
-  const [optionListDetalle, setOptionListDetalle] = useState([]);
-  const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
-    useState("0");
-  const [openCalendar, setCalendar] = useState(false);
   const [openHistoricoGestiones, setHistoricoGestiones] = useState(false);
 
-  const [startdateini, setStartDateIni] = useState(new Date());
-  const [startdatefin, setStartDateFin] = useState(new Date());
-
   const [datafull, setDataFull] = useState([]);
-  const [datafullIntervalo, setDataFullIntervalo] = useState([]);
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const [selectedValueApp, setSelectedValueApp] = useState("1");
 
   function get_elapsed_time_string(total_seconds) {
     function pretty_time_string(num) {
@@ -104,8 +82,7 @@ const Callintro = () => {
 
   const ValidaCall = async () => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
-      //  { userName: agente, password: agente }
+      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
       { userName: "test", password: "test" }
     );
 
@@ -128,7 +105,7 @@ const Callintro = () => {
   };
   const DatosCliente = async (lead, clave) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/DatosCliente",
+      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/DatosCliente",
       { dato: lead },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -149,7 +126,7 @@ const Callintro = () => {
   };
   const GuardaURL = async (agentes, url, clave) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/SaveURl",
+      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/SaveURl",
       { dato: agentes, dato_2: url },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -166,7 +143,7 @@ const Callintro = () => {
   };
   const Conecta = async (clave) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Conecta",
+      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Conecta",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -206,53 +183,6 @@ const Callintro = () => {
     setHistoricoGestiones(!openHistoricoGestiones);
   };
 
-  async function GuardarRegistroTercero() {
-    let id = []; //final
-    let item_sucess_llamada = {};
-    let json_sucess_gestion = [];
-    let item_sucess_gestion = {};
-    const preguntas = document.querySelectorAll(".cliente");
-    preguntas.forEach((obj) => {
-      let title = obj.id;
-      let valor = obj.value;
-      item_sucess_gestion[title] = valor;
-    });
-
-    json_sucess_gestion.push(item_sucess_gestion);
-
-    item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = "Sonrie Seguro "; //nombre de la campana, en este caso: Cobranza_INCAP
-    item_sucess_llamada["campaign_id"] = list_id;
-    datafull.map((data, index) => {
-      item_sucess_llamada["campaign"] = data.campaign;
-    });
-    item_sucess_llamada["lead_id"] = lead_id;
-    item_sucess_llamada["list_id"] = list_id;
-    item_sucess_llamada["agente"] = agente;
-    item_sucess_llamada["recording_filename"] = recording_filename;
-    item_sucess_llamada["epoch"] = epoch;
-    item_sucess_llamada["fecha_gestion"] = new Date();
-    item_sucess_llamada["duracion_sec"] = elapsedSeconds;
-    // item_sucess_llamada["duracion_time"] =
-    // get_elapsed_time_string(elapsed_seconds);
-    item_sucess_llamada["phone_number"] = phone_number;
-    item_sucess_llamada["gestion"] = json_sucess_gestion;
-    id.push(item_sucess_llamada);
-
-    const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
-      { dato: id },
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-
-    if (result.status === 200) {
-      toast.success("Registro Guardado Exitosamente");
-      console.log("Registro Guardado Exitosamente");
-      setTimeout(() => {
-        window.location.href = "/Soluziona/CallSouth/SonrieSeguro/Call/Fin";
-      }, 5000); // 5000 milisegundos = 5 segundos
-    }
-  }
 
   async function GuardarRegistroNoContesta() {
     setPuedeClickear(false);
@@ -304,7 +234,7 @@ const Callintro = () => {
 
     try {
       const result = await axios.post(
-        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
+        // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -313,7 +243,7 @@ const Callintro = () => {
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
+          window.location.href = "/Orkesta/NewCallSouthPeru/Call_SonrieSeguro/Fin";
         }, 5000);
       }
     } catch (error) {
@@ -325,78 +255,6 @@ const Callintro = () => {
       }, 1000);
     }
   }
-
-  //   async function GuardarRegistro() {
-  //     const nombres = document.getElementById('nombres').value
-  //     const apellido_paterno = document.getElementById('apellido_paterno').value
-  //     const apellido_materno = document.getElementById('apellido_materno').value
-  //     const fecha_nacimiento = document.getElementById('fecha_nacimiento').value
-  //     const RutCliente = document.getElementById('RutCliente').value
-  //     const sexo = document.getElementById('sexo').value
-  //     const email = document.getElementById('email').value
-  //     const planes = document.getElementById('planes').value
-  //     const comuna = document.getElementById('comuna').value
-  //     const ciudad = document.getElementById('ciudad').value
-  //     const calle = document.getElementById('calle').value
-  //     const numero = document.getElementById('numero').value
-  //     const depto = document.getElementById('depto').value
-  //     const referencia = document.getElementById('referencia').value
-
-  //     if (nombres === '' || apellido_paterno === '' || apellido_materno === '' || fecha_nacimiento === '' || RutCliente === '' || sexo === '' || email === '' || planes === '' || comuna === '' || ciudad === '' || calle === '' || numero === '' || depto === '' || referencia === '')  {
-  //         alert('Debe completar todos los campos');
-
-  //     } else {
-  //         let id = []; //final
-  //         let item_sucess_llamada = {};
-  //         let json_sucess_gestion = [];
-  //         let item_sucess_gestion = {};
-  //         const preguntas = document.querySelectorAll(".cliente");
-  //         preguntas.forEach((obj) => {
-  //             let title = obj.id;
-  //             let valor = obj.value;
-  //             item_sucess_gestion[title] = valor;
-  //         });
-
-  //         json_sucess_gestion.push(item_sucess_gestion);
-
-  //         item_sucess_llamada["sucess"] = true;
-  //         item_sucess_llamada["campaign_name"] = company;
-  //         item_sucess_llamada["campaign_id"] = list_id;
-  //         item_sucess_llamada["campaign"] = "Sonrie Seguro ";
-  //         item_sucess_llamada["lead_id"] = lead_id;
-  //         item_sucess_llamada["list_id"] = list_id;
-  //         item_sucess_llamada["agente"] = agente;
-  //         item_sucess_llamada["recording_filename"] = recording_filename;
-  //         item_sucess_llamada["epoch"] = epoch;
-  //         item_sucess_llamada["fecha_gestion"] = new Date();
-  //         item_sucess_llamada["phone_number"] = phone_number;
-  //         item_sucess_llamada["gestion"] = json_sucess_gestion;
-  //         id.push(item_sucess_llamada);
-
-  //         try {
-  //           const result = await axios.post(
-  //             "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
-  //             { dato: id },
-  //             { headers: { Authorization: `Bearer ${token}` } }
-  //           );
-
-  //           if (result.status === 200) {
-  //             toastr.success("Registro Guardado Exitosamente");
-  //             console.log("Registro Guardado Exitosamente");
-  //             setbotonDeshabilitado_guardar(true); // Deshabilitar el botón después de guardar exitosamente
-  //             setTimeout(() => {
-  //               window.location.href = "/Orkesta/Generacc/Call/Fin";
-  //             }, 5000);
-  //           }
-  //         } catch (error) {
-  //           // Manejo de errores
-  //           toastr.success("Error Con Guardado");
-  //           console.log("Error Con Guardado");
-  //         }
-  //       }
-  // }
-
-  // console.log("select_no_conecta:", select_no_conecta);
 
   return (
     <>
@@ -424,14 +282,8 @@ const Callintro = () => {
 
               <label for="ddl_estado">Conecta:</label>
               <div className="col-lg-12 col-sm-12">
-                <select
-                  className="cliente form-control form-select my-1"
-                  id="selectLlamada"
-                  value={selectLlamada}
-                  onChange={(e) => ChangeLlamada(e.target.value)}
-                >
+                <select className="cliente form-control form-select my-1" id="selectLlamada" value={selectLlamada} onChange={(e) => ChangeLlamada(e.target.value)}>
                   <option value="0">Seleccione una opción</option>
-                  {/* <option value="85">Contacto Efectivo Positivo</option> */}
                   <option value="86">EFECTIVO</option>
                   <option value="87">NO CONTACTO</option>
                   <option value="88">NO EFECTIVO</option>
@@ -443,12 +295,7 @@ const Callintro = () => {
                 <div>
                   <label for="ddl_estado">Sub-Conecta:</label>
                   <div className="col-lg-12 col-sm-12">
-                    <select
-                      className="cliente form-control form-select my-1"
-                      id="selectsubllamada"
-                      value={selectLlamada_2}
-                      onChange={(e) => ChangeLlamada_2(e.target.value)}
-                    >
+                    <select className="cliente form-control form-select my-1" id="selectsubllamada" value={selectLlamada_2} onChange={(e) => ChangeLlamada_2(e.target.value)} >
                       <option value="0">Seleccione una opción</option>
                       {selectLlamada === "85" && (
                         <React.Fragment>
@@ -478,18 +325,9 @@ const Callintro = () => {
                     </select>
                   </div>
 
-                  {selectLlamada_2 !== "95" &&
-                    selectLlamada_2 !== "89" &&
-                    selectLlamada_2 !== "0" &&
-                    selectLlamada_2 !== "" && (
+                  {selectLlamada_2 !== "95" && selectLlamada_2 !== "89" && selectLlamada_2 !== "0" && selectLlamada_2 !== "" && (
                       <div className="d-flex justify-content-end m-1 mt-2">
-                        <button
-                          className="btn text-white guardar"
-                          value="GuardarRegistro"
-                          onClick={GuardarRegistroNoContesta}
-                          disabled={!puedeClickear}
-                          style={{ background: "#8362D6" }}
-                        >
+                        <button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} style={{ background: "#8362D6" }}>
                           Finalizar
                         </button>
                       </div>
@@ -497,39 +335,20 @@ const Callintro = () => {
                 </div>
               )}
 
-              <hr className="my-4" />
-
               {(selectLlamada === "87" || selectLlamada === "88") && (
                 <section>
-                  <NoContesta
-                    conecta={selectLlamada}
-                    elapsedSeconds={elapsedSeconds}
-                    clave={token}
-                    datafull={datafull}
-                  />
+                  <NoContesta conecta={selectLlamada} elapsedSeconds={elapsedSeconds} clave={token} datafull={datafull} />
                 </section>
               )}
 
               {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
                 <section>
-                  <Terceros
-                    conecta={selectLlamada}
-                    shouldScroll={scrollToNoContesta}
-                    select_si_conecta_llamada={select_si_conecta_llamada}
-                    handleSelectChange={handleSelectChange}
-                    elapsedSeconds={elapsedSeconds}
-                    clave={token}
-                    datafull={datafull}
-                  />
+                  <Terceros conecta={selectLlamada} shouldScroll={scrollToNoContesta} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} clave={token} datafull={datafull}/>
                 </section>
               )}
             </div>
             <div className="col-lg-9 col-md-9 col-sm-12">
-              <DatosClientes
-                datafull={datafull}
-                company={company}
-                clave={token}
-              ></DatosClientes>
+              <DatosClientes datafull={datafull} company={company} clave={token}></DatosClientes>
             </div>
           </div>
 
@@ -538,16 +357,7 @@ const Callintro = () => {
               <div>
                 <hr />
                 <div className="container">
-                  <Contesta
-                    datafull={datafull}
-                    tercerosComponent={<Terceros />}
-                    company={company}
-                    clave={token}
-                    elapsedSeconds={elapsedSeconds}
-                    select_si_conecta_llamada={select_si_conecta_llamada}
-                    handleSelectChange={handleSelectChange}
-                    shouldScroll={scrollToNoContesta}
-                  ></Contesta>
+                  <Contesta datafull={datafull} tercerosComponent={<Terceros />} company={company} clave={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
                 </div>
               </div>
             )}

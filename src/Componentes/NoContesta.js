@@ -24,7 +24,7 @@ console.log(Conecta)
 
   const Company = async (company) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
+      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -89,7 +89,7 @@ console.log(Conecta)
 
     try {
       const result = await axios.post(
-        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
+        // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${clave}` } }
       );
@@ -98,7 +98,7 @@ console.log(Conecta)
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
+          window.location.href = "/Orkesta/NewCallSouthPeru/Call_SonrieSeguro/Fin";
         }, 5000);
       }
     } catch (error) {

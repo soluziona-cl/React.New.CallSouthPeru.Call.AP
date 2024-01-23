@@ -18,9 +18,6 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
   useEffect(() => {
     Company(company);
     if (shouldScroll) {
-      // Coloca aquí la lógica para desplazarte a la sección deseada
-      // Esto puede involucrar el uso de métodos para el desplazamiento en el DOM.
-      // Por ejemplo, si deseas desplazarte a un elemento con un id 'mySection':
       const element = document.getElementById('mySection');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
@@ -81,7 +78,7 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
 
     try {
       const result = await axios.post(
-        "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
+        // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${clave}` } }
       );
@@ -90,7 +87,7 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Orkesta/CallSouthPeru/Call_SonrieSeguro/Fin";
+          window.location.href = "/Orkesta/NewCallSouthPeru/Call_SonrieSeguro/Fin";
         }, 5000);
       }
     } catch (error) {
@@ -106,7 +103,7 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
 
   const Company = async (company) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
+      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -121,59 +118,36 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
   return (
     <>
       <div className=" row" id="">
-<section className="" id="mySection">
-            <div class="col-lg-12 col-sm-12 my-2">
-              <label for="observacion_agenda">Observación Agenda</label>
-              <textarea
-                rows="4"
-                class="form-control textarea cliente"
-                id="observacion_agenda"
-              ></textarea>
+        <section className="" id="mySection">
+          <div class="col-lg-12 col-sm-12 my-2">
+            <label for="observacion_agenda">Observación Agenda</label>
+            <textarea rows="4" class="form-control textarea cliente" id="observacion_agenda" ></textarea>
+          </div>
+          <div class="col-lg-12 col-sm-12 my-2">
+            <label for="observacion_agenda">Fecha</label>
+            <div class="input-group">
+              <input type="text" class="form-control pickadate-disable-dates cliente" id="fec_ini" />
+              <span class="input-group-text">
+                <i class="fa-solid fa-calendar-days"></i>
+              </span>
             </div>
-
-            <div class="col-lg-12 col-sm-12 my-2">
-              <label for="observacion_agenda">Fecha</label>
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control pickadate-disable-dates cliente"
-                  id="fec_ini"
-                />
-                  <span class="input-group-text">
-                    <i class="fa-solid fa-calendar-days"></i>
-                  </span>
-               
-              </div>
+          </div>
+          <div class="col-lg-12 col-sm-12 my-2">
+            <label for="observacion_agenda">Hora</label>
+            <div class="input-group">
+              <input type="text" class="form-control  cliente" id="hor_ini" />
+              <span class="input-group-text">
+                <i class="fa-solid fa-clock "></i>
+              </span>
             </div>
-
-            <div class="col-lg-12 col-sm-12 my-2">
-              <label for="observacion_agenda">Hora</label>
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control  cliente"
-                  id="hor_ini"
-                />
-                  <span class="input-group-text">
-                    <i class="fa-solid fa-clock "></i>
-                  </span>
-               
-              </div>
-            </div>
-            <div className="d-flex justify-content-end">
-            <button
-              className="btn text-white guardar"
-              value="GuardarRegistro"
-              onClick={GuardarRegistroNoContesta}
-              disabled={!puedeClickear}
-              style={{ background: "#8362D6" }}
-
-            >
+          </div>
+          <div className="d-flex justify-content-end">
+            <button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} style={{ background: "#8362D6" }} >
               Finalizar
             </button>
           </div>
-          </section>
-        </div>
+        </section>
+      </div>
 
      
     
