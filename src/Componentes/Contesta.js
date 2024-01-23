@@ -4,13 +4,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import TabsTabs from "./TabsTabs";
 import ValidaDatos from "./ValidaDatos";
-import NoContesta from "./NoContesta";
-import { Routes, Route, Link, Outlet, useNavigate } from "react-router-dom";
-import TextPromocionesRipley from "./TextPromocionesRipley";
-import TextPreCierre from "./TextPreCierre";
 import Terceros from "./Terceros";
 import Tabsinformacion from "./TabsInfotmacion";
-
 
 
 function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, select_si_conecta_llamada, handleSelectChange, tercerosComponent, datafull, shouldScroll}) {
@@ -317,7 +312,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
 
   return (
     <>
-      <div className="row my-1">
+      <div className=" row my-1">
         <div className="   ">
           <h3 className="card-header text-white" style={{backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}}>
             Script
@@ -347,7 +342,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                   </div>
                   {(select_si_conecta_llamada === "1" || select_si_conecta_llamada === "2" || select_si_conecta_llamada === "3") && (
                     <div>
-
+                        
                       {select_si_conecta_llamada === "2" && (
                         <div className="mb-5 p-4">
                           <strong>
@@ -378,7 +373,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                         </div>
                       )}
                       {select_si_conecta_llamada === "3" && (
-                        <div className="mb-5 p-4">
+                        <div className="mb-2 p-4">
                           <strong>
                             <h5>Adicional 1</h5>
                             <section className="row">
@@ -432,7 +427,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                         </div>
 
                       )}
-                      <hr></hr>
+                     
                       {datafull.map((data, index) => (
                         <div>
                           <div className="" id="stock">
@@ -469,18 +464,15 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                     </div>
                   )}
                 </div>
-                <div className="text-justify" id="adicional">
-                  <TextPromocionesRipley></TextPromocionesRipley>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
       {(select_si_conecta_llamada === "1" || select_si_conecta_llamada === "2" || select_si_conecta_llamada === "3") && (
-        <div>
+        <div >
       
-          <div className="mb-3 p-3">
+          <div className="card mx-2 p-3">
             <TabsTabs></TabsTabs>
           </div>
           <div className="mt-1 p-3">
@@ -488,7 +480,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
               <strong> EJECUTIVO Y CORROBORACION DE DATOS </strong>
             </h6>
           </div>
-          <div className="form-row p-2 ">
+          <div className="form-row p-2 m-2 ">
             <label for="observacion">
               ¿Entonces Sr. … Siendo el día de hoy (DD/MM/AAAA) acepta la contratación de “Sonríe Seguro”, con un cargo fijo mensual de S/. 29.90 en su tarjeta de crédito Ripley? - Esperar respuesta afirmativa del cliente (Sí - Sí acepto).
             </label>
@@ -547,7 +539,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
           )}
           {select_conecta_llamada_pregunta_interesa === "1" && (
             <div id="vw_script_cliente_valida" class="">
-              <div className=" row m-1 rounded py-2" style={{ background: "#EDEDED" }}>
+              <div className=" row m-2 rounded p-2" style={{ background: "#EDEDED" }}>
                 <h4>
                   Sr./Sra. Actualmente se encuentra en buen estado de salud. (SÍ o NO).
                 </h4>
@@ -583,12 +575,13 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                   </div>
                 )}
               </div>
-              <section className=" mt-2">
+              <section className=" mt-2 ">
+              <div className=" m-4 ">
                 <p>¡Felicitaciones, desde este momento ya se encuentra protegido con Sonríe Seguro de Chubb Seguros…! </p>
                 <p> Recuerde que el cargo mensual aparecerá en su estado de cuenta y podrá acceder a todos los beneficios del seguro desde la fecha de afiliación. </p>
                
                 <p>Adicionalmente, vamos a validar sus datos para el correcto envío de la póliza.</p>
-
+                </div>
                 <div className="card my-3">
                   <ValidaDatos company={company} clave={token} elapsedSeconds={setduracion} onDataComplete={handleDatosCompletosChange} datafull={datafull}/>
                 </div>
