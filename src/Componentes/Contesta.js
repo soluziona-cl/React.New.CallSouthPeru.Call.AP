@@ -60,7 +60,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
   }, []);
   const Nointeresa = async () => {
     const result = await axios.post(
-      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaClienteNoInteresa",
+       "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaClienteNoInteresa",
       { dato: "20367002" },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -505,7 +505,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
             </section>
           )}
           {select_conecta_llamada_pregunta_interesa === "2" && (
-            <div className="col-12 pb-3">
+            <div className="col-12 p-3">
               <div id="vw_script_cliente_nointeresa" className="">
                 <p> <strong> En caso la respuesta es NO: </strong> </p>
                 <p> Cuando NO desea, me despido. Cuando solicita se le llame en otra oportunidad, se agenda nueva llamada. </p>
@@ -515,10 +515,15 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                     <label for="observacion"> Me podria decir la razon por la cual no desea contratar el seguro ? </label>
                   </div>
 
-                  <div className="form-row col-6">
-                    <select id="select_conecta_llamada_pregunta_no_interesa" className="form-select cliente" disabled={   select_conecta_llamada_pregunta_interesa !== "2" } value={select_conecta_llamada_pregunta_no_interesa} onChange={(e) =>   setselect_conecta_llamada_pregunta_no_interesa(e.target.value) } >
+                  <div className="form-row col-6 my-2">
+                    <select id="select_conecta_llamada_pregunta_no_interesa" className="form-select cliente" disabled={select_conecta_llamada_pregunta_interesa !== "2"} value={select_conecta_llamada_pregunta_no_interesa} onChange={(e) => setselect_conecta_llamada_pregunta_no_interesa(e.target.value)} >
                       <option value="0">Seleccione</option>
-                      {no_interesa.map((item) => (
+                      {/* {no_interesa.map((item) => (
+                        <option key={item.id} value={item.id}>
+                          {item.detalle}
+                        </option>
+                      ))} */}
+                      {Array.isArray(no_interesa) && no_interesa.map((item) => (
                         <option key={item.id} value={item.id}>
                           {item.detalle}
                         </option>

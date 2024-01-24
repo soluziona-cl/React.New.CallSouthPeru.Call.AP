@@ -426,7 +426,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
       <section>
         
         <div className="row my-2 p-3">
-          <div className="col-lg-4 col-md-4 col-sm-12 ">
+          <div className="col-lg-6 col-md-6 col-sm-12 ">
             Tipo Documento
             <select id="ddl_listas_tipodocumentodeidentidad" value={tipoDocumento} onChange={handleTipoDocumentoChange} onBlur={handleTipoDocumentoBlur} className="form-select cliente my-2">
               <option value="0">Seleccione una opcion</option>
@@ -434,23 +434,23 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
               <option value="2">carnet de Extranjeria</option>
             </select>
           </div>
-          <div className="col-lg-4 col-md-4 col-sm-12">
+          <div className="col-lg-6 col-md-6 col-sm-12">
             N° Documento
             <input type="text" className="form-control cliente my-2" value={numeroDocumento} inputMode="numeric"  maxLength="8" onChange={(e) => {const inputValue = e.target.value.replace(/\D/g, ""); if (inputValue.length > 8) { e.target.value = inputValue.slice(0, 8);} else { e.target.value = inputValue;}setNumeroDocumento(e.target.value)}} onBlur={handleNumeroDocumentoBlur} id="n_documento" />
           </div>
-          <div className="col-lg-5 col-md-6 col-sm-12 ">
+          <div className="col-lg-3 col-md-6 col-sm-12 ">
             Primer Nombre
             <input name="roomRent" id="val_nombre1" value={primerNombre} onChange={(e) =>handleLettersOnlyChange(e, handlePrimerNombreChange) } onBlur={handlePrimerNombreBlur} type="text" className="cliente form-control my-2" />
           </div>
-          <div className="col-lg-5 col-md-6 col-sm-12 ">
+          <div className="col-lg-3 col-md-6 col-sm-12 ">
             Segundo Nombre
             <input name="roomRent" id="val_nombre2" value={segundoNombre} onChange={(e) => handleLettersOnlyChange(e, handleSegundoNombreChange) } onBlur={handleSegundoNombreBlur} type="text" className="cliente form-control my-2"/>
           </div>
-          <div className="col-lg-5 col-md-6 col-sm-12 ">
+          <div className="col-lg-3 col-md-6 col-sm-12 ">
             Apellido Paterno
             <input name="roomRent" type="text" id="val_paterno" value={apellidoPaterno} onChange={(e) => handleLettersOnlyChange(e, handlePrimerApellidoChange) } onBlur={handlePrimerApellidoBlur} className="cliente form-control my-2" />
           </div>
-          <div className="col-lg-5 col-md-6 col-sm-12 ">
+          <div className="col-lg-3 col-md-6 col-sm-12 ">
             Apellido Materno
             <input name="roomRent" type="text" id="val_materno" value={apellidoMaterno} onChange={(e) => handleLettersOnlyChange(e, handleSegundoApellidoChange) } onBlur={handleSegundoApellidoBlur} className="cliente form-control my-2"/>
           </div>
@@ -484,7 +484,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
             Telefono Movil
             <input name="val_fono" id="val_fon_venta" type="text" maxLength={9} className={`cliente form-control my-2 ${!isTelefonoMovilValid ? "invalid" : ""   }`} value={telefonoMovil} onChange={handleTelefonoMovilChange} onBlur={handleTelefonoMovilBlur} />
           </div>
-          <div className="col-lg-5 col-md-6 col-sm-12 ">
+          <div className="col-lg-8 col-md-6 col-sm-12 ">
             Email:
             <input type="email" id="val_email" required className={`cliente form-control my-2 ${isValidEmail ? "" : "invalid"   }`} value={email} onChange={(e) => setEmail(e.target.value)} onBlur={handleEmailBlur}
             />

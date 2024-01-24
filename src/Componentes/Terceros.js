@@ -117,7 +117,7 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
 
   return (
     <>
-      <div className=" row" id="">
+      <div className="p-3 row" id="">
         <section className="" id="mySection">
           <div class="col-lg-12 col-sm-12 my-2">
             <label for="observacion_agenda">Observación Agenda</label>
