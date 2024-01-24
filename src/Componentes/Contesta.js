@@ -452,10 +452,25 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                       ))}
                     </div>
                   )}
-
+  {select_si_conecta_llamada !== "5" && (
                   <p>
                     Antes de continuar le informamos que por su seguridad esta llamada está siendo grabada.
                   </p>
+                   )}
+                  {( select_si_conecta_llamada === "4") && (
+            <section>
+              <Terceros
+                conecta={selectLlamada}
+                shouldScroll={shouldScroll}
+                select_si_conecta_llamada={select_si_conecta_llamada}
+                handleSelectChange={handleSelectChange}
+                elapsedSeconds={elapsedSeconds}
+                clave={token}
+                datafull={datafull}
+ 
+              />
+            </section>
+          )}
                   {select_si_conecta_llamada === "5" && (
                     <div className="d-flex justify-content-end">
                       <button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={!puedeClickear} style={{ background: "#8362D6" }}>
