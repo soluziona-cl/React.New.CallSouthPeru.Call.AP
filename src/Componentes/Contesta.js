@@ -174,7 +174,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
 
   const Company = async (company) => {
     const result = await axios.post(
-      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
+       //"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -192,7 +192,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
       setSelectedLlamada("0");
     } else {
       const result = await axios.post(
-        // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
+         //"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
         { dato: event },
         { headers: { Authorization: `Bearer ${clave}` } }
       );
@@ -208,7 +208,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
   const DataOcupacion = async () => {
 
     const result = await axios.post(
-      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Profesiones",
+       //"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Profesiones",
       { dato: null },
       { headers: { Authorization: `Bearer ${clave}` } }
     );

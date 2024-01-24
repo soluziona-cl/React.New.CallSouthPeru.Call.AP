@@ -82,7 +82,7 @@ const Callintro = () => {
 
   const ValidaCall = async () => {
     const result = await axios.post(
-      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
+       //"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
       { userName: "test", password: "test" }
     );
 
