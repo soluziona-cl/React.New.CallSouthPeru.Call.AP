@@ -11,7 +11,7 @@ import Tabsinformacion from "./TabsInfotmacion";
 function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, select_si_conecta_llamada, handleSelectChange, tercerosComponent, datafull, shouldScroll}) {
 
   const [buenEstadoSalud, setBuenEstadoSalud] = useState(""); // Estado para la respuesta de buen estado de salud
-  const [ocupacionActual, setOcupacionActual] = useState(""); // Estado para la ocupación actual
+  const [ocupacionActual, setOcupacionActual] = useState("0"); // Estado para la ocupación actual
   const [mostrarMensajeOcupacion, setMostrarMensajeOcupacion] = useState(false); // Estado para mostrar el mensaje de ocupación
   const handleBlur = () => {
     if (ocupacionActual.trim() !== "") {
@@ -21,16 +21,9 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
   const [puedeClickear, setPuedeClickear] = useState(true);
 
   const [selectLlamada, setSelectedLlamada] = useState("");
-  const [Comunica_con_tercero_valido, setComunica_con_tercero_valido] = useState("0");
   const [token, setToken] = useState(clave);
-  const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
   const [select_conecta_llamada_pregunta_no_interesa, setselect_conecta_llamada_pregunta_no_interesa] = useState("0");
 
-  const [horario_tercero, sethorario_tercero] = useState("");
-  const [selectcorreo, setselectcorreo] = useState("");
-  const [selectaceptaseguro, setselectaceptaseguro] = useState("");
-  const [selectinteresa, setselectinteresa] = useState("0");
-  const [selectnointeresa, setselectnointeresa] = useState("0");
   const [setduracion, setselectduracion] = useState("0");
   const [select_conecta_llamada_pregunta_interesa, setselect_conecta_llamada_pregunta_interesa] = useState("0");
   const [no_interesa, setno_interesa] = useState("0");
@@ -40,10 +33,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
     useState(false); // Estado para controlar la habilitación del botón
 
   const [optionListMotivo, setOptionListMotivo] = useState([]);
-  const [optionListDetalle, setOptionListDetalle] = useState([]);
   const [optionocupacion, setOptionListOcupacion] = useState([]);
-  const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] = useState("0");
 
   const nombreCliente = datafull && datafull.length > 0 ? datafull[0].Chubb_nombre : 'Nombre de Cliente Predeterminado';
 
@@ -185,26 +175,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
     }
   };
 
-  const ChangeConecta_nombre = async (event) => {
-    if (event === "0") {
-      setOptionListDetalleEstado(true);
-      setOptionListDetalleEstadoSelect("0");
-      setSelectedLlamada("0");
-    } else {
-      const result = await axios.post(
-         //"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
-        { dato: event },
-        { headers: { Authorization: `Bearer ${clave}` } }
-      );
 
-      setSelectedLlamada(event);
-
-      if (result.status === 200) {
-        setOptionListDetalle(result.data);
-        setOptionListDetalleEstado(false);
-      }
-    }
-  };
   const DataOcupacion = async () => {
 
     const result = await axios.post(
@@ -277,26 +248,8 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
     }
   }
 
-  const SelectedLlamadaChange = (event) => {
-    setComunica_con_tercero_valido("0");
-    setSelectedLlamada(event);
-    setselectnointeresa("0");
-    setselectinteresaChange("0");
-    setselectaceptaseguro("0");
-    setselectcorreo("0");
-  };
 
-  const setselectinteresaChange = (event) => {
-    setselectinteresa(event);
-    setselectnointeresa("0");
-    setselectaceptaseguro("0");
-    setselectcorreo("0");
-  };
 
-  const setselectnointeresaChange = (event) => {
-    setselectnointeresa("0");
-    setselectnointeresa(event);
-  };
   const [selectConectaLlamadaPreguntaConfirma, setSelectConectaLlamadaPreguntaConfirma] = useState("");
 
   const [camposCompletos, setCamposCompletos] = useState(false);
@@ -557,11 +510,6 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                   <div className="form-row col-6 my-2">
                     <select id="select_conecta_llamada_pregunta_no_interesa" className="form-select cliente" disabled={select_conecta_llamada_pregunta_interesa !== "2"} value={select_conecta_llamada_pregunta_no_interesa} onChange={(e) => setselect_conecta_llamada_pregunta_no_interesa(e.target.value)} >
                       <option value="0">Seleccione</option>
-                      {/* {no_interesa.map((item) => (
-                        <option key={item.id} value={item.id}>
-                          {item.detalle}
-                        </option>
-                      ))} */}
                       {Array.isArray(no_interesa) && no_interesa.map((item) => (
                         <option key={item.id} value={item.id}>
                           {item.detalle}

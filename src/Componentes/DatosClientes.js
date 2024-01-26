@@ -2,14 +2,8 @@ import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
 function DatosClientes({ company, clave, datafull }) {
-  const [selectLlamada, setSelectedLlamada] = useState("");
-  const [selectLlamadaDetalle, setSelectedLlamadaDetalle] = useState("");
 
-  const [optionListMotivo, setOptionListMotivo] = useState([]);
-  const [optionListDetalle, setOptionListDetalle] = useState([]);
-  const [optionListDetalleEstado, setOptionListDetalleEstado] = useState(true);
-  const [optionListDetalleEstadoSelect, setOptionListDetalleEstadoSelect] =
-    useState("0");
+ 
   const sesiones = {
     sgui: localStorage.getItem("localgui"),
     scliente: localStorage.getItem("localcliente"),
@@ -18,51 +12,11 @@ function DatosClientes({ company, clave, datafull }) {
     stoken: localStorage.getItem("token"),
   };
 
-  // useEffect(() => {
-  //   Company(company);
-  // }, []);
+  
 
-  const Company = async (company) => {
-    const result = await axios.post(
-      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
-      { dato: company },
-      { headers: { Authorization: `Bearer ${clave}` } }
-    );
+ 
 
-    if (result.status === 200) {
-      setOptionListMotivo(result.data);
-      // console.log(result.data)
-      //  console.log(optionList)
-    }
-  };
-
-  const ChangeConecta_motivo = async (event) => {
-    if (event === "0") {
-      setOptionListDetalleEstado(true);
-      setOptionListDetalleEstadoSelect("0");
-      setSelectedLlamada("0");
-    } else {
-      const result = await axios.post(
-        // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
-        { dato: event },
-        { headers: { Authorization: `Bearer ${clave}` } }
-      );
-
-      setSelectedLlamada(event);
-
-      if (result.status === 200) {
-        setOptionListDetalle(result.data);
-        setOptionListDetalleEstado(false);
-      }
-    }
-  };
-
-  const ChangeConectaDetalle_submotivo = async (event) => {
-    setOptionListDetalleEstado(false);
-    setOptionListDetalleEstadoSelect(event);
-    setSelectedLlamadaDetalle(event);
-  };
-
+  
   return (
     <>
       <div className="container-fluid">

@@ -10,7 +10,6 @@ function NoContesta({ company, clave, conecta,  elapsedSeconds,datafull
   const [selectedOption, setSelectedOption] = useState("0"); // Estado para la opción seleccionada
   const [showGuardarButton, setShowGuardarButton] = useState(false); // Estado para mostrar u ocultar el botón de guardar
   const Conecta = conecta;
-  const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
   const [puedeClickear, setPuedeClickear] = useState(true);
 
 

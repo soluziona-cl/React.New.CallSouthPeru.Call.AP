@@ -156,10 +156,7 @@ const Callintro = () => {
     }
   };
 
-  const handleSeleccion = () => {
-    alert("Seleccionaste 'Lo Pensara' en el hijo.");
-    // Aquí puedes realizar cualquier acción que necesites en el componente padre.
-  };
+ 
 
   const [select_si_conecta_llamada, setSelectSiConectaLlamada] = useState("0");
 
