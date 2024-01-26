@@ -507,7 +507,8 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
           </div>
         </div>
       </div>
-      {(select_si_conecta_llamada === "1") && (
+      {(select_si_conecta_llamada === "1" &&
+  (select_si_conecta_llamada_adicional === "2" || select_cuantos_adicionales !== "0")) && (
         <div >
       
           <div className="card mx-2 p-3">
