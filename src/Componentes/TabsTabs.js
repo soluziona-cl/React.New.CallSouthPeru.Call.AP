@@ -11,7 +11,7 @@ function TabsTabs() {
 
   return (
     <>
-      <Tabs id="controlled-tab-example" activeKey={key} onSelect={(k) => setKey(k)} className="mb-3">
+      <Tabs id="controlled-tab-example" activeKey={key} onSelect={(k) => setKey(k)} className="mb-2">
         <Tab eventKey="bienvenida" title="Bienvenida">
           {/* Contenido de la pestaña Bienvenida */}
           <div className=" p-2">

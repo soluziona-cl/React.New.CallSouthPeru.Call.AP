@@ -309,6 +309,11 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
   const ChangeConecta_Ocupacion = (ocupacion) => {
     setOcupacion(ocupacion);
   };
+ 
+ 
+  const [select_si_conecta_llamada_adicional, setSelectSiConectaLlamadaAdicional] = useState("0");
+  const [select_cuantos_adicionales, setSelect_cuantos_adicionales] = useState("0");
+
 
   return (
     <>
@@ -330,104 +335,131 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                 <div>
                   <div className="form-row">
                     <p className="col-5">
-                      <select id="select_si_conecta_llamada" className="form-select cliente" value={select_si_conecta_llamada} onChange={(event) => {const value = event.target.value;  handleSelectChange(value); }}>
+                      <select id="select_si_conecta_llamada" className="form-select cliente" value={select_si_conecta_llamada} onChange={(event) => {const value = event.target.value;  handleSelectChange(value);  }}>
                         <option value="0">Seleccione</option>
                         <option value="1">Titular</option>
-                        <option value="2">Titular y adicional</option>
-                        <option value="3">Titular y adicionales</option>
-                        <option value="4">Tercero Valido</option>
-                        <option value="5">Tercero no Valido</option>
+                        <option value="2">Tercero Valido</option>
+                        <option value="3">Tercero no Valido</option>
                       </select>
                     </p>
                   </div>
-                  {(select_si_conecta_llamada === "1" || select_si_conecta_llamada === "2" || select_si_conecta_llamada === "3") && (
+                  {(select_si_conecta_llamada === "1") && (
                     <div>
-                        
-                      {select_si_conecta_llamada === "2" && (
-                        <div className="mb-5 p-4">
-                          <strong>
-                            <h5>Adicional </h5>
-                            <section className="row">
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Primer Nombre
-                                <input name="roomRent" type="text" className="cliente form-control  my-2" />
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Segundo Nombre
-                                <input name="roomRent" type="text" className="cliente form-control my-2" />
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Apellido Paterno
-                                <input name="roomRent" type="text" className="cliente form-control my-2" />
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Apellido Materno
-                                <input name="roomRent" className="cliente form-control my-2" />
-                              </div>
-                              <div className="col-lg-6 col-md-6 col-sm-12 ">
-                                Fecha de Nacimiento:
-                                <input type="date" className="cliente form-control my-2" />
-                              </div>
-                            </section>
-                          </strong>
-                        </div>
+
+                      <div className="mb-3 col-5">
+                        ¿Con Adicional?
+                        <select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional}
+                          onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)}
+                          className="form-select cliente">
+                          <option value="0">Seleccione</option>
+                          <option value="1">SI</option>
+                          <option value="2">NO </option>
+                        </select>
+                      </div>
+                      {select_si_conecta_llamada_adicional === "1" && (
+                        <section>
+                          <div className="mb-3  col-5">
+                            ¿Cuántos?
+                            <select id="select_cuantos_adicionales" value={select_cuantos_adicionales}
+                              onChange={(e) => setSelect_cuantos_adicionales(e.target.value)} className="form-select cliente">
+                              <option value="0">Seleccione</option>
+                              <option value="1">Titular + 1 adicional</option>
+                              <option value="2">Tercero + 2 adicionales</option>
+                            </select>
+                          </div>
+
+
+                          {select_cuantos_adicionales === "1" && (
+                            <div className="mb-5 p-4">
+                              <strong>
+                                <h5> Adicional  </h5>
+                                <section className="row">
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Primer Nombre
+                                    <input name="roomRent" type="text" className="cliente form-control  my-2" />
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Segundo Nombre
+                                    <input name="roomRent" type="text" className="cliente form-control my-2" />
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Apellido Paterno
+                                    <input name="roomRent" type="text" className="cliente form-control my-2" />
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Apellido Materno
+                                    <input name="roomRent" className="cliente form-control my-2" />
+                                  </div>
+                                  <div className="col-lg-6 col-md-6 col-sm-12 ">
+                                    Fecha de Nacimiento:
+                                    <input type="date" className="cliente form-control my-2" />
+                                  </div>
+                                </section>
+                              </strong>
+                            </div>
+                          )}
+                          {select_cuantos_adicionales === "2" && (
+                            <div className="mb-2 p-4">
+                              <strong>
+                                <h5>Adicional 1</h5>
+                                <section className="row">
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Primer Nombre
+                                    <input name="roomRent" type="text" className="cliente form-control  my-2" />
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Segundo Nombre
+                                    <input name="roomRent" type="text" className="cliente form-control my-2" />
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Apellido Paterno
+                                    <input name="roomRent" type="text" className="cliente form-control my-2" />
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Apellido Materno
+                                    <input name="roomRent" className="cliente form-control my-2" />
+                                  </div>
+                                  <div className="col-lg-6 col-md-6 col-sm-12 ">
+                                    Fecha de Nacimiento:
+                                    <input type="date" className="cliente form-control my-2" />
+                                  </div>
+                                </section>
+
+                                <h5 className="mt-4">Adicional 2</h5>
+                                <section className="row">
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Primer Nombre
+                                    <input name="roomRent" type="text" className="cliente form-control  my-2" />
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Segundo Nombre
+                                    <input name="roomRent" type="text" className="cliente form-control my-2" />
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Apellido Paterno
+                                    <input name="roomRent" type="text" className="cliente form-control my-2" />
+                                  </div>
+                                  <div className="col-lg-3 col-md-3 col-sm-12 ">
+                                    Apellido Materno
+                                    <input name="roomRent" className="cliente form-control my-2" />
+                                  </div>
+                                  <div className="col-lg-6 col-md-6 col-sm-12 ">
+                                    Fecha de Nacimiento:
+                                    <input type="date" className="cliente form-control my-2" />
+                                  </div>
+                                </section>
+                              </strong>
+
+                            </div>
+
+                          )}
+
+                          <button className="btn text-white btn-primary mb-4" value="agregarAdicional">Agregar</button>
+                        </section>
                       )}
-                      {select_si_conecta_llamada === "3" && (
-                        <div className="mb-2 p-4">
-                          <strong>
-                            <h5>Adicional 1</h5>
-                            <section className="row">
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Primer Nombre
-                                <input name="roomRent" type="text" className="cliente form-control  my-2" />
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Segundo Nombre
-                                <input name="roomRent" type="text" className="cliente form-control my-2" />
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Apellido Paterno
-                                <input name="roomRent" type="text" className="cliente form-control my-2" />
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Apellido Materno
-                                <input name="roomRent" className="cliente form-control my-2" />
-                              </div>
-                              <div className="col-lg-6 col-md-6 col-sm-12 ">
-                                Fecha de Nacimiento:
-                                <input type="date" className="cliente form-control my-2" />
-                              </div>
-                            </section>
+                    
 
-                            <h5 className="mt-4">Adicional 2</h5>
-                            <section className="row">
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Primer Nombre
-                                <input name="roomRent" type="text" className="cliente form-control  my-2" />
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Segundo Nombre
-                                <input name="roomRent" type="text" className="cliente form-control my-2" />
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Apellido Paterno
-                                <input name="roomRent" type="text" className="cliente form-control my-2" />
-                              </div>
-                              <div className="col-lg-3 col-md-3 col-sm-12 ">
-                                Apellido Materno
-                                <input name="roomRent" className="cliente form-control my-2" />
-                              </div>
-                              <div className="col-lg-6 col-md-6 col-sm-12 ">
-                                Fecha de Nacimiento:
-                                <input type="date" className="cliente form-control my-2" />
-                              </div>
-                            </section>
-                          </strong>
 
-                        </div>
-
-                      )}
-                     
                       {datafull.map((data, index) => (
                         <div>
                           <div className="" id="stock">
@@ -452,26 +484,17 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
                       ))}
                     </div>
                   )}
-  {select_si_conecta_llamada !== "5" && (
-                  <p>
+ 
+                  <p className="my-3">
                     Antes de continuar le informamos que por su seguridad esta llamada está siendo grabada.
                   </p>
-                   )}
-                  {( select_si_conecta_llamada === "4") && (
-            <section>
-              <Terceros
-                conecta={selectLlamada}
-                shouldScroll={shouldScroll}
-                select_si_conecta_llamada={select_si_conecta_llamada}
-                handleSelectChange={handleSelectChange}
-                elapsedSeconds={elapsedSeconds}
-                clave={token}
-                datafull={datafull}
- 
-              />
-            </section>
-          )}
-                  {select_si_conecta_llamada === "5" && (
+                  
+                  {(select_si_conecta_llamada === "2") && (
+                    <section>
+                      <Terceros conecta={selectLlamada} shouldScroll={shouldScroll} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} clave={token} datafull={datafull} />
+                    </section>
+                  )}
+                  {select_si_conecta_llamada === "3" && (
                     <div className="d-flex justify-content-end">
                       <button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={!puedeClickear} style={{ background: "#8362D6" }}>
                         Finalizar
@@ -484,7 +507,7 @@ function Contesta({ company, clave, onConectaTerceroValido, elapsedSeconds, sele
           </div>
         </div>
       </div>
-      {(select_si_conecta_llamada === "1" || select_si_conecta_llamada === "2" || select_si_conecta_llamada === "3") && (
+      {(select_si_conecta_llamada === "1") && (
         <div >
       
           <div className="card mx-2 p-3">
