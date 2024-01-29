@@ -66,7 +66,7 @@ function Contesta({
   }, []);
   const Nointeresa = async () => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaClienteNoInteresa",
+      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaClienteNoInteresa",
       { dato: "20367002" },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -130,7 +130,7 @@ function Contesta({
 
     try {
       const result = await axios.post(
-        // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
+         "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -179,7 +179,7 @@ function Contesta({
 
   const Company = async (company) => {
     const result = await axios.post(
-      //"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/ConectaDetalle",
+      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -192,7 +192,7 @@ function Contesta({
 
   const DataOcupacion = async () => {
     const result = await axios.post(
-      //"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Profesiones",
+      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Profesiones",
       { dato: null },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -240,7 +240,7 @@ function Contesta({
 
     try {
       const result = await axios.post(
-        // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
+         "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${clave}` } }
       );

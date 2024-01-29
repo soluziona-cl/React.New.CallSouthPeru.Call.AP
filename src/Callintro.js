@@ -63,12 +63,12 @@ const Callintro = () => {
   const lead_id = urlParams.get("lead_id");
   // const rut = urlParams.get("address2");
   const epoch = urlParams.get("epoch");
-  const lead_id_2 = urlParams.get("lead_id");
-  const rut_2 = urlParams.get("lead_id");
+ // const lead_id_2 = urlParams.get("lead_id");
+ // const rut_2 = urlParams.get("lead_id");
   const phone_number = urlParams.get("phone_number");
-  const uniqueid = urlParams.get("uniqueid");
+ // const uniqueid = urlParams.get("uniqueid");
   const agente = urlParams.get("user");
-  const recording_filename = urlParams.get("recording_filename");
+ // const recording_filename = urlParams.get("recording_filename");
 
   useEffect(() => {
     ValidaCall();
@@ -82,7 +82,7 @@ const Callintro = () => {
 
   const ValidaCall = async () => {
     const result = await axios.post(
-       //"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
+       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Validacall",//"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
       { userName: "test", password: "test" }
     );
 
@@ -99,13 +99,13 @@ const Callintro = () => {
 
       setToken(clave);
       Conecta(clave);
-      DatosCliente(rut_2, clave);
+      DatosCliente(clave);
       GuardaURL(agente, queryString, clave);
     }
   };
   const DatosCliente = async (lead, clave) => {
     const result = await axios.post(
-      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/DatosCliente",
+       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/DatosCliente",
       { dato: lead },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -126,7 +126,7 @@ const Callintro = () => {
   };
   const GuardaURL = async (agentes, url, clave) => {
     const result = await axios.post(
-      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/SaveURl",
+       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/SaveURl",
       { dato: agentes, dato_2: url },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -143,7 +143,7 @@ const Callintro = () => {
   };
   const Conecta = async (clave) => {
     const result = await axios.post(
-      // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Conecta",
+       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/Conecta",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -201,12 +201,12 @@ const Callintro = () => {
     const lead_id = urlParams.get("lead_id");
     // const rut = urlParams.get("address2");
     const epoch = urlParams.get("epoch");
-    const lead_id_2 = urlParams.get("lead_id");
-    const rut_2 = urlParams.get("lead_id");
+    //const lead_id_2 = urlParams.get("lead_id");
+    //const rut_2 = urlParams.get("lead_id");
     const phone_number = urlParams.get("phone_number");
-    const uniqueid = urlParams.get("uniqueid");
+    //const uniqueid = urlParams.get("uniqueid");
     const agente = urlParams.get("user");
-    const recording_filename = urlParams.get("recording_filename");
+    //const recording_filename = urlParams.get("recording_filename");
 
     json_sucess_gestion.push(item_sucess_gestion);
 
@@ -219,7 +219,7 @@ const Callintro = () => {
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
-    item_sucess_llamada["recording_filename"] = recording_filename;
+    //item_sucess_llamada["recording_filename"] = recording_filename;
     item_sucess_llamada["epoch"] = epoch;
     item_sucess_llamada["fecha_gestion"] = new Date();
     item_sucess_llamada["duracion_sec"] = elapsedSeconds;
@@ -231,7 +231,7 @@ const Callintro = () => {
 
     try {
       const result = await axios.post(
-        // "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/GuardaGestion",
+         "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -255,7 +255,7 @@ const Callintro = () => {
 
   return (
     <>
-      <ToastContainer autoClose={3000} />{" "}
+      <ToastContainer autoClose={3000} />
       <Container className="p-1 mb-4 rounded-3">
         <div class="card card-header bg-black">
           <h3 class="text-white  ms-3 ">
@@ -264,9 +264,9 @@ const Callintro = () => {
               <div key={index} className="col-lg-12 col-md-12 col-sm-12 my-1">
                 Tipo Base: {data.Chubb_tipo_captacion.toUpperCase()}
               </div>
-            ))}{" "}
+            ))}
             Identificador de Llamada <label id="ident_llamdaa">{lead_id}</label>
-            <br /> Duracion de la llamada{" "}
+            <br /> Duracion de la llamada
             <span id="duracion" className="cliente">
               {get_elapsed_time_string(elapsedSeconds)}
             </span>
