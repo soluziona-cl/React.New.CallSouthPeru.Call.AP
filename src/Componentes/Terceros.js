@@ -6,7 +6,6 @@ import { ToastContainer, toast } from "react-toastify";
 
 function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,elapsedSeconds,datafull  }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
-  const [botonDeshabilitado, setBotonDeshabilitado] = useState(false); // Estado para controlar la habilitación del botón
   const [puedeClickear, setPuedeClickear] = useState(true);
 
 // console.log(clave)
@@ -123,24 +122,7 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
             <label for="observacion_agenda">Observación Agenda</label>
             <textarea rows="4" class="form-control textarea cliente" id="observacion_agenda" ></textarea>
           </div>
-          <div class="col-lg-12 col-sm-12 my-2">
-            <label for="observacion_agenda">Fecha</label>
-            <div class="input-group">
-              <input type="text" class="form-control pickadate-disable-dates cliente" id="fec_ini" />
-              <span class="input-group-text">
-                <i class="fa-solid fa-calendar-days"></i>
-              </span>
-            </div>
-          </div>
-          <div class="col-lg-12 col-sm-12 my-2">
-            <label for="observacion_agenda">Hora</label>
-            <div class="input-group">
-              <input type="text" class="form-control  cliente" id="hor_ini" />
-              <span class="input-group-text">
-                <i class="fa-solid fa-clock "></i>
-              </span>
-            </div>
-          </div>
+         
           <div className="d-flex justify-content-end">
             <button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} style={{ background: "#8362D6" }} >
               Finalizar

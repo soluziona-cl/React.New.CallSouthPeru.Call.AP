@@ -166,33 +166,7 @@ console.log(Conecta)
                 ></textarea>
               </div>
 
-              <div className="col-lg-12 col-sm-12 my-2">
-                <label htmlFor="observacion_agenda">Fecha</label>
-                <div className="input-group">
-                  <input
-                    type="text"
-                    className="form-control pickadate-disable-dates cliente"
-                    id="fec_ini"
-                  />
-                  <span className="input-group-text">
-                    <i className="fa-solid fa-calendar-days"></i>
-                  </span>
-                </div>
-              </div>
 
-              <div className="col-lg-12 col-sm-12 my-2">
-                <label htmlFor="observacion_agenda">Hora</label>
-                <div className="input-group">
-                  <input
-                    type="text"
-                    className="form-control  cliente"
-                    id="hor_ini"
-                  />
-                  <span className="input-group-text">
-                    <i className="fa-solid fa-clock "></i>
-                  </span>
-                </div>
-              </div>
             </>
           )}
            {/* Mostrar el botón de guardar si se elige una opción distinta de "Seleccione" */}
