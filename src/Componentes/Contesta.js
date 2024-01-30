@@ -288,13 +288,7 @@ function Contesta({
     <>
       <div className=" row my-1">
         <div className="   ">
-          <h3
-            className="card-header text-white"
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
-            }}
-          >
+          <h3 className="card-header text-white" style={{backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}}>
             Script
           </h3>
         </div>
@@ -304,7 +298,7 @@ function Contesta({
               <div className="card-body login-card-body">
                 <div className="form-row">
                   <p>
-                    Buenos días/tardes, me podría comunicar con el (la) señor(a){" "}
+                    Buenos días/tardes, me podría comunicar con el (la) señor(a)
                     {nombreCliente}, Cómo le va mucho gusto! Encantado/a de
                     saludarle mi nombre es XXXX le llamamos de Banco Ripley por
                     encargo de Chubb Seguros Perú.
@@ -313,15 +307,7 @@ function Contesta({
                 <div>
                   <div className="form-row">
                     <p className="col-5">
-                      <select
-                        id="select_si_conecta_llamada"
-                        className="form-select cliente"
-                        value={select_si_conecta_llamada}
-                        onChange={(event) => {
-                          const value = event.target.value;
-                          handleSelectChange(value);
-                        }}
-                      >
+                      <select id="select_si_conecta_llamada" className="form-select cliente" value={select_si_conecta_llamada} onChange={(event) => {const value = event.target.value;   handleSelectChange(value)}} >
                         <option value="0">Seleccione</option>
                         <option value="1">Titular</option>
                         <option value="2">Tercero Valido</option>
@@ -333,14 +319,7 @@ function Contesta({
                     <div>
                       <div className="mb-3 col-5">
                         ¿Con Adicional?
-                        <select
-                          id="select_si_conecta_llamada_adicional"
-                          value={select_si_conecta_llamada_adicional}
-                          onChange={(e) =>
-                            setSelectSiConectaLlamadaAdicional(e.target.value)
-                          }
-                          className="form-select cliente"
-                        >
+                        <select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} className="form-select cliente" >
                           <option value="0">Seleccione</option>
                           <option value="1">SI</option>
                           <option value="2">NO </option>
@@ -350,14 +329,7 @@ function Contesta({
                         <section>
                           <div className="mb-3  col-5">
                             ¿Cuántos?
-                            <select
-                              id="select_cuantos_adicionales"
-                              value={select_cuantos_adicionales}
-                              onChange={(e) =>
-                                setSelect_cuantos_adicionales(e.target.value)
-                              }
-                              className="form-select cliente"
-                            >
+                            <select id="select_cuantos_adicionales" value={select_cuantos_adicionales} onChange={(e) =>setSelect_cuantos_adicionales(e.target.value)} className="form-select cliente">
                               <option value="0">Seleccione</option>
                               <option value="1">Titular + 1 adicional</option>
                               <option value="2">Tercero + 2 adicionales</option>
@@ -582,12 +554,7 @@ function Contesta({
                             {data.Chubb_tipo_captacion.toUpperCase() ===
                               "STOCK" && (
                               <p>
-                                {" "}
-                                El motivo de mi llamada es agradecer la
-                                permanencia que tiene con la tarjeta, RIPLEY y
-                                gracias a los pagos puntuales que ha venido
-                                efectuando este año queremos ampliar sus
-                                beneficios.
+                                 El motivo de mi llamada es agradecer la permanencia que tiene con la tarjeta, RIPLEY y gracias a los pagos puntuales que ha venido efectuando este año queremos ampliar sus beneficios.
                               </p>
                             )}
                           </div>
@@ -595,11 +562,7 @@ function Contesta({
                             {data.Chubb_tipo_captacion.toUpperCase() ===
                               "WELCOME" && (
                               <p>
-                                {" "}
-                                El motivo de mi llamada es agradecer la
-                                CONFIANZA y su preferencia por haber obtenido
-                                recientemente su Tarjeta de crédito Ripley con
-                                nosotros.
+                                 El motivo de mi llamada es agradecer la CONFIANZA y su preferencia por haber obtenido recientemente su Tarjeta de crédito Ripley con nosotros.
                               </p>
                             )}
                           </div>
@@ -608,11 +571,7 @@ function Contesta({
                               "CROSS"
                             ) && (
                               <p>
-                                {" "}
-                                EL MOTIVO DE MI LLAMADA Es para agradecer el
-                                tiempo de permanencia con EL SEGURO (DETALLAR
-                                NOMBRE DE SEGURO) AMPLIANDO SUS BENEFICIOS CON
-                                EL NUEVO SEGURO: SONRIE SEGURO
+                                 EL MOTIVO DE MI LLAMADA Es para agradecer el tiempo de permanencia con EL SEGURO (DETALLAR NOMBRE DE SEGURO) AMPLIANDO SUS BENEFICIOS CON EL NUEVO SEGURO: SONRIE SEGURO
                               </p>
                             )}
                           </div>
@@ -628,25 +587,13 @@ function Contesta({
 
                   {select_si_conecta_llamada === "2" && (
                     <section>
-                      <Terceros
-                        conecta={selectLlamada}
-                        shouldScroll={shouldScroll}
-                        select_si_conecta_llamada={select_si_conecta_llamada}
-                        handleSelectChange={handleSelectChange}
-                        elapsedSeconds={elapsedSeconds}
-                        clave={token}
-                        datafull={datafull}
+                      <Terceros conecta={selectLlamada} shouldScroll={shouldScroll} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} clave={token} datafull={datafull}
                       />
                     </section>
                   )}
                   {select_si_conecta_llamada === "3" && (
                     <div className="d-flex justify-content-end">
-                      <button
-                        className="btn text-white guardar"
-                        value="GuardarRegistro"
-                        onClick={GuardarRegistroNoValido}
-                        disabled={!puedeClickear}
-                        style={{ background: "#8362D6" }}
+                      <button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={!puedeClickear} style={{ background: "#8362D6" }}
                       >
                         Finalizar
                       </button>
@@ -702,11 +649,11 @@ function Contesta({
 
             <div className="d-none" id="no_acepta">
               <p>
-                {" "}
+                
                 <strong> Agendo:</strong> Por supuesto (Primer nombre del
                 cliente) se programará la llamada para el día (validar fecha con
                 cliente). Muchas gracias, buenos días/buenas tardes/buenas
-                noches{" "}
+                noches
               </p>
             </div>
 
@@ -727,26 +674,26 @@ function Contesta({
               <div className="col-12 p-3">
                 <div id="vw_script_cliente_nointeresa" className="">
                   <p>
-                    {" "}
-                    <strong> En caso la respuesta es NO: </strong>{" "}
+                    
+                    <strong> En caso la respuesta es NO: </strong>
                   </p>
                   <p>
-                    {" "}
+                    
                     Cuando NO desea, me despido. Cuando solicita se le llame en
-                    otra oportunidad, se agenda nueva llamada.{" "}
+                    otra oportunidad, se agenda nueva llamada.
                   </p>
                   <p>
                     <strong> Agendo:</strong> Por supuesto (Primer nombre del
                     cliente) se programará la llamada para el día (validar fecha
                     con cliente). Muchas gracias, buenos días/buenas
-                    tardes/buenas noches{" "}
+                    tardes/buenas noches
                   </p>
                   <div className=" card-body">
                     <div className="form-row">
                       <label for="observacion">
-                        {" "}
+                        
                         Me podria decir la razon por la cual no desea contratar
-                        el seguro ?{" "}
+                        el seguro ?
                       </label>
                     </div>
 
@@ -826,7 +773,7 @@ function Contesta({
                   </div>
                   {buenEstadoSalud === "NO" && (
                     <p>
-                      {" "}
+                      
                       Salvedad: Recuerde Sr./Sra. que le vamos a cubrir por
                       cualquier accidente que no sea consecuencia de alguna
                       preexistencia.
@@ -835,7 +782,7 @@ function Contesta({
                   <div className=" row col-6 ms-2">
                     <div className="form rounded-3 col-lg-12 col-md-6 col-sm-12 ">
                       <label for="ocupacion">
-                        {" "}
+                        
                         Para culminar, nos podría indicar su ocupación actual:
                       </label>
                       <select
@@ -859,12 +806,12 @@ function Contesta({
                   {mostrarMensajeOcupacion && (
                     <div>
                       <p>
-                        {" "}
+                        
                         Si el cliente tiene una profesión de alto riesgo, se
                         debe indicar lo siguiente.
                       </p>
                       <p>
-                        {" "}
+                        
                         Salvedad: Recuerde Sr./Sra. que le vamos a cubrir por
                         cualquier accidente fuera de sus horas de trabajo.
                       </p>
@@ -875,13 +822,13 @@ function Contesta({
                   <div className=" m-4 ">
                     <p>
                       ¡Felicitaciones, desde este momento ya se encuentra
-                      protegido con Sonríe Seguro de Chubb Seguros…!{" "}
+                      protegido con Sonríe Seguro de Chubb Seguros…!
                     </p>
                     <p>
-                      {" "}
+                      
                       Recuerde que el cargo mensual aparecerá en su estado de
                       cuenta y podrá acceder a todos los beneficios del seguro
-                      desde la fecha de afiliación.{" "}
+                      desde la fecha de afiliación.
                     </p>
 
                     <p>
@@ -936,7 +883,7 @@ function Contesta({
                       {selectConectaLlamadaPreguntaConfirma === "1" && (
                         <div className="my-4" id="si_correo">
                           <p>
-                            {" "}
+                            
                             Muy bien Sr/Sra. XXXXXX le recuerdo que el envío de
                             tu Solicitud-Certificado digital es el sustento de
                             la contratación del presente seguro. Entonces le
@@ -949,7 +896,7 @@ function Contesta({
                       {selectConectaLlamadaPreguntaConfirma === "2" && (
                         <div className="my-4" id="no_correo">
                           <p>
-                            {" "}
+                            
                             Te estaremos enviando la Solicitud-Certificado a tu
                             domicilio en 15 días calendario, contados a partir
                             del día de hoy Revalidar (LA DIRECCIÓN:
@@ -984,7 +931,7 @@ function Contesta({
                   <div className="card card-body">
                     <div className="form-row col-12 text-justify">
                       <p>
-                        {" "}
+                        
                         Por cualquier consulta puede comunicarse con nosotros al
                         Banco Ripley al 611-5757 o a Chubb Seguros Perú al (01)
                         3991212 de lunes a viernes de 9:00am a 6:00pm. Sr. XXX

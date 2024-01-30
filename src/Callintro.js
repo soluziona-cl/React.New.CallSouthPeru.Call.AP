@@ -26,7 +26,6 @@ const Callintro = () => {
   const { Alert } = bootstrap;
   const [scrollToNoContesta, setScrollToNoContesta] = useState(false);
 
-  const [show, toggleShow] = useState(true);
   const [token, setToken] = useState("");
   const [company, setCompany] = useState("11740594");
 
@@ -35,7 +34,6 @@ const Callintro = () => {
 
   const [dataValida, setDataValida] = useState([]);
   const [optionList, setOptionList] = useState([]);
-  const [openHistoricoGestiones, setHistoricoGestiones] = useState(false);
 
   const [datafull, setDataFull] = useState([]);
 
@@ -175,10 +173,7 @@ const Callintro = () => {
   };
   const [showContent, setShowContent] = useState(false);
 
-  const HideLogo = () => {
-    // setshowlogo(!showlogo);
-    setHistoricoGestiones(!openHistoricoGestiones);
-  };
+
 
 
   async function GuardarRegistroNoContesta() {
@@ -199,14 +194,9 @@ const Callintro = () => {
     let urlParams = new URLSearchParams(queryString);
     const list_id = urlParams.get("list_id");
     const lead_id = urlParams.get("lead_id");
-    // const rut = urlParams.get("address2");
     const epoch = urlParams.get("epoch");
-    //const lead_id_2 = urlParams.get("lead_id");
-    //const rut_2 = urlParams.get("lead_id");
     const phone_number = urlParams.get("phone_number");
-    //const uniqueid = urlParams.get("uniqueid");
     const agente = urlParams.get("user");
-    //const recording_filename = urlParams.get("recording_filename");
 
     json_sucess_gestion.push(item_sucess_gestion);
 
@@ -219,12 +209,9 @@ const Callintro = () => {
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
-    //item_sucess_llamada["recording_filename"] = recording_filename;
     item_sucess_llamada["epoch"] = epoch;
     item_sucess_llamada["fecha_gestion"] = new Date();
     item_sucess_llamada["duracion_sec"] = elapsedSeconds;
-    // item_sucess_llamada["duracion_time"] =
-    // get_elapsed_time_string(elapsed_seconds);
     item_sucess_llamada["phone_number"] = phone_number;
     item_sucess_llamada["gestion"] = json_sucess_gestion;
     id.push(item_sucess_llamada);
