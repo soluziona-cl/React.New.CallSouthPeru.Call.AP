@@ -101,15 +101,26 @@ function Contesta({
     let id = []; //final
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
+    let json_sucess_gestion2 = [];
+
     let item_sucess_gestion = {};
+    let item_sucess_gestion2 = {};
+
     const preguntas = document.querySelectorAll(".cliente");
     preguntas.forEach((obj) => {
       let title = obj.id;
       let valor = obj.value;
       item_sucess_gestion[title] = valor;
     });
-
+    const preguntas2 = document.querySelectorAll(".clienteadicional");
+    preguntas2.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion2[title] = valor;
+    });
     json_sucess_gestion.push(item_sucess_gestion);
+    json_sucess_gestion2.push(item_sucess_gestion2);
+
 
     item_sucess_llamada["sucess"] = true;
     item_sucess_llamada["campaign_name"] = "Sonrie_Seguro";
@@ -127,6 +138,9 @@ function Contesta({
     item_sucess_llamada["fecha_gestion"] = new Date();
     item_sucess_llamada["phone_number"] = phone_number;
     item_sucess_llamada["gestion"] = json_sucess_gestion;
+    item_sucess_llamada["adicionales"] = json_sucess_gestion2;
+
+
     item_sucess_llamada["duracion_sec"] = setduracion;
     id.push(item_sucess_llamada);
 

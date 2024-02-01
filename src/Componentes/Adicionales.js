@@ -329,7 +329,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                       e.target.value
                                                                   );
                                                               }}
-                                                              className="cliente form-control  my-2"
+                                                              className="clienteadicional form-control  my-2"
                                                           />
                                                       </div>
                                                       <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -343,7 +343,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                       e.target.value
                                                                   );
                                                               }}
-                                                              className="cliente form-control my-2"
+                                                              className="clienteadicional form-control my-2"
                                                           />
                                                       </div>
                                                       <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -357,7 +357,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                       e.target.value
                                                                   );
                                                               }}
-                                                              className="cliente form-control my-2"
+                                                              className="clienteadicional form-control my-2"
                                                           />
                                                       </div>
                                                       <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -370,7 +370,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                       e.target.value
                                                                   );
                                                               }}
-                                                              className="cliente form-control my-2"
+                                                              className="clienteadicional form-control my-2"
                                                           />
                                                       </div>
                                                       <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -383,14 +383,14 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                       e.target.value
                                                                   );
                                                               }}
-                                                              className="cliente form-control my-2"
+                                                              className="clienteadicional form-control my-2"
                                                           />
                                                       </div>
                                                       <div className="col-lg-3 col-md-6 col-sm-12 ">
                                                           N° Documento
                                                           <input
                                                               type="text"
-                                                              className="form-control cliente my-2"
+                                                              className="form-control clienteadicional my-2"
                                                               value={doc_adicional1}
                                                               inputMode="numeric"
                                                               maxLength="8"
@@ -424,7 +424,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                       onChange={(e) =>
                                                                           settipo_asegurado2(e.target.value)
                                                                       }
-                                                                      className="form-select cliente"
+                                                                      className="form-select clienteadicional"
                                                                   >
                                                                       <option value="0">Seleccione</option>
                                                                       <option value="AT">Titular</option>
@@ -449,7 +449,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                       onChange={(e) =>
                                                                           setparentesco2(e.target.value)
                                                                       }
-                                                                      className="form-select cliente"
+                                                                      className="form-select clienteadicional"
                                                                   >
                                                                       <option value="0">Seleccione</option>
                                                                       <option value="38">Conyugue</option>
@@ -487,7 +487,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control  my-2"
+                                                                      className="clienteadicional form-control  my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -501,7 +501,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control my-2"
+                                                                      className="clienteadicional form-control my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -515,7 +515,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control my-2"
+                                                                      className="clienteadicional form-control my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -528,7 +528,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control my-2"
+                                                                      className="clienteadicional form-control my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -541,14 +541,14 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control my-2"
+                                                                      className="clienteadicional form-control my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12">
                                                                   N° Documento
                                                                   <input
                                                                       type="text"
-                                                                      className="form-control cliente my-2"
+                                                                      className="form-control clienteadicional my-2"
                                                                       value={doc_adicional2}
                                                                       inputMode="numeric"
                                                                       maxLength="8"
@@ -584,7 +584,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                       onChange={(e) =>
                                                                           settipo_asegurado3(e.target.value)
                                                                       }
-                                                                      className="form-select cliente"
+                                                                      className="form-select clienteadicional"
                                                                   >
                                                                       <option value="0">Seleccione</option>
                                                                       <option value="AT">Titular</option>
@@ -609,7 +609,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                       onChange={(e) =>
                                                                           setparentesco3(e.target.value)
                                                                       }
-                                                                      className="form-select cliente"
+                                                                      className="form-select clienteadicional"
                                                                   >
                                                                       <option value="0">Seleccione</option>
                                                                       <option value="38">Conyugue</option>
@@ -647,7 +647,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control  my-2"
+                                                                      className="clienteadicional form-control  my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -661,7 +661,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control my-2"
+                                                                      className="clienteadicional form-control my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -675,7 +675,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control my-2"
+                                                                      className="clienteadicional form-control my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -688,7 +688,7 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control my-2"
+                                                                      className="clienteadicional form-control my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12 ">
@@ -701,14 +701,14 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                                               e.target.value
                                                                           );
                                                                       }}
-                                                                      className="cliente form-control my-2"
+                                                                      className="clienteadicional form-control my-2"
                                                                   />
                                                               </div>
                                                               <div className="col-lg-3 col-md-6 col-sm-12 ">
                                                                   N° Documento
                                                                   <input
                                                                       type="text"
-                                                                      className="form-control cliente my-2"
+                                                                      className="form-control clienteadicional my-2"
                                                                       value={doc_adicional3}
                                                                       inputMode="numeric"
                                                                       maxLength="8"
