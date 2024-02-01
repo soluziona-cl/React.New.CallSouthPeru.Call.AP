@@ -21,16 +21,42 @@ import Adicionales from "./Componentes/Adicionales";
 
 registerLocale("es", es);
 
+
+function get_elapsed_time_string(total_seconds) {
+  function pretty_time_string(num) {
+    return (num < 10 ? "0" : "") + num;
+  }
+  var hours = Math.floor(total_seconds / 3600);
+  total_seconds = total_seconds % 3600;
+  var minutes = Math.floor(total_seconds / 60);
+  total_seconds = total_seconds % 60;
+  var seconds = Math.floor(total_seconds);
+  hours = pretty_time_string(hours);
+  minutes = pretty_time_string(minutes);
+  seconds = pretty_time_string(seconds);
+  var currentTimeString = hours + ":" + minutes + ":" + seconds;
+  return currentTimeString;
+}
+
+
 const Callintro = () => {
   const [puedeClickear, setPuedeClickear] = useState(true);
   const [adicional, setAdicional] = useState(false);
+
+
+
+  const [viewNoContesta,setviewNoContesta]=useState(false)	
+  const [viewTerceros	,setviewTerceros]=useState(false)
+  const [viewDatosClientes,setviewDatosClientes]=useState(false)	
+  const [viewAdicionales	,setviewAdicionales]=useState(false)
+  const [viewContesta,setviewContesta]=useState(false)
+
 
 
   const { Alert } = bootstrap;
   const [scrollToNoContesta, setScrollToNoContesta] = useState(false);
 
   const [token, setToken] = useState("");
-  const [company, setCompany] = useState("11740594");
 
   const [selectLlamada, setSelectLlamada] = useState("0");
   const [selectLlamada_2, setselectLlamada_2] = useState("0");
@@ -42,48 +68,47 @@ const Callintro = () => {
 
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
-  function get_elapsed_time_string(total_seconds) {
-    function pretty_time_string(num) {
-      return (num < 10 ? "0" : "") + num;
-    }
-    var hours = Math.floor(total_seconds / 3600);
-    total_seconds = total_seconds % 3600;
-    var minutes = Math.floor(total_seconds / 60);
-    total_seconds = total_seconds % 60;
-    var seconds = Math.floor(total_seconds);
-    hours = pretty_time_string(hours);
-    minutes = pretty_time_string(minutes);
-    seconds = pretty_time_string(seconds);
-    var currentTimeString = hours + ":" + minutes + ":" + seconds;
-    return currentTimeString;
-  }
 
-  let queryString = window.location.search;
-  let urlParams = new URLSearchParams(queryString);
-  const list_id = urlParams.get("list_id");
+
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
   const lead_id = urlParams.get("lead_id");
-  // const rut = urlParams.get("address2");
-  const epoch = urlParams.get("epoch");
- // const lead_id_2 = urlParams.get("lead_id");
- // const rut_2 = urlParams.get("lead_id");
+  const list_id = urlParams.get("list_id");
+  const id_registro = urlParams.get("id_registro");
+  const id_registro_url = urlParams.get("id_registro");
   const phone_number = urlParams.get("phone_number");
- // const uniqueid = urlParams.get("uniqueid");
+  const user = urlParams.get("user");
+  const campaign = urlParams.get("campaign");
+  const company = urlParams.get("campaign");
+  const epoch = urlParams.get("epoch");
   const agente = urlParams.get("user");
- // const recording_filename = urlParams.get("recording_filename");
+
+
+  let id_url = []; //final
+  let item_sucess_llamada_url = {};
+
+  item_sucess_llamada_url["sucess"] = true;
+  item_sucess_llamada_url["campaign_name"] = company;
+  item_sucess_llamada_url["campaign_id"] = "1";
+  item_sucess_llamada_url["campaign"] = "SonrieSeguro";
+  item_sucess_llamada_url["lead_id"] = lead_id;
+  item_sucess_llamada_url["list_id"] = list_id;
+  item_sucess_llamada_url["duracion"] = 0;
+  item_sucess_llamada_url["agente"] = agente;
+  item_sucess_llamada_url["phone_number"] = phone_number;
+  item_sucess_llamada_url["url"] = queryString;
+  item_sucess_llamada_url["estado"] = '0';
+  id_url.push(item_sucess_llamada_url);
+
 
   useEffect(() => {
     ValidaCall();
-    const intervalId = setInterval(() => {
-      setElapsedSeconds((prevSeconds) => prevSeconds + 1);
-    }, 1000);
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+    
+  }, [id_registro]);
 
   const ValidaCall = async () => {
     const result = await axios.post(
-       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Validacall",//"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
+      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Validacall",//"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
       { userName: "test", password: "test" }
     );
 
@@ -99,14 +124,14 @@ const Callintro = () => {
       });
 
       setToken(clave);
-      Conecta(clave);
-      DatosCliente(clave);
-      GuardaURL(agente, queryString, clave);
+      // Conecta(clave);
+      // DatosCliente(clave);
+      GuardaURL2(id_url, clave);
     }
   };
   const DatosCliente = async (lead, clave) => {
     const result = await axios.post(
-       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/DatosCliente",
+      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/DatosCliente",
       { dato: lead },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -125,26 +150,22 @@ const Callintro = () => {
       //console.log(datafull);
     }
   };
-  const GuardaURL = async (agentes, url, clave) => {
-    const result = await axios.post(
-       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/SaveURl",
-      { dato: agentes, dato_2: url },
-      { headers: { Authorization: `Bearer ${clave}` } }
+
+  const GuardaURL2 = async (url_id, clave) => {
+
+    const result = await axios.post("https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/SaveURl/2", { dato: url_id }, { headers: { Authorization: `Bearer ${clave}` } }
     );
 
     if (result.status === 200) {
-      console.log(result.data);
-      console.log(queryString);
-      // AlertDemo()
 
-      // setTimeout(() => {
-      //   AlertDemo.close()
-      // }, 5000)
+
     }
   };
+
+
   const Conecta = async (clave) => {
     const result = await axios.post(
-       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/Conecta",
+      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/Conecta",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -157,7 +178,7 @@ const Callintro = () => {
     }
   };
 
- 
+
 
   const [select_si_conecta_llamada, setSelectSiConectaLlamada] = useState("0");
 
@@ -222,7 +243,7 @@ const Callintro = () => {
 
     try {
       const result = await axios.post(
-         "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
+        "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -250,6 +271,20 @@ const Callintro = () => {
     // Lógica para agregar adicional y habilitar Contesta
     setAdicionalCompleto(true);
   };
+
+
+  useEffect(() => {
+
+    const intervalId = setInterval(() => {
+      setElapsedSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
+
+
   return (
     <>
       <ToastContainer autoClose={3000} />
@@ -320,12 +355,12 @@ const Callintro = () => {
                   </div>
 
                   {selectLlamada_2 !== "95" && selectLlamada_2 !== "89" && selectLlamada_2 !== "0" && selectLlamada_2 !== "" && (
-                      <div className="d-flex justify-content-end m-1 mt-2">
-                        <button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} style={{ background: "#8362D6" }}>
-                          Finalizar
-                        </button>
-                      </div>
-                    )}
+                    <div className="d-flex justify-content-end m-1 mt-2">
+                      <button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} style={{ background: "#8362D6" }}>
+                        Finalizar
+                      </button>
+                    </div>
+                  )}
                 </div>
               )}
 
@@ -337,7 +372,7 @@ const Callintro = () => {
 
               {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
                 <section>
-                  <Terceros conecta={selectLlamada} shouldScroll={scrollToNoContesta} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} clave={token} datafull={datafull}/>
+                  <Terceros conecta={selectLlamada} shouldScroll={scrollToNoContesta} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} clave={token} datafull={datafull} />
                 </section>
               )}
             </div>
@@ -349,20 +384,20 @@ const Callintro = () => {
           <div className=" mt-2 ">
             {(selectLlamada_2 === "95" || selectLlamada_2 === "89") && (
               <div>
-              <div className="col-lg-12 col-sm-12">
-              <Adicionales datafull={datafull} clave={token}  elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
+                <div className="col-lg-12 col-sm-12">
+                  <Adicionales datafull={datafull} clave={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
                 </div>
                 <hr />
                 {adicionalCompleto && (
-                <div className="container">
-                  <Contesta datafull={datafull} tercerosComponent={<Terceros />} company={company} clave={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
-                </div>
-                
+                  <div className="container">
+                    <Contesta datafull={datafull} tercerosComponent={<Terceros />} company={company} clave={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
+                  </div>
+
                 )}
-             
+
               </div>
             )}
-            
+
           </div>
         </div>
       </Container>

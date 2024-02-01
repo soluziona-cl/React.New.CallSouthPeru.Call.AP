@@ -4,7 +4,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 
 
-function NoContesta({ company, clave, conecta,  elapsedSeconds,datafull
+function NoContesta({ company, clave, conecta, elapsedSeconds, datafull
 }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [selectedOption, setSelectedOption] = useState("0"); // Estado para la opción seleccionada
@@ -13,17 +13,17 @@ function NoContesta({ company, clave, conecta,  elapsedSeconds,datafull
   const [puedeClickear, setPuedeClickear] = useState(true);
 
 
-console.log(Conecta)
+  console.log(Conecta)
 
   useEffect(() => {
     Company(company);
-   
-    
+
+
   }, []);
 
   const Company = async (company) => {
     const result = await axios.post(
-       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
+      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -88,7 +88,7 @@ console.log(Conecta)
 
     try {
       const result = await axios.post(
-         "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
+        "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${clave}` } }
       );
@@ -126,13 +126,13 @@ console.log(Conecta)
           <div className="" id="">
             <label htmlFor="ddl_detalle_cliente">Detalle:</label>
             <div className="col-lg-12 col-sm-12 my-2">
-            <select
+              <select
                 className="browser-default form-select cliente validacion"
                 id="ddl_detalle_cliente"
                 onChange={handleOptionChange} // Manejar el cambio de opción
                 value={selectedOption}
               >
-                 {conecta === "87" && (
+                {conecta === "87" && (
                   <React.Fragment>
                     <option value="102">GRABADORA</option>
                     <option value="103">NO CONTESTA / OCUPADO</option>
@@ -140,7 +140,7 @@ console.log(Conecta)
 
                   </React.Fragment>
                 )}
-                                 {conecta === "88" && (
+                {conecta === "88" && (
                   <React.Fragment>
                     <option value="105">TITULAR INUBICABLE</option>
                     <option value="106">CONTACTO CON TERCERO</option>
@@ -148,14 +148,14 @@ console.log(Conecta)
                     <option value="108">NUMERO EQUIVOCADO</option>
                   </React.Fragment>
                 )}
-               </select>
-             
+              </select>
+
             </div>
           </div>
-          <hr className="my-4"/>
+          <hr className="my-4" />
           {/* Mostrar elementos solo cuando se selecciona "CITA TELEFONICA CON TERCERO" */}
-         
-           {(selectedOption === "3" || selectedOption === "5" || selectedOption === "6") && (
+
+          {(selectedOption === "3" || selectedOption === "5" || selectedOption === "6") && (
             <>
               <div className="col-lg-12 col-sm-12 my-2">
                 <label htmlFor="observacion_agenda">Observación Agenda</label>
@@ -169,20 +169,20 @@ console.log(Conecta)
 
             </>
           )}
-           {/* Mostrar el botón de guardar si se elige una opción distinta de "Seleccione" */}
-           {showGuardarButton && (
- <div className="d-flex justify-content-end">
- <button
-   className="btn text-white guardar"
-   value="GuardarRegistro"
-   onClick={GuardarRegistroNoContesta}
-   disabled={!puedeClickear}
-   style={{ background: "#8362D6" }}
+          {/* Mostrar el botón de guardar si se elige una opción distinta de "Seleccione" */}
+          {showGuardarButton && (
+            <div className="d-flex justify-content-end">
+              <button
+                className="btn text-white guardar"
+                value="GuardarRegistro"
+                onClick={GuardarRegistroNoContesta}
+                disabled={!puedeClickear}
+                style={{ background: "#8362D6" }}
 
- >
-   Finalizar
- </button>
-</div>
+              >
+                Finalizar
+              </button>
+            </div>
           )}
         </div>
       </div>
