@@ -17,11 +17,14 @@ import NoContesta from "./Componentes/NoContesta";
 import Despedida from ".";
 import DatosClientes from "./Componentes/DatosClientes";
 import Terceros from "./Componentes/Terceros";
+import Adicionales from "./Componentes/Adicionales";
 
 registerLocale("es", es);
 
 const Callintro = () => {
   const [puedeClickear, setPuedeClickear] = useState(true);
+  const [adicional, setAdicional] = useState(false);
+
 
   const { Alert } = bootstrap;
   const [scrollToNoContesta, setScrollToNoContesta] = useState(false);
@@ -167,6 +170,7 @@ const Callintro = () => {
 
   const handleSelectChange = (value) => {
     setSelectSiConectaLlamada(value);
+    setAdicional()
   };
   const handleSelectChangeLoPensara = (value) => {
     setSelectSiConectaLlamada(value);
@@ -240,6 +244,12 @@ const Callintro = () => {
     }
   }
 
+  const [adicionalCompleto, setAdicionalCompleto] = useState(false);
+
+  const handleAgregarAdicional = () => {
+    // Lógica para agregar adicional y habilitar Contesta
+    setAdicionalCompleto(true);
+  };
   return (
     <>
       <ToastContainer autoClose={3000} />
@@ -252,8 +262,8 @@ const Callintro = () => {
                 Tipo Base: {data.Chubb_tipo_captacion.toUpperCase()}
               </div>
             ))}
-            Identificador de Llamada <label id="ident_llamdaa">{lead_id}</label>
-            <br /> Duracion de la llamada
+            Identificador de Llamada {" "} <label id="ident_llamdaa">{lead_id}</label>
+            <br /> Duracion de la llamada {" "}
             <span id="duracion" className="cliente">
               {get_elapsed_time_string(elapsedSeconds)}
             </span>
@@ -339,13 +349,20 @@ const Callintro = () => {
           <div className=" mt-2 ">
             {(selectLlamada_2 === "95" || selectLlamada_2 === "89") && (
               <div>
-                
+              <div className="col-lg-12 col-sm-12">
+              <Adicionales datafull={datafull} clave={token}  elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
+                </div>
                 <hr />
+                {adicionalCompleto && (
                 <div className="container">
                   <Contesta datafull={datafull} tercerosComponent={<Terceros />} company={company} clave={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
                 </div>
+                
+                )}
+             
               </div>
             )}
+            
           </div>
         </div>
       </Container>
