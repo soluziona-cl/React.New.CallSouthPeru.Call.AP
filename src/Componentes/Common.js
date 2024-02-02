@@ -11,7 +11,7 @@ export const setUserSession = (token, user) => {
 
 export const setUrl = () => {
     // https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Validacall
-    const url = 'https://app.soluziona.cl/API_QA/Peru/Call/api'
+    const url = 'https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM'
     return url
 }
 
