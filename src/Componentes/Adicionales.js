@@ -424,19 +424,7 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
 
                                             <section className="row">
                                              
-                                                <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                    Fecha de Nacimiento:
-                                                    <input
-                                                        type="date"
-                                                        id="nacimiento_adicional1"
-                                                        onChange={(e) => {
-                                                            setnacimiento_adicional1(
-                                                                e.target.value
-                                                            );
-                                                        }}
-                                                        className="clienteadicional form-control my-2"
-                                                    />
-                                                </div>
+                                               
                                                 <div className="col-lg-3 col-md-6 col-sm-12 ">
                                                     N° Documento
                                                     <input
