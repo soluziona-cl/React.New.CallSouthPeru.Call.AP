@@ -3,7 +3,7 @@ import * as bootstrap from "bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Terceros from "./Terceros";
-
+import { Box, MenuItem, InputLabel, Typography , Button,  FormControl, Grid, Select } from "@mui/material";
 
 function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScroll,  elapsedSeconds,
 }) {
@@ -197,76 +197,51 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
   return (
       <>
 
-          <div class="card card-warning border-0 ">
-              <div class="card-body login-card-body row">
-                  <div class="col-lg-12 col-md-6 col-sm-12">
-                      <div className="row">
-                          <p className="col-lg-3 col-md-6 col-sm-12 ">
-                              <select id="select_si_conecta_llamada" className="form-select cliente" value={select_si_conecta_llamada} onChange={(event) => { const value = event.target.value; handleSelectChange(value); }}>
-                                  <option value="0">Seleccione</option>
-                                  <option value="1">Titular</option>
-                                  <option value="2">Tercero Valido</option>
-                                  <option value="3">Tercero no Valido</option>
-                              </select>
-                          </p>
-                      </div>
-                      {select_si_conecta_llamada === "1" && (
-                          <div>
+          <Grid >
+                     
+                <FormControl fullWidth>
+                  <InputLabel  id="Conecta" label="Conecta" variant="standard"/>
+                  <Select id="select_si_conecta_llamada" value={select_si_conecta_llamada} label="Conecta" onChange={(event) => { const value = event.target.value; handleSelectChange(value); }} className="rounded">
+                    <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                    <MenuItem value={'1'}>Titular</MenuItem>
+                    <MenuItem value={'2'}>Tercero Valido</MenuItem>
+                    <MenuItem value={'3'}>Tercero no Valido</MenuItem>
+                  </Select>
+                </FormControl>
+             
+                         
+                {select_si_conecta_llamada === "1" && (
+                          <Grid >
+                              <Box >
+                                  <FormControl fullWidth>
+                                      <InputLabel id="adicional" label="¿Con Adicional?" variant="standard" />
+                                      <Select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} className="form-select cliente rounded" label="¿Con Adicional?">
+                                          <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                          <MenuItem value={'1'}>SI</MenuItem>
+                                          <MenuItem value={'2'}>NO</MenuItem>
+                                      </Select>
+                                  </FormControl>
+                              </Box>
 
-                              {datafull.map((data, index) => (
-                                  <div>
-                                      <div className="" id="stock">
-                                          {data.Chubb_tipo_captacion.toUpperCase() ===
-                                              "STOCK" && (
-                                                  <p> El motivo de mi llamada es agradecer la permanencia que tiene con la tarjeta, RIPLEY y gracias a los pagos puntuales que ha venido efectuando este año queremos ampliar sus beneficios.
-                                                  </p>
-                                              )}
-                                      </div>
-                                      <div className="" id="welcome">
-                                          {data.Chubb_tipo_captacion.toUpperCase() ===
-                                              "WELCOME" && (
-                                                  <p> El motivo de mi llamada es agradecer la CONFIANZA y su preferencia por haber obtenido recientemente su Tarjeta de crédito Ripley con nosotros.
-                                                  </p>
-                                              )}
-                                      </div>
-                                      <div className="" id="coross">
-                                          {data.Chubb_tipo_captacion.toUpperCase().includes(
-                                              "CROSS"
-                                          ) && (
-                                                  <p> EL MOTIVO DE MI LLAMADA Es para agradecer el tiempo de permanencia con EL SEGURO (DETALLAR NOMBRE DE SEGURO) AMPLIANDO SUS BENEFICIOS CON EL NUEVO SEGURO: SONRIE SEGURO
-                                                  </p>
-                                              )}
-                                      </div>
-                                  </div>
-                              ))}
-                          </div>
-                      )}
-                      {select_si_conecta_llamada === "1" && (
-                          <div className="row">
-                              <div className="mb-3 col-lg-3 col-md-6 col-sm-12 ">
-                                  ¿Con Adicional?
-                                  <select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} className="form-select cliente" >
-                                      <option value="0">Seleccione</option>
-                                      <option value="1">SI</option>
-                                      <option value="2">NO </option>
-                                  </select>
-                              </div>
                               {select_si_conecta_llamada_adicional === "1" && (
-                                  <div className="row">
-                                      <div className="mb-3 col-lg-3 col-md-6 col-sm-12 ">
-                                          ¿Cuántos?
-                                          <select id="select_cuantos_adicionales" value={select_cuantos_adicionales} onChange={(e) => setSelect_cuantos_adicionales(e.target.value)} className="form-select cliente" >
-                                              <option value="0">Seleccione</option>
-                                              <option value="1">Titular + 1 adicional</option>
-                                              <option value="2">Titular + 2 adicionales</option>
-                                              <option value="3">Titular + 3 adicionales</option>
-                                          </select>
-                                      </div>
+                              
+                                  <Grid className="row">
+                                       <Box >
+                                <FormControl fullWidth>
+                                    <InputLabel id="adicional" label="¿Con Adicional?" variant="standard" />
+                                    <Select id="select_si_conecta_llamada_adicional" value={select_cuantos_adicionales}  onChange={(e) => setSelect_cuantos_adicionales(e.target.value)} className="form-select cliente rounded" label="¿Cuántos?">
+                                        <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                        <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
+                                        <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
+                                        <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Box>
 
                                       {(select_cuantos_adicionales === "1" || select_cuantos_adicionales === "2" || select_cuantos_adicionales === "3") && (
                                           <div className="mb-2  p-4">
                                               <strong>
-                                                  <h5>Adicional 1</h5>
+                                                  <Typography>Adicional 1</Typography>
                                                   <section className="row">
                                                       <div className="col-lg-3 col-md-6 col-sm-12 ">
                                                           Tipo Asegurado
@@ -732,25 +707,49 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                                                           </section>
                                                       </div>
                                                   )}
-                                              </strong>
-                                          </div>
-                                      )}
-
-                                      <button
-                                          disabled={!datosValidos}
-                                          className="btn text-white btn-primary mb-4 col-lg-1"
-                                          onClick={() => {
-                                              handleAgregarAdicional();
-                                          }}
-                                      >
-                                          Agregar
-                                      </button>
+                                      </strong>
                                   </div>
                               )}
+                              <Button disabled={!datosValidos} value="agregarAdicional" onClick={() => {handleAgregarAdicional();}} variant="Agregar">Agregar</Button>
+
+                          </Grid>
+                      )}
 
 
+                          </Grid>
+                      )}
+                      {select_si_conecta_llamada === "1" && (
+                          <div>
+
+                              {datafull.map((data, index) => (
+                                  <div>
+                                      <div className="" id="stock">
+                                          {data.Chubb_tipo_captacion.toUpperCase() ===
+                                              "STOCK" && (
+                                                  <p> El motivo de mi llamada es agradecer la permanencia que tiene con la tarjeta, RIPLEY y gracias a los pagos puntuales que ha venido efectuando este año queremos ampliar sus beneficios.
+                                                  </p>
+                                              )}
+                                      </div>
+                                      <div className="" id="welcome">
+                                          {data.Chubb_tipo_captacion.toUpperCase() ===
+                                              "WELCOME" && (
+                                                  <p> El motivo de mi llamada es agradecer la CONFIANZA y su preferencia por haber obtenido recientemente su Tarjeta de crédito Ripley con nosotros.
+                                                  </p>
+                                              )}
+                                      </div>
+                                      <div className="" id="coross">
+                                          {data.Chubb_tipo_captacion.toUpperCase().includes(
+                                              "CROSS"
+                                          ) && (
+                                                  <p> EL MOTIVO DE MI LLAMADA Es para agradecer el tiempo de permanencia con EL SEGURO (DETALLAR NOMBRE DE SEGURO) AMPLIANDO SUS BENEFICIOS CON EL NUEVO SEGURO: SONRIE SEGURO
+                                                  </p>
+                                              )}
+                                      </div>
+                                  </div>
+                              ))}
                           </div>
                       )}
+                     
                       {select_si_conecta_llamada === "2" && (
                           <section>
                               <Terceros
@@ -777,9 +776,8 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
                               </button>
                           </div>
                       )}
-                  </div>
-              </div>
-          </div>
+                 
+          </Grid>
 
       </>
   );

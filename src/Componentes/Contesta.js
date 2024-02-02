@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import TabsTabs from "./TabsTabs";
 import ValidaDatos from "./ValidaDatos";
 import Terceros from "./Terceros";
-
+import { TextField, MenuItem, Select,} from "@mui/material";
 import Tabsinformacion from "./TabsInfotmacion";
 
 function Contesta({
@@ -49,6 +49,7 @@ function Contesta({
 
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionocupacion, setOptionListOcupacion] = useState([]);
+
 
   const nombreCliente =
     datafull && datafull.length > 0
@@ -442,7 +443,25 @@ function Contesta({
                     <label for="ocupacion">
                       Para culminar, nos podría indicar su ocupación actual:
                     </label>{" "}
-                    <select
+                    <TextField id="ocupacion" label="Ocupación" variant="standard" />
+    <Select
+      id="select-ocupacion"
+      value={optionValueOcupacion}
+      label="Ocupación"
+      onChange={(e) => {
+        setOcupacion(e.target.value);
+        ChangeConecta_Ocupacion(e.target.value);
+      }}
+      className="rounded"
+    >
+      <MenuItem value="0">Seleccione una opción</MenuItem>
+      {optionocupacion.map((item) => (
+        <MenuItem key={item.id} value={item.id}>
+          {item.detalle}
+        </MenuItem>
+      ))}
+    </Select>
+                    {/* <select
                       className="form-control form-select my-2 cliente"
                       id="ocupacion"
                       value={optionValueOcupacion}
@@ -457,7 +476,8 @@ function Contesta({
                           {item.detalle}{" "}
                         </option>
                       ))}{" "}
-                    </select>{" "}
+                    </select>{" "} */}
+
                   </div>{" "}
                 </div>
                 {mostrarMensajeOcupacion && (
