@@ -259,7 +259,7 @@ const Callintro = () => {
 
   const [viewConecta, setViewConecta] = useState(false)
 
-  const handleConecta  = (valor) => {
+  const handleConecta = (valor) => {
     // Lógica para agregar adicional y habilitar Contesta
     console.log(valor)
 
@@ -288,13 +288,13 @@ const Callintro = () => {
             {/* <h3 class="text-white  ms-3 "> */}
             <Typography variant="h1" class="fw-bold "> Sonríe Seguro </Typography>
             {datafull.map((data, index) => (
-              <Typography variant="h3" key={index} className="col-lg-12 col-md-12 col-sm-12 my-1">
+              <Typography variant="h5" key={index} className="col-lg-12 col-md-12 col-sm-12 my-1">
                 Tipo Base: {data.Chubb_tipo_captacion.toUpperCase()}
               </Typography>
             ))}
-            <Typography variant="h4">Identificador de Llamada {" "} <label id="ident_llamdaa">{lead_id}</label> </Typography>
+            <Typography variant="h5">Identificador de Llamada {" "} <label id="ident_llamdaa">{lead_id}</label> </Typography>
 
-            <Typography variant="h4"> Duracion de la llamada {" "}
+            <Typography variant="h5"> Duracion de la llamada {" "}
               <span id="duracion" className="cliente">
                 {get_elapsed_time_string(elapsedSeconds)}
               </span></Typography>
@@ -302,57 +302,18 @@ const Callintro = () => {
           </FormControl>
         </Box>
 
-
-        <Encabezado
-          company={company}
-          clave={token}
-          setViewConecta={handleConecta}
-          >
-        
-        </Encabezado>
-
-
-
-        <Grid container sx={{ padding: 4 }} spacing={2}>
+        <Grid container sx={{ padding: 2 }} spacing={2}>
           <Card class="card-body login-card-body row">
             <Grid xs={3} >
-              <Typography class="mt-4">Tipificador</Typography>
-              <Box >
-                <FormControl fullWidth>
-                  <InputLabel style={{ color: 'black' }} id="Conecta" label="Conecta" variant="standard" />
-                  <Select id="demo-simple-select" value={selectLlamada} label="Conecta" onChange={(e) => ChangeLlamada(e.target.value)} className="rounded">
-                    <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                    <MenuItem value={'86'}>EFECTIVO</MenuItem>
-                    <MenuItem value={'87'}>NO CONTACTO</MenuItem>
-                    <MenuItem value={'88'}>NO EFECTIVO</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              <hr className="my-4" />
+              <Encabezado company={company} clave={token} setViewConecta={handleConecta}
+              >
+
+              </Encabezado>
+              <hr className="my-2" />
               {(selectLlamada === "85" || selectLlamada === "86") && (
 
                 <div>
-                  <Box >
-                    <FormControl fullWidth>
-                      <InputLabel id="Sub-Conecta" label="Sub-Conecta" variant="standard" />
-                      <Select id="selectsubllamada" value={selectLlamada_2} label="Sub-Conecta" onChange={(e) => ChangeLlamada_2(e.target.value)} className="rounded">
-                        {/* colocar mapeo en todos los secto posibles */}
-                        <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                        <MenuItem value={"90"}>ND LO LLAMARON MAS DE UNA VEZ</MenuItem>
-                        <MenuItem value={"91"}>NO DESEA - YA LE OFRECIERON </MenuItem>
-                        <MenuItem value={"92"}>ND POR COSTO</MenuItem>
-                        <MenuItem value={"93"}>ND NO TIENE TARJETA</MenuItem>
-                        <MenuItem value={"94"}>ND COYUNTURAL</MenuItem>
-                        <MenuItem value={"96"}>ND NO CONFORME RIPLEY</MenuItem>
-                        <MenuItem value={"97"}>REVALIDACION</MenuItem>
-                        <MenuItem value={"98"}>VOLVER A LLAMAR</MenuItem>
-                        <MenuItem value={"99"}>CLIENTE CORTO LLAMADA CON INFO </MenuItem>
-                        <MenuItem value={"100"}>ND NO BRINDA MOTIVO</MenuItem>
-                        <MenuItem value={"101"}>ND NO CONTRATA NADA POR TELF. </MenuItem>
-                        <MenuItem value={"95"}>VENTA</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </Box>
+
 
 
                   {selectLlamada_2 !== "95" && selectLlamada_2 !== "89" && selectLlamada_2 !== "0" && selectLlamada_2 !== "" && (
@@ -368,11 +329,7 @@ const Callintro = () => {
                 </div>
               )}
 
-              {(selectLlamada === "87" || selectLlamada === "88") && (
-                <section>
-                  <NoContesta conecta={selectLlamada} elapsedSeconds={elapsedSeconds} getToken={token} datafull={datafull} />
-                </section>
-              )}
+
 
               {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
                 <section>
@@ -401,21 +358,7 @@ const Callintro = () => {
 
             </Grid>
           )}
-          {/* {(selectLlamada_2 === "95" || selectLlamada_2 === "89") && (
-            <Grid container>
-              <Grid xs={3} >
-                <Adicionales datafull={datafull} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
-              </Grid>
-              <hr />
-              {adicionalCompleto && (
-                <Grid xs={12}>
-                  <Contesta datafull={datafull} tercerosComponent={<Terceros />} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
-                </Grid>
 
-              )}
-
-            </Grid>
-          )} */}
 
 
         </Grid>

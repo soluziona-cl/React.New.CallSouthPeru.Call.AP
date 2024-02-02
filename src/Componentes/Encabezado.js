@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Select, MenuItem, Card, CardContent, Grid } from "@mui/material";
 
-
 import { setUrl } from './Common';
 import { compareAsc } from "date-fns";
 const url = setUrl()
@@ -51,15 +50,10 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
       alert("Debe Seleccionar Una Opcion");
 
     } else {
-
-
       SubRespuesta(company, selectedValue)
       // You can perform additional actions based on the selected value if needed
-
     }
   };
-
-
 
   const SubRespuesta = async (company, valor) => {
     const result = await axios.post(url + endpoint_subrespuesta, { dato: company, dato_1: valor }, { headers: { Authorization: `Bearer ${clave}` } }
@@ -72,7 +66,6 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
 
   const handleChangeSubRespuesta = (event) => {
 
-
     const selectedValue = event.target.value;
     setValueSubRespuesta(selectedValue);
     setValueComunica(0)
@@ -81,11 +74,8 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
 
       alert("Debe Seleccionar Una Opcion");
     } else {
-
-
       Comunica(company, selectedValue)
       // You can perform additional actions based on the selected value if needed
-
     }
   };
 
@@ -100,7 +90,6 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
 
   const handleChangeComunica = (event) => {
 
-
     const selectedValue = event.target.value;
     setValueComunica(selectedValue);
     setValueInteresa(0)
@@ -112,16 +101,11 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
 
       let valor = ''
       optionComunica.map((item) => (
-
         valor = item.contesta
-
       ))
-
       setViewConecta(valor)
-
       Interesa(company, selectedValue)
       // You can perform additional actions based on the selected value if needed
-
     }
   };
 
@@ -134,42 +118,15 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
     }
   };
 
-  const handleChangeInteresa = (event) => {
-
-
-    const selectedValue = event.target.value;
-    setValueInteresa(selectedValue);
-
-
-
-
-    if (selectedValue === "0") {
-
-      alert("Debe Seleccionar Una Opcion");
-    } else {
-
-
-      //  SubRespuesta(company, selectedValue)
-      // You can perform additional actions based on the selected value if needed
-
-    }
-  };
-
-
+  //cambiar ID
   return (
     <>
       <Grid container spacing={1}>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <Card>
             <CardContent>
               Conecta
-              <Select
-                className="form-control cliente"
-                id="conecta"
-                sx={{ height: 40 }}
-                value={valueConecta}
-                onChange={changeConecta}
-              >
+              <Select className="form-control rounded cliente" id="conecta" sx={{ height: 40 }} value={valueConecta} onChange={changeConecta}>
                 <MenuItem value="0">Seleccione una opción</MenuItem>
                 {optionListConecta.map((item) => (
                   <MenuItem key={item.id} value={item.id}>
@@ -180,17 +137,11 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <Card>
             <CardContent>
-              Subrespuesta
-              <Select
-                className="form-control cliente"
-                id="tipificacion_detalle"
-                sx={{ height: 40 }}
-                onChange={handleChangeSubRespuesta}
-                value={valueSubRespuesta}
-              >
+              Sub-Conecta
+              <Select className="form-control rounded cliente" id="tipificacion_detalle" sx={{ height: 40 }} onChange={handleChangeSubRespuesta} value={valueSubRespuesta}>
                 <MenuItem value="0">Seleccione una opción</MenuItem>
                 {optionSubRespuesta.map((item) => (
                   <MenuItem key={item.id} value={item.id}>
@@ -201,17 +152,11 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <Card>
             <CardContent>
               Comunica
-              <Select
-                className="form-control cliente"
-                id="tipificacion_comunica"
-                sx={{ height: 40 }}
-                onChange={handleChangeComunica}
-                value={valueComunica}
-              >
+              <Select className="form-control rounded cliente" id="tipificacion_comunica" sx={{ height: 40 }} onChange={handleChangeComunica} value={valueComunica}>
                 <MenuItem value="0">Seleccione una opción</MenuItem>
                 {optionComunica.map((item) => (
                   <MenuItem key={item.id} value={item.id}>
@@ -222,37 +167,7 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} md={3}>
-          <Card>
-            <CardContent>
-              Respuesta
-              <Select
-                className="form-control cliente"
-                id="tipificacion_interesa"
-                sx={{ height: 40 }}
-                onChange={handleChangeInteresa}
-                value={valueInteresa}
-              >
-                <MenuItem value="0">Seleccione una opción</MenuItem>
-                {optionInteresa.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
-                    {item.detalle}
-                  </MenuItem>
-                ))}
-              </Select>
-            </CardContent>
-          </Card>
-        </Grid>
-
       </Grid>
-
-
-
-
-
-
-
-
     </>
   );
 }
