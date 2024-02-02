@@ -198,50 +198,58 @@ function Adicionales({handleAgregarAdicional, datafull, clave, token, shouldScro
       <>
 
           <Grid >
-                     
-                <FormControl fullWidth>
-                  <InputLabel  id="Conecta" label="Conecta" variant="standard"/>
+              <FormControl fullWidth>
+                  <InputLabel id="Conecta" label="Conecta" variant="standard" />
                   <Select id="select_si_conecta_llamada" value={select_si_conecta_llamada} label="Conecta" onChange={(event) => { const value = event.target.value; handleSelectChange(value); }} className="rounded">
-                    <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                    <MenuItem value={'1'}>Titular</MenuItem>
-                    <MenuItem value={'2'}>Tercero Valido</MenuItem>
-                    <MenuItem value={'3'}>Tercero no Valido</MenuItem>
+                      <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                      <MenuItem value={'1'}>Titular</MenuItem>
+                      <MenuItem value={'2'}>Tercero Valido</MenuItem>
+                      <MenuItem value={'3'}>Tercero no Valido</MenuItem>
                   </Select>
-                </FormControl>
-             
-                         
-                {select_si_conecta_llamada === "1" && (
-                          <Grid >
+              </FormControl>
+
+              {select_si_conecta_llamada === "1" && (
+                  <Grid >
+                      <Box >
+                          <FormControl fullWidth>
+                              <InputLabel id="adicional" label="¿Con Adicional?" variant="standard" />
+                              <Select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} className="form-select cliente rounded" label="¿Con Adicional?">
+                                  <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                  <MenuItem value={'1'}>SI</MenuItem>
+                                  <MenuItem value={'2'}>NO</MenuItem>
+                              </Select>
+                          </FormControl>
+                      </Box>
+
+                      {select_si_conecta_llamada_adicional === "1" && (
+                          <Grid className="row">
                               <Box >
                                   <FormControl fullWidth>
                                       <InputLabel id="adicional" label="¿Con Adicional?" variant="standard" />
-                                      <Select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} className="form-select cliente rounded" label="¿Con Adicional?">
+                                      <Select id="select_si_conecta_llamada_adicional" value={select_cuantos_adicionales} onChange={(e) => setSelect_cuantos_adicionales(e.target.value)} className="form-select cliente rounded" label="¿Cuántos?">
                                           <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                          <MenuItem value={'1'}>SI</MenuItem>
-                                          <MenuItem value={'2'}>NO</MenuItem>
+                                          <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
+                                          <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
+                                          <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
                                       </Select>
                                   </FormControl>
                               </Box>
 
-                              {select_si_conecta_llamada_adicional === "1" && (
-                              
-                                  <Grid className="row">
-                                       <Box >
-                                <FormControl fullWidth>
-                                    <InputLabel id="adicional" label="¿Con Adicional?" variant="standard" />
-                                    <Select id="select_si_conecta_llamada_adicional" value={select_cuantos_adicionales}  onChange={(e) => setSelect_cuantos_adicionales(e.target.value)} className="form-select cliente rounded" label="¿Cuántos?">
-                                        <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                        <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
-                                        <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
-                                        <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </Box>
-
-                                      {(select_cuantos_adicionales === "1" || select_cuantos_adicionales === "2" || select_cuantos_adicionales === "3") && (
-                                          <div className="mb-2  p-4">
-                                              <strong>
+                              {(select_cuantos_adicionales === "1" || select_cuantos_adicionales === "2" || select_cuantos_adicionales === "3") && (
+                                  <div className="mb-2  p-4">
+                                      <strong>
                                                   <Typography>Adicional 1</Typography>
+                                                  <Box >
+                                  <FormControl fullWidth>
+                                      <InputLabel id="adicional" label="¿Con Adicional?" variant="standard" />
+                                      <Select id="select_si_conecta_llamada_adicional" value={select_cuantos_adicionales} onChange={(e) => setSelect_cuantos_adicionales(e.target.value)} className="form-select cliente rounded" label="¿Cuántos?">
+                                          <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                          <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
+                                          <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
+                                          <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
+                                      </Select>
+                                  </FormControl>
+                              </Box>
                                                   <section className="row">
                                                       <div className="col-lg-3 col-md-6 col-sm-12 ">
                                                           Tipo Asegurado
