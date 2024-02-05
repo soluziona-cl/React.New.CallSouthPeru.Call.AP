@@ -3,7 +3,7 @@ import * as bootstrap from "bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Terceros from "./Terceros";
-import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, TextField } from "@mui/material";
+import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, TextField, Typography } from "@mui/material";
 import { CalendarContainer } from "react-datepicker";
 
 function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScroll, elapsedSeconds,
@@ -203,576 +203,452 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                     <Card>
                         <CardContent>
                             ¿Titular?
-                            <Select id="select_si_conecta_llamada" value={select_si_conecta_llamada} sx={{ height: 40 }} label="Conecta" onChange={(event) => { const value = event.target.value; handleSelectChange(value); }} className="rounded">
+                            <Select id="select_si_conecta_llamada" value={select_si_conecta_llamada} sx={{ height: 40 }} label="Conecta" onChange={(event) => { const value = event.target.value; handleSelectChange(value); }} className="rounded cliente form-select my-2">
                                 <MenuItem value={'0'}>Seleccione una opción</MenuItem>
                                 <MenuItem value={'1'}>Titular</MenuItem>
                                 <MenuItem value={'2'}>Tercero Valido</MenuItem>
                                 <MenuItem value={'3'}>Tercero no Valido</MenuItem>
                             </Select>
-
                         </CardContent>
                     </Card>
                 </Grid>
-
-
-
-                <Grid item xs={12} md={12}>
-                    <Card>
-                        <CardContent>
-                            ¿Con Adicional?
-                            <Select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} sx={{ height: 40 }} className="form-select cliente rounded">
-                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                <MenuItem value={'1'}>SI</MenuItem>
-                                <MenuItem value={'2'}>NO</MenuItem>
-                            </Select>
-
-                        </CardContent>
-                    </Card>
-                </Grid>
-
-
-
-                <Grid item xs={12} md={12}>
-                    <Card>
-                        <CardContent>
-                            ¿Cuántos?
-                            <Select id="select_si_conecta_llamada_adicional" value={select_cuantos_adicionales} onChange={(e) => setSelect_cuantos_adicionales(e.target.value)} sx={{ height: 40 }} className="form-select cliente rounded" label="¿Cuántos?">
-                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
-                                <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
-                                <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
-                            </Select>
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={12} md={12}>
-                    <Card>
-                        <CardContent>
-                            Tipo Asegurado
-                            <Select id="tipo_asegurado" value={tipo_asegurado1} onChange={(e) => settipo_asegurado1(e.target.value)} sx={{ height: 40 }} className="form-select cliente rounded">
-                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                <MenuItem value={'AT'}>Titular</MenuItem>
-                                <MenuItem value={'AC'}>Conyuge </MenuItem>
-                                <MenuItem value={'AH'}>Hijo </MenuItem>
-                                <MenuItem value={'AO'}>Otra Relación</MenuItem>
-                                <MenuItem value={'TC'}>Titular de Cuenta - Contratante</MenuItem>
-                                <MenuItem value={'BN'}>Beneficiario </MenuItem>
-
-                            </Select>
-
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={12} md={12}>
-                    <Card>
-                        <CardContent>
-                            Parentesco
-                            <Select id="parentesco1" value={parentesco1} onChange={(e) => setparentesco1(e.target.value)} sx={{ height: 40 }} className="form-select cliente rounded">
-                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                <MenuItem value={'38'}>Conyuge </MenuItem>
-                                <MenuItem value={'39'}>Hijo </MenuItem>
-                                <MenuItem value={'40'}>Hermano </MenuItem>
-                                <MenuItem value={'41'}>Primo(A)</MenuItem>
-                                <MenuItem value={'42'}>Padre</MenuItem>
-                                <MenuItem value={'43'}>Madre</MenuItem>
-                                <MenuItem value={'44'}>Otro Familiar</MenuItem>
-                                <MenuItem value={'45'}>Otra Relacion</MenuItem>
-                                <MenuItem value={'125'}>Titular</MenuItem>
-                                <MenuItem value={'1347'}>Hija </MenuItem>
-                                <MenuItem value={'1348'}>Hermana</MenuItem>
-                                <MenuItem value={'1349'}>Sobrino</MenuItem>
-                                <MenuItem value={'1350'}>Abuelo </MenuItem>
-                                <MenuItem value={'1351'}>Abuela </MenuItem>
-                                <MenuItem value={'1352'}>Sobrina</MenuItem>
-                                <MenuItem value={'1353'}>Viuda</MenuItem>
-                                <MenuItem value={'1356'}>Suegro</MenuItem>
-                                <MenuItem value={'1357'}>Suegra</MenuItem>
-                            </Select>
-                        </CardContent>
-                    </Card>
-                </Grid>
-               
-                <Grid item xs={12} md={12}>
-    <Card>
-        <CardContent>
-            Primer Nombre
-            <TextField
-                id="primer_nombre_adicional1"
-                onChange={(e) => { setprimer_nombre_adicional1(e.target.value); }}
-                className="clienteadicional rounded my-2"
-                sx={{ height: 40 }}
-            />
-        </CardContent>
-    </Card>
-</Grid>
-
-<Grid item xs={12} md={12}>
-    <Card>
-        <CardContent>
-            Segundo Nombre
-            <TextField
-                id="segundo_nombre_adicional1"
-                onChange={(e) => { setsegundo_nombre_adicional1(e.target.value); }}
-                className="clienteadicional my-2"
-                sx={{ height: 40 }}
-            />
-        </CardContent>
-    </Card>
-</Grid>
-
-<Grid item xs={12} md={12}>
-    <Card>
-        <CardContent>
-            Apellido Paterno
-            <TextField
-                id="apellido_p_adicional1"
-                onChange={(e) => { setapellido_p_adicional1(e.target.value); }}
-                className="clienteadicional my-2"
-                sx={{ height: 40 }}
-            />
-        </CardContent>
-    </Card>
-</Grid>
-
-<Grid item xs={12} md={12}>
-    <Card>
-        <CardContent>
-            Apellido Materno
-            <TextField
-                id="apellido_m_adicional1"
-                onChange={(e) => { setapellido_m_adicional1(e.target.value); }}
-                className="clienteadicional my-2"
-                sx={{ height: 40 }}
-            />
-        </CardContent>
-    </Card>
-</Grid>
-
-<Grid item xs={12} md={12}>
-    <Card>
-        <CardContent>
-            Fecha de Nacimiento
-            <input
-                type="date"
-                id="nacimiento_adicional1"
-                onChange={(e) => { setnacimiento_adicional1(e.target.value); }}
-                className="clienteadicional form-control my-2"
-            />
-        </CardContent>
-    </Card>
-</Grid>
-
-                <Grid item xs={12} md={12}>
-                    <Card>
-                        <CardContent>
-                        Apellido Materno
-                            <InputLabel id="apellido_m_adicional1" onChange={(e) => { setapellido_m_adicional1(e.target.value); }} className="clienteadicional   my-2" sx={{ height: 40 }} />
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid item xs={12} md={12}>
-                    <Card>
-                        <CardContent>
-                        Fecha de Nacimiento
-                        <input
-                                                              type="date"
-                                                              id="nacimiento_adicional1"
-                                                              onChange={(e) => {
-                                                                  setnacimiento_adicional1(
-                                                                      e.target.value
-                                                                  );
-                                                              }}
-                                                              className="clienteadicional form-control my-2"
-                                                          />
-                        </CardContent>
-                    </Card>
-                </Grid>
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
+                
                 {select_si_conecta_llamada === "1" && (
                     <Grid >
+                        <Grid item xs={12} md={12}>
+                            <Card>
+                                <CardContent>
+                                    ¿Con Adicional?
+                                    <Select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} sx={{ height: 40 }} className="form-select cliente  my-2 rounded">
+                                        <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                        <MenuItem value={'1'}>SI</MenuItem>
+                                        <MenuItem value={'2'}>NO</MenuItem>
+                                    </Select>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+
                         {select_si_conecta_llamada_adicional === "1" && (
-                            <Grid className="row">
-                                <Box >
-                                    <FormControl fullWidth>
-                                        <InputLabel id="adicional" label="¿Con Adicional?" variant="standard" />
-                                        <Select id="select_si_conecta_llamada_adicional" value={select_cuantos_adicionales} onChange={(e) => setSelect_cuantos_adicionales(e.target.value)} className="form-select cliente rounded" label="¿Cuántos?">
-                                            <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                            <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
-                                            <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
-                                            <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Box>
+                            <Grid >
+                                <Grid item xs={12} md={12}>
+                                    <Card>
+                                        <CardContent>
+                                            ¿Cuántos?
+                                            <Select id="select_si_conecta_llamada_adicional" value={select_cuantos_adicionales} onChange={(e) => setSelect_cuantos_adicionales(e.target.value)} sx={{ height: 40 }} className="form-select my-2 clienteadicional rounded" label="¿Cuántos?">
+                                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
+                                                <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
+                                                <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
+                                            </Select>
+                                        </CardContent>
+                                    </Card>
+                                </Grid>
 
                                 {(select_cuantos_adicionales === "1" || select_cuantos_adicionales === "2" || select_cuantos_adicionales === "3") && (
-                                    <div className="mb-2  p-4">
-                                        <strong>
+                                    <Card className=" my-2 ">
 
-                                            <section className="row">
-                                             
-                                               
-                                                <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                    N° Documento
-                                                    <input
-                                                        type="text"
-                                                        className="form-control clienteadicional my-2"
-                                                        value={doc_adicional1}
-                                                        inputMode="numeric"
-                                                        maxLength="8"
-                                                        onChange={(e) => {
-                                                            const inputValue =
-                                                                e.target.value.replace(/\D/g, "");
-                                                            if (inputValue.length > 8) {
-                                                                e.target.value = inputValue.slice(
-                                                                    0,
-                                                                    8
-                                                                );
-                                                            } else {
-                                                                e.target.value = inputValue;
-                                                            }
-                                                            setdoc_adicional1(e.target.value);
-                                                        }}
-                                                        // onBlur={handleNumeroDocumentoBlur}
-                                                        id="doc_adicional1"
-                                                    />
-                                                </div>
-                                            </section>
-                                            {(select_cuantos_adicionales === "2" || select_cuantos_adicionales === "3") && (
-                                                <div>
-                                                    <h5>Adicional 2</h5>
-                                                    <section className="row">
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Tipo Asegurado
-                                                            <select
-                                                                id="tipo_asegurado2"
-                                                                value={tipo_asegurado2}
-                                                                onChange={(e) =>
-                                                                    settipo_asegurado2(e.target.value)
+                                        <Typography variant="h5">Adicional 1</Typography>
+                                        <Grid item xs={12} md={12}>
+                                            <CardContent>
+                                                Tipo Asegurado
+                                                <Select id="tipo_asegurado" value={tipo_asegurado1} onChange={(e) => settipo_asegurado1(e.target.value)} sx={{ height: 40 }} className="form-select clienteadicional rounded">
+                                                    <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                    <MenuItem value={'AT'}>Titular</MenuItem>
+                                                    <MenuItem value={'AC'}>Conyuge </MenuItem>
+                                                    <MenuItem value={'AH'}>Hijo </MenuItem>
+                                                    <MenuItem value={'AO'}>Otra Relación</MenuItem>
+                                                    <MenuItem value={'TC'}>Titular de Cuenta - Contratante</MenuItem>
+                                                    <MenuItem value={'BN'}>Beneficiario </MenuItem>
+                                                </Select>
+                                            </CardContent>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+                                            <CardContent>
+                                                Parentesco
+                                                <Select id="parentesco1" value={parentesco1} onChange={(e) => setparentesco1(e.target.value)} sx={{ height: 40 }} className="form-select clienteadicional rounded">
+                                                    <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                    <MenuItem value={'38'}>Conyuge </MenuItem>
+                                                    <MenuItem value={'39'}>Hijo </MenuItem>
+                                                    <MenuItem value={'40'}>Hermano </MenuItem>
+                                                    <MenuItem value={'41'}>Primo(A)</MenuItem>
+                                                    <MenuItem value={'42'}>Padre</MenuItem>
+                                                    <MenuItem value={'43'}>Madre</MenuItem>
+                                                    <MenuItem value={'44'}>Otro Familiar</MenuItem>
+                                                    <MenuItem value={'45'}>Otra Relacion</MenuItem>
+                                                    <MenuItem value={'125'}>Titular</MenuItem>
+                                                    <MenuItem value={'1347'}>Hija </MenuItem>
+                                                    <MenuItem value={'1348'}>Hermana</MenuItem>
+                                                    <MenuItem value={'1349'}>Sobrino</MenuItem>
+                                                    <MenuItem value={'1350'}>Abuelo </MenuItem>
+                                                    <MenuItem value={'1351'}>Abuela </MenuItem>
+                                                    <MenuItem value={'1352'}>Sobrina</MenuItem>
+                                                    <MenuItem value={'1353'}>Viuda</MenuItem>
+                                                    <MenuItem value={'1356'}>Suegro</MenuItem>
+                                                    <MenuItem value={'1357'}>Suegra</MenuItem>
+                                                </Select>
+                                            </CardContent>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+
+                                            <CardContent>
+                                                Primer Nombre
+                                                <TextField
+                                                    id="primer_nombre_adicional1"
+                                                    onChange={(e) => { setprimer_nombre_adicional1(e.target.value); }}
+                                                    className="clienteadicional form-control rounded "
+                                                    sx={{ height: 40 }}
+                                                />
+                                            </CardContent>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+
+                                            <CardContent>
+                                                Segundo Nombre
+                                                <TextField
+                                                    id="segundo_nombre_adicional1"
+                                                    onChange={(e) => { setsegundo_nombre_adicional1(e.target.value); }}
+                                                    className="clienteadicional form-control rounded"
+                                                    sx={{ height: 40 }}
+                                                />
+                                            </CardContent>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+                                            <CardContent>
+                                                Apellido Paterno
+                                                <TextField
+                                                    id="apellido_p_adicional1"
+                                                    onChange={(e) => { setapellido_p_adicional1(e.target.value); }}
+                                                    className="clienteadicional form-control rounded"
+                                                    sx={{ height: 40 }}
+                                                />
+                                            </CardContent>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+
+                                            <CardContent>
+                                                Apellido Materno
+                                                <TextField
+                                                    id="apellido_m_adicional1"
+                                                    onChange={(e) => { setapellido_m_adicional1(e.target.value); }}
+                                                    className="clienteadicional form-control rounded"
+                                                    sx={{ height: 40 }}
+                                                />
+                                            </CardContent>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+
+                                            <CardContent>
+                                                Fecha de Nacimiento
+                                                <input
+                                                    type="date"
+                                                    id="nacimiento_adicional1"
+                                                    onChange={(e) => { setnacimiento_adicional1(e.target.value); }}
+                                                    className="clienteadicional form-control rounded"
+                                                />
+                                            </CardContent>
+                                        </Grid>
+                                        <Grid item xs={12} md={12}>
+                                            <CardContent>
+                                                DNI
+                                                <input
+                                                    type="text"
+                                                    className="form-control clienteadicional rounded"
+                                                    value={doc_adicional1}
+                                                    inputMode="numeric"
+                                                    maxLength="8"
+                                                    onChange={(e) => {
+                                                        const inputValue =
+                                                            e.target.value.replace(/\D/g, "");
+                                                        if (inputValue.length > 8) {
+                                                            e.target.value = inputValue.slice(
+                                                                0,
+                                                                8
+                                                            );
+                                                        } else {
+                                                            e.target.value = inputValue;
+                                                        }
+                                                        setdoc_adicional1(e.target.value);
+                                                    }}
+                                                    // onBlur={handleNumeroDocumentoBlur}
+                                                    id="doc_adicional1"
+                                                />
+                                            </CardContent>
+                                        </Grid>
+                                        {(select_cuantos_adicionales === "2" || select_cuantos_adicionales === "3") && (
+                                            <Grid>
+                                                <Typography variant="h5">Adicional 2</Typography>
+
+                                                <Grid item xs={12} md={12}>
+
+                                                    <CardContent>
+                                                        Tipo Asegurado
+                                                        <Select id="tipo_asegurado2" value={tipo_asegurado2} onChange={(e) => settipo_asegurado2(e.target.value)} sx={{ height: 40 }} className="form-select clienteadicional rounded">
+                                                            <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                            <MenuItem value={'AT'}>Titular</MenuItem>
+                                                            <MenuItem value={'AC'}>Conyuge </MenuItem>
+                                                            <MenuItem value={'AH'}>Hijo </MenuItem>
+                                                            <MenuItem value={'AO'}>Otra Relación</MenuItem>
+                                                            <MenuItem value={'TC'}>Titular de Cuenta - Contratante</MenuItem>
+                                                            <MenuItem value={'BN'}>Beneficiario </MenuItem>
+                                                        </Select>
+                                                    </CardContent>
+
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+
+                                                    <CardContent>
+                                                        Parentesco
+                                                        <Select id="parentesco2" value={parentesco2} onChange={(e) => setparentesco2(e.target.value)} sx={{ height: 40 }} className="form-select clienteadicional rounded">
+                                                            <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                            <MenuItem value={'38'}>Conyuge </MenuItem>
+                                                            <MenuItem value={'39'}>Hijo </MenuItem>
+                                                            <MenuItem value={'40'}>Hermano </MenuItem>
+                                                            <MenuItem value={'41'}>Primo(A)</MenuItem>
+                                                            <MenuItem value={'42'}>Padre</MenuItem>
+                                                            <MenuItem value={'43'}>Madre</MenuItem>
+                                                            <MenuItem value={'44'}>Otro Familiar</MenuItem>
+                                                            <MenuItem value={'45'}>Otra Relacion</MenuItem>
+                                                            <MenuItem value={'125'}>Titular</MenuItem>
+                                                            <MenuItem value={'1347'}>Hija </MenuItem>
+                                                            <MenuItem value={'1348'}>Hermana</MenuItem>
+                                                            <MenuItem value={'1349'}>Sobrino</MenuItem>
+                                                            <MenuItem value={'1350'}>Abuelo </MenuItem>
+                                                            <MenuItem value={'1351'}>Abuela </MenuItem>
+                                                            <MenuItem value={'1352'}>Sobrina</MenuItem>
+                                                            <MenuItem value={'1353'}>Viuda</MenuItem>
+                                                            <MenuItem value={'1356'}>Suegro</MenuItem>
+                                                            <MenuItem value={'1357'}>Suegra</MenuItem>
+                                                        </Select>
+                                                    </CardContent>
+
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+
+                                                    <CardContent>
+                                                        Primer Nombre
+                                                        <TextField
+                                                            id="primer_nombre_adicional2"
+                                                            onChange={(e) => { setprimer_nombre_adicional2(e.target.value); }}
+                                                            className="clienteadicional form-control rounded "
+                                                            sx={{ height: 40 }}
+                                                        />
+                                                    </CardContent>
+
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+
+                                                    <CardContent>
+                                                        Segundo Nombre
+                                                        <TextField
+                                                            id="segundo_nombre_adicional2"
+                                                            onChange={(e) => { setsegundo_nombre_adicional2(e.target.value); }}
+                                                            className="clienteadicional form-control rounded"
+                                                            sx={{ height: 40 }}
+                                                        />
+                                                    </CardContent>
+
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+
+                                                    <CardContent>
+                                                        Apellido Paterno
+                                                        <TextField
+                                                            id="apellido_p_adicional2"
+                                                            onChange={(e) => { setapellido_p_adicional2(e.target.value); }}
+                                                            className="clienteadicional form-control rounded"
+                                                            sx={{ height: 40 }}
+                                                        />
+                                                    </CardContent>
+
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+
+                                                    <CardContent>
+                                                        Apellido Materno
+                                                        <TextField
+                                                            id="apellido_m_adicional2"
+                                                            onChange={(e) => { setapellido_m_adicional2(e.target.value); }}
+                                                            className="clienteadicional form-control rounded"
+                                                            sx={{ height: 40 }}
+                                                        />
+                                                    </CardContent>
+
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+
+                                                    <CardContent>
+                                                        Fecha de Nacimiento
+                                                        <input
+                                                            type="date"
+                                                            id="nacimiento_adicional2"
+                                                            onChange={(e) => { setnacimiento_adicional2(e.target.value); }}
+                                                            className="clienteadicional form-control rounded"
+                                                        />
+                                                    </CardContent>
+
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+
+                                                    <CardContent>
+                                                        DNI
+                                                        <input
+                                                            type="text"
+                                                            className="form-control clienteadiciona2 rounded"
+                                                            value={doc_adicional2}
+                                                            inputMode="numeric"
+                                                            maxLength="8"
+                                                            onChange={(e) => {
+                                                                const inputValue =
+                                                                    e.target.value.replace(/\D/g, "");
+                                                                if (inputValue.length > 8) {
+                                                                    e.target.value = inputValue.slice(
+                                                                        0,
+                                                                        8
+                                                                    );
+                                                                } else {
+                                                                    e.target.value = inputValue;
                                                                 }
-                                                                className="form-select clienteadicional"
-                                                            >
-                                                                <option value="0">Seleccione</option>
-                                                                <option value="AT">Titular</option>
-                                                                <option value="AC">Conyugue </option>
-                                                                <option value="AH">Hijo </option>
-                                                                <option value="AO">
-                                                                    Otra Relación{" "}
-                                                                </option>
-                                                                <option value="TC">
-                                                                    Titular de Cuenta - Contratante{" "}
-                                                                </option>
-                                                                <option value="BN">
-                                                                    Beneficiario{" "}
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Parentesco
-                                                            <select
-                                                                id="parentesco1"
-                                                                value={parentesco2}
-                                                                onChange={(e) =>
-                                                                    setparentesco2(e.target.value)
+                                                                setdoc_adicional2(e.target.value);
+                                                            }}
+                                                            // onBlur={handleNumeroDocumentoBlur}
+                                                            id="doc_adicional2"
+                                                        />
+                                                    </CardContent>
+
+                                                </Grid>
+
+                                            </Grid>
+                                        )}
+                                        {select_cuantos_adicionales === "3" && (
+                                            <div>
+                                                <Typography variant="h5"> Adicional 3</Typography>
+                                                <Grid item xs={12} md={12}>
+                                                    <CardContent>
+                                                        Tipo Asegurado
+                                                        <Select id="tipo_asegurado3" value={tipo_asegurado3} onChange={(e) => settipo_asegurado3(e.target.value)} sx={{ height: 40 }} className="form-select clienteadicional rounded">
+                                                            <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                            <MenuItem value={'AT'}>Titular</MenuItem>
+                                                            <MenuItem value={'AC'}>Conyuge </MenuItem>
+                                                            <MenuItem value={'AH'}>Hijo </MenuItem>
+                                                            <MenuItem value={'AO'}>Otra Relación</MenuItem>
+                                                            <MenuItem value={'TC'}>Titular de Cuenta - Contratante</MenuItem>
+                                                            <MenuItem value={'BN'}>Beneficiario </MenuItem>
+                                                        </Select>
+                                                    </CardContent>
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+                                                    <CardContent>
+                                                        Parentesco
+                                                        <Select id="parentesco3" value={parentesco3} onChange={(e) => setparentesco3(e.target.value)} sx={{ height: 40 }} className="form-select clienteadicional rounded">
+                                                            <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                            <MenuItem value={'38'}>Conyuge </MenuItem>
+                                                            <MenuItem value={'39'}>Hijo </MenuItem>
+                                                            <MenuItem value={'40'}>Hermano </MenuItem>
+                                                            <MenuItem value={'41'}>Primo(A)</MenuItem>
+                                                            <MenuItem value={'42'}>Padre</MenuItem>
+                                                            <MenuItem value={'43'}>Madre</MenuItem>
+                                                            <MenuItem value={'44'}>Otro Familiar</MenuItem>
+                                                            <MenuItem value={'45'}>Otra Relacion</MenuItem>
+                                                            <MenuItem value={'125'}>Titular</MenuItem>
+                                                            <MenuItem value={'1347'}>Hija </MenuItem>
+                                                            <MenuItem value={'1348'}>Hermana</MenuItem>
+                                                            <MenuItem value={'1349'}>Sobrino</MenuItem>
+                                                            <MenuItem value={'1350'}>Abuelo </MenuItem>
+                                                            <MenuItem value={'1351'}>Abuela </MenuItem>
+                                                            <MenuItem value={'1352'}>Sobrina</MenuItem>
+                                                            <MenuItem value={'1353'}>Viuda</MenuItem>
+                                                            <MenuItem value={'1356'}>Suegro</MenuItem>
+                                                            <MenuItem value={'1357'}>Suegra</MenuItem>
+                                                        </Select>
+                                                    </CardContent>
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+                                                    <CardContent>
+                                                        Primer Nombre
+                                                        <TextField
+                                                            id="primer_nombre_adicional3"
+                                                            onChange={(e) => { setprimer_nombre_adicional3(e.target.value); }}
+                                                            className="clienteadicional form-control rounded "
+                                                            sx={{ height: 40 }}
+                                                        />
+                                                    </CardContent>
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+                                                    <CardContent>
+                                                        Segundo Nombre
+                                                        <TextField
+                                                            id="segundo_nombre_adicional3"
+                                                            onChange={(e) => { setsegundo_nombre_adicional3(e.target.value); }}
+                                                            className="clienteadicional form-control rounded"
+                                                            sx={{ height: 40 }}
+                                                        />
+                                                    </CardContent>
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+                                                    <CardContent>
+                                                        Apellido Paterno
+                                                        <TextField
+                                                            id="apellido_p_adicional3"
+                                                            onChange={(e) => { setapellido_p_adicional3(e.target.value); }}
+                                                            className="clienteadicional form-control rounded"
+                                                            sx={{ height: 40 }}
+                                                        />
+                                                    </CardContent>
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+                                                    <CardContent>
+                                                        Apellido Materno
+                                                        <TextField
+                                                            id="apellido_m_adicional3"
+                                                            onChange={(e) => { setapellido_m_adicional3(e.target.value); }}
+                                                            className="clienteadicional form-control rounded"
+                                                            sx={{ height: 40 }}
+                                                        />
+                                                    </CardContent>
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+                                                    <CardContent>
+                                                        Fecha de Nacimiento
+                                                        <input
+                                                            type="date"
+                                                            id="nacimiento_adicional3"
+                                                            onChange={(e) => { setnacimiento_adicional3(e.target.value); }}
+                                                            className="clienteadicional form-control rounded"
+                                                        />
+                                                    </CardContent>
+                                                </Grid>
+                                                <Grid item xs={12} md={12}>
+                                                    <CardContent>
+                                                        DNI
+                                                        <input
+                                                            type="text"
+                                                            className="form-control clienteadicional rounded"
+                                                            value={doc_adicional3}
+                                                            inputMode="numeric"
+                                                            maxLength="8"
+                                                            onChange={(e) => {
+                                                                const inputValue =
+                                                                    e.target.value.replace(/\D/g, "");
+                                                                if (inputValue.length > 8) {
+                                                                    e.target.value = inputValue.slice(
+                                                                        0,
+                                                                        8
+                                                                    );
+                                                                } else {
+                                                                    e.target.value = inputValue;
                                                                 }
-                                                                className="form-select clienteadicional"
-                                                            >
-                                                                <option value="0">Seleccione</option>
-                                                                <option value="38">Conyugue</option>
-                                                                <option value="39">Hijo</option>
-                                                                <option value="40">Hermano </option>
-                                                                <option value="41">Primo(A)</option>
-                                                                <option value="42">Padre</option>
-                                                                <option value="43">Madre </option>
-                                                                <option value="44">
-                                                                    Otro Familiar{" "}
-                                                                </option>
-                                                                <option value="45">
-                                                                    Otra Relacion{" "}
-                                                                </option>
-                                                                <option value="125">Titular </option>
-                                                                <option value="1347">Hija </option>
-                                                                <option value="1348">Hermana </option>
-                                                                <option value="1349">Sobrino </option>
-                                                                <option value="1350">Abuelo </option>
-                                                                <option value="1351">Abuela </option>
-                                                                <option value="1352">Sobrina </option>
-                                                                <option value="1353">Viuda </option>
-                                                                <option value="1356">Suegro </option>
-                                                                <option value="1357">Suegra</option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Primer Nombre
-                                                            <input
-                                                                name="roomRent"
-                                                                type="text"
-                                                                id="primer_nombre_adicional2"
-                                                                onChange={(e) => {
-                                                                    setprimer_nombre_adicional2(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control  my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Segundo Nombre
-                                                            <input
-                                                                name="roomRent"
-                                                                type="text"
-                                                                id="segundo_nombre_adicional2"
-                                                                onChange={(e) => {
-                                                                    setsegundo_nombre_adicional2(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Apellido Paterno
-                                                            <input
-                                                                name="roomRent"
-                                                                type="text"
-                                                                id="apellido_p_adicional2"
-                                                                onChange={(e) => {
-                                                                    setapellido_p_adicional2(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Apellido Materno
-                                                            <input
-                                                                name="roomRent"
-                                                                id="apellido_m_adicional2"
-                                                                onChange={(e) => {
-                                                                    setapellido_m_adicional2(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Fecha de Nacimiento:
-                                                            <input
-                                                                type="date"
-                                                                id="nacimiento_adicional2"
-                                                                onChange={(e) => {
-                                                                    setnacimiento_adicional2(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12">
-                                                            N° Documento
-                                                            <input
-                                                                type="text"
-                                                                className="form-control clienteadicional my-2"
-                                                                value={doc_adicional2}
-                                                                inputMode="numeric"
-                                                                maxLength="8"
-                                                                onChange={(e) => {
-                                                                    const inputValue =
-                                                                        e.target.value.replace(/\D/g, "");
-                                                                    if (inputValue.length > 8) {
-                                                                        e.target.value = inputValue.slice(
-                                                                            0,
-                                                                            8
-                                                                        );
-                                                                    } else {
-                                                                        e.target.value = inputValue;
-                                                                    }
-                                                                    setdoc_adicional2(e.target.value);
-                                                                }}
-                                                                // onBlur={handleNumeroDocumentoBlur}
-                                                                id="doc_adicional2"
-                                                            />
-                                                        </div>
-                                                    </section>
-                                                </div>
-                                            )}
-                                            {select_cuantos_adicionales === "3" && (
-                                                <div>
-                                                    <h5>Adicional 3</h5>
-                                                    <section className="row">
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Tipo Asegurado
-                                                            <select
-                                                                id="tipo_asegurado3"
-                                                                value={tipo_asegurado3}
-                                                                onChange={(e) =>
-                                                                    settipo_asegurado3(e.target.value)
-                                                                }
-                                                                className="form-select clienteadicional"
-                                                            >
-                                                                <option value="0">Seleccione</option>
-                                                                <option value="AT">Titular</option>
-                                                                <option value="AC">Conyugue </option>
-                                                                <option value="AH">Hijo </option>
-                                                                <option value="AO">
-                                                                    Otra Relación{" "}
-                                                                </option>
-                                                                <option value="TC">
-                                                                    Titular de Cuenta - Contratante{" "}
-                                                                </option>
-                                                                <option value="BN">
-                                                                    Beneficiario{" "}
-                                                                </option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Parentesco
-                                                            <select
-                                                                id="parentesco3"
-                                                                value={parentesco3}
-                                                                onChange={(e) =>
-                                                                    setparentesco3(e.target.value)
-                                                                }
-                                                                className="form-select clienteadicional"
-                                                            >
-                                                                <option value="0">Seleccione</option>
-                                                                <option value="38">Conyugue</option>
-                                                                <option value="39">Hijo</option>
-                                                                <option value="40">Hermano </option>
-                                                                <option value="41">Primo(A)</option>
-                                                                <option value="42">Padre</option>
-                                                                <option value="43">Madre </option>
-                                                                <option value="44">
-                                                                    Otro Familiar{" "}
-                                                                </option>
-                                                                <option value="45">
-                                                                    Otra Relacion{" "}
-                                                                </option>
-                                                                <option value="125">Titular </option>
-                                                                <option value="1347">Hija </option>
-                                                                <option value="1348">Hermana </option>
-                                                                <option value="1349">Sobrino </option>
-                                                                <option value="1350">Abuelo </option>
-                                                                <option value="1351">Abuela </option>
-                                                                <option value="1352">Sobrina </option>
-                                                                <option value="1353">Viuda </option>
-                                                                <option value="1356">Suegro </option>
-                                                                <option value="1357">Suegra</option>
-                                                            </select>
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Primer Nombre
-                                                            <input
-                                                                name="roomRent"
-                                                                type="text"
-                                                                id="primer_nombre_adicional3"
-                                                                onChange={(e) => {
-                                                                    setprimer_nombre_adicional3(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control  my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Segundo Nombre
-                                                            <input
-                                                                name="roomRent"
-                                                                type="text"
-                                                                id="segundo_nombre_adicional3"
-                                                                onChange={(e) => {
-                                                                    setsegundo_nombre_adicional3(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Apellido Paterno
-                                                            <input
-                                                                name="roomRent"
-                                                                type="text"
-                                                                id="apellido_p_adicional3"
-                                                                onChange={(e) => {
-                                                                    setapellido_p_adicional3(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Apellido Materno
-                                                            <input
-                                                                name="roomRent"
-                                                                id="apellido_m_adicional3"
-                                                                onChange={(e) => {
-                                                                    setapellido_m_adicional3(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            Fecha de Nacimiento:
-                                                            <input
-                                                                type="date"
-                                                                id="nacimiento_adicional3"
-                                                                onChange={(e) => {
-                                                                    setnacimiento_adicional3(
-                                                                        e.target.value
-                                                                    );
-                                                                }}
-                                                                className="clienteadicional form-control my-2"
-                                                            />
-                                                        </div>
-                                                        <div className="col-lg-3 col-md-6 col-sm-12 ">
-                                                            N° Documento
-                                                            <input
-                                                                type="text"
-                                                                className="form-control clienteadicional my-2"
-                                                                value={doc_adicional3}
-                                                                inputMode="numeric"
-                                                                maxLength="8"
-                                                                onChange={(e) => {
-                                                                    const inputValue =
-                                                                        e.target.value.replace(/\D/g, "");
-                                                                    if (inputValue.length > 8) {
-                                                                        e.target.value = inputValue.slice(
-                                                                            0,
-                                                                            8
-                                                                        );
-                                                                    } else {
-                                                                        e.target.value = inputValue;
-                                                                    }
-                                                                    setdoc_adicional3(e.target.value);
-                                                                }}
-                                                                // onBlur={handleNumeroDocumentoBlur}
-                                                                id="doc_adicional3"
-                                                            />
-                                                        </div>
-                                                    </section>
-                                                </div>
-                                            )}
-                                        </strong>
-                                    </div>
+                                                                setdoc_adicional3(e.target.value);
+                                                            }}
+                                                            // onBlur={handleNumeroDocumentoBlur}
+                                                            id="doc_adicional3"
+                                                        />
+                                                    </CardContent>
+                                                </Grid>
+
+                                            </div>
+                                        )}
+
+                                    </Card>
                                 )}
                                 <Button disabled={!datosValidos} value="agregarAdicional" onClick={() => { handleAgregarAdicional(); }} variant="Agregar">Agregar</Button>
 

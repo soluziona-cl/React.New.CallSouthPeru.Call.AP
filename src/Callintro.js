@@ -119,6 +119,8 @@ const Callintro = () => {
       GuardaURL2(id_url, getToken);
     }
   };
+
+ 
   const DatosCliente = async (lead, getToken) => {
     const result = await axios.post(
       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/DatosCliente",
@@ -140,7 +142,7 @@ const Callintro = () => {
       //console.log(datafull);
     }
   };
-
+  //console.log(DatosCliente)
   const GuardaURL2 = async (url_id, getToken) => {
 
     const result = await axios.post("https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/SaveURl/2", { dato: url_id }, { headers: { Authorization: `Bearer ${getToken}` } }
