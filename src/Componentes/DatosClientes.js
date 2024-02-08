@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, TextField, Typography } from "@mui/material";
+
 
 function DatosClientes({ company, clave, datafull }) {
 
- 
+
   const sesiones = {
     sgui: localStorage.getItem("localgui"),
     scliente: localStorage.getItem("localcliente"),
@@ -12,86 +14,74 @@ function DatosClientes({ company, clave, datafull }) {
     stoken: localStorage.getItem("token"),
   };
 
-  
-
- 
-
-  
   return (
     <>
-      <div className="container-fluid">
-        <div className="">
-          <div className="">
+      <Grid container spacing={1} >
 
-            {datafull.map((data, index) => (
-              <>
-                {/* {console.log(data)} */}
-                <div className="row">
-                  <h3 className="card-header text-white" style={{ backgroundImage: 'linear-gradient(90deg, #646464 10%, #ffffff 120%)' }}>Datos Cliente</h3>
-                  <hr />
-                </div>
-                <div className="row my-3">
 
-                  <div className="col-lg-3 col-md-5 col-sm-12 my-1">ID Cliente
-                    <input name="roomRent" type="text" value={data.lead_id} className="form-control" disabled />
-                  </div>
-                  <div className="col-lg-3 col-md-4 col-sm-12 my-1">DNI
-                    <input name="roomRent" type="text" value={data.Chubb_numero_documento} className="  form-control" disabled />
-                  </div>
-                  <div className="col-lg-6 col-md-8 col-sm-12 my-1">Email
-                    <input name="roomRent" type="text" value={data.Chubb_email} className=" form-control" disabled />
-                  </div>
+        {/* {datafull.map((data, index) => ( */}
+        <>
+          {/* {console.log(data)} */}
+          <Card>
+            <Grid item xs={12} md={12}>
+              <Typography variant="h6" className="card-header text-white p-2 m-2 rounded" style={{ backgroundImage: 'linear-gradient(90deg, #646464 10%, #ffffff 120%)' }}>Datos Cliente</Typography>
+              <hr />
+            </Grid>
+            <CardContent>
+              <Grid container spacing={1} sx={{ marginY: 1 }} >
+                <Grid item xs={12} md={4}>
+                  <TextField id='id_cliente' disabled variant="outlined" label="ID Cliente" className="cliente form-control rounded" />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='dni' disabled variant="outlined" label="DNI" className="cliente form-control rounded " />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='nacimiento' disabled variant="outlined" label="Fecha de Nacimiento" className="cliente form-control rounded" />
+                </Grid>
+                <Grid item xs={12} md={10}>
+                  <TextField id='nombre' disabled variant="outlined" label="Nombre" className="cliente form-control rounded " />
+                </Grid>
+                <Grid item xs={12} md={2}>
+                  <TextField id='edad' disabled variant="outlined" label="Edad" className="cliente form-control rounded " />
+                </Grid>
+               
+                <Grid item xs={12} md={4}>
+                  <TextField id='edad' disabled variant="outlined" label="Condicion Laboral" className="cliente form-control rounded " />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='apellido_2' disabled variant="outlined" label="Tipo Tarjeta" className="cliente form-control rounded " />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='id_cliente' disabled variant="outlined" label="Tienda Colocacion" className="cliente form-control rounded" />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='dni' disabled variant="outlined" label="Fecha Colocacion" className="cliente form-control rounded " />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='apellido_2' disabled variant="outlined" label="Cantidad Seguros" className="cliente form-control rounded " />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='id_cliente' disabled variant="outlined" label="Seguros Contratados" className="cliente form-control rounded" />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='' disabled variant="outlined" label="Departamento" className="cliente form-control rounded " />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='' disabled variant="outlined" label="Provincia" className="cliente form-control rounded " />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <TextField id='' disabled variant="outlined" label="Distrito" className="cliente form-control rounded " />
+                </Grid>
+                <Grid item xs={12} md={12}>
+                  <TextField id='dni' disabled variant="outlined" label="Dirección" className="cliente form-control rounded " />
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        </>
+        {/* ))} */}
 
-                  <div className="col-lg-6 col-md-10 col-sm-12 my-1">Nombre
-                    <input name="roomRent" type="text" value={data.Chubb_nombre} className="  form-control" disabled />
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Fecha de Nacimiento
-                    <input name="roomRent" type="text" value={data.Chubb_fecha_nacimiento == 'NULL' ? '' : data.Chubb_fecha_nacimiento} className=" form-control" disabled />
-                  </div>
-                  <div className="col-lg-2 col-md-2 col-sm-12 my-1">Edad
-                    <input name="roomRent" type="text" value={data.Chubb_edad} className="  form-control" disabled />
-                  </div>
-
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Condicion Laboral
-                    <input name="roomRent" type="text" value={data.Chubb_condicion_laboral == 'NULL' ? '' : data.Chubb_condicion_laboral} className=" form-control" disabled />
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Tipo Tarjeta
-                    <input name="roomRent" type="text" value={data.Chubb_tipo_tarjeta} className=" form-control" disabled />
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Tienda Colocacion
-                    <input name="roomRent" type="text" value={data.Chubb_tienda_colocacion == 'NULL' ? '' : data.Chubb_tienda_colocacion} className=" form-control" disabled />
-                  </div>
-
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Fecha Colocacion
-                    <input name="roomRent" type="text" value={data.Chubb_fecha_colocacion == 'NULL' ? '' : data.Chubb_fecha_colocacion} className=" form-control" disabled />
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Cantidad Seguros
-                    <input name="roomRent" type="text" value={data.Chubb_cantidad_seguros == 'NULL' ? '' : data.Chubb_cantidad_seguros} className=" form-control" disabled />
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Seguros Contratados
-                    <input name="roomRent" type="text" value={data.Chubb_seguros_contratados == 'NULL' ? '' : data.Chubb_seguros_contratados} className=" form-control" disabled />
-                  </div>
-
-                  <div className="col-lg-12 col-md-12 col-sm-12 my-1">Dirección
-                    <input name="roomRent" type="text" value={data.Chubb_direccion} className=" form-control" disabled />
-                  </div>
-
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Departamento
-                    <input name="roomRent" type="text" value={data.Chubb_departamento} className=" form-control" disabled />
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Provincia
-                    <input name="roomRent" type="text" value={data.Chubb_provincia} className=" form-control" disabled />
-                  </div>
-                  <div className="col-lg-4 col-md-4 col-sm-12 my-1">Distrito
-                    <input name="roomRent" type="text" value={data.Chubb_distrito} className=" form-control" disabled />
-                  </div>
-                </div>
-
-              </>
-            ))}
-          </div>
-        </div>
-      </div>
+      </Grid>
     </>
   );
 }

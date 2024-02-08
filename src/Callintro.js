@@ -253,7 +253,7 @@ const Callintro = () => {
 
   const [adicionalCompleto, setAdicionalCompleto] = useState(false);
 
-  const handleAgregarAdicional = () => {
+  const handleAgregarAdicional = (index) => {
     // Lógica para agregar adicional y habilitar Contesta
     setAdicionalCompleto(true);
   };
@@ -284,10 +284,10 @@ const Callintro = () => {
   return (
     <>
       <ToastContainer autoClose={3000} />
-      <Container className="p-1 mb-4 rounded-3">
-        <Box class="card card-header bg-black">
+
+      <Grid container sx={{ padding: 3 }} spacing={1}>
+        <Grid item xs={12} md={12} sx={{ alignItems: 'center', background: 'black' }}>
           <FormControl fullWidth class="text-white  ms-3 ">
-            {/* <h3 class="text-white  ms-3 "> */}
             <Typography variant="h1" class="fw-bold "> Sonríe Seguro </Typography>
             {datafull.map((data, index) => (
               <Typography variant="h5" key={index} className="col-lg-12 col-md-12 col-sm-12 my-1">
@@ -295,76 +295,68 @@ const Callintro = () => {
               </Typography>
             ))}
             <Typography variant="h5">Identificador de Llamada {" "} <label id="ident_llamdaa">{lead_id}</label> </Typography>
-
             <Typography variant="h5"> Duracion de la llamada {" "}
               <span id="duracion" className="cliente">
                 {get_elapsed_time_string(elapsedSeconds)}
               </span></Typography>
-            {/* </h3> */}
           </FormControl>
-        </Box>
+        </Grid>
+      </Grid>
 
-        <Grid container sx={{ padding: 2 }} spacing={2}>
-          <Card class="card-body login-card-body row">
-            <Grid xs={3} >
-              <Encabezado company={company} clave={token} setViewConecta={handleConecta}
-              >
+        
+      <Grid container  spacing={2}>
+        <Grid item xs={4} sx={{ marginX: 1 }}>
+          <DatosClientes
+          // datafull={datafull} 
+          // company={company} 
+          // getToken={token}
+          ></DatosClientes>
 
-              </Encabezado>
-              <hr className="my-2" />
-              {(selectLlamada === "85" || selectLlamada === "86") && (
+          <Card></Card>
+        </Grid>
 
-                <div>
-
-
-
-                  {selectLlamada_2 !== "95" && selectLlamada_2 !== "89" && selectLlamada_2 !== "0" && selectLlamada_2 !== "" && (
-
-
-
-                    <Stack direction="row" spacing={2}>
-                      <Button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} variant="Finalizar">Finalizar</Button>
-
-                    </Stack>
-
-                  )}
-                </div>
+        <Grid item xs={7} >
+          <Encabezado company={company} clave={token} setViewConecta={handleConecta}> </Encabezado>
+          <hr className="my-2" />
+          {(selectLlamada === "85" || selectLlamada === "86") && (
+            <div>
+              {selectLlamada_2 !== "95" && selectLlamada_2 !== "89" && selectLlamada_2 !== "0" && selectLlamada_2 !== "" && (
+                <Stack direction="row" spacing={2}>
+                  <Button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} variant="Finalizar">Finalizar</Button>
+                </Stack>
               )}
-
-
-
-              {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
-                <section>
-                  <Terceros conecta={selectLlamada} shouldScroll={scrollToNoContesta} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} getToken={token} datafull={datafull} />
-                </section>
-              )}
-            </Grid>
-            <Grid xs={8}>
-              <DatosClientes datafull={datafull} company={company} getToken={token}></DatosClientes>
-            </Grid>
-          </Card>
-
-
-          {viewConecta && (
-            <Grid container>
-              <Grid xs={3} >
-                <Adicionales datafull={datafull} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
-              </Grid>
-              <hr />
-              {adicionalCompleto && (
-                <Grid xs={12}>
-                  <Contesta datafull={datafull} tercerosComponent={<Terceros />} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
-                </Grid>
-
-              )}
-
-            </Grid>
+            </div>
           )}
 
+          {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
+            <section>
+              <Terceros conecta={selectLlamada} shouldScroll={scrollToNoContesta} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} getToken={token} datafull={datafull} />
+            </section>
+          )}
 
+{viewConecta && (
+          <Grid >
+            <Grid  >
+              <Adicionales datafull={datafull} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
+            </Grid>
+            <hr />
+            {adicionalCompleto && (
+              <Grid >
+                <Contesta datafull={datafull} tercerosComponent={<Terceros />} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
+              </Grid>
+
+            )}
+
+          </Grid>
+        )}
 
         </Grid>
-      </Container>
+
+
+        
+
+
+      </Grid>
     </>
   );
 };

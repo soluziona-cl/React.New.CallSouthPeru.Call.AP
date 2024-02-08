@@ -5,8 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import TabsTabs from "./TabsTabs";
 import ValidaDatos from "./ValidaDatos";
 import Terceros from "./Terceros";
-import { TextField, MenuItem, Select,} from "@mui/material";
 import Tabsinformacion from "./TabsInfotmacion";
+import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, TextField, Typography } from "@mui/material";
 
 function Contesta({
   company,
@@ -234,6 +234,63 @@ function Contesta({
   const ChangeConecta_Ocupacion = (ocupacion) => {
     setOcupacion(ocupacion);
   };
+  async function GuardarRegistroNoValido() {
+    setPuedeClickear(false);
+    let id = []; //final
+    let item_sucess_llamada = {};
+    let json_sucess_gestion = [];
+    let item_sucess_gestion = {};
+    const preguntas = document.querySelectorAll(".cliente");
+    preguntas.forEach((obj) => {
+        let title = obj.id;
+        let valor = obj.value;
+        item_sucess_gestion[title] = valor;
+    });
+
+    json_sucess_gestion.push(item_sucess_gestion);
+
+    item_sucess_llamada["sucess"] = true;
+    item_sucess_llamada["campaign_name"] = "Sonrie Seguro ";
+    item_sucess_llamada["campaign_id"] = list_id;
+    datafull.map((data, index) => {
+        item_sucess_llamada["campaign"] = data.campaign;
+    });
+
+    item_sucess_llamada["lead_id"] = lead_id;
+    item_sucess_llamada["list_id"] = list_id;
+    item_sucess_llamada["agente"] = agente;
+    item_sucess_llamada["recording_filename"] = recording_filename;
+    item_sucess_llamada["epoch"] = epoch;
+    item_sucess_llamada["fecha_gestion"] = new Date();
+    item_sucess_llamada["duracion_sec"] = setduracion;
+    //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
+    // item_sucess_llamada["duracion_time"] =
+    // get_elapsed_time_string(elapsed_seconds);
+    item_sucess_llamada["phone_number"] = phone_number;
+    item_sucess_llamada["gestion"] = json_sucess_gestion;
+    id.push(item_sucess_llamada);
+
+    try {
+        const result = await axios.post(
+            "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
+            { dato: id },
+            { headers: { Authorization: `Bearer ${clave}` } }
+        );
+
+        if (result.status === 200) {
+            toast.success("Registro Guardado Exitosamente");
+            console.log("Registro Guardado Exitosamente");
+            setTimeout(() => {
+                window.location.href =
+                    "/Orkesta/NewCallSouthPeru/Call_SonrieSeguro/Fin";
+            }, 5000);
+        }
+    } catch (error) {
+        toast.error("Error Con Guardado");
+        console.log("Error Con Guardado");
+        // Manejo de errores
+    }
+}
 
   return (
     <>
@@ -275,43 +332,31 @@ function Contesta({
       </div>
       {select_si_conecta_llamada && (
         <div>
-          <div className="card mx-2 p-3">
-            <TabsTabs> </TabsTabs>{" "}
-          </div>{" "}
-          <div className="mt-1 p-3">
-            <h6>
-              <strong> EJECUTIVO Y CORROBORACION DE DATOS </strong>{" "}
-            </h6>{" "}
-          </div>{" "}
-          <div className="form-row p-2 m-2 ">
-            <label for="observacion">
-              {" "}
-              ¿Entonces Sr.…Siendo el día de hoy(DD / MM / AAAA) acepta la
-              contratación de“ Sonríe Seguro”, con un cargo fijo mensual de S /
-              .29.90 en su tarjeta de crédito Ripley ? -Esperar respuesta
-              afirmativa del cliente(Sí - Sí acepto).{" "}
-            </label>{" "}
-            <div className="col-lg-6 col-md-6 col-sm-12 my-2">
-              <select
-                id="select_conecta_llamada_pregunta_interesa"
-                className="form-select cliente"
+          
+          <Grid item xs={12} md={12}>
+              <Typography variant="h6"> EJECUTIVO Y CORROBORACION DE DATOS </Typography>
+              </Grid>
+        
+            <Grid item xs={12} md={6}>
+                                
+                                        <CardContent>
+                                            ¿Le interesa?
+                                            <Select  id="select_conecta_llamada_pregunta_interesa"
+                className="form-select cliente rounded" sx={{height:40}}
                 value={select_conecta_llamada_pregunta_interesa}
                 onChange={(e) =>
                   setselect_conecta_llamada_pregunta_interesa(e.target.value)
-                }
-                // disabled={
-                //   select_si_conecta_llamada !== "1" &&
-                //   select_si_conecta_llamada !== "2" &&
-                //   select_si_conecta_llamada !== "3"
-                // }
-              >
-                <option value="0"> Seleccione </option>{" "}
-                <option value="1"> Interesa </option>{" "}
-                <option value="2"> No Interesa </option>{" "}
-                <option value="3"> Lo Pensara </option>{" "}
-              </select>{" "}
-            </div>{" "}
-          </div>{" "}
+                }>
+                                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                <MenuItem value={'1'}>Interesa </MenuItem>
+                                                <MenuItem value={'2'}>No Interesa </MenuItem>
+                                                <MenuItem value={'3'}>Lo Pensará</MenuItem>
+                                            </Select>
+                                        </CardContent>
+                                  
+                                </Grid>
+           
+        
           <br />
           <div className="d-none" id="no_acepta">
             <p>
