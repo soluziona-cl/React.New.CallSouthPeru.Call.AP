@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Select, MenuItem, Card, CardContent, Grid } from "@mui/material";
+import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Stack, Grid, Select, TextField, Typography } from "@mui/material";
+
 
 import { setUrl } from './Common';
 import { compareAsc } from "date-fns";
@@ -11,7 +12,8 @@ const url = setUrl()
 const endpoint_conecta = '/Call/Select/Nivel/P';
 const endpoint_subrespuesta = '/Call/Select/Nivel/H';
 
-function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPoscicionChange, data, DatosCliente, rut, HistorialLlamados, rut_entero, onUniversidadChange, onEstado, setViewConecta }) {
+function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPoscicionChange, data, DatosCliente, rut, HistorialLlamados, rut_entero, onUniversidadChange, onEstado, setViewConecta, GuardarRegistroNoContesta }) {
+  const [puedeClickear, setPuedeClickear] = useState(true);
 
   const [optionListConecta, setOptionListConecta] = useState([]);
   const [valueConecta, setValueConecta] = useState(0);
@@ -167,6 +169,24 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
             </CardContent>
           </Card>
         </Grid>
+
+        {(valueSubRespuesta !== 0) && (valueConecta === 2 || valueConecta === 3 ) && (
+          <Grid item xs={12} md={12} container justifyContent="flex-end">
+            <Stack direction="row" spacing={2}>
+              <Button className="btn text-white guardar" variant="contained"
+                color="success" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} >Finalizar</Button>
+            </Stack>
+          </Grid>
+        )}
+
+        {(valueSubRespuesta !== 15 && valueConecta === 1) && (
+          <Grid item xs={12} md={12} container justifyContent="flex-end">
+            <Stack direction="row" spacing={2}>
+              <Button className="btn text-white guardar" variant="contained"
+                color="success" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} >Finalizar</Button>
+            </Stack>
+          </Grid>
+        )}
       </Grid>
     </>
   );

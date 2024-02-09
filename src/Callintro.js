@@ -39,9 +39,19 @@ const Callintro = () => {
   const [viewTerceros, setviewTerceros] = useState(false)
   const [viewDatosClientes, setviewDatosClientes] = useState(false)
   const [viewAdicionales, setviewAdicionales] = useState(false)
-  const [viewContesta, setviewContesta] = useState(false)
 
+  const handleNoConecta = (valor) => {
+    console.log(valor)
+    setviewNoContesta(valor);
+  };
+  const [viewConecta, setViewConecta] = useState(false)
 
+  const handleConecta = (valor) => {
+    // Lógica para agregar adicional y habilitar Contesta
+    console.log(valor)
+
+    setViewConecta(valor);
+  };
 
   const { Alert } = bootstrap;
   const [scrollToNoContesta, setScrollToNoContesta] = useState(false);
@@ -259,14 +269,7 @@ const Callintro = () => {
   };
 
 
-  const [viewConecta, setViewConecta] = useState(false)
-
-  const handleConecta = (valor) => {
-    // Lógica para agregar adicional y habilitar Contesta
-    console.log(valor)
-
-    setViewConecta(valor);
-  };
+ 
 
 
   useEffect(() => {
@@ -316,9 +319,10 @@ const Callintro = () => {
         </Grid>
 
         <Grid item xs={7} >
-          <Encabezado company={company} clave={token} setViewConecta={handleConecta}> </Encabezado>
+          <Encabezado company={company} GuardarRegistroNoContesta={GuardarRegistroNoContesta} clave={token} setViewConecta={handleConecta} setviewNoContesta={handleNoConecta}> </Encabezado>
           <hr className="my-2" />
-          {(selectLlamada === "85" || selectLlamada === "86") && (
+          
+          {/* {(selectLlamada === "85" || selectLlamada === "86") && (
             <div>
               {selectLlamada_2 !== "95" && selectLlamada_2 !== "89" && selectLlamada_2 !== "0" && selectLlamada_2 !== "" && (
                 <Stack direction="row" spacing={2}>
@@ -326,36 +330,28 @@ const Callintro = () => {
                 </Stack>
               )}
             </div>
-          )}
-
-          {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
-            <section>
+          )} */}
+          
+                  {/* {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
+            <Grid>
               <Terceros conecta={selectLlamada} shouldScroll={scrollToNoContesta} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} getToken={token} datafull={datafull} />
-            </section>
-          )}
-
-{viewConecta && (
-          <Grid >
-            <Grid  >
-              <Adicionales datafull={datafull} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
+            </Grid>
+          )} */}
+          
+          {viewConecta && (
+            <Grid>
+              <Grid >
+                <Adicionales datafull={datafull} clave={token} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
             </Grid>
             <hr />
             {adicionalCompleto && (
-              <Grid >
-                <Contesta datafull={datafull} tercerosComponent={<Terceros />} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
+              <Grid>
+                <Contesta datafull={datafull}  tercerosComponent={<Terceros />} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
               </Grid>
-
             )}
-
           </Grid>
         )}
-
         </Grid>
-
-
-        
-
-
       </Grid>
     </>
   );

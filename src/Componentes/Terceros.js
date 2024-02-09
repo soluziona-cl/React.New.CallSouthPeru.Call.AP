@@ -2,17 +2,17 @@ import React, { useEffect, useState, useRef } from "react";
 import * as bootstrap from "bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, TextField, Typography, Stack } from "@mui/material";
 
-
-function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,elapsedSeconds,datafull  }) {
+function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta, elapsedSeconds, datafull }) {
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [puedeClickear, setPuedeClickear] = useState(true);
 
-// console.log(clave)
+  // console.log(clave)
   const Conecta = conecta;
   // console.log(Conecta)
 
-  console.log(clave)
+  // console.log(clave)
 
   useEffect(() => {
     Company(company);
@@ -27,7 +27,7 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
   async function GuardarRegistroNoContesta() {
 
     setPuedeClickear(false);
- 
+
     let id = []; //final
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
@@ -77,7 +77,7 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
 
     try {
       const result = await axios.post(
-         "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
+        "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${clave}` } }
       );
@@ -96,13 +96,13 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
       setTimeout(() => {
         setPuedeClickear(true); // Reactivamos la capacidad de clickear después de 1 segundo.
       }, 1000);
-  
+
     }
   }
 
   const Company = async (company) => {
     const result = await axios.post(
-       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
+      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -116,24 +116,35 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta,ela
 
   return (
     <>
-      <div className="p-3 row" id="">
-        <section className="" id="mySection">
-          <div class="col-lg-12 col-sm-12 my-2">
-            <label for="observacion_agenda">Observación Agenda</label>
-            <textarea rows="4" class="form-control textarea cliente" id="observacion_agenda" ></textarea>
-          </div>
-         
-          <div className="d-flex justify-content-end">
-            <button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} style={{ background: "#8362D6" }} >
-              Finalizar
-            </button>
-          </div>
-        </section>
-      </div>
+      <Grid container sx={{ padding: 3 }} spacing={1}>
+  <Grid item xs={12} md={12}>
+    <textarea
+      name="Observación Agenda"
+      className='rounded'
+      id="observacion_agenda"
+      style={{ width: '100%', height: '100%' }}
+      rows={3}
+      placeholder="Observación Agenda..."
+    />
+  </Grid>
 
-     
-    
-      
+  <Grid item xs={12} md={12} container justifyContent="flex-end">
+    <Stack direction="row" spacing={2} sx={{ paddingTop: 2 }}>
+      <Button
+        variant="contained"
+        color="success"
+        className="btn text-white guardar"
+        value="GuardarRegistro"
+        onClick={GuardarRegistroNoContesta}
+        disabled={!puedeClickear}
+        style={{ background: "#8362D6" }}
+      >
+        Finalizar
+      </Button>
+    </Stack>
+  </Grid>
+</Grid>
+
     </>
   );
 }

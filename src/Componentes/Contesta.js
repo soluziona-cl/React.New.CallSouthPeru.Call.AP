@@ -6,7 +6,7 @@ import TabsTabs from "./TabsTabs";
 import ValidaDatos from "./ValidaDatos";
 import Terceros from "./Terceros";
 import Tabsinformacion from "./TabsInfotmacion";
-import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, TextField, Typography } from "@mui/material";
+import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, TextField, Typography, FormControlLabel, Radio } from "@mui/material";
 
 function Contesta({
   company,
@@ -294,80 +294,47 @@ function Contesta({
 
   return (
     <>
-      <div className=" row my-1">
-        <div className="   ">
-          <h3
-            className="card-header text-white"
-            style={{
-              backgroundImage:
-                "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
-            }}
-          >
-            Script{" "}
-          </h3>{" "}
-        </div>{" "}
-        <div className="card-body">
-          <div className="col-md-12" id="tipificador_script">
-            <div className=" card-warning " id="vw_script">
-              <div className="card-body login-card-body">
-                <div className="form-row">
-                  <p>
-                    {" "}
-                    Buenos días / tardes, me podría comunicar con el(la)
-                    señor(a) {nombreCliente}, Cómo le va mucho gusto!Encantado /
-                    a de saludarle mi nombre es XXXX le llamamos de Banco Ripley
-                    por encargo de Chubb Seguros Perú.{" "}
-                  </p>{" "}
-                </div>{" "}
-                <div>
-                  <p className="my-3">
-                    Antes de continuar le informamos que por su seguridad esta
-                    llamada está siendo grabada.{" "}
-                  </p>
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </div>
+      <Grid className=" row my-1">
+
+        <Grid item xs={12} md={12}>
+          <Typography variant="h6" className="card-header text-white p-2 m-2 rounded" style={{
+            backgroundImage:
+              "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
+          }}>Script</Typography>
+          <hr />
+        </Grid>
+
+        <Grid item xs={12} md={12}>
+          {/* <Typography variant="h7" className="p-2 m-2"> Buenos días / tardes, me podría comunicar con el(la)
+            señor(a) {nombreCliente}, Cómo le va mucho gusto! Encantado / a de saludarle mi nombre es XXXX le llamamos de Banco Ripley
+            por encargo de Chubb Seguros Perú.{" "}</Typography> */}
+          
+          <Typography variant="h7" className=" p-2 m-1"> Antes de continuar le informamos que por su seguridad esta
+            llamada está siendo grabada.{" "}</Typography>
+        </Grid>
+      </Grid>
       {select_si_conecta_llamada && (
         <div>
-          
-          <Grid item xs={12} md={12}>
-              <Typography variant="h6"> EJECUTIVO Y CORROBORACION DE DATOS </Typography>
-              </Grid>
-        
-            <Grid item xs={12} md={6}>
-                                
-                                        <CardContent>
-                                            ¿Le interesa?
-                                            <Select  id="select_conecta_llamada_pregunta_interesa"
-                className="form-select cliente rounded" sx={{height:40}}
+          <Grid item xs={12} md={6}>
+            <CardContent>
+              ¿Le interesa?
+              <Select id="select_conecta_llamada_pregunta_interesa"
+                className="form-select cliente rounded" sx={{ height: 40 }}
                 value={select_conecta_llamada_pregunta_interesa}
                 onChange={(e) =>
                   setselect_conecta_llamada_pregunta_interesa(e.target.value)
                 }>
-                                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                                <MenuItem value={'1'}>Interesa </MenuItem>
-                                                <MenuItem value={'2'}>No Interesa </MenuItem>
-                                                <MenuItem value={'3'}>Lo Pensará</MenuItem>
-                                            </Select>
-                                        </CardContent>
-                                  
-                                </Grid>
-           
-        
+                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                <MenuItem value={'1'}>Interesa </MenuItem>
+                <MenuItem value={'2'}>No Interesa </MenuItem>
+                <MenuItem value={'3'}>Lo Pensará</MenuItem>
+              </Select>
+            </CardContent>
+          </Grid>
           <br />
-          <div className="d-none" id="no_acepta">
-            <p>
-              <strong> Agendo : </strong> Por supuesto (Primer nombre del
-              cliente) se programará la llamada para el día (validar fecha con
-              cliente). Muchas gracias, buenos días/buenas tardes / buenas
-              noches{" "}
-            </p>{" "}
-          </div>
+         
           {select_conecta_llamada_pregunta_interesa === "3" && (
-            <section>
+            <Grid>
               <Terceros
                 conecta={selectLlamada}
                 shouldScroll={shouldScroll}
@@ -377,185 +344,102 @@ function Contesta({
                 clave={token}
                 datafull={datafull}
               />{" "}
-            </section>
+            </Grid>
           )}{" "}
           {select_conecta_llamada_pregunta_interesa === "2" && (
-            <div className="col-12 p-3">
-              <div id="vw_script_cliente_nointeresa" className="">
-                <p>
-                  <strong> En caso la respuesta es NO: </strong>{" "}
-                </p>{" "}
-                <p>
-                  Cuando NO desea, me despido.Cuando solicita se le llame en
-                  otra oportunidad, se agenda nueva llamada.{" "}
-                </p>{" "}
-                <p>
-                  <strong> Agendo: </strong> Por supuesto (Primer nombre del
-                  cliente) se programará la llamada para el día (validar fecha
-                  con cliente). Muchas gracias, buenos días/buenas tardes /
-                  buenas noches{" "}
-                </p>{" "}
-                <div className=" card-body">
-                  <div className="form-row">
-                    <label for="observacion">
-                      Me podria decir la razon por la cual no desea contratar el
-                      seguro ?
-                    </label>{" "}
-                  </div>
-                  <div className="form-row col-6 my-2">
-                    <select
-                      id="select_conecta_llamada_pregunta_no_interesa"
-                      className="form-select cliente"
-                      disabled={
-                        select_conecta_llamada_pregunta_interesa !== "2"
-                      }
-                      value={select_conecta_llamada_pregunta_no_interesa}
-                      onChange={(e) =>
-                        setselect_conecta_llamada_pregunta_no_interesa(
-                          e.target.value
-                        )
-                      }
-                    >
-                      <option value="0"> Seleccione </option>{" "}
-                      {Array.isArray(no_interesa) &&
-                        no_interesa.map((item) => (
-                          <option key={item.id} value={item.id}>
-                            {" "}
-                            {item.detalle}{" "}
-                          </option>
-                        ))}{" "}
-                    </select>{" "}
-                  </div>
-                  {select_conecta_llamada_pregunta_no_interesa !== "0" && (
-                    <div className="form-row col-6 mt-2">
-                      <button
-                        className="btn text-white guardar"
-                        value="GuardarRegistro"
-                        disabled={!puedeClickear}
-                        onClick={GuardarRegistroNoValido}
-                        style={{ background: "#8362D6" }}
-                      >
-                        Finalizar{" "}
-                      </button>{" "}
-                    </div>
-                  )}{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>
+            <Grid item xs={12} md={12} >
+              <Grid sx={{ paddingX: 1 }}>
+                <Typography variant="h7" for="observacion">
+                  Me podria decir la razon por la cual no desea contratar el seguro ?
+                </Typography>{" "}
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <CardContent>
+                  <Select id="select_conecta_llamada_pregunta_no_interesa" className="form-select cliente rounded" disabled={select_conecta_llamada_pregunta_interesa !== "2"} value={select_conecta_llamada_pregunta_no_interesa} onChange={(e) => setselect_conecta_llamada_pregunta_no_interesa(e.target.value)} sx={{ height: 40 }}>
+                    <MenuItem value="0">Seleccione una opción</MenuItem>
+                    {Array.isArray(no_interesa) &&
+                      no_interesa.map((item) => (
+                        <MenuItem key={item.id} value={item.id}>
+                          {item.detalle}
+                        </MenuItem>
+                      ))}
+                  </Select>
+                </CardContent>
+              </Grid>
+
+              {select_conecta_llamada_pregunta_no_interesa !== "0" && (
+                <Grid container justifyContent="flex-end">
+                  <Stack direction="row" spacing={2}>
+                    <Button variant="contained" className="btn text-white guardar mt-3 " value="GuardarRegistro"
+                      disabled={!puedeClickear}
+                      onClick={GuardarRegistroNoValido}
+                      style={{ background: "#8362D6" }}>Finalizar</Button>
+                  </Stack>
+                </Grid>
+              )}
+            </Grid>
           )}{" "}
           {select_conecta_llamada_pregunta_interesa === "1" && (
-            <div id="vw_script_cliente_valida" class="">
-              <div
-                className=" row m-2 rounded p-2"
-                style={{ background: "#EDEDED" }}
-              >
-                <h4>
-                  Sr. / Sra.Actualmente se encuentra en buen estado de salud.
-                  (SÍ o NO).{" "}
-                </h4>{" "}
-                <div>
-                  <input
-                    className="ms-1 cliente"
-                    type="radio"
-                    id="buenestadoSalud"
-                    name="buenEstadoSalud"
-                    value={buenEstadoSalud}
-                    checked={buenEstadoSalud === "SÍ"}
-                    onChange={() => setBuenEstadoSalud("SÍ")}
-                  />{" "}
-                  <label className="m-1"> SÍ </label>{" "}
-                </div>{" "}
-                <div>
-                  <input
-                    type="radio"
-                    className="ms-1 "
-                    name="buenEstadoSalud"
-                    value={buenEstadoSalud}
-                    checked={buenEstadoSalud === "NO"}
-                    onChange={() => setBuenEstadoSalud("NO")}
-                  />{" "}
-                  <label className="m-1"> NO </label>{" "}
-                </div>{" "}
+            <Grid id="vw_script_cliente_valida" class="">
+              <Grid className=" row m-2 rounded p-2" style={{ background: "#EDEDED" }} >
+                <Typography variant="h7">
+                  Sr. / Sra.Actualmente se encuentra en buen estado de salud.(SÍ o NO).{" "}
+                </Typography>{" "}
+                <Grid>
+                  <FormControlLabel
+                    control={
+                      <Radio className="ms-1 cliente" id="buenestadoSalud" name="buenEstadoSalud" value={buenEstadoSalud} checked={buenEstadoSalud === "SÍ"} onChange={() => setBuenEstadoSalud("SÍ")}
+                      />
+                    }
+                    label="SÍ"
+                    className="m-1" />
+                </Grid>{" "}
+                <Grid>
+                  <FormControlLabel
+                    control={
+                      <Radio className="ms-1 cliente" id="buenestadoSalud" name="buenEstadoSalud" value={buenEstadoSalud} checked={buenEstadoSalud === "NO"} onChange={() => setBuenEstadoSalud("NO")}
+                      />
+                    }
+                    label="NO"
+                    className="m-1"/>
+                </Grid>
                 {buenEstadoSalud === "NO" && (
-                  <p>
+                  <Typography variant="h7" sx={{ paddingY: 1 }}>
                     Salvedad: Recuerde Sr. / Sra.que le vamos a cubrir por
                     cualquier accidente que no sea consecuencia de alguna
                     preexistencia.{" "}
-                  </p>
+                  </Typography>
                 )}{" "}
-                <div className=" row col-6 ms-2">
-                  <div className="form rounded-3 col-lg-12 col-md-6 col-sm-12 ">
-                    <label for="ocupacion">
-                      Para culminar, nos podría indicar su ocupación actual:
-                    </label>{" "}
-                    <TextField id="ocupacion" label="Ocupación" variant="standard" />
-    <Select
-      id="select-ocupacion"
-      value={optionValueOcupacion}
-      label="Ocupación"
-      onChange={(e) => {
-        setOcupacion(e.target.value);
-        ChangeConecta_Ocupacion(e.target.value);
-      }}
-      className="rounded"
-    >
-      <MenuItem value="0">Seleccione una opción</MenuItem>
-      {optionocupacion.map((item) => (
-        <MenuItem key={item.id} value={item.id}>
-          {item.detalle}
-        </MenuItem>
-      ))}
-    </Select>
-                    {/* <select
-                      className="form-control form-select my-2 cliente"
-                      id="ocupacion"
-                      value={optionValueOcupacion}
-                      onChange={(e) => {
-                        ChangeConecta_Ocupacion(e.target.value);
-                      }}
-                    >
-                      <option value="0"> Selec. </option>{" "}
-                      {optionocupacion.map((item) => (
-                        <option key={item.id} value={item.id}>
-                          {" "}
-                          {item.detalle}{" "}
-                        </option>
-                      ))}{" "}
-                    </select>{" "} */}
-
-                  </div>{" "}
-                </div>
+                <Grid item xs={12} md={12}>
+                  <Typography variant="h7">
+                    Para culminar, nos podría indicar su ocupación actual:
+                  </Typography>
+                </Grid>
+                <Grid item xs={12} md={12}>
+                  <Select id="select-ocupacion" style={{ width: '50%', height: '80%' }} value={optionValueOcupacion} label="Ocupación" onChange={(e) => { setOcupacion(e.target.value); ChangeConecta_Ocupacion(e.target.value); }} className="rounded">
+                    <MenuItem value="0">Seleccione una opción</MenuItem>
+                    {optionocupacion.map((item) => (
+                      <MenuItem key={item.id} value={item.id}>
+                        {item.detalle}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </Grid>
                 {mostrarMensajeOcupacion && (
-                  <div>
-                    <p>
+                  <Box>
+                    <Typography variant="h7">
                       Si el cliente tiene una profesión de alto riesgo, se debe
                       indicar lo siguiente.{" "}
-                    </p>{" "}
-                    <p>
+                    </Typography>{" "}
+                    <Typography variant="h7">
                       Salvedad: Recuerde Sr. / Sra.que le vamos a cubrir por
                       cualquier accidente fuera de sus horas de trabajo.{" "}
-                    </p>{" "}
-                  </div>
+                    </Typography>{" "}
+                  </Box>
                 )}{" "}
-              </div>{" "}
-              <section className=" mt-2 ">
-                <div className=" m-4 ">
-                  <p>
-                    {" "}
-                    ¡Felicitaciones, desde este momento ya se encuentra
-                    protegido con Sonríe Seguro de Chubb Seguros…!
-                  </p>{" "}
-                  <p>
-                    Recuerde que el cargo mensual aparecerá en su estado de
-                    cuenta y podrá acceder a todos los beneficios del seguro
-                    desde la fecha de afiliación.{" "}
-                  </p>
-                  <p>
-                    Adicionalmente, vamos a validar sus datos para el correcto
-                    envío de la póliza.{" "}
-                  </p>{" "}
-                </div>{" "}
-                <div className="card my-3">
+              </Grid>{" "}
+             
+                <Grid className="card my-3">
                   <ValidaDatos
                     company={company}
                     clave={token}
@@ -563,19 +447,12 @@ function Contesta({
                     onDataComplete={handleDatosCompletosChange}
                     datafull={datafull}
                   />{" "}
-                </div>{" "}
-              </section>{" "}
+                </Grid>
               <div className="card " id="pre_cierre">
                 <div className="">
-                  <h3
-                    className=" card-header text-white"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
-                    }}
-                  >
+                  <Typography variant="h6" className=" card-header text-white" style={{backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}}>
                     Continuar a Confirmacion de Datos y PreCierre{" "}
-                  </h3>{" "}
+                  </Typography>{" "}
                 </div>{" "}
                 <div className=" card-body">
                   <div>
@@ -625,7 +502,7 @@ function Contesta({
                   </div>{" "}
                 </div>{" "}
               </div>{" "}
-            </div>
+            </Grid>
           )}
           {(selectConectaLlamadaPreguntaConfirma == "1" ||
             selectConectaLlamadaPreguntaConfirma == "2") && (
