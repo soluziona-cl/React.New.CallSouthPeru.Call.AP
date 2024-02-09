@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/css/main.dc048d47.css",
-    "main.js": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/js/main.aada5e83.js",
-    "index.html": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/index.html",
-    "main.dc048d47.css.map": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/css/main.dc048d47.css.map",
-    "main.aada5e83.js.map": "/Orkesta/CallSouthPeru/Call_SonrieSeguro/static/js/main.aada5e83.js.map"
+    "main.css": "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/static/css/main.dc048d47.css",
+    "main.js": "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/static/js/main.d3c45178.js",
+    "index.html": "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/index.html",
+    "main.dc048d47.css.map": "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/static/css/main.dc048d47.css.map",
+    "main.d3c45178.js.map": "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/static/js/main.d3c45178.js.map"
   },
   "entrypoints": [
     "static/css/main.dc048d47.css",
-    "static/js/main.aada5e83.js"
+    "static/js/main.d3c45178.js"
   ]
 }

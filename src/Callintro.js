@@ -248,7 +248,7 @@ const Callintro = () => {
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Orkesta/NewCallSouthPeru/Call_SonrieSeguro/Fin";
+          window.location.href = "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/Fin";
         }, 5000);
       }
     } catch (error) {

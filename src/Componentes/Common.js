@@ -15,7 +15,7 @@ export const setUrl = () => {
 }
 
 export const setDireccion = () => {
-    const direccion = '/Orkesta/NewCallSouthPeru/Call_SonrieSeguro'
+    const direccion = '/Orkesta/CallSouthPeru/NewCall/SonrieSeguro'
     return direccion
 }
 

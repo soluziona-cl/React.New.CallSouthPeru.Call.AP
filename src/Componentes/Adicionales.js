@@ -96,7 +96,7 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                 console.log("Registro Guardado Exitosamente");
                 setTimeout(() => {
                     window.location.href =
-                        "/Orkesta/NewCallSouthPeru/Call_SonrieSeguro/Fin";
+                        "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/Fin";
                 }, 5000);
             }
         } catch (error) {

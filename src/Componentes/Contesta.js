@@ -6,7 +6,7 @@ import TabsTabs from "./TabsTabs";
 import ValidaDatos from "./ValidaDatos";
 import Terceros from "./Terceros";
 import Tabsinformacion from "./TabsInfotmacion";
-import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, TextField, Typography, FormControlLabel, Radio } from "@mui/material";
+import { Box, MenuItem, InputLabel, CardContent, Stack, Card, Button, FormControl, Grid, Select, TextField, Typography, FormControlLabel, Radio } from "@mui/material";
 
 function Contesta({
   company,
@@ -157,7 +157,7 @@ function Contesta({
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
           window.location.href =
-            "/Orkesta/NewCallSouthPeru/Call_SonrieSeguro/Fin";
+            "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/Fin";
         }, 5000);
       }
     } catch (error) {
@@ -282,7 +282,7 @@ function Contesta({
             console.log("Registro Guardado Exitosamente");
             setTimeout(() => {
                 window.location.href =
-                    "/Orkesta/NewCallSouthPeru/Call_SonrieSeguro/Fin";
+                    "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/Fin";
             }, 5000);
         }
     } catch (error) {
