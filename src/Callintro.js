@@ -288,7 +288,7 @@ const Callintro = () => {
     <>
       <ToastContainer autoClose={3000} />
 
-      <Grid container sx={{ padding: 3 }} spacing={1}>
+      <Grid container sx={{ padding: 2 }} spacing={1}>
         <Grid item xs={12} md={12} sx={{ alignItems: 'center', background: 'black' }}>
           <FormControl fullWidth class="text-white  ms-3 ">
             <Typography variant="h1" class="fw-bold "> Sonríe Seguro </Typography>
@@ -307,8 +307,10 @@ const Callintro = () => {
       </Grid>
 
         
-      <Grid container  spacing={2}>
-        <Grid item xs={4} sx={{ marginX: 1 }}>
+      <Grid container  spacing={2} >
+        <Grid item xs={4} sx={{ marginLeft: 3 }} 
+        // style={{ position: 'fixed',  zIndex: 1 }}
+        >
           <DatosClientes
           // datafull={datafull} 
           // company={company} 
@@ -318,7 +320,7 @@ const Callintro = () => {
           <Card></Card>
         </Grid>
 
-        <Grid item xs={7} >
+        <Grid item xs={7} sx={{ marginLeft: 3 }}>
           <Encabezado company={company} GuardarRegistroNoContesta={GuardarRegistroNoContesta} clave={token} setViewConecta={handleConecta} setviewNoContesta={handleNoConecta}> </Encabezado>
           <hr className="my-2" />
           

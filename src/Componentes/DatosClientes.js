@@ -22,7 +22,7 @@ function DatosClientes({ company, clave, datafull }) {
         {/* {datafull.map((data, index) => ( */}
         <>
           {/* {console.log(data)} */}
-          <Card>
+          <Card container  >  
             <Grid item xs={12} md={12}>
               <Typography variant="h6" className="card-header text-white p-2 m-2 rounded" style={{ backgroundImage: 'linear-gradient(90deg, #646464 10%, #ffffff 120%)' }}>Datos Cliente</Typography>
               <hr />

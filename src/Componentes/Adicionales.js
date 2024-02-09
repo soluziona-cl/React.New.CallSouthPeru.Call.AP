@@ -167,8 +167,17 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
         }
         console.log(newDataFull2)
         setDatafull2(newDataFull2);
-        
-      };
+        if (selectedValue === "0") {
+
+            alert("Debe Seleccionar Una Opcion");
+          } else {
+      
+            
+            setDatafull2(newDataFull2);
+            setSelect_cuantos_adicionales(selectedValue);
+          }
+
+    };
 
     return (
         <>
@@ -187,8 +196,8 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                     </Card>
                 </Grid>
 
-                {select_si_conecta_llamada === "1" && (
-                    <Grid container spacing={1}>
+                {/* {select_si_conecta_llamada === "1" && ( */}
+                  
                         <Grid item xs={12} md={4}>
                             <Card>
                                 <CardContent>
@@ -201,13 +210,14 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                 </CardContent>
                             </Card>
                         </Grid>
-                        {select_si_conecta_llamada_adicional === "1" && (
-                            <Grid container spacing={1}>
+
+                       
+                        {/* {select_si_conecta_llamada_adicional === "1" && ( */}
                                 <Grid item xs={12} md={4}>
                                     <Card>
                                         <CardContent>
                                             ¿Cuántos?
-                                            <Select id='select_si_conecta_llamada_adicional' value={select_cuantos_adicionales} onChange={onChangesetCuantosAdicionales} sx={{ height: 40 }} className="form-select my-2 clienteadicional rounded">
+                                            <Select id='select_si_conecta_llamada_adicional'  value={select_cuantos_adicionales} onChange={onChangesetCuantosAdicionales} sx={{ height: 40 }} className="form-select my-2 clienteadicional rounded">
                                                 <MenuItem value={'0'}>Seleccione una opción</MenuItem>
                                                 <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
                                                 <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
@@ -216,173 +226,19 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                         </CardContent>
                                     </Card>
                                 </Grid>
-                                <Grid item xs={12} md={12}>
-                                    <Card>
-                                        Adicionales
-                                        <CardContent>
-                                        {select_cuantos_adicionales !== 0 && (
-                                            
-                                                <Card className=" my-2 ">
-                                                    {datafull2.map((item) => {
-                                                        <Card className="my-2 "key={item.key}>
-                                                            <Typography variant="h5">Adicional </Typography>
-                                                            <Grid item xs={12} md={12}>
-                                                                <CardContent>
-                                                                    Tipo Asegurado
-                                                                    <Select id={'tipo_asegurado_' + item.id} value={tipo_asegurado} onChange={(e) => settipo_asegurado(e.target.value, item.id)} sx={{ height: 40 }} className="form-select clienteadicional rounded">
-                                                                        <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                                                        <MenuItem value={'AT'}>Titular</MenuItem>
-                                                                        <MenuItem value={'AC'}>Conyuge </MenuItem>
-                                                                        <MenuItem value={'AH'}>Hijo </MenuItem>
-                                                                        <MenuItem value={'AO'}>Otra Relación</MenuItem>
-                                                                        <MenuItem value={'TC'}>Titular de Cuenta - Contratante</MenuItem>
-                                                                        <MenuItem value={'BN'}>Beneficiario </MenuItem>
-                                                                    </Select>
-                                                                </CardContent>
-                                                            </Grid>
-                                                            <Grid item xs={12} md={12}>
-                                                                <CardContent>
-                                                                    Parentesco
-                                                                    <Select id={'parentesco_' + item.id} value={parentesco} onChange={(e) => setparentesco(e.target.value, item.id)} sx={{ height: 40 }} className="form-select clienteadicional rounded">
-                                                                        <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                                                        <MenuItem value={'38'}>Conyuge </MenuItem>
-                                                                        <MenuItem value={'39'}>Hijo </MenuItem>
-                                                                        <MenuItem value={'40'}>Hermano </MenuItem>
-                                                                        <MenuItem value={'41'}>Primo(A)</MenuItem>
-                                                                        <MenuItem value={'42'}>Padre</MenuItem>
-                                                                        <MenuItem value={'43'}>Madre</MenuItem>
-                                                                        <MenuItem value={'44'}>Otro Familiar</MenuItem>
-                                                                        <MenuItem value={'45'}>Otra Relacion</MenuItem>
-                                                                        <MenuItem value={'125'}>Titular</MenuItem>
-                                                                        <MenuItem value={'1347'}>Hija </MenuItem>
-                                                                        <MenuItem value={'1348'}>Hermana</MenuItem>
-                                                                        <MenuItem value={'1349'}>Sobrino</MenuItem>
-                                                                        <MenuItem value={'1350'}>Abuelo </MenuItem>
-                                                                        <MenuItem value={'1351'}>Abuela </MenuItem>
-                                                                        <MenuItem value={'1352'}>Sobrina</MenuItem>
-                                                                        <MenuItem value={'1353'}>Viuda</MenuItem>
-                                                                        <MenuItem value={'1356'}>Suegro</MenuItem>
-                                                                        <MenuItem value={'1357'}>Suegra</MenuItem>
-                                                                    </Select>
-                                                                </CardContent>
-                                                            </Grid>
-                                                            <Grid item xs={12} md={12}>
-
-                                                                <CardContent>
-                                                                    Primer Nombre
-                                                                    <TextField
-                                                                        id={'primer_nombre_adicional_' + item.id}
-                                                                        onChange={(e) => { setprimer_nombre_adicional(e.target.value, item.id); }}
-                                                                        className="clienteadicional form-control rounded "
-                                                                        sx={{ height: 40 }}
-                                                                    />
-                                                                </CardContent>
-                                                            </Grid>
-                                                            <Grid item xs={12} md={12}>
-
-                                                                <CardContent>
-                                                                    Segundo Nombre
-                                                                    <TextField
-                                                                        id={'segundo_nombre_adicional_' + item.id}
-                                                                        onChange={(e) => { setsegundo_nombre_adicional(e.target.value, item.id); }}
-                                                                        className="clienteadicional form-control rounded"
-                                                                        sx={{ height: 40 }}
-                                                                    />
-                                                                </CardContent>
-                                                            </Grid>
-                                                            <Grid item xs={12} md={12}>
-                                                                <CardContent>
-                                                                    Apellido Paterno
-                                                                    <TextField
-                                                                        id={'apellido_p_adicional_' + item.id}
-                                                                        onChange={(e) => { setapellido_p_adicional(e.target.value, item.id); }}
-                                                                        className="clienteadicional form-control rounded"
-                                                                        sx={{ height: 40 }}
-                                                                    />
-                                                                </CardContent>
-                                                            </Grid>
-                                                            <Grid item xs={12} md={12}>
-
-                                                                <CardContent>
-                                                                    Apellido Materno
-                                                                    <TextField
-                                                                        id={'apellido_m_adicional_' + item.id}
-                                                                        onChange={(e) => { setapellido_m_adicional(e.target.value, item.id); }}
-                                                                        className="clienteadicional form-control rounded"
-                                                                        sx={{ height: 40 }}
-                                                                    />
-                                                                </CardContent>
-                                                            </Grid>
-                                                            <Grid item xs={12} md={12}>
-
-                                                                <CardContent>
-                                                                    Fecha de Nacimiento
-                                                                    <input
-                                                                        id={'nacimiento_adicional_' + item.id}
-                                                                        type="date"
-                                                                        onChange={(e) => { setnacimiento_adicional(e.target.value, item.id); }}
-                                                                        className="clienteadicional form-control rounded"
-                                                                    />
-                                                                </CardContent>
-                                                            </Grid>
-                                                            <Grid item xs={12} md={12}>
-                                                                <CardContent>
-                                                                    DNI
-                                                                    <input
-                                                                        type="text"
-                                                                        className="form-control clienteadicional rounded"
-                                                                        value={doc_adicional}
-                                                                        inputMode="numeric"
-                                                                        maxLength="8"
-                                                                        onChange={(e) => {
-                                                                            const inputValue =
-                                                                                e.target.value.replace(/\D/g, "");
-                                                                            if (inputValue.length > 8) {
-                                                                                e.target.value = inputValue.slice(
-                                                                                    0,
-                                                                                    8
-                                                                                );
-                                                                            } else {
-                                                                                e.target.value = inputValue;
-                                                                            }
-                                                                            setdoc_adicional(e.target.value, item.id);
-                                                                        }}
-                                                                        id={'doc_adicional_' + item.id}
-                                                                    />
-                                                                </CardContent>
-                                                            </Grid>
-                                                            <Grid item xs={12} md={12}>
-                                                                <Button disabled={!datosValidos} variant="contained" color="info" value="agregarAdicional" onClick={() => { handleAgregarAdicional(); }}>Agregar</Button>
-                                                            </Grid>
-                                                        </Card>
-                                                    })}
-                                                </Card>
-
-                                                
-                                            )}
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-{/* 
-                                {datafull2.map((item) => (
-                                    <Card className="my-2" key={item.key}>
-                                        Item {item.id}
-                                    </Card>
-                                ))} */}
                                
-
-                            </Grid>
-                            
-                        )}
-                        {select_si_conecta_llamada_adicional === "2" && (
-                             <Grid item xs={12} md={12} container justifyContent="flex-end">
-                             <Stack direction="row" spacing={2}>
-                                <Button variant="contained" color="info" value="Siguiente" onClick={() => { handleAgregarAdicional(); }}>Siguiente</Button>
+                          
+                                {select_si_conecta_llamada_adicional === '2' && (
+                            <Grid item xs={12} md={12} container justifyContent="flex-end">
+                                <Stack direction="row" spacing={2}>
+                                    <Button variant="contained" color="info" value="Siguiente" onClick={() => { handleAgregarAdicional(); }}>Siguiente</Button>
                                 </Stack>
                             </Grid>
                         )}
-                    </Grid>
-                )}
+                        {/* )} */}
+                    
+                    
+                {/* )} */}
                 {select_si_conecta_llamada === "1" && (
                     <div>
 
@@ -435,6 +291,116 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                         </Stack>
                     </Grid>
                 )}
+            </Grid>
+            <Grid container spacing={2}>
+                <Grid item xs={12} md={12}>
+                    {select_cuantos_adicionales !== 0 && (
+                        <Grid container spacing={2} >
+                            {datafull2.map((item) => (
+                                <Grid item xs={12} md={12} className="my-2" key={item.key}>
+                                    <Typography variant="h5">Adicional {item.id} </Typography>
+                                    <Card sx={{ paddingBottom: 2 }}>
+                                        <Grid container spacing={2}>
+                                            <Grid item xs={12} md={3}>
+                                                Tipo Asegurado
+                                                <Select id={'tipo_asegurado_' + item} value={tipo_asegurado} onChange={(e) => settipo_asegurado(e.target.value, item)} sx={{ height: 60 }} className="form-select clienteadicional rounded">
+                                                    <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                    <MenuItem value={'AT'}>Titular</MenuItem>
+                                                    <MenuItem value={'AC'}>Conyuge </MenuItem>
+                                                    <MenuItem value={'AH'}>Hijo </MenuItem>
+                                                    <MenuItem value={'AO'}>Otra Relación</MenuItem>
+                                                    <MenuItem value={'TC'}>Titular de Cuenta - Contratante</MenuItem>
+                                                    <MenuItem value={'BN'}>Beneficiario </MenuItem>
+                                                </Select>
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                Parentesco
+                                                <Select id={'parentesco_' + item} value={parentesco} onChange={(e) => setparentesco(e.target.value, item)} sx={{ height: 60 }} className="form-select clienteadicional rounded">
+                                                    <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                                    <MenuItem value={'38'}>Conyuge </MenuItem>
+                                                    <MenuItem value={'39'}>Hijo </MenuItem>
+                                                    <MenuItem value={'40'}>Hermano </MenuItem>
+                                                    <MenuItem value={'41'}>Primo(A)</MenuItem>
+                                                    <MenuItem value={'42'}>Padre</MenuItem>
+                                                    <MenuItem value={'43'}>Madre</MenuItem>
+                                                    <MenuItem value={'44'}>Otro Familiar</MenuItem>
+                                                    <MenuItem value={'45'}>Otra Relacion</MenuItem>
+                                                    <MenuItem value={'125'}>Titular</MenuItem>
+                                                    <MenuItem value={'1347'}>Hija </MenuItem>
+                                                    <MenuItem value={'1348'}>Hermana</MenuItem>
+                                                    <MenuItem value={'1349'}>Sobrino</MenuItem>
+                                                    <MenuItem value={'1350'}>Abuelo </MenuItem>
+                                                    <MenuItem value={'1351'}>Abuela </MenuItem>
+                                                    <MenuItem value={'1352'}>Sobrina</MenuItem>
+                                                    <MenuItem value={'1353'}>Viuda</MenuItem>
+                                                    <MenuItem value={'1356'}>Suegro</MenuItem>
+                                                    <MenuItem value={'1357'}>Suegra</MenuItem>
+                                                </Select>
+
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                Primer Nombre
+                                                <TextField
+                                                    id={'primer_nombre_adicional_' + item}
+                                                    onChange={(e) => { setprimer_nombre_adicional(e.target.value, item); }}
+                                                    className="clienteadicional form-control rounded "
+                                                    sx={{ height: 40 }}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                Segundo Nombre
+                                                <TextField
+                                                    id={'segundo_nombre_adicional_' + item}
+                                                    onChange={(e) => { setsegundo_nombre_adicional(e.target.value, item); }}
+                                                    className="clienteadicional form-control rounded"
+                                                    sx={{ height: 40 }}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                Apellido Paterno
+                                                <TextField
+                                                    id={'apellido_p_adicional_' + item}
+                                                    onChange={(e) => { setapellido_p_adicional(e.target.value, item); }}
+                                                    className="clienteadicional form-control rounded"
+                                                    sx={{ height: 40 }}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                Apellido Materno
+                                                <TextField
+                                                    id={'apellido_m_adicional_' + item}
+                                                    onChange={(e) => { setapellido_m_adicional(e.target.value, item); }}
+                                                    className="clienteadicional form-control rounded"
+                                                    sx={{ height: 40 }}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                Fecha de Nacimiento
+                                                <input
+                                                    id={'nacimiento_adicional_' + item}
+                                                    type="date"
+                                                    onChange={(e) => { setnacimiento_adicional(e.target.value, item); }}
+                                                    className="clienteadicional form-control rounded"
+                                                    style={{ height: 60 }}
+                                                />
+                                            </Grid>
+                                            <Grid item xs={12} md={3}>
+                                                DNI
+                                                <input type="text" style={{ height: 60 }} className="form-control clienteadicional rounded" value={doc_adicional} inputMode="numeric" maxLength="8" onChange={(e) => { const inputValue = e.target.value.replace(/\D/g, ""); if (inputValue.length > 8) { e.target.value = inputValue.slice(0, 8) } else { e.target.value = inputValue } setdoc_adicional(e.target.value, item); }} id={'doc_adicional_' + item}
+                                                />
+                                            </Grid>
+                                        </Grid>
+                                    </Card>
+                                </Grid>
+                            ))}
+                            <Grid item xs={12} md={12} sx={{ padding: 1 }} container justifyContent="flex-end">
+                                    <Stack direction="row" spacing={2}>
+                                        <Button disabled={!datosValidos} variant="contained" color="info" value="agregarAdicional" onClick={() => { handleAgregarAdicional(); }}>Agregar</Button>
+                                    </Stack>
+                            </Grid>
+                        </Grid>
+                    )}
+                </Grid>
             </Grid>
         </>
     );
