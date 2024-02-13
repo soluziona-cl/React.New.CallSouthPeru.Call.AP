@@ -321,7 +321,7 @@ const Callintro = () => {
         </Grid>
 
         <Grid item xs={7} sx={{ marginLeft: 3 }}>
-          <Encabezado company={company} GuardarRegistroNoContesta={GuardarRegistroNoContesta} clave={token} setViewConecta={handleConecta} setviewNoContesta={handleNoConecta}> </Encabezado>
+          <Encabezado company={company} GuardarRegistroNoContesta={GuardarRegistroNoContesta} clave={token} getToken={token} setViewConecta={handleConecta} setviewNoContesta={handleNoConecta}> </Encabezado>
           <hr className="my-2" />
           
           {/* {(selectLlamada === "85" || selectLlamada === "86") && (
@@ -348,7 +348,7 @@ const Callintro = () => {
             <hr />
             {adicionalCompleto && (
               <Grid>
-                <Contesta datafull={datafull}  tercerosComponent={<Terceros />} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
+                <Contesta datafull={datafull}  tercerosComponent={<Terceros />} clave={token} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
               </Grid>
             )}
           </Grid>

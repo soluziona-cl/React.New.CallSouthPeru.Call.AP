@@ -143,11 +143,11 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           <Card>
             <CardContent>
               Sub-Conecta
-              <Select className="form-control rounded cliente" id="tipificacion_detalle" sx={{ height: 40 }} onChange={handleChangeSubRespuesta} value={valueSubRespuesta}>
+              <Select className="form-control rounded cliente" id="tipificacion_detalle" sx={{ height: 40 }} disabled={valueConecta === '0'} onChange={handleChangeSubRespuesta} value={valueSubRespuesta}>
                 <MenuItem value="0">Seleccione una opción</MenuItem>
                 {optionSubRespuesta.map((item) => (
                   <MenuItem key={item.id} value={item.id}>
-                    {item.detalle}
+                    {item.detalle} 
                   </MenuItem>
                 ))}
               </Select>
@@ -158,7 +158,7 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           <Card>
             <CardContent>
               Comunica
-              <Select className="form-control rounded cliente" id="tipificacion_comunica" sx={{ height: 40 }} onChange={handleChangeComunica} value={valueComunica}>
+              <Select className="form-control rounded cliente" id="tipificacion_comunica" sx={{ height: 40 }}  onChange={handleChangeComunica} disabled={valueSubRespuesta !== 15} value={valueComunica}>
                 <MenuItem value="0">Seleccione una opción</MenuItem>
                 {optionComunica.map((item) => (
                   <MenuItem key={item.id} value={item.id}>
@@ -170,7 +170,7 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           </Card>
         </Grid>
 
-        {(valueSubRespuesta !== 0) && (valueConecta === 2 || valueConecta === 3 ) && (
+        {(valueSubRespuesta !== 0 ) && (valueConecta === 2 || valueConecta === 3 ) && (
           <Grid item xs={12} md={12} container justifyContent="flex-end">
             <Stack direction="row" spacing={2}>
               <Button className="btn text-white guardar" variant="contained"

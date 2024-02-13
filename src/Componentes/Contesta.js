@@ -242,9 +242,9 @@ function Contesta({
     let item_sucess_gestion = {};
     const preguntas = document.querySelectorAll(".cliente");
     preguntas.forEach((obj) => {
-        let title = obj.id;
-        let valor = obj.value;
-        item_sucess_gestion[title] = valor;
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion[title] = valor;
     });
 
     json_sucess_gestion.push(item_sucess_gestion);
@@ -253,7 +253,7 @@ function Contesta({
     item_sucess_llamada["campaign_name"] = "Sonrie Seguro ";
     item_sucess_llamada["campaign_id"] = list_id;
     datafull.map((data, index) => {
-        item_sucess_llamada["campaign"] = data.campaign;
+      item_sucess_llamada["campaign"] = data.campaign;
     });
 
     item_sucess_llamada["lead_id"] = lead_id;
@@ -271,26 +271,26 @@ function Contesta({
     id.push(item_sucess_llamada);
 
     try {
-        const result = await axios.post(
-            "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
-            { dato: id },
-            { headers: { Authorization: `Bearer ${clave}` } }
-        );
+      const result = await axios.post(
+        "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
+        { dato: id },
+        { headers: { Authorization: `Bearer ${clave}` } }
+      );
 
-        if (result.status === 200) {
-            toast.success("Registro Guardado Exitosamente");
-            console.log("Registro Guardado Exitosamente");
-            setTimeout(() => {
-                window.location.href =
-                    "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/Fin";
-            }, 5000);
-        }
+      if (result.status === 200) {
+        toast.success("Registro Guardado Exitosamente");
+        console.log("Registro Guardado Exitosamente");
+        setTimeout(() => {
+          window.location.href =
+            "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/Fin";
+        }, 5000);
+      }
     } catch (error) {
-        toast.error("Error Con Guardado");
-        console.log("Error Con Guardado");
-        // Manejo de errores
+      toast.error("Error Con Guardado");
+      console.log("Error Con Guardado");
+      // Manejo de errores
     }
-}
+  }
 
   return (
     <>
@@ -307,10 +307,10 @@ function Contesta({
         <Grid item xs={12} md={12}>
           {/* <Typography variant="h7" className="p-2 m-2"> Buenos días / tardes, me podría comunicar con el(la)
             señor(a) {nombreCliente}, Cómo le va mucho gusto! Encantado / a de saludarle mi nombre es XXXX le llamamos de Banco Ripley
-            por encargo de Chubb Seguros Perú.{" "}</Typography> */}
-          
+            por encargo de Chubb Seguros Perú.</Typography> */}
+
           <Typography variant="h7" className=" p-2 m-1"> Antes de continuar le informamos que por su seguridad esta
-            llamada está siendo grabada.{" "}</Typography>
+            llamada está siendo grabada.</Typography>
         </Grid>
       </Grid>
       {select_si_conecta_llamada && (
@@ -332,7 +332,7 @@ function Contesta({
             </CardContent>
           </Grid>
           <br />
-         
+
           {select_conecta_llamada_pregunta_interesa === "3" && (
             <Grid>
               <Terceros
@@ -343,15 +343,15 @@ function Contesta({
                 elapsedSeconds={elapsedSeconds}
                 clave={token}
                 datafull={datafull}
-              />{" "}
+              />
             </Grid>
-          )}{" "}
+          )}
           {select_conecta_llamada_pregunta_interesa === "2" && (
             <Grid item xs={12} md={12} >
               <Grid sx={{ paddingX: 1 }}>
                 <Typography variant="h7" for="observacion">
                   Me podria decir la razon por la cual no desea contratar el seguro ?
-                </Typography>{" "}
+                </Typography>
               </Grid>
               <Grid item xs={12} md={6}>
                 <CardContent>
@@ -378,13 +378,13 @@ function Contesta({
                 </Grid>
               )}
             </Grid>
-          )}{" "}
+          )}
           {select_conecta_llamada_pregunta_interesa === "1" && (
             <Grid id="vw_script_cliente_valida" class="">
               <Grid className=" row m-2 rounded p-2" style={{ background: "#EDEDED" }} >
                 <Typography variant="h7">
-                  Sr. / Sra.Actualmente se encuentra en buen estado de salud.(SÍ o NO).{" "}
-                </Typography>{" "}
+                  Sr. / Sra.Actualmente se encuentra en buen estado de salud.(SÍ o NO).
+                </Typography>
                 <Grid>
                   <FormControlLabel
                     control={
@@ -393,7 +393,7 @@ function Contesta({
                     }
                     label="SÍ"
                     className="m-1" />
-                </Grid>{" "}
+                </Grid>
                 <Grid>
                   <FormControlLabel
                     control={
@@ -401,15 +401,12 @@ function Contesta({
                       />
                     }
                     label="NO"
-                    className="m-1"/>
+                    className="m-1" />
                 </Grid>
                 {buenEstadoSalud === "NO" && (
-                  <Typography variant="h7" sx={{ paddingY: 1 }}>
-                    Salvedad: Recuerde Sr. / Sra.que le vamos a cubrir por
-                    cualquier accidente que no sea consecuencia de alguna
-                    preexistencia.{" "}
+                  <Typography variant="h7" sx={{ paddingY: 1 }}> Salvedad: Recuerde Sr. / Sra.que le vamos a cubrir por cualquier accidente que no sea consecuencia de alguna preexistencia.
                   </Typography>
-                )}{" "}
+                )}
                 <Grid item xs={12} md={12}>
                   <Typography variant="h7">
                     Para culminar, nos podría indicar su ocupación actual:
@@ -428,127 +425,54 @@ function Contesta({
                 {mostrarMensajeOcupacion && (
                   <Box>
                     <Typography variant="h7">
-                      Si el cliente tiene una profesión de alto riesgo, se debe
-                      indicar lo siguiente.{" "}
-                    </Typography>{" "}
+                      Si el cliente tiene una profesión de alto riesgo, se debe indicar lo siguiente.
+                    </Typography>
                     <Typography variant="h7">
-                      Salvedad: Recuerde Sr. / Sra.que le vamos a cubrir por
-                      cualquier accidente fuera de sus horas de trabajo.{" "}
-                    </Typography>{" "}
+                      Salvedad: Recuerde Sr. / Sra.que le vamos a cubrir por cualquier accidente fuera de sus horas de trabajo.
+                    </Typography>
                   </Box>
-                )}{" "}
-              </Grid>{" "}
-             
-                <Grid className="card my-3">
-                  <ValidaDatos
-                    company={company}
-                    clave={token}
-                    elapsedSeconds={setduracion}
-                    onDataComplete={handleDatosCompletosChange}
-                    datafull={datafull}
-                  />{" "}
+                )}
+              </Grid>
+
+              <Grid className="card my-3">
+                <ValidaDatos
+                  company={company}
+                  clave={token}
+                  elapsedSeconds={setduracion}
+                  onDataComplete={handleDatosCompletosChange}
+                  datafull={datafull}
+                />
+              </Grid>
+              <Grid className="card my-3" >
+              <Grid container  spacing={1}>
+                <Grid item xs={12} md={12} >
+                  <Typography variant="h6" className="card-header text-white rounded p-2 " style={{ backgroundImage: "linear-gradient(90deg, #646464 10%, #ffffff 120%)", }}>
+                    Continuar a Confirmacion de Datos y PreCierre
+                  </Typography>
                 </Grid>
-              <div className="card " id="pre_cierre">
-                <div className="">
-                  <Typography variant="h6" className=" card-header text-white" style={{backgroundImage:"linear-gradient(90deg, #646464 10%, #ffffff 120%)"}}>
-                    Continuar a Confirmacion de Datos y PreCierre{" "}
-                  </Typography>{" "}
-                </div>{" "}
-                <div className=" card-body">
-                  <div>
-                    <label for="observacion">
-                      {" "}
-                      ¿Don / Sra.XXXX, Usted desea que le enviemos su Póliza a
-                      través de su correo electrónico ?
-                    </label>{" "}
-                    <select
-                      value={selectConectaLlamadaPreguntaConfirma}
-                      onChange={(e) =>
-                        setSelectConectaLlamadaPreguntaConfirma(e.target.value)
-                      }
-                      id="select_conecta_llamada_pregunta_confirma"
-                      className="form-select cliente my-2"
-                      disabled={!camposCompletos}
-                    >
-                      <option value="0"> Seleccione </option>{" "}
-                      <option value="1"> Si </option>{" "}
-                      <option value="2"> No </option>{" "}
-                    </select>
-                    {selectConectaLlamadaPreguntaConfirma === "1" && (
-                      <div className="my-4" id="si_correo">
-                        <p>
-                          Muy bien Sr / Sra.XXXXXX le recuerdo que el envío de
-                          tu Solicitud - Certificado digital es el sustento de
-                          la contratación del presente seguro.Entonces le
-                          estaremos enviando el mismo al correo XXXXX declarado
-                          por usted, en un plazo de 15 DIAS CALENDARIO, contados
-                          a partir del día de hoy.{" "}
-                        </p>{" "}
-                      </div>
-                    )}{" "}
-                    {selectConectaLlamadaPreguntaConfirma === "2" && (
-                      <div className="my-4" id="no_correo">
-                        <p>
-                          Te estaremos enviando la Solicitud - Certificado a tu
-                          domicilio en 15 días calendario, contados a partir del
-                          día de hoy Revalidar(LA DIRECCIÓN: distrito /
-                          provincia / departamento / referencias).{" "}
-                        </p>{" "}
-                      </div>
-                    )}{" "}
-                  </div>{" "}
-                  <div>
-                    <Tabsinformacion> </Tabsinformacion>{" "}
-                  </div>{" "}
-                </div>{" "}
-              </div>{" "}
+
+                <Grid item xs={12} md={12} spacing={1} sx={{marginX:1, padding:1}}>
+                  ¿Don / Sra.XXXX, Usted desea que le enviemos su Póliza a través de su correo electrónico ?
+                  <Select sx={{ height: 60 }} value={selectConectaLlamadaPreguntaConfirma} onChange={(e) => setSelectConectaLlamadaPreguntaConfirma(e.target.value)} id="select_conecta_llamada_pregunta_confirma" className="form-select cliente my-2 rounded" disabled={!camposCompletos}>
+                    <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                    <MenuItem value={'1'}>Si</MenuItem>
+                    <MenuItem value={'2'}>No</MenuItem>
+                  </Select>
+                </Grid>
+              </Grid>
+            </Grid>
             </Grid>
           )}
           {(selectConectaLlamadaPreguntaConfirma == "1" ||
             selectConectaLlamadaPreguntaConfirma == "2") && (
-            <div className="col-12 my-3">
-              <div id="vw_script_cliente_despedida" className="">
-                <div className="">
-                  <h3
-                    className=" card-header text-white"
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(90deg, #646464 10%, #ffffff 120%)",
-                    }}
-                  >
-                    DESPEDIDA{" "}
-                  </h3>{" "}
-                </div>{" "}
-                <div className="card card-body">
-                  <div className="form-row col-12 text-justify">
-                    <p>
-                      {" "}
-                      Por cualquier consulta puede comunicarse con nosotros al
-                      Banco Ripley al 611 - 5757 o a Chubb Seguros Perú al(01)
-                      3991212 de lunes a viernes de 9: 00 am a 6: 00 pm.Sr.XXX
-                      le agradezco su atención y su tiempo, a nombre del Banco
-                      Ripley y Chubb Seguros Perú le damos una cordial
-                      bienvenida; se despide que tenga buenos(días, tardes,
-                      noches).{" "}
-                    </p>{" "}
-                  </div>{" "}
-                  <div className="d-flex justify-content-end">
-                    <button
-                      className="btn text-white guardar"
-                      value="GuardarRegistro"
-                      onClick={GuardarRegistro}
-                      disabled={!puedeClickear}
-                      style={{ background: "#8362D6" }}
-                    >
-                      Finalizar{" "}
-                    </button>{" "}
-                  </div>{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>
-          )}{" "}
+              <Grid item xs={12} md={12} sx={{ padding: 1 }} container justifyContent="flex-end">
+                <Stack direction="row" spacing={2}>
+                  <Button disabled={!puedeClickear} variant="contained" value={GuardarRegistro} onClick={GuardarRegistro} style={{ background: "#8362D6" }}>Finalizar</Button>
+                </Stack>
+              </Grid>
+            )}
         </div>
-      )}{" "}
+      )}
     </>
   );
 }

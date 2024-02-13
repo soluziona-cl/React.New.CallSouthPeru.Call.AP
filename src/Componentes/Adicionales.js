@@ -217,7 +217,7 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                     <Card>
                                         <CardContent>
                                             ¿Cuántos?
-                                            <Select id='select_si_conecta_llamada_adicional'  value={select_cuantos_adicionales} onChange={onChangesetCuantosAdicionales} sx={{ height: 40 }} className="form-select my-2 clienteadicional rounded">
+                                            <Select id='select_si_conecta_llamada_adicional'  value={select_cuantos_adicionales} disabled={select_si_conecta_llamada_adicional === '2'} onChange={onChangesetCuantosAdicionales} sx={{ height: 40 }} className="form-select my-2 clienteadicional rounded">
                                                 <MenuItem value={'0'}>Seleccione una opción</MenuItem>
                                                 <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
                                                 <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
@@ -393,14 +393,20 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                     </Card>
                                 </Grid>
                             ))}
-                            <Grid item xs={12} md={12} sx={{ padding: 1 }} container justifyContent="flex-end">
-                                    <Stack direction="row" spacing={2}>
-                                        <Button disabled={!datosValidos} variant="contained" color="info" value="agregarAdicional" onClick={() => { handleAgregarAdicional(); }}>Agregar</Button>
-                                    </Stack>
-                            </Grid>
+
+                         
+
                         </Grid>
                     )}
+                    
                 </Grid>
+                {select_si_conecta_llamada_adicional === "1" && select_cuantos_adicionales !== "0" && (
+                                <Grid item xs={12} md={12} sx={{ padding: 1 }} container justifyContent="flex-end">
+                                    <Stack direction="row" spacing={2}>
+                                        <Button disabled={!datosValidos} variant="contained" color="info" value={agregarAdicional} onClick={() => { handleAgregarAdicional(); }}>Agregar</Button>
+                                    </Stack>
+                                </Grid>
+                            )}
             </Grid>
         </>
     );
