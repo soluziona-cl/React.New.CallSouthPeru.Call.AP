@@ -125,31 +125,30 @@ const Callintro = () => {
 
       setToken(getToken);
       // Conecta(getToken);
-      // DatosCliente(getToken);
+      DatosCliente(id_registro, getToken);
       GuardaURL2(id_url, getToken);
     }
   };
 
- 
+
   const DatosCliente = async (lead, getToken) => {
     const result = await axios.post(
       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/DatosCliente",
-      { dato: lead },
+      { dato: company, dato_1: lead },
       { headers: { Authorization: `Bearer ${getToken}` } }
     );
 
-    if (result.status === 200) {
-      var arr = result.data;
-      setDataFull(result.data);
+    if (result.status === 200 && result.data[0] && result.data[0].detalle) {
+      const arr = JSON.parse(result.data[0].detalle);
 
-      let datoscliente = "";
-      arr.forEach((element) => {
-        datoscliente = JSON.parse(element.detalle);
-      });
+      // let datoscliente = "";
 
-      setDataFull(datoscliente);
-
-      //console.log(datafull);
+      // arr.forEach((element) => {
+      //   datoscliente = JSON.parse(element.detalle);
+      // });
+      console.log(arr);
+      setDataFull(arr);
+      // console.log(datoscliente);
     }
   };
   //console.log(DatosCliente)
@@ -269,7 +268,7 @@ const Callintro = () => {
   };
 
 
- 
+
 
 
   useEffect(() => {
@@ -294,7 +293,7 @@ const Callintro = () => {
             <Typography variant="h1" class="fw-bold "> Sonríe Seguro </Typography>
             {datafull.map((data, index) => (
               <Typography variant="h5" key={index} className="col-lg-12 col-md-12 col-sm-12 my-1">
-                Tipo Base: {data.Chubb_tipo_captacion.toUpperCase()}
+                Tipo Base: {data.tipo_base.toUpperCase()}
               </Typography>
             ))}
             <Typography variant="h5">Identificador de Llamada {" "} <label id="ident_llamdaa">{lead_id}</label> </Typography>
@@ -306,15 +305,15 @@ const Callintro = () => {
         </Grid>
       </Grid>
 
-        
-      <Grid container  spacing={2} >
-        <Grid item xs={4} sx={{ marginLeft: 3 }} 
+
+      <Grid container spacing={2} >
+        <Grid item xs={4} sx={{ marginLeft: 3 }}
         // style={{ position: 'fixed',  zIndex: 1 }}
         >
           <DatosClientes
-          // datafull={datafull} 
-          // company={company} 
-          // getToken={token}
+            datafull={datafull}
+            company={company}
+            getToken={token}
           ></DatosClientes>
 
           <Card></Card>
@@ -323,7 +322,7 @@ const Callintro = () => {
         <Grid item xs={7} sx={{ marginLeft: 3 }}>
           <Encabezado company={company} GuardarRegistroNoContesta={GuardarRegistroNoContesta} clave={token} getToken={token} setViewConecta={handleConecta} setviewNoContesta={handleNoConecta}> </Encabezado>
           <hr className="my-2" />
-          
+
           {/* {(selectLlamada === "85" || selectLlamada === "86") && (
             <div>
               {selectLlamada_2 !== "95" && selectLlamada_2 !== "89" && selectLlamada_2 !== "0" && selectLlamada_2 !== "" && (
@@ -333,26 +332,26 @@ const Callintro = () => {
               )}
             </div>
           )} */}
-          
-                  {/* {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
+
+          {/* {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
             <Grid>
               <Terceros conecta={selectLlamada} shouldScroll={scrollToNoContesta} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} getToken={token} datafull={datafull} />
             </Grid>
           )} */}
-          
+
           {viewConecta && (
             <Grid>
               <Grid >
                 <Adicionales datafull={datafull} clave={token} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
-            </Grid>
-            <hr />
-            {adicionalCompleto && (
-              <Grid>
-                <Contesta datafull={datafull}  tercerosComponent={<Terceros />} clave={token} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
               </Grid>
-            )}
-          </Grid>
-        )}
+              <hr />
+              {adicionalCompleto && (
+                <Grid>
+                  <Contesta datafull={datafull} tercerosComponent={<Terceros />} clave={token} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
+                </Grid>
+              )}
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </>

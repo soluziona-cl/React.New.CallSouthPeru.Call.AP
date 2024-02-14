@@ -6,6 +6,11 @@ import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid
 function DatosClientes({ company, clave, datafull }) {
 
 
+  useEffect(() => {
+    console.log(datafull)
+  }, [datafull])
+
+
   const sesiones = {
     sgui: localStorage.getItem("localgui"),
     scliente: localStorage.getItem("localcliente"),
@@ -22,7 +27,7 @@ function DatosClientes({ company, clave, datafull }) {
         {/* {datafull.map((data, index) => ( */}
         <>
           {/* {console.log(data)} */}
-          <Card container  >  
+          <Card container  >
             <Grid item xs={12} md={12}>
               <Typography variant="h6" className="card-header text-white p-2 m-2 rounded" style={{ backgroundImage: 'linear-gradient(90deg, #646464 10%, #ffffff 120%)' }}>Datos Cliente</Typography>
               <hr />
@@ -44,7 +49,7 @@ function DatosClientes({ company, clave, datafull }) {
                 <Grid item xs={12} md={2}>
                   <TextField id='edad' disabled variant="outlined" label="Edad" className="cliente form-control rounded " />
                 </Grid>
-               
+
                 <Grid item xs={12} md={4}>
                   <TextField id='edad' disabled variant="outlined" label="Condicion Laboral" className="cliente form-control rounded " />
                 </Grid>
