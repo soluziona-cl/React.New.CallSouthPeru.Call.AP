@@ -138,8 +138,7 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
         segundo_nombre_adicional,
         apellido_p_adicional,
         apellido_m_adicional,
-        nacimiento_adicional,
-        tipo_asegurado
+        nacimiento_adicional
     ]);
 
     const [select_si_conecta_llamada, setSelectSiConectaLlamada] = useState("0");
