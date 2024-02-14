@@ -53,7 +53,7 @@ function Contesta({
 
   const nombreCliente =
     datafull && datafull.length > 0
-      ? datafull[0].Chubb_nombre
+      ? datafull[0].nombre
       : "Nombre de Cliente Predeterminado";
 
   // console.log(datafull)
@@ -108,17 +108,21 @@ function Contesta({
     let item_sucess_gestion2 = {};
 
     const preguntas = document.querySelectorAll(".cliente");
+    
     preguntas.forEach((obj) => {
       let title = obj.id;
       let valor = obj.value;
       item_sucess_gestion[title] = valor;
     });
+
     const preguntas2 = document.querySelectorAll(".clienteadicional");
+
     preguntas2.forEach((obj) => {
       let title = obj.id;
       let valor = obj.value;
       item_sucess_gestion2[title] = valor;
     });
+
     json_sucess_gestion.push(item_sucess_gestion);
     json_sucess_gestion2.push(item_sucess_gestion2);
 

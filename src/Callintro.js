@@ -203,7 +203,7 @@ const Callintro = () => {
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
     let item_sucess_gestion = {};
-    const preguntas = document.querySelectorAll(".cliente");
+    const preguntas = document.querySelectorAll('*[aria-label^="cliente"]');
     preguntas.forEach((obj) => {
       let title = obj.id;
       let valor = obj.value;

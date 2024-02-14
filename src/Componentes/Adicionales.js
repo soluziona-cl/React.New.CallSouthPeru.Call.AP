@@ -48,6 +48,7 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
     useEffect(() => {
         setselectduracion(elapsedSeconds);
     }, [elapsedSeconds]);
+    
     async function GuardarRegistroNoValido() {
         setPuedeClickear(false);
         let id = []; //final
@@ -169,12 +170,12 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
         if (selectedValue === "0") {
 
             alert("Debe Seleccionar Una Opcion");
-          } else {
-      
-            
+        } else {
+
+
             setDatafull2(newDataFull2);
             setSelect_cuantos_adicionales(selectedValue);
-          }
+        }
 
     };
 
@@ -196,47 +197,47 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                 </Grid>
 
                 {/* {select_si_conecta_llamada === "1" && ( */}
-                  
-                        <Grid item xs={12} md={4}>
-                            <Card>
-                                <CardContent>
-                                    ¿Con Adicional?
-                                    <Select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} sx={{ height: 40 }} className="form-select cliente  my-2 rounded">
-                                        <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                        <MenuItem value={'1'}>SI</MenuItem>
-                                        <MenuItem value={'2'}>NO</MenuItem>
-                                    </Select>
-                                </CardContent>
-                            </Card>
-                        </Grid>
 
-                       
-                        {/* {select_si_conecta_llamada_adicional === "1" && ( */}
-                                <Grid item xs={12} md={4}>
-                                    <Card>
-                                        <CardContent>
-                                            ¿Cuántos?
-                                            <Select id='select_si_conecta_llamada_adicional'  value={select_cuantos_adicionales} disabled={select_si_conecta_llamada_adicional === '2'} onChange={onChangesetCuantosAdicionales} sx={{ height: 40 }} className="form-select my-2 clienteadicional rounded">
-                                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                                <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
-                                                <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
-                                                <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
-                                            </Select>
-                                        </CardContent>
-                                    </Card>
-                                </Grid>
-                               
-                          
-                                {select_si_conecta_llamada_adicional === '2' && (
-                            <Grid item xs={12} md={12} container justifyContent="flex-end">
-                                <Stack direction="row" spacing={2}>
-                                    <Button variant="contained" color="info" value="Siguiente" onClick={() => { handleAgregarAdicional(); }}>Siguiente</Button>
-                                </Stack>
-                            </Grid>
-                        )}
-                        {/* )} */}
-                    
-                    
+                <Grid item xs={12} md={4}>
+                    <Card>
+                        <CardContent>
+                            ¿Con Adicional?
+                            <Select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} sx={{ height: 40 }} className="form-select cliente  my-2 rounded">
+                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                <MenuItem value={'1'}>SI</MenuItem>
+                                <MenuItem value={'2'}>NO</MenuItem>
+                            </Select>
+                        </CardContent>
+                    </Card>
+                </Grid>
+
+
+                {/* {select_si_conecta_llamada_adicional === "1" && ( */}
+                <Grid item xs={12} md={4}>
+                    <Card>
+                        <CardContent>
+                            ¿Cuántos?
+                            <Select id='select_si_conecta_llamada_adicional' value={select_cuantos_adicionales} disabled={select_si_conecta_llamada_adicional === '2'} onChange={onChangesetCuantosAdicionales} sx={{ height: 40 }} className="form-select my-2 clienteadicional rounded">
+                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
+                                <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
+                                <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
+                                <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
+                            </Select>
+                        </CardContent>
+                    </Card>
+                </Grid>
+
+
+                {select_si_conecta_llamada_adicional === '2' && (
+                    <Grid item xs={12} md={12} container justifyContent="flex-end">
+                        <Stack direction="row" spacing={2}>
+                            <Button variant="contained" color="info" value="Siguiente" onClick={() => { handleAgregarAdicional(); }}>Siguiente</Button>
+                        </Stack>
+                    </Grid>
+                )}
+                {/* )} */}
+
+
                 {/* )} */}
                 {select_si_conecta_llamada === "1" && (
                     <div>
@@ -244,21 +245,21 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                         {datafull.map((data, index) => (
                             <div>
                                 <div className="" id="stock">
-                                    {data.Chubb_tipo_captacion.toUpperCase() ===
+                                    {data.tipo_base.toUpperCase() ===
                                         "STOCK" && (
                                             <p> El motivo de mi llamada es agradecer la permanencia que tiene con la tarjeta, RIPLEY y gracias a los pagos puntuales que ha venido efectuando este año queremos ampliar sus beneficios.
                                             </p>
                                         )}
                                 </div>
                                 <div className="" id="welcome">
-                                    {data.Chubb_tipo_captacion.toUpperCase() ===
+                                    {data.tipo_base.toUpperCase() ===
                                         "WELCOME" && (
                                             <p> El motivo de mi llamada es agradecer la CONFIANZA y su preferencia por haber obtenido recientemente su Tarjeta de crédito Ripley con nosotros.
                                             </p>
                                         )}
                                 </div>
                                 <div className="" id="coross">
-                                    {data.Chubb_tipo_captacion.toUpperCase().includes(
+                                    {data.tipo_base.toUpperCase().includes(
                                         "CROSS"
                                     ) && (
                                             <p> EL MOTIVO DE MI LLAMADA Es para agradecer el tiempo de permanencia con EL SEGURO (DETALLAR NOMBRE DE SEGURO) AMPLIANDO SUS BENEFICIOS CON EL NUEVO SEGURO: SONRIE SEGURO
@@ -393,19 +394,19 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                 </Grid>
                             ))}
 
-                         
+
 
                         </Grid>
                     )}
-                    
+
                 </Grid>
                 {select_si_conecta_llamada_adicional === "1" && select_cuantos_adicionales !== "0" && (
-                                <Grid item xs={12} md={12} sx={{ padding: 1 }} container justifyContent="flex-end">
-                                    <Stack direction="row" spacing={2}>
-                                        <Button disabled={!datosValidos} variant="contained" color="info" value={agregarAdicional} onClick={() => { handleAgregarAdicional(); }}>Agregar</Button>
-                                    </Stack>
-                                </Grid>
-                            )}
+                    <Grid item xs={12} md={12} sx={{ padding: 1 }} container justifyContent="flex-end">
+                        <Stack direction="row" spacing={2}>
+                            <Button disabled={!datosValidos} variant="contained" color="info" value={agregarAdicional} onClick={() => { handleAgregarAdicional();alert('Registro Actualizado') }}>Agregar</Button>
+                        </Stack>
+                    </Grid>
+                )}
             </Grid>
         </>
     );

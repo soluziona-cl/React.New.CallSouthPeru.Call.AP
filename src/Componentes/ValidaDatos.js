@@ -55,17 +55,17 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
   useEffect(() => {
     datafull.map((datos, index) => {
 
-      setPrimerNombre(datos.Chubb_nombre.toUpperCase())
-      setTipoDocumento(datos.Chubb_tipo_documento)
-      setNumeroDocumento(datos.Chubb_numero_documento.toUpperCase())
-      setFechaNacimiento(datos.Chubb_fecha_nacimiento ? '' : datos.Chubb_fecha_nacimiento)
-      setTelefonoMovil(datos.Chubb_celular1)
-      setSexo(datos.Chubb_sexo === 'f' ? '2' : '1')
-      setEmail(datos.Chubb_email.toUpperCase())
-      setDireccion(datos.Chubb_direccion.toUpperCase())
-      setDepartamento(datos.Chubb_departamento.toUpperCase())
-      setProvincia(datos.Chubb_provincia.toUpperCase())
-      setDistrito(datos.Chubb_distrito.toUpperCase())
+      setPrimerNombre(datos.nombre.toUpperCase())
+      setTipoDocumento(datos.tipo_documento)
+      setNumeroDocumento(datos.numero_documento.toUpperCase())
+      setFechaNacimiento(datos.fecha_nacimiento ? '' : datos.fecha_nacimiento)
+      setTelefonoMovil(datos.celular1)
+      setSexo(datos.sexo === 'f' ? '2' : '1')
+      setEmail(datos.email.toUpperCase())
+      setDireccion(datos.direccion.toUpperCase())
+      setDepartamento(datos.departamento.toUpperCase())
+      setProvincia(datos.provincia.toUpperCase())
+      setDistrito(datos.distrito.toUpperCase())
     });
 
   }, [datafull]);
@@ -508,7 +508,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
               Provincia - <span style={underlineStyle}> {provincia}</span>
               <Select sx={{ height: 60 }} className="form-control rounded cliente" id="ddl_listas_provincia" disabled={optionValueMotivoProvinciaView} value={optionValueMotivoProvincia} onChange={(e) => { ChangeConecta_Provincia(e.target.value); }} onBlur={handleProvinciaBlur}>
                 <MenuItem value="0">Seleccione una opción</MenuItem>
-                {optionListMotivoDepartamento.map((item) => (
+                {optionListMotivoProvincia.map((item) => (
                   <MenuItem key={item.id} value={item.id}>
                     {item.detalle}
                   </MenuItem>
