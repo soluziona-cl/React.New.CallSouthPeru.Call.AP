@@ -427,31 +427,31 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
         <Grid container spacing={1} sx={{marginX:1, padding:1}}>
           <Grid item xs={12} md={6} >
               Tipo Documento
-              <Select id="ddl_listas_tipodocumentodeidentidad" sx={{height: 60 }} value={tipoDocumento} onChange={handleTipoDocumentoChange} onBlur={handleTipoDocumentoBlur}  className="form-select form-control  cliente rounded">
-                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                <MenuItem value={'1'}>D.N.I.</MenuItem>
-                <MenuItem value={'2'}>Carnet de Extranjeria</MenuItem>
-              </Select>
+              <select id="ddl_listas_tipodocumentodeidentidad" sx={{height: 60 }} value={tipoDocumento} onChange={handleTipoDocumentoChange} onBlur={handleTipoDocumentoBlur}  className="form-select form-control  cliente rounded">
+                <option value={'0'}>Seleccione una opción</option>
+                <option value={'1'}>D.N.I.</option>
+                <option value={'2'}>Carnet de Extranjeria</option>
+              </select>
           </Grid>
           <Grid item xs={12} md={6} >
               N° Documento
-              <TextField sx={{ height: 60 }} value={numeroDocumento} inputMode="numeric" maxLength="8" onChange={(e) => { const inputValue = e.target.value.replace(/\D/g, ""); if (inputValue.length > 8) { e.target.value = inputValue.slice(0, 8); } else { e.target.value = inputValue; } setNumeroDocumento(e.target.value) }} onBlur={handleNumeroDocumentoBlur} id="n_documento" className="cliente form-control rounded "/>
+              <input style={{ height: 60 }} value={numeroDocumento} inputMode="numeric" maxLength="8" onChange={(e) => { const inputValue = e.target.value.replace(/\D/g, ""); if (inputValue.length > 8) { e.target.value = inputValue.slice(0, 8); } else { e.target.value = inputValue; } setNumeroDocumento(e.target.value) }} onBlur={handleNumeroDocumentoBlur} id="numero_documento" className="cliente form-control rounded "/>
           </Grid>
           <Grid item xs={12} md={3} >
               Primer Nombre
-              <TextField id="val_nombre1" value={primerNombre} onChange={(e) => handleLettersOnlyChange(e, handlePrimerNombreChange)} onBlur={handlePrimerNombreBlur} className="cliente form-control rounded " sx={{ height: 60 }}/>
+              <input id="val_nombre1" value={primerNombre} onChange={(e) => handleLettersOnlyChange(e, handlePrimerNombreChange)} onBlur={handlePrimerNombreBlur} className="cliente form-control rounded " style={{ height: 60 }}/>
           </Grid>
           <Grid item xs={12} md={3} >
               Segundo Nombre
-              <TextField id="val_nombre2" value={segundoNombre} onChange={(e) => handleLettersOnlyChange(e, handleSegundoNombreChange)} onBlur={handleSegundoNombreBlur} className="cliente form-control rounded " sx={{ height: 60 }}/>
+              <input id="val_nombre2" value={segundoNombre} onChange={(e) => handleLettersOnlyChange(e, handleSegundoNombreChange)} onBlur={handleSegundoNombreBlur} className="cliente form-control rounded " style={{ height: 60 }}/>
           </Grid>
           <Grid item xs={12} md={3} >
               Apellido Paterno
-              <TextField id="val_paterno" value={apellidoPaterno} onChange={(e) => handleLettersOnlyChange(e, handlePrimerApellidoChange)} onBlur={handlePrimerApellidoBlur} className="cliente form-control rounded " sx={{ height: 60 }}/>
+              <input id="val_paterno" value={apellidoPaterno} onChange={(e) => handleLettersOnlyChange(e, handlePrimerApellidoChange)} onBlur={handlePrimerApellidoBlur} className="cliente form-control rounded " style={{ height: 60 }}/>
           </Grid>
           <Grid item xs={12} md={3} >
               Apellido Materno
-              <TextField id="val_materno" value={apellidoMaterno} onChange={(e) => handleLettersOnlyChange(e, handleSegundoApellidoChange)} onBlur={handleSegundoApellidoBlur} className="cliente form-control rounded " sx={{ height: 60 }}/>
+              <input id="val_materno" value={apellidoMaterno} onChange={(e) => handleLettersOnlyChange(e, handleSegundoApellidoChange)} onBlur={handleSegundoApellidoBlur} className="cliente form-control rounded " style={{ height: 60 }}/>
           </Grid>
           <Grid item xs={12} md={4} >
               Fecha de Nacimiento:
@@ -459,33 +459,33 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </Grid>
           <Grid item xs={12} md={4} >
               Sexo
-              <Select id="ddl_listas_sexo" value={sexo} onChange={handleSexoChange} onBlur={handleSexoBlur} sx={{ height: 60 }} className="form-select form-control cliente rounded">
-                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                <MenuItem value={'1'}>Masculino</MenuItem>
-                <MenuItem value={'2'}>Femenino</MenuItem>
-              </Select>
+              <select id="ddl_listas_sexo" value={sexo} onChange={handleSexoChange} onBlur={handleSexoBlur} style={{ height: 60 }} className="form-select form-control cliente rounded">
+                <option value={'0'}>Seleccione una opción</option>
+                <option value={'1'}>Masculino</option>
+                <option value={'2'}>Femenino</option>
+              </select>
           </Grid>
           <Grid item xs={12} md={4} >
               Estado Civil
-              <Select id="ddl_listas_estadocivil" value={estadoCivil} onChange={handleEstadoCivilChange} onBlur={handleEstadoCivilBlur} sx={{ height: 60 }} className="form-select cliente rounded">
-                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                <MenuItem value={'1'}>Otros</MenuItem>
-                <MenuItem value={'2'}>No Registrado(a)</MenuItem>
-                <MenuItem value={'3'}>Casado(a)</MenuItem>
-                <MenuItem value={'4'}>Soltero(a)</MenuItem>
-                <MenuItem value={'5'}>Divorciado(a)</MenuItem>
-                <MenuItem value={'6'}>Viudo(a)</MenuItem>
-                <MenuItem value={'7'}>Conviviente</MenuItem>
-                <MenuItem value={'8'}>Separado(a)</MenuItem>
-              </Select>
+              <select id="ddl_listas_estadocivil" value={estadoCivil} onChange={handleEstadoCivilChange} onBlur={handleEstadoCivilBlur} style={{ height: 60 }} className="form-select cliente rounded">
+                <option value={'0'}>Seleccione una opción</option>
+                <option value={'1'}>Otros</option>
+                <option value={'2'}>No Registrado(a)</option>
+                <option value={'3'}>Casado(a)</option>
+                <option value={'4'}>Soltero(a)</option>
+                <option value={'5'}>Divorciado(a)</option>
+                <option value={'6'}>Viudo(a)</option>
+                <option value={'7'}>Conviviente</option>
+                <option value={'8'}>Separado(a)</option>
+              </select>
           </Grid>
           <Grid item xs={12} md={4} >
               Telefono Movil
-              <TextField id="val_fon_venta" type="text" maxLength={9} className={`cliente rounded form-control  ${!isTelefonoMovilValid ? "invalid" : ""}`} value={telefonoMovil} onChange={handleTelefonoMovilChange} onBlur={handleTelefonoMovilBlur} sx={{ height: 60 }}/>
+              <input id="val_fon_venta" type="text" maxLength={9} className={`cliente rounded form-control  ${!isTelefonoMovilValid ? "invalid" : ""}`} value={telefonoMovil} onChange={handleTelefonoMovilChange} onBlur={handleTelefonoMovilBlur} style={{ height: 60 }}/>
           </Grid>
           <Grid item xs={12} md={8}>
               Email
-              <TextField type="email" id="val_email" required className={`cliente form-control ${isValidEmail ? "" : "invalid"}`} value={email} onChange={(e) => setEmail(e.target.value)} onBlur={handleEmailBlur}
+              <input type="email" id="val_email" style={{ height: 60 }} required className={`cliente form-control ${isValidEmail ? "" : "invalid"}`} value={email} onChange={(e) => setEmail(e.target.value)} onBlur={handleEmailBlur}
               />
               {!isValidEmail && (
                 <Typography variant="h7" className="error-message">
@@ -495,40 +495,40 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </Grid>
           <Grid item xs={12} md={4} >
               Departamento - <span style={underlineStyle}> {departamento}</span>
-              <Select sx={{ height: 60 }} className="form-control rounded cliente" id="ddl_listas_departamento" disabled={false} value={optionValueMotivoDepartamento} onChange={(e) => { ChangeConecta_Departamento(e.target.value); }} onBlur={handleDepartamentoBlur}>
-                <MenuItem value="0">Seleccione una opción</MenuItem>
+              <select style={{ height: 60 }} className="form-control rounded cliente" id="ddl_listas_departamento" disabled={false} value={optionValueMotivoDepartamento} onChange={(e) => { ChangeConecta_Departamento(e.target.value); }} onBlur={handleDepartamentoBlur}>
+                <option value="0">Seleccione una opción</option>
                 {optionListMotivoDepartamento.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
+                  <option key={item.id} value={item.id}>
                     {item.detalle}
-                  </MenuItem>
+                  </option>
                 ))}
-              </Select>
+              </select>
           </Grid>
           <Grid item xs={12} md={4} >
               Provincia - <span style={underlineStyle}> {provincia}</span>
-              <Select sx={{ height: 60 }} className="form-control rounded cliente" id="ddl_listas_provincia" disabled={optionValueMotivoProvinciaView} value={optionValueMotivoProvincia} onChange={(e) => { ChangeConecta_Provincia(e.target.value); }} onBlur={handleProvinciaBlur}>
-                <MenuItem value="0">Seleccione una opción</MenuItem>
+              <select style={{ height: 60 }} className="form-control rounded cliente" id="ddl_listas_provincia" disabled={optionValueMotivoProvinciaView} value={optionValueMotivoProvincia} onChange={(e) => { ChangeConecta_Provincia(e.target.value); }} onBlur={handleProvinciaBlur}>
+                <option value="0">Seleccione una opción</option>
                 {optionListMotivoProvincia.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
+                  <option key={item.id} value={item.id}>
                     {item.detalle}
-                  </MenuItem>
+                  </option>
                 ))}
-              </Select>
+              </select>
           </Grid>
           <Grid item xs={12} md={4} >
               Distrito - <span style={underlineStyle}> {distrito}</span>
-              <Select sx={{ height: 60 }} className="form-control rounded cliente" disabled={optionValueMotivoDistritoView} value={optionValueMotivoDistrito} onChange={(e) => { handleDistritoChange(e.target.value); }} onBlur={handleDistritoBlur} id="ddl_listas_distrito">
-                <MenuItem value="0">Seleccione una opción</MenuItem>
+              <select style={{ height: 60 }} className="form-control rounded cliente" disabled={optionValueMotivoDistritoView} value={optionValueMotivoDistrito} onChange={(e) => { handleDistritoChange(e.target.value); }} onBlur={handleDistritoBlur} id="ddl_listas_distrito">
+                <option value="0">Seleccione una opción</option>
                 {optionListMotivoDistrito.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
+                  <option key={item.id} value={item.id}>
                     {item.detalle}
-                  </MenuItem>
+                  </option>
                 ))}
-              </Select>
+              </select>
           </Grid>
           <Grid item xs={12} md={12} sx={{marginY:2}}>
           Indique Dirección
-              <TextField sx={{ height: 60 }} value={direccion} onChange={(e) => {const inputValue = e.target.value.replace(/[^A-Za-z0-9\s]/g, ""); e.target.value = inputValue; handleDireccionChange(e) }} onBlur={handleDireccionBlur} id="val_direccion" className="form-control rounded cliente" />
+              <input style={{ height: 60 }} value={direccion} onChange={(e) => {const inputValue = e.target.value.replace(/[^A-Za-z0-9\s]/g, ""); e.target.value = inputValue; handleDireccionChange(e) }} onBlur={handleDireccionBlur} id="val_direccion" className="form-control rounded cliente" />
               
           </Grid>
          
