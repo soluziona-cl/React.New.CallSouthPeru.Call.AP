@@ -128,7 +128,7 @@ function Contesta({
 
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = "Sonrie_Seguro";
+    item_sucess_llamada["campaign_name"] = company;
     item_sucess_llamada["campaign_id"] = list_id;
 
     datafull.map((data, index) => {
@@ -254,7 +254,7 @@ function Contesta({
     json_sucess_gestion.push(item_sucess_gestion);
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = "Sonrie Seguro ";
+    item_sucess_llamada["campaign_name"] = company;
     item_sucess_llamada["campaign_id"] = list_id;
     datafull.map((data, index) => {
       item_sucess_llamada["campaign"] = data.campaign;
@@ -322,17 +322,17 @@ function Contesta({
           <Grid item xs={12} md={6}>
             <CardContent>
               ¿Le interesa?
-              <Select id="select_conecta_llamada_pregunta_interesa"
-                className="form-select cliente rounded" sx={{ height: 40 }}
+              <select id="select_conecta_llamada_pregunta_interesa"
+                className="form-select cliente rounded" style={{ height: 60 }}
                 value={select_conecta_llamada_pregunta_interesa}
                 onChange={(e) =>
                   setselect_conecta_llamada_pregunta_interesa(e.target.value)
                 }>
-                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                <MenuItem value={'1'}>Interesa </MenuItem>
-                <MenuItem value={'2'}>No Interesa </MenuItem>
-                <MenuItem value={'3'}>Lo Pensará</MenuItem>
-              </Select>
+                <option value={'0'}>Seleccione una opción</option>
+                <option value={'1'}>Interesa </option>
+                <option value={'2'}>No Interesa </option>
+                <option value={'3'}>Lo Pensará</option>
+              </select>
             </CardContent>
           </Grid>
           <br />
@@ -359,15 +359,15 @@ function Contesta({
               </Grid>
               <Grid item xs={12} md={6}>
                 <CardContent>
-                  <Select id="select_conecta_llamada_pregunta_no_interesa" className="form-select cliente rounded" disabled={select_conecta_llamada_pregunta_interesa !== "2"} value={select_conecta_llamada_pregunta_no_interesa} onChange={(e) => setselect_conecta_llamada_pregunta_no_interesa(e.target.value)} sx={{ height: 40 }}>
-                    <MenuItem value="0">Seleccione una opción</MenuItem>
+                  <select id="select_conecta_llamada_pregunta_no_interesa" className="form-select cliente rounded" disabled={select_conecta_llamada_pregunta_interesa !== "2"} value={select_conecta_llamada_pregunta_no_interesa} onChange={(e) => setselect_conecta_llamada_pregunta_no_interesa(e.target.value)} style={{ height: 60 }}>
+                    <option value="0">Seleccione una opción</option>
                     {Array.isArray(no_interesa) &&
                       no_interesa.map((item) => (
-                        <MenuItem key={item.id} value={item.id}>
+                        <option key={item.id} value={item.id}>
                           {item.detalle}
-                        </MenuItem>
+                        </option>
                       ))}
-                  </Select>
+                  </select>
                 </CardContent>
               </Grid>
 

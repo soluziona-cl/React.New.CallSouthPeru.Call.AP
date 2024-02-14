@@ -427,7 +427,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
         <Grid container spacing={1} sx={{marginX:1, padding:1}}>
           <Grid item xs={12} md={6} >
               Tipo Documento
-              <select id="ddl_listas_tipodocumentodeidentidad" sx={{height: 60 }} value={tipoDocumento} onChange={handleTipoDocumentoChange} onBlur={handleTipoDocumentoBlur}  className="form-select form-control  cliente rounded">
+              <select id="tipo_documento" sx={{height: 60 }} value={tipoDocumento} onChange={handleTipoDocumentoChange} onBlur={handleTipoDocumentoBlur}  className="form-select form-control  cliente rounded">
                 <option value={'0'}>Seleccione una opción</option>
                 <option value={'1'}>D.N.I.</option>
                 <option value={'2'}>Carnet de Extranjeria</option>
@@ -459,7 +459,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </Grid>
           <Grid item xs={12} md={4} >
               Sexo
-              <select id="ddl_listas_sexo" value={sexo} onChange={handleSexoChange} onBlur={handleSexoBlur} style={{ height: 60 }} className="form-select form-control cliente rounded">
+              <select id="sexo" value={sexo} onChange={handleSexoChange} onBlur={handleSexoBlur} style={{ height: 60 }} className="form-select form-control cliente rounded">
                 <option value={'0'}>Seleccione una opción</option>
                 <option value={'1'}>Masculino</option>
                 <option value={'2'}>Femenino</option>
@@ -481,11 +481,11 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </Grid>
           <Grid item xs={12} md={4} >
               Telefono Movil
-              <input id="val_fon_venta" type="text" maxLength={9} className={`cliente rounded form-control  ${!isTelefonoMovilValid ? "invalid" : ""}`} value={telefonoMovil} onChange={handleTelefonoMovilChange} onBlur={handleTelefonoMovilBlur} style={{ height: 60 }}/>
+              <input id="celular1" type="text" maxLength={9} className={`cliente rounded form-control  ${!isTelefonoMovilValid ? "invalid" : ""}`} value={telefonoMovil} onChange={handleTelefonoMovilChange} onBlur={handleTelefonoMovilBlur} style={{ height: 60 }}/>
           </Grid>
           <Grid item xs={12} md={8}>
               Email
-              <input type="email" id="val_email" style={{ height: 60 }} required className={`cliente form-control ${isValidEmail ? "" : "invalid"}`} value={email} onChange={(e) => setEmail(e.target.value)} onBlur={handleEmailBlur}
+              <input type="email" id="email" style={{ height: 60 }} required className={`cliente form-control ${isValidEmail ? "" : "invalid"}`} value={email} onChange={(e) => setEmail(e.target.value)} onBlur={handleEmailBlur}
               />
               {!isValidEmail && (
                 <Typography variant="h7" className="error-message">
@@ -495,7 +495,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </Grid>
           <Grid item xs={12} md={4} >
               Departamento - <span style={underlineStyle}> {departamento}</span>
-              <select style={{ height: 60 }} className="form-control rounded cliente" id="ddl_listas_departamento" disabled={false} value={optionValueMotivoDepartamento} onChange={(e) => { ChangeConecta_Departamento(e.target.value); }} onBlur={handleDepartamentoBlur}>
+              <select style={{ height: 60 }} className="form-control rounded cliente" id="departamento" disabled={false} value={optionValueMotivoDepartamento} onChange={(e) => { ChangeConecta_Departamento(e.target.value); }} onBlur={handleDepartamentoBlur}>
                 <option value="0">Seleccione una opción</option>
                 {optionListMotivoDepartamento.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -506,7 +506,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </Grid>
           <Grid item xs={12} md={4} >
               Provincia - <span style={underlineStyle}> {provincia}</span>
-              <select style={{ height: 60 }} className="form-control rounded cliente" id="ddl_listas_provincia" disabled={optionValueMotivoProvinciaView} value={optionValueMotivoProvincia} onChange={(e) => { ChangeConecta_Provincia(e.target.value); }} onBlur={handleProvinciaBlur}>
+              <select style={{ height: 60 }} className="form-control rounded cliente" id="provincia" disabled={optionValueMotivoProvinciaView} value={optionValueMotivoProvincia} onChange={(e) => { ChangeConecta_Provincia(e.target.value); }} onBlur={handleProvinciaBlur}>
                 <option value="0">Seleccione una opción</option>
                 {optionListMotivoProvincia.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -517,7 +517,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </Grid>
           <Grid item xs={12} md={4} >
               Distrito - <span style={underlineStyle}> {distrito}</span>
-              <select style={{ height: 60 }} className="form-control rounded cliente" disabled={optionValueMotivoDistritoView} value={optionValueMotivoDistrito} onChange={(e) => { handleDistritoChange(e.target.value); }} onBlur={handleDistritoBlur} id="ddl_listas_distrito">
+              <select style={{ height: 60 }} className="form-control rounded cliente" disabled={optionValueMotivoDistritoView} value={optionValueMotivoDistrito} onChange={(e) => { handleDistritoChange(e.target.value); }} onBlur={handleDistritoBlur} id="distrito">
                 <option value="0">Seleccione una opción</option>
                 {optionListMotivoDistrito.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -528,7 +528,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
           </Grid>
           <Grid item xs={12} md={12} sx={{marginY:2}}>
           Indique Dirección
-              <input style={{ height: 60 }} value={direccion} onChange={(e) => {const inputValue = e.target.value.replace(/[^A-Za-z0-9\s]/g, ""); e.target.value = inputValue; handleDireccionChange(e) }} onBlur={handleDireccionBlur} id="val_direccion" className="form-control rounded cliente" />
+              <input style={{ height: 60 }} value={direccion} onChange={(e) => {const inputValue = e.target.value.replace(/[^A-Za-z0-9\s]/g, ""); e.target.value = inputValue; handleDireccionChange(e) }} onBlur={handleDireccionBlur} id="direccion" className="form-control rounded cliente" />
               
           </Grid>
          

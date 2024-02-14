@@ -3,10 +3,10 @@ import * as bootstrap from "bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Terceros from "./Terceros";
-import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select,  Typography, Stack, CardHeader } from "@mui/material";
+import { Box,InputLabel, CardContent, Card, Button, FormControl, Grid, Select,  Typography, Stack, CardHeader } from "@mui/material";
 import { CalendarContainer } from "react-datepicker";
 
-function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScroll, elapsedSeconds, selectLlamada
+function Adicionales({ handleAgregarAdicional,company, datafull, clave, token, shouldScroll, elapsedSeconds, selectLlamada
 }) {
 
 
@@ -51,21 +51,36 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
     
     async function GuardarRegistroNoValido() {
         setPuedeClickear(false);
-        let id = []; //final
-        let item_sucess_llamada = {};
-        let json_sucess_gestion = [];
-        let item_sucess_gestion = {};
-        const preguntas = document.querySelectorAll(".cliente");
-        preguntas.forEach((obj) => {
-            let title = obj.id;
-            let valor = obj.value;
-            item_sucess_gestion[title] = valor;
-        });
+       
+    let id = []; //final
+    let item_sucess_llamada = {};
+    let json_sucess_gestion = [];
+    let json_sucess_gestion2 = [];
 
-        json_sucess_gestion.push(item_sucess_gestion);
+    let item_sucess_gestion = {};
+    let item_sucess_gestion2 = {};
+
+    const preguntas = document.querySelectorAll(".cliente");
+    
+    preguntas.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion[title] = valor;
+    });
+
+    const preguntas2 = document.querySelectorAll(".clienteadicional");
+
+    preguntas2.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion2[title] = valor;
+    });
+
+    json_sucess_gestion.push(item_sucess_gestion);
+    json_sucess_gestion2.push(item_sucess_gestion2);
 
         item_sucess_llamada["sucess"] = true;
-        item_sucess_llamada["campaign_name"] = "Sonrie Seguro ";
+        item_sucess_llamada["campaign_name"] = company;
         item_sucess_llamada["campaign_id"] = list_id;
         datafull.map((data, index) => {
             item_sucess_llamada["campaign"] = data.campaign;
@@ -186,12 +201,12 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                     <Card>
                         <CardContent>
                             ¿Titular?
-                            <Select id="select_si_conecta_llamada" value={select_si_conecta_llamada} style={{ height: 60 }} onChange={(event) => { const value = event.target.value; handleSelectChange(value); }} className="rounded cliente form-select my-2">
-                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                <MenuItem value={'1'}>Titular</MenuItem>
-                                <MenuItem value={'2'}>Tercero Valido</MenuItem>
-                                <MenuItem value={'3'}>Tercero no Valido</MenuItem>
-                            </Select>
+                            <select id="select_si_conecta_llamada" value={select_si_conecta_llamada} style={{ height: 60 }} onChange={(event) => { const value = event.target.value; handleSelectChange(value); }} className="rounded cliente form-select my-2">
+                                <option value={'0'}>Seleccione una opción</option>
+                                <option value={'1'}>Titular</option>
+                                <option value={'2'}>Tercero Valido</option>
+                                <option value={'3'}>Tercero no Valido</option>
+                            </select>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -202,11 +217,11 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                     <Card>
                         <CardContent>
                             ¿Con Adicional?
-                            <Select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} style={{ height: 60 }} className="form-select cliente  my-2 rounded">
-                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                <MenuItem value={'1'}>SI</MenuItem>
-                                <MenuItem value={'2'}>NO</MenuItem>
-                            </Select>
+                            <select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} style={{ height: 60 }} className="form-select cliente  my-2 rounded">
+                                <option value={'0'}>Seleccione una opción</option>
+                                <option value={'1'}>SI</option>
+                                <option value={'2'}>NO</option>
+                            </select>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -217,12 +232,12 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                     <Card>
                         <CardContent>
                             ¿Cuántos?
-                            <Select id='select_si_conecta_llamada_adicional' value={select_cuantos_adicionales} disabled={select_si_conecta_llamada_adicional === '2'} onChange={onChangesetCuantosAdicionales} style={{ height: 60 }} className="form-select my-2 clienteadicional rounded">
-                                <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                                <MenuItem value={'1'}>Titular + 1 adicional</MenuItem>
-                                <MenuItem value={'2'}>Titular + 2 adicionales</MenuItem>
-                                <MenuItem value={'3'}>Titular + 3 adicionales</MenuItem>
-                            </Select>
+                            <select id='select_si_conecta_llamada_adicional' value={select_cuantos_adicionales} disabled={select_si_conecta_llamada_adicional === '2'} onChange={onChangesetCuantosAdicionales} style={{ height: 60 }} className="form-select my-2 clienteadicional rounded">
+                                <option value={'0'}>Seleccione una opción</option>
+                                <option value={'1'}>Titular + 1 adicional</option>
+                                <option value={'2'}>Titular + 2 adicionales</option>
+                                <option value={'3'}>Titular + 3 adicionales</option>
+                            </select>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -279,7 +294,7 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                             select_si_conecta_llamada={select_si_conecta_llamada}
                             handleSelectChange={handleSelectChange}
                             elapsedSeconds={elapsedSeconds}
-                            clave={token}
+                            clave={clave}
                             datafull={datafull}
                         />
                     </Grid>
@@ -296,14 +311,15 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                 <Grid item xs={12} md={12}>
                     {select_cuantos_adicionales !== 0 && (
                         <Grid container spacing={2} >
-                            {datafull2.map((item) => (
-                                <Grid item xs={12} md={12} className="my-2" key={item.key}>
-                                    <Typography variant="h5">Adicional {item.id} </Typography>
+                            {datafull2.map((index) => (
+                                <Grid item xs={12} md={12} className="my-2" key={index.key}>
+                                    <Typography variant="h5">Adicional {index.id + 1} </Typography>
                                     <Card sx={{ paddingBottom: 2 }}>
                                         <Grid container spacing={2}>
                                             <Grid item xs={12} md={3}>
                                                 Tipo Asegurado
-                                                <select id={'tipo_asegurado_' + item} value={tipo_asegurado} onChange={(e) => settipo_asegurado(e.target.value, item)} style={{ height: 60 }} className="form-select clienteadicional rounded">
+                                                <select id={'tipo_asegurado_' + index.id} value={tipo_asegurado} onChange={(e) => settipo_asegurado(e.target.value, index.id
+                                                    )} style={{ height: 60 }} className="form-select clienteadicional rounded">
                                                     <option value={'0'}>Seleccione una opción</option>
                                                     <option value={'AT'}>Titular</option>
                                                     <option value={'AC'}>Conyuge </option>
@@ -315,7 +331,7 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                             </Grid>
                                             <Grid item xs={12} md={3}>
                                                 Parentesco
-                                                <select id={'parentesco_' + item} value={parentesco} onChange={(e) => setparentesco(e.target.value, item)} style={{ height: 60 }} className="form-select clienteadicional rounded">
+                                                <select id={'parentesco_' + index.id} value={parentesco} onChange={(e) => setparentesco(e.target.value, index.id)} style={{ height: 60 }} className="form-select clienteadicional rounded">
                                                     <option value={'0'}>Seleccione una opción</option>
                                                     <option value={'38'}>Conyuge </option>
                                                     <option value={'39'}>Hijo </option>
@@ -341,8 +357,8 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                             <Grid item xs={12} md={3}>
                                                 Primer Nombre
                                                 <input
-                                                    id={'primer_nombre_adicional_' + item}
-                                                    onChange={(e) => { setprimer_nombre_adicional(e.target.value, item); }}
+                                                    id={'primer_nombre_adicional_' + index.id}
+                                                    onChange={(e) => { setprimer_nombre_adicional(e.target.value, index.id); }}
                                                     className="clienteadicional form-control rounded "
                                                     style={{ height: 60 }}
                                                 />
@@ -350,8 +366,8 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                             <Grid item xs={12} md={3}>
                                                 Segundo Nombre
                                                 <input
-                                                    id={'segundo_nombre_adicional_' + item}
-                                                    onChange={(e) => { setsegundo_nombre_adicional(e.target.value, item); }}
+                                                    id={'segundo_nombre_adicional_' + index.id}
+                                                    onChange={(e) => { setsegundo_nombre_adicional(e.target.value, index.id); }}
                                                     className="clienteadicional form-control rounded"
                                                     style={{ height: 60 }}
                                                 />
@@ -359,8 +375,8 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                             <Grid item xs={12} md={3}>
                                                 Apellido Paterno
                                                 <input
-                                                    id={'apellido_p_adicional_' + item}
-                                                    onChange={(e) => { setapellido_p_adicional(e.target.value, item); }}
+                                                    id={'apellido_p_adicional_' + index.id}
+                                                    onChange={(e) => { setapellido_p_adicional(e.target.value, index.id); }}
                                                     className="clienteadicional form-control rounded"
                                                     style={{ height: 60 }}
                                                 />
@@ -368,8 +384,8 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                             <Grid item xs={12} md={3}>
                                                 Apellido Materno
                                                 <input
-                                                    id={'apellido_m_adicional_' + item}
-                                                    onChange={(e) => { setapellido_m_adicional(e.target.value, item); }}
+                                                    id={'apellido_m_adicional_' + index.id}
+                                                    onChange={(e) => { setapellido_m_adicional(e.target.value, index.id); }}
                                                     className="clienteadicional form-control rounded"
                                                     style={{ height: 60 }}
                                                 />
@@ -377,16 +393,16 @@ function Adicionales({ handleAgregarAdicional, datafull, clave, token, shouldScr
                                             <Grid item xs={12} md={3}>
                                                 Fecha de Nacimiento
                                                 <input
-                                                    id={'nacimiento_adicional_' + item}
+                                                    id={'nacimiento_adicional_' + index.id}
                                                     type="date"
-                                                    onChange={(e) => { setnacimiento_adicional(e.target.value, item); }}
+                                                    onChange={(e) => { setnacimiento_adicional(e.target.value, index.id); }}
                                                     className="clienteadicional form-control rounded"
                                                     style={{ height: 60 }}
                                                 />
                                             </Grid>
                                             <Grid item xs={12} md={3}>
                                                 DNI
-                                                <input type="text" style={{ height: 60 }} className="form-control clienteadicional rounded" value={doc_adicional} inputMode="numeric" maxLength="8" onChange={(e) => { const inputValue = e.target.value.replace(/\D/g, ""); if (inputValue.length > 8) { e.target.value = inputValue.slice(0, 8) } else { e.target.value = inputValue } setdoc_adicional(e.target.value, item); }} id={'doc_adicional_' + item}
+                                                <input type="text" style={{ height: 60 }} className="form-control clienteadicional rounded" value={doc_adicional} inputMode="numeric" maxLength="8" onChange={(e) => { const inputValue = e.target.value.replace(/\D/g, ""); if (inputValue.length > 8) { e.target.value = inputValue.slice(0, 8) } else { e.target.value = inputValue } setdoc_adicional(e.target.value, index.id); }} id={'doc_adicional_' + index.id}
                                                 />
                                             </Grid>
                                         </Grid>

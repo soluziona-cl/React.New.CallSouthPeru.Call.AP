@@ -128,14 +128,14 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           <Card>
             <CardContent>
               Conecta
-              <Select className="form-control rounded cliente" id="conecta" sx={{ height: 40 }} value={valueConecta} onChange={changeConecta}>
-                <MenuItem value="0">Seleccione una opción</MenuItem>
+              <select className="form-control rounded cliente" id="conecta" style={{ height: 60 }} value={valueConecta} onChange={changeConecta}>
+                <option value="0">Seleccione una opción</option>
                 {optionListConecta.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
+                  <option key={item.id} value={item.id}>
                     {item.detalle}
-                  </MenuItem>
+                  </option>
                 ))}
-              </Select>
+              </select>
             </CardContent>
           </Card>
         </Grid>
@@ -143,14 +143,14 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           <Card>
             <CardContent>
               Sub-Conecta
-              <Select className="form-control rounded cliente" id="tipificacion_detalle" sx={{ height: 40 }} disabled={valueConecta === '0'} onChange={handleChangeSubRespuesta} value={valueSubRespuesta}>
-                <MenuItem value="0">Seleccione una opción</MenuItem>
+              <select className="form-control rounded cliente" id="tipificacion_detalle" style={{ height: 60 }} disabled={valueConecta === '0'} onChange={handleChangeSubRespuesta} value={valueSubRespuesta}>
+                <option value="0">Seleccione una opción</option>
                 {optionSubRespuesta.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
+                  <option key={item.id} value={item.id}>
                     {item.detalle} 
-                  </MenuItem>
+                  </option>
                 ))}
-              </Select>
+              </select>
             </CardContent>
           </Card>
         </Grid>
@@ -158,19 +158,19 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           <Card>
             <CardContent>
               Comunica
-              <Select className="form-control rounded cliente" id="tipificacion_comunica" sx={{ height: 40 }}  onChange={handleChangeComunica} disabled={valueSubRespuesta !== 15} value={valueComunica}>
-                <MenuItem value="0">Seleccione una opción</MenuItem>
+              <select className="form-control rounded cliente" id="tipificacion_comunica" style={{ height: 60 }}  onChange={handleChangeComunica} disabled={valueSubRespuesta !== '15'} value={valueComunica}>
+                <option value="0">Seleccione una opción</option>
                 {optionComunica.map((item) => (
-                  <MenuItem key={item.id} value={item.id}>
+                  <option key={item.id} value={item.id}>
                     {item.detalle}
-                  </MenuItem>
+                  </option>
                 ))}
-              </Select>
+              </select>
             </CardContent>
           </Card>
         </Grid>
 
-        {(valueSubRespuesta !== 0 ) && (valueConecta === 2 || valueConecta === 3 ) && (
+        {(valueSubRespuesta !== '0' ) && (valueConecta === '2' || valueConecta === '3' ) && (
           <Grid item xs={12} md={12} container justifyContent="flex-end">
             <Stack direction="row" spacing={2}>
               <Button className="btn text-white guardar" variant="contained"
@@ -179,7 +179,7 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           </Grid>
         )}
 
-        {(valueSubRespuesta !== 15 && valueConecta === 1) && (
+        {(valueSubRespuesta !== '15' && valueConecta === '1') && (
           <Grid item xs={12} md={12} container justifyContent="flex-end">
             <Stack direction="row" spacing={2}>
               <Button className="btn text-white guardar" variant="contained"

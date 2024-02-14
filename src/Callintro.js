@@ -15,7 +15,6 @@ import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
 
 import Contesta from "./Componentes/Contesta";
-import NoContesta from "./Componentes/NoContesta";
 import DatosClientes from "./Componentes/DatosClientes";
 import Terceros from "./Componentes/Terceros";
 import Adicionales from "./Componentes/Adicionales";
@@ -32,13 +31,7 @@ registerLocale("es", es);
 const Callintro = () => {
   const [puedeClickear, setPuedeClickear] = useState(true);
   const [adicional, setAdicional] = useState(false);
-
-
-
   const [viewNoContesta, setviewNoContesta] = useState(false)
-  const [viewTerceros, setviewTerceros] = useState(false)
-  const [viewDatosClientes, setviewDatosClientes] = useState(false)
-  const [viewAdicionales, setviewAdicionales] = useState(false)
 
   const handleNoConecta = (valor) => {
     console.log(valor)
@@ -221,7 +214,7 @@ const Callintro = () => {
     json_sucess_gestion.push(item_sucess_gestion);
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = "Sonrie Seguro ";
+    item_sucess_llamada["campaign_name"] = company;
     item_sucess_llamada["campaign_id"] = list_id;
     datafull.map((data, index) => {
       item_sucess_llamada["campaign"] = data.campaign;
@@ -342,7 +335,7 @@ const Callintro = () => {
           {viewConecta && (
             <Grid>
               <Grid >
-                <Adicionales datafull={datafull} clave={token} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
+                <Adicionales datafull={datafull} company={company} clave={token} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
               </Grid>
               <hr />
               {adicionalCompleto && (

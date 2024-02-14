@@ -8,7 +8,7 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta, el
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [puedeClickear, setPuedeClickear] = useState(true);
 
-  // console.log(clave)
+  //  console.log(clave)
   const Conecta = conecta;
   // console.log(Conecta)
 
@@ -55,7 +55,7 @@ function Terceros({ company, clave, onNoConectaChange, shouldScroll, conecta, el
     json_sucess_gestion.push(item_sucess_gestion);
 
     item_sucess_llamada["sucess"] = true;
-    item_sucess_llamada["campaign_name"] = "Sonrie Seguro ";
+    item_sucess_llamada["campaign_name"] = company;
     item_sucess_llamada["campaign_id"] = list_id;
     datafull.map((data, index) => {
       item_sucess_llamada["campaign"] = data.campaign;
