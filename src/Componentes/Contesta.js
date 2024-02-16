@@ -457,11 +457,11 @@ function Contesta({
 
                 <Grid item xs={12} md={12} spacing={1} sx={{marginX:1, padding:1}}>
                   ¿Don / Sra.XXXX, Usted desea que le enviemos su Póliza a través de su correo electrónico ?
-                  <Select sx={{ height: 60 }} value={selectConectaLlamadaPreguntaConfirma} onChange={(e) => setSelectConectaLlamadaPreguntaConfirma(e.target.value)} id="select_conecta_llamada_pregunta_confirma" className="form-select cliente my-2 rounded" disabled={!camposCompletos}>
-                    <MenuItem value={'0'}>Seleccione una opción</MenuItem>
-                    <MenuItem value={'1'}>Si</MenuItem>
-                    <MenuItem value={'2'}>No</MenuItem>
-                  </Select>
+                  <select style={{ height: 60 }} value={selectConectaLlamadaPreguntaConfirma} onChange={(e) => setSelectConectaLlamadaPreguntaConfirma(e.target.value)} id="select_conecta_llamada_pregunta_confirma" className="form-select cliente my-2 rounded" disabled={!camposCompletos}>
+                    <option value={'0'}>Seleccione una opción</option>
+                    <option value={'1'}>Si</option>
+                    <option value={'2'}>No</option>
+                  </select>
                 </Grid>
               </Grid>
             </Grid>

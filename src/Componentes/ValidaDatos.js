@@ -427,7 +427,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
         <Grid container spacing={1} sx={{marginX:1, padding:1}}>
           <Grid item xs={12} md={6} >
               Tipo Documento
-              <select id="tipo_documento" sx={{height: 60 }} value={tipoDocumento} onChange={handleTipoDocumentoChange} onBlur={handleTipoDocumentoBlur}  className="form-select form-control  cliente rounded">
+              <select id="tipo_documento" style={{height: 60 }} value={tipoDocumento} onChange={handleTipoDocumentoChange} onBlur={handleTipoDocumentoBlur}  className="form-select form-control  cliente rounded">
                 <option value={'0'}>Seleccione una opción</option>
                 <option value={'1'}>D.N.I.</option>
                 <option value={'2'}>Carnet de Extranjeria</option>
