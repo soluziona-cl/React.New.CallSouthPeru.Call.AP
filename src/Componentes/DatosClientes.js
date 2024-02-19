@@ -3,7 +3,7 @@ import axios from "axios";
 import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, TextField, Typography } from "@mui/material";
 
 
-function DatosClientes({ company, clave, datafull }) {
+function DatosClientes({ company, clave, datafull, lead_id }) {
 
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function DatosClientes({ company, clave, datafull }) {
             <CardContent>
               <Grid container spacing={1} sx={{ marginY: 1 }} >
                 <Grid item xs={12} md={4}>
-                  <TextField id='id_cliente' value={data.lead_id} disabled variant="outlined" label="ID Cliente" className="cliente form-control rounded" />
+                  <TextField id='id_cliente' value={lead_id} disabled variant="outlined" label="ID Cliente" className="cliente form-control rounded" />
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <TextField id='numero_documento' value={data.numero_documento} disabled variant="outlined" label="DNI" className="cliente form-control rounded " />

@@ -68,13 +68,14 @@ const Callintro = () => {
   const lead_id = urlParams.get("lead_id");
   const list_id = urlParams.get("list_id");
   const id_registro = urlParams.get("id_registro");
-  const id_registro_url = urlParams.get("id_registro");
+  const id_registro_url = urlParams.get("id_registro_url");
   const phone_number = urlParams.get("phone_number");
   const user = urlParams.get("user");
   const campaign = urlParams.get("campaign");
   const company = urlParams.get("campaign");
   const epoch = urlParams.get("epoch");
   const agente = urlParams.get("user");
+  const recording_filename = urlParams.get("recording_filename");
 
 
   let id_url = []; //final
@@ -83,7 +84,10 @@ const Callintro = () => {
   item_sucess_llamada_url["sucess"] = true;
   item_sucess_llamada_url["campaign_name"] = company;
   item_sucess_llamada_url["campaign_id"] = "1";
-  item_sucess_llamada_url["campaign"] = "SonrieSeguro";
+  item_sucess_llamada_url["id_registro"] = id_registro;
+
+  item_sucess_llamada_url["idcallintro"] = id_registro_url;
+  item_sucess_llamada_url["campaign"] = company;
   item_sucess_llamada_url["lead_id"] = lead_id;
   item_sucess_llamada_url["list_id"] = list_id;
   item_sucess_llamada_url["duracion"] = 0;
@@ -191,42 +195,65 @@ const Callintro = () => {
 
   async function GuardarRegistroNoContesta() {
     setPuedeClickear(false);
-
     let id = []; //final
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
+    let json_sucess_gestion2 = [];
+    let json_sucess_gestion3 = [];
+
     let item_sucess_gestion = {};
-    const preguntas = document.querySelectorAll('*[aria-label^="cliente"]');
+    let item_sucess_gestion2 = {};
+    let item_sucess_gestion3 = {};
+
+
+    const preguntas = document.querySelectorAll(".gestion");
     preguntas.forEach((obj) => {
       let title = obj.id;
       let valor = obj.value;
       item_sucess_gestion[title] = valor;
     });
-
-    let queryString = window.location.search;
-    let urlParams = new URLSearchParams(queryString);
-    const list_id = urlParams.get("list_id");
-    const lead_id = urlParams.get("lead_id");
-    const epoch = urlParams.get("epoch");
-    const phone_number = urlParams.get("phone_number");
-    const agente = urlParams.get("user");
+    const preguntas3 = document.querySelectorAll(".cliente");
+    preguntas3.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion3[title] = valor;
+    });
+    const preguntas2 = document.querySelectorAll(".clienteadicional");
+    preguntas2.forEach((obj) => {
+      let title = obj.id;
+      let valor = obj.value;
+      item_sucess_gestion2[title] = valor;
+    });
+  
 
     json_sucess_gestion.push(item_sucess_gestion);
+    json_sucess_gestion2.push(item_sucess_gestion2);
+    json_sucess_gestion3.push(item_sucess_gestion3);
+
+
 
     item_sucess_llamada["sucess"] = true;
     item_sucess_llamada["campaign_name"] = company;
     item_sucess_llamada["campaign_id"] = list_id;
+
     datafull.map((data, index) => {
       item_sucess_llamada["campaign"] = data.campaign;
     });
+    item_sucess_llamada["id_registro"] = id_registro;
     item_sucess_llamada["lead_id"] = lead_id;
     item_sucess_llamada["list_id"] = list_id;
     item_sucess_llamada["agente"] = agente;
+    item_sucess_llamada["recording_filename"] = recording_filename;
     item_sucess_llamada["epoch"] = epoch;
     item_sucess_llamada["fecha_gestion"] = new Date();
-    item_sucess_llamada["duracion_sec"] = elapsedSeconds;
     item_sucess_llamada["phone_number"] = phone_number;
+    item_sucess_llamada["duracion_sec"] = elapsedSeconds;
+
     item_sucess_llamada["gestion"] = json_sucess_gestion;
+    item_sucess_llamada["cliente"] = json_sucess_gestion3;
+    item_sucess_llamada["adicionales"] = json_sucess_gestion2;
+
+
     id.push(item_sucess_llamada);
 
     try {
@@ -253,12 +280,6 @@ const Callintro = () => {
     }
   }
 
-  const [adicionalCompleto, setAdicionalCompleto] = useState(false);
-
-  const handleAgregarAdicional = (index) => {
-    // Lógica para agregar adicional y habilitar Contesta
-    setAdicionalCompleto(true);
-  };
 
 
 
@@ -300,49 +321,31 @@ const Callintro = () => {
 
 
       <Grid container spacing={2} >
-        <Grid item xs={4} sx={{ marginLeft: 3 }}
-        // style={{ position: 'fixed',  zIndex: 1 }}
-        >
+        <Grid item xs={4} sx={{ marginLeft: 3 }} >
           <DatosClientes
             datafull={datafull}
             company={company}
             getToken={token}
           ></DatosClientes>
-
-          <Card></Card>
         </Grid>
-
         <Grid item xs={7} sx={{ marginLeft: 3 }}>
-          <Encabezado company={company} GuardarRegistroNoContesta={GuardarRegistroNoContesta} clave={token} getToken={token} setViewConecta={handleConecta} setviewNoContesta={handleNoConecta}> </Encabezado>
+          <Encabezado 
+          company={company}
+           GuardarRegistroNoContesta={GuardarRegistroNoContesta} clave={token} getToken={token} setViewConecta={handleConecta} setviewNoContesta={handleNoConecta}> </Encabezado>
           <hr className="my-2" />
-
-          {/* {(selectLlamada === "85" || selectLlamada === "86") && (
-            <div>
-              {selectLlamada_2 !== "95" && selectLlamada_2 !== "89" && selectLlamada_2 !== "0" && selectLlamada_2 !== "" && (
-                <Stack direction="row" spacing={2}>
-                  <Button className="btn text-white guardar" value="GuardarRegistro" onClick={GuardarRegistroNoContesta} disabled={!puedeClickear} variant="Finalizar">Finalizar</Button>
-                </Stack>
-              )}
-            </div>
-          )} */}
-
-          {/* {selectLlamada === "85" && select_si_conecta_llamada === "2" && (
-            <Grid>
-              <Terceros conecta={selectLlamada} shouldScroll={scrollToNoContesta} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} elapsedSeconds={elapsedSeconds} getToken={token} datafull={datafull} />
-            </Grid>
-          )} */}
-
           {viewConecta && (
             <Grid>
-              <Grid >
+              {/* <Grid >
                 <Adicionales datafull={datafull} company={company} clave={token} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
-              </Grid>
+              </Grid> */}
               <hr />
-              {adicionalCompleto && (
+              {/* {adicionalCompleto && ( */}
                 <Grid>
-                  <Contesta datafull={datafull} tercerosComponent={<Terceros />} clave={token} company={company} getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
+                  <Contesta datafull={datafull} tercerosComponent={<Terceros />} clave={token} 
+                  //company={company} 
+                  getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
                 </Grid>
-              )}
+              {/* )} */}
             </Grid>
           )}
         </Grid>

@@ -128,7 +128,7 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           <Card>
             <CardContent>
               Conecta
-              <select className="form-control rounded cliente" id="conecta" style={{ height: 60 }} value={valueConecta} onChange={changeConecta}>
+              <select className="form-control rounded gestion" id="conecta" style={{ height: 60 }} value={valueConecta} onChange={changeConecta}>
                 <option value="0">Seleccione una opción</option>
                 {optionListConecta.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -143,7 +143,7 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           <Card>
             <CardContent>
               Sub-Conecta
-              <select className="form-control rounded cliente" id="tipificacion_detalle" style={{ height: 60 }} disabled={valueConecta === '0'} onChange={handleChangeSubRespuesta} value={valueSubRespuesta}>
+              <select className="form-control rounded gestion" id="tipificacion_detalle" style={{ height: 60 }} disabled={valueConecta === '0'} onChange={handleChangeSubRespuesta} value={valueSubRespuesta}>
                 <option value="0">Seleccione una opción</option>
                 {optionSubRespuesta.map((item) => (
                   <option key={item.id} value={item.id}>
@@ -158,7 +158,7 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           <Card>
             <CardContent>
               Comunica
-              <select className="form-control rounded cliente" id="tipificacion_comunica" style={{ height: 60 }}  onChange={handleChangeComunica} disabled={valueSubRespuesta !== '15'} value={valueComunica}>
+              <select className="form-control rounded gestion" id="tipificacion_comunica" style={{ height: 60 }}  onChange={handleChangeComunica} disabled={valueSubRespuesta !== '15'} value={valueComunica}>
                 <option value="0">Seleccione una opción</option>
                 {optionComunica.map((item) => (
                   <option key={item.id} value={item.id}>

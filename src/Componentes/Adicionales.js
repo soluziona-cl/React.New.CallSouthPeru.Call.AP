@@ -3,233 +3,68 @@ import * as bootstrap from "bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Terceros from "./Terceros";
-import { Box,InputLabel, CardContent, Card, Button, FormControl, Grid, Select,  Typography, Stack, CardHeader } from "@mui/material";
+import { Box, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, Typography, Stack, CardHeader } from "@mui/material";
 import { CalendarContainer } from "react-datepicker";
+import ValidaAdicionales from "./ValidaAdicionales";
 
-function Adicionales({ handleAgregarAdicional,company, datafull, clave, token, shouldScroll, elapsedSeconds, selectLlamada
+function Adicionales({ handleAgregarAdicional, onDataComplete, company, datafull, clave, token, shouldScroll, elapsedSeconds, selectLlamada
 }) {
-
 
     const [datosValidos, setDatosValidos] = useState("0");
     const [datafull2, setDatafull2] = useState([]);
 
 
     const [puedeClickear, setPuedeClickear] = useState(true);
-    const [agregarAdicional] = useState(true);
-
-    const [tipo_asegurado, settipo_asegurado] = useState("0");
-    const [parentesco, setparentesco] = useState("0");
-    const [doc_adicional, setdoc_adicional] = useState("0");
-    const [primer_nombre_adicional, setprimer_nombre_adicional] = useState("");
-    const [segundo_nombre_adicional, setsegundo_nombre_adicional] = useState("");
-    const [apellido_p_adicional, setapellido_p_adicional] = useState("");
-    const [apellido_m_adicional, setapellido_m_adicional] = useState("");
-    const [nacimiento_adicional, setnacimiento_adicional] = useState("");
-
-
-
     const [select_si_conecta_llamada_adicional, setSelectSiConectaLlamadaAdicional] = useState("0");
     const [select_cuantos_adicionales, setSelect_cuantos_adicionales] = useState("0");
-
-    let queryString = window.location.search;
-    let urlParams = new URLSearchParams(queryString);
-    const list_id = urlParams.get("list_id");
-    const lead_id = urlParams.get("lead_id");
-    // const rut = urlParams.get("address2");
-    const epoch = urlParams.get("epoch");
-    const lead_id_2 = urlParams.get("lead_id");
-
-    const phone_number = urlParams.get("phone_number");
-    const uniqueid = urlParams.get("uniqueid");
-    const agente = urlParams.get("user");
-    const recording_filename = urlParams.get("recording_filename");
-
-    const [setduracion, setselectduracion] = useState("0");
-    useEffect(() => {
-        setselectduracion(elapsedSeconds);
-    }, [elapsedSeconds]);
-    
-    async function GuardarRegistroNoValido() {
-        setPuedeClickear(false);
-       
-    let id = []; //final
-    let item_sucess_llamada = {};
-    let json_sucess_gestion = [];
-    let json_sucess_gestion2 = [];
-
-    let item_sucess_gestion = {};
-    let item_sucess_gestion2 = {};
-
-    const preguntas = document.querySelectorAll(".cliente");
-    
-    preguntas.forEach((obj) => {
-      let title = obj.id;
-      let valor = obj.value;
-      item_sucess_gestion[title] = valor;
-    });
-
-    const preguntas2 = document.querySelectorAll(".clienteadicional");
-
-    preguntas2.forEach((obj) => {
-      let title = obj.id;
-      let valor = obj.value;
-      item_sucess_gestion2[title] = valor;
-    });
-
-    json_sucess_gestion.push(item_sucess_gestion);
-    json_sucess_gestion2.push(item_sucess_gestion2);
-
-        item_sucess_llamada["sucess"] = true;
-        item_sucess_llamada["campaign_name"] = company;
-        item_sucess_llamada["campaign_id"] = list_id;
-        datafull.map((data, index) => {
-            item_sucess_llamada["campaign"] = data.campaign;
-        });
-
-        item_sucess_llamada["lead_id"] = lead_id;
-        item_sucess_llamada["list_id"] = list_id;
-        item_sucess_llamada["agente"] = agente;
-        item_sucess_llamada["recording_filename"] = recording_filename;
-        item_sucess_llamada["epoch"] = epoch;
-        item_sucess_llamada["fecha_gestion"] = new Date();
-        item_sucess_llamada["duracion_sec"] = setduracion;
-        //item_sucess_llamada["duracion_sec"] = elapsed_seconds;
-        // item_sucess_llamada["duracion_time"] =
-        // get_elapsed_time_string(elapsed_seconds);
-        item_sucess_llamada["phone_number"] = phone_number;
-        item_sucess_llamada["gestion"] = json_sucess_gestion;
-        id.push(item_sucess_llamada);
-
-        try {
-            const result = await axios.post(
-                "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
-                { dato: id },
-                { headers: { Authorization: `Bearer ${clave}` } }
-            );
-
-            if (result.status === 200) {
-                toast.success("Registro Guardado Exitosamente");
-                console.log("Registro Guardado Exitosamente");
-                setTimeout(() => {
-                    window.location.href =
-                        "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/Fin";
-                }, 5000);
-            }
-        } catch (error) {
-            toast.error("Error Con Guardado");
-            console.log("Error Con Guardado");
-            // Manejo de errores
-        }
-    }
-
-    const validarDatos = () => {
-        // Validación personalizada
-        const datosAdicionalValidos =
-            tipo_asegurado.trim() !== "" &&
-            parentesco.trim() !== "" &&
-            primer_nombre_adicional.trim() !== "" &&
-            segundo_nombre_adicional.trim() !== "" &&
-            apellido_p_adicional.trim() !== "" &&
-            apellido_p_adicional.trim() !== "" &&
-            nacimiento_adicional.trim() !== ""; // Agrega más validaciones según sea necesario
-
-
-
-        // Actualizar el estado de datosValidos
-        setDatosValidos("1");
-
-        //console.log(datosValidos);
-
-        // Devolver el resultado de la validación
-        return datosAdicionalValidos;
-    };
-
-    // Efecto de efectuación para ejecutar la validación cuando cambien los datos
-    useEffect(() => {
-        validarDatos();
-    }, [
-        tipo_asegurado,
-        parentesco,
-        primer_nombre_adicional,
-        segundo_nombre_adicional,
-        apellido_p_adicional,
-        apellido_m_adicional,
-        nacimiento_adicional
-    ]);
-
     const [select_si_conecta_llamada, setSelectSiConectaLlamada] = useState("0");
 
     const handleSelectChange = (value) => {
         setSelectSiConectaLlamada(value);
-
     };
-    useEffect(() => {
-        const isValid = validarDatos();
-        setDatosValidos(isValid ? "1" : "0");
-    }, []); // Solo se ejecutará una vez al montar el componente
-
-
-
+  
     const onChangesetCuantosAdicionales = (event) => {
-
         const selectedValue = event.target.value;
-        setSelect_cuantos_adicionales(selectedValue);
-        console.log(selectedValue)
-
+        console.log(selectedValue);
+    
+       
         const newDataFull2 = [];
         for (let i = 0; i < parseInt(selectedValue); i++) {
             newDataFull2.push({ id: i, key: i });
         }
-        console.log(newDataFull2)
         setDatafull2(newDataFull2);
         if (selectedValue === "0") {
 
             alert("Debe Seleccionar Una Opcion");
         } else {
-
-
             setDatafull2(newDataFull2);
             setSelect_cuantos_adicionales(selectedValue);
         }
 
+        console.log("Selected Cuantos Adicionales:", selectedValue);
     };
 
     return (
         <>
+        
             <Grid container spacing={1}>
-                <Grid item xs={12} md={4}>
-                    <Card>
-                        <CardContent>
-                            ¿Titular?
-                            <select id="select_si_conecta_llamada" value={select_si_conecta_llamada} style={{ height: 60 }} onChange={(event) => { const value = event.target.value; handleSelectChange(value); }} className="rounded cliente form-select my-2">
-                                <option value={'0'}>Seleccione una opción</option>
-                                <option value={'1'}>Titular</option>
-                                <option value={'2'}>Tercero Valido</option>
-                                <option value={'3'}>Tercero no Valido</option>
-                            </select>
-                        </CardContent>
-                    </Card>
-                </Grid>
-
-                {/* {select_si_conecta_llamada === "1" && ( */}
-
-                <Grid item xs={12} md={4}>
-                    <Card>
+            <Grid item xs={12} md={12} >
+              <Typography variant="h6" className="card-header text-white rounded " style={{ backgroundImage: "linear-gradient(90deg, #646464 10%, #ffffff 120%)", }}> Datos Adicionales</Typography>
+            </Grid>
+            <Grid container spacing={1}>
+           
+                <Grid item xs={12} md={6}>
                         <CardContent>
                             ¿Con Adicional?
-                            <select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} style={{ height: 60 }} className="form-select cliente  my-2 rounded">
+                            <select id="select_si_conecta_llamada_adicional" value={select_si_conecta_llamada_adicional} onChange={(e) => setSelectSiConectaLlamadaAdicional(e.target.value)} style={{ height: 60 }} className="form-select clienteadicional  my-2 rounded">
                                 <option value={'0'}>Seleccione una opción</option>
                                 <option value={'1'}>SI</option>
                                 <option value={'2'}>NO</option>
                             </select>
                         </CardContent>
-                    </Card>
+                   
                 </Grid>
-
-
-                {/* {select_si_conecta_llamada_adicional === "1" && ( */}
-                <Grid item xs={12} md={4}>
-                    <Card>
+                <Grid item xs={12} md={6}>
                         <CardContent>
                             ¿Cuántos?
                             <select id='select_si_conecta_llamada_adicional' value={select_cuantos_adicionales} disabled={select_si_conecta_llamada_adicional === '2'} onChange={onChangesetCuantosAdicionales} style={{ height: 60 }} className="form-select my-2 clienteadicional rounded">
@@ -239,76 +74,29 @@ function Adicionales({ handleAgregarAdicional,company, datafull, clave, token, s
                                 <option value={'3'}>Titular + 3 adicionales</option>
                             </select>
                         </CardContent>
-                    </Card>
                 </Grid>
-
-
-                {select_si_conecta_llamada_adicional === '2' && (
-                    <Grid item xs={12} md={12} container justifyContent="flex-end">
-                        <Stack direction="row" spacing={2}>
-                            <Button variant="contained" color="info" value="Siguiente" onClick={() => { handleAgregarAdicional(); }}>Siguiente</Button>
-                        </Stack>
-                    </Grid>
-                )}
-                {/* )} */}
-
-
-                {/* )} */}
-                {select_si_conecta_llamada === "1" && (
-                    <div>
-
-                        {datafull.map((data, index) => (
-                            <div>
-                                <div className="" id="stock">
-                                    {data.tipo_base.toUpperCase() ===
-                                        "STOCK" && (
-                                            <p> El motivo de mi llamada es agradecer la permanencia que tiene con la tarjeta, RIPLEY y gracias a los pagos puntuales que ha venido efectuando este año queremos ampliar sus beneficios.
-                                            </p>
-                                        )}
-                                </div>
-                                <div className="" id="welcome">
-                                    {data.tipo_base.toUpperCase() ===
-                                        "WELCOME" && (
-                                            <p> El motivo de mi llamada es agradecer la CONFIANZA y su preferencia por haber obtenido recientemente su Tarjeta de crédito Ripley con nosotros.
-                                            </p>
-                                        )}
-                                </div>
-                                <div className="" id="coross">
-                                    {data.tipo_base.toUpperCase().includes(
-                                        "CROSS"
-                                    ) && (
-                                            <p> EL MOTIVO DE MI LLAMADA Es para agradecer el tiempo de permanencia con EL SEGURO (DETALLAR NOMBRE DE SEGURO) AMPLIANDO SUS BENEFICIOS CON EL NUEVO SEGURO: SONRIE SEGURO
-                                            </p>
-                                        )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                {select_si_conecta_llamada === "2" && (
-                    <Grid container>
-                        <Terceros
-                            conecta={selectLlamada}
-                            shouldScroll={shouldScroll}
-                            select_si_conecta_llamada={select_si_conecta_llamada}
-                            handleSelectChange={handleSelectChange}
-                            elapsedSeconds={elapsedSeconds}
-                            clave={clave}
-                            datafull={datafull}
-                        />
-                    </Grid>
-                )}
-                {select_si_conecta_llamada === "3" && (
-                    <Grid container justifyContent="flex-end">
-                        <Stack direction="row" spacing={2}>
-                            <Button variant="contained" color="success" className="btn text-white guardar mt-3 " value="GuardarRegistro" onClick={GuardarRegistroNoValido} disabled={!puedeClickear} style={{ background: "#8362D6" }}>Finalizar</Button>
-                        </Stack>
-                    </Grid>
-                )}
             </Grid>
-            <Grid container spacing={2}>
-                <Grid item xs={12} md={12}>
+            <Grid container spacing={1}>
+            {select_cuantos_adicionales  !== '0' && (
+            <Grid item xs={12} md={12}>
+                <ValidaAdicionales
+                    onDataComplete={onDataComplete} 
+                    onChangesetCuantosAdicionales={onChangesetCuantosAdicionales}
+                    datafull2={datafull2}
+                ></ValidaAdicionales>
+            </Grid>
+            )}
+             </Grid>
+
+             </Grid>
+        </>
+    );
+}
+export default Adicionales;
+
+
+
+  {/* <Grid item xs={12} md={12}>
                     {select_cuantos_adicionales !== 0 && (
                         <Grid container spacing={2} >
                             {datafull2.map((index) => (
@@ -319,7 +107,7 @@ function Adicionales({ handleAgregarAdicional,company, datafull, clave, token, s
                                             <Grid item xs={12} md={3}>
                                                 Tipo Asegurado
                                                 <select id={'tipo_asegurado_' + index.id} value={tipo_asegurado} onChange={(e) => settipo_asegurado(e.target.value, index.id
-                                                    )} style={{ height: 60 }} className="form-select clienteadicional rounded">
+                                                )} style={{ height: 60 }} className="form-select clienteadicional rounded">
                                                     <option value={'0'}>Seleccione una opción</option>
                                                     <option value={'AT'}>Titular</option>
                                                     <option value={'AC'}>Conyuge </option>
@@ -419,12 +207,7 @@ function Adicionales({ handleAgregarAdicional,company, datafull, clave, token, s
                 {select_si_conecta_llamada_adicional === "1" && select_cuantos_adicionales !== "0" && (
                     <Grid item xs={12} md={12} sx={{ padding: 1 }} container justifyContent="flex-end">
                         <Stack direction="row" spacing={2}>
-                            <Button disabled={!datosValidos} variant="contained" color="info" value={agregarAdicional} onClick={() => { handleAgregarAdicional();alert('Registro Actualizado') }}>Agregar</Button>
+                            <Button disabled={!datosValidos} variant="contained" color="info" value={agregarAdicional} onClick={() => { handleAgregarAdicional(); alert('Registro Actualizado') }}>Agregar</Button>
                         </Stack>
                     </Grid>
-                )}
-            </Grid>
-        </>
-    );
-}
-export default Adicionales;
+                )} */}
