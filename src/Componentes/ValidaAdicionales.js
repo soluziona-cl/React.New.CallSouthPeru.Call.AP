@@ -155,15 +155,15 @@ const actualizarCamposCompletos = () => {
 };
 
 const handleAgregarAdicional = () => {
-  actualizarCamposCompletos();
+  // --actualizarCamposCompletos();
 
-  if (camposCompletosAD) {
+  // if (camposCompletosAD) {
     toast.success('Adicional agregado');
-    console.log("Agregar Adicional clicked");
-    // Agrega aquí la lógica para agregar el adicional
-  } else {
-    toast.error('Completa todos los campos antes de agregar.');
-  }
+  //   console.log("Agregar Adicional clicked");
+  //   // Agrega aquí la lógica para agregar el adicional
+  // } else {
+  //   toast.error('Completa todos los campos antes de agregar.');
+  // }
 };
 
 
@@ -247,7 +247,7 @@ const handleAgregarAdicional = () => {
         ))}
         <Grid item xs={12} md={2} sx={{ padding: 1 }} container justifyContent="flex-end">
         <Stack direction="row" spacing={2}>
-            <Button variant="contained" color="info" onClick={() => handleAgregarAdicional()} disabled={!camposCompletosAD}>Agregar</Button>
+            <Button variant="contained" color="info" onClick={() => handleAgregarAdicional()} >Agregar</Button>
           </Stack>
         </Grid>
 

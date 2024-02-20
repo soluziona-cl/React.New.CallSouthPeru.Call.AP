@@ -26,7 +26,7 @@ function Contesta({
   const [ocupacionActual, setOcupacionActual] = useState("0"); // Estado para la ocupación actual
   const [mostrarMensajeOcupacion, setMostrarMensajeOcupacion] = useState(false); // Estado para mostrar el mensaje de ocupación
   const handleBlur = () => {
-    if (ocupacionActual.trim() !== "") {
+    if (ocupacionActual.trim() !== "0") {
       setMostrarMensajeOcupacion(true);
     }
   };
@@ -44,12 +44,6 @@ function Contesta({
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionocupacion, setOptionListOcupacion] = useState([]);
 
-
-  const nombreCliente =
-    datafull && datafull.length > 0
-      ? datafull[0].nombre
-      : "Nombre de Cliente Predeterminado";
-
   // console.log(datafull)
   const sesiones = {
     sgui: localStorage.getItem("localgui"),
@@ -64,7 +58,7 @@ function Contesta({
   const Nointeresa = async () => {
     const result = await axios.post(
       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaClienteNoInteresa",
-      { dato: "20367002" },
+      { dato: "Chubb_Sonrie_Seguro" },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
 
@@ -276,6 +270,7 @@ function Contesta({
 
   const ChangeConecta_Ocupacion = (ocupacion) => {
     setOcupacion(ocupacion);
+    setOcupacionActual()
   };
  
   return (
@@ -412,7 +407,7 @@ function Contesta({
                     </Typography>
                   </Grid>
                   <Grid item xs={12} md={6}>
-                    <select id="select-ocupacion" style={{ height: 50 }} value={optionValueOcupacion} label="Ocupación" onChange={(e) => { setOcupacion(e.target.value); ChangeConecta_Ocupacion(e.target.value); }} className=" form-select cliente rounded">
+                    <select id="select-ocupacion" style={{ height: 50 }} value={optionValueOcupacion} label="Ocupación" onChange={(e) => { setOcupacion(e.target.value); ChangeConecta_Ocupacion(e.target.value); setOcupacionActual(e.target.value) }}onBlur={handleBlur} className=" form-select cliente rounded">
                       <option value="0">Seleccione una ocupación</option>
                       {optionocupacion.map((item) => (
                         <option key={item.id} value={item.id}>
@@ -421,12 +416,13 @@ function Contesta({
                       ))}
                     </select>
                   </Grid>
+                
                   {mostrarMensajeOcupacion && (
                     <Box>
                       <Typography variant="h7">
                         Si el cliente tiene una profesión de alto riesgo, se debe indicar lo siguiente.
                       </Typography>
-                      <Typography variant="h6" style={{ color: 'red' }}>
+                      <Typography variant="h6" style={{ color: 'blue', textDecoration:'underline' }}>
                         Salvedad: Recuerde Sr. / Sra.que le vamos a cubrir por cualquier accidente fuera de sus horas de trabajo.
                       </Typography>
                     </Box>
