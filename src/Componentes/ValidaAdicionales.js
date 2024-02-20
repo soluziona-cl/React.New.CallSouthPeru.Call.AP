@@ -7,68 +7,72 @@ import { format, parse } from "date-fns";
 import { Button, Grid, Typography, Stack } from "@mui/material";
 
 
-function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicionales }) {
+function ValidaAdicionales({  camposCompletosActualizados, datafull2, onChangesetCuantosAdicionales }) {
   //const [datafull2, setDatafull2] = useState([]);
   const [optionListMotivo, setOptionListMotivo] = useState([]);
-  const [parentesco, setparentesco] = useState("0");
-  const [tipo_asegurado, settipo_asegurado] = useState("0");
-  const [doc_adicional, setdoc_adicional] = useState("0");
-  const [primer_nombre_adicional, setprimer_nombre_adicional] = useState("");
-  const [segundo_nombre_adicional, setsegundo_nombre_adicional] = useState("");
-  const [apellido_p_adicional, setapellido_p_adicional] = useState("");
-  const [apellido_m_adicional, setapellido_m_adicional] = useState("");
-  const [nacimiento_adicional, setnacimiento_adicional] = useState("");
-  //console.log(setDatafull2)
-
   const regex = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-  const [botonAgregar, setbotonAgregar] = useState(false);
+  const [tiposAsegurado, setTiposAsegurado] = useState(Array(datafull2.length).fill('0'));
+
+  const handleTipoAseguradoChange = (value, index) => {
+    const nuevosTiposAsegurado = [...tiposAsegurado];
+    nuevosTiposAsegurado[index] = value;
+    setTiposAsegurado(nuevosTiposAsegurado);
+  };
+  const [tipoParentesco, setTipoParentesco] = useState(Array(datafull2.length).fill('0'));
+  const [tipoDoc_adicional, setTipoDoc_adicional] = useState(Array(datafull2.length).fill('0'));
+  const [tipoPrimer_nombre_adicional, setTipoPrimer_nombre_adicional] = useState(Array(datafull2.length).fill('0'));
+  const [tipoSegundo_nombre_adicional, setTipoSegundo_nombre_adicional] = useState(Array(datafull2.length).fill('0'));
+  const [tipoApellido_p_adicional, setTipoApellido_p_adicional] = useState(Array(datafull2.length).fill('0'));
+  const [tipoApellido_m_adicional, setTipoApellido_m_adicional] = useState(Array(datafull2.length).fill('0'));
+  const [tipoNacimiento_adicional, setTipoNacimiento_adicional] = useState(Array(datafull2.length).fill('0'));
 
 
-  const handletipo_aseguradoChange = (e) => {
-    settipo_asegurado(e.target.value);
+  const handleTipoParentescoChange = (value, index) => {
+    const nuevosTiposParentesco = [...tipoParentesco];
+    nuevosTiposParentesco[index] = value;
+    setTipoParentesco(nuevosTiposParentesco);
   };
-  const handleparentescoChange = (e) => {
-    setparentesco(e.target.value);
-  };
-  const handlePrimerNombreChange = (e) => {
-    setprimer_nombre_adicional(e.target.value);
-  };
-  const handleSegundoNombreChange = (e) => {
-    setsegundo_nombre_adicional(e.target.value);
-  };
-  const handlePrimerApellidoChange = (e) => {
-    setapellido_p_adicional(e.target.value);
-  };
-  const handleSegundoApellidoChange = (e) => {
-    setapellido_m_adicional(e.target.value);
-  };
-  const handleFechaNacimientoChange = (e) => {
-    setnacimiento_adicional(e.target.value);
-    //setbotonAgregar(e.target.value)
-  };
-
-  const handlesetparentescoBlur = () => {
-    if (parentesco.trim() === "") {
-      toast.error("El parentesco es obligatoria.", {
-        position: "top-right",
-        autoClose: 5000,
-      });
-    }
+  const handleTipodoc_adicionalChange = (value, index) => {
+    const nuevosTipoDoc_adicional = [...tipoDoc_adicional];
+    nuevosTipoDoc_adicional[index] = value;
+    setTipoDoc_adicional(nuevosTipoDoc_adicional);
     actualizarCamposCompletos();
   };
-  const handletipo_aseguradoBlur = () => {
-    if (tipo_asegurado.trim() === "") {
-      toast.error("El tipo de asegurado es obligatorio.", {
-        position: "top-right",
-        autoClose: 5000,
-      });
-    }
+  const handleTipoPrimer_nombre_adicionalChange = (value, index) => {
+    const nuevosTiposParentesco = [...tipoPrimer_nombre_adicional];
+    nuevosTiposParentesco[index] = value;
+    setTipoPrimer_nombre_adicional(nuevosTiposParentesco);
     actualizarCamposCompletos();
   };
+  const handleTipoSegundo_nombre_adicionalChange = (value, index) => {
+    const nuevosTiposSegundo_nombre_adicional = [...tipoSegundo_nombre_adicional];
+    nuevosTiposSegundo_nombre_adicional[index] = value;
+    setTipoSegundo_nombre_adicional(nuevosTiposSegundo_nombre_adicional);
+    actualizarCamposCompletos();
+  };
+  const handleTipoApellido_p_adicionalChange = (value, index) => {
+    const nuevosTiposApellido_p_adicional = [...tipoApellido_p_adicional];
+    nuevosTiposApellido_p_adicional[index] = value;
+    setTipoApellido_p_adicional(nuevosTiposApellido_p_adicional);
+    actualizarCamposCompletos();
+  };
+  const handleTipoApellido_m_adicionalChange = (value, index) => {
+    const nuevosTiposApellido_m_adicional = [...tipoApellido_m_adicional];
+    nuevosTiposApellido_m_adicional[index] = value;
+    setTipoApellido_m_adicional(nuevosTiposApellido_m_adicional);
+    actualizarCamposCompletos();
+  };
+  const handleTipoNacimiento_adicionalChange = (value, index) => {
+    const nuevosTiposNacimiento_adicional = [...tipoNacimiento_adicional];
+    nuevosTiposNacimiento_adicional[index] = value;
+    setTipoNacimiento_adicional(nuevosTiposNacimiento_adicional);
+    actualizarCamposCompletos();
+  };
+
   const handleNumeroDocumentoBlur = () => {
     // Validar que el valor tenga exactamente 8 dígitos en el evento onBlur
-    if (/^\d{8}$/.test(doc_adicional)) {
+    if (/^\d{8}$/.test(tipoDoc_adicional)) {
       // El número de documento es válido
     } else {
       // Mostrar un mensaje de error con toast si no cumple con la longitud requerida
@@ -76,12 +80,12 @@ function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicio
         position: "top-right",
         autoClose: 5000,
       });
-      setdoc_adicional("");
+      setTipoDoc_adicional("");
     }
     actualizarCamposCompletos();
   };
   const handlePrimerNombreBlur = () => {
-    if (primer_nombre_adicional.trim() === "") {
+    if (tipoPrimer_nombre_adicional.trim() === "") {
       toast.error("El primer nombre es obligatorio.", {
         position: "top-right",
         autoClose: 5000,
@@ -90,7 +94,7 @@ function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicio
     actualizarCamposCompletos();
   };
   const handleSegundoNombreBlur = () => {
-    if (segundo_nombre_adicional.trim() === "") {
+    if (tipoSegundo_nombre_adicional.trim() === "") {
       toast.error("El segundo nombre es obligatorio.", {
         position: "top-right",
         autoClose: 5000,
@@ -99,7 +103,7 @@ function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicio
     actualizarCamposCompletos();
   };
   const handlePrimerApellidoBlur = () => {
-    if (apellido_p_adicional.trim() === "") {
+    if (tipoApellido_p_adicional.trim() === "") {
       toast.error("El primer apellido es obligatorio.", {
         position: "top-right",
         autoClose: 5000,
@@ -108,7 +112,7 @@ function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicio
     actualizarCamposCompletos();
   };
   const handleSegundoApellidoBlur = () => {
-    if (apellido_m_adicional.trim() === "") {
+    if (tipoApellido_m_adicional.trim() === "") {
       toast.error("El segundo apellido es obligatorio.", {
         position: "top-right",
         autoClose: 5000,
@@ -117,7 +121,7 @@ function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicio
     actualizarCamposCompletos();
   };
   const handlenacimiento_adicionalBlur = () => {
-    if (nacimiento_adicional.trim() === "") {
+    if (tipoNacimiento_adicional.trim() === "") {
       toast.error("La fecha de nacimiento es obligatorio.", {
         position: "top-right",
         autoClose: 5000,
@@ -131,14 +135,37 @@ function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicio
     e.target.value = inputValue;
     handleChange(e);
   }
-  const actualizarCamposCompletos = () => {
-    const camposCompletos = tipo_asegurado !== "" && doc_adicional !== "" && primer_nombre_adicional !== "" && segundo_nombre_adicional !== "" && apellido_p_adicional !== "" && apellido_m_adicional !== "" && nacimiento_adicional !== "" && parentesco !== ""; onDataComplete(camposCompletos);
-  };
-  const handleAgregarAdicional = () => {
-    toast.success('Adicional agregado')
-    // setbotonAgregar()
+
+  const [camposCompletosAD, setCamposCompletosAD] = useState(false);
+
+
+const actualizarCamposCompletos = () => {
+  const camposCompletosActualizados =
+  tiposAsegurado.every(value => value !== "0") &&
+  tipoDoc_adicional !== "0" &&
+  tipoPrimer_nombre_adicional.trim() !== "" &&
+  tipoSegundo_nombre_adicional.trim() !== "" &&
+  tipoApellido_p_adicional.trim() !== "" &&
+  tipoApellido_m_adicional.trim() !== "" &&
+  tipoNacimiento_adicional.trim() !== "" &&
+  tipoParentesco.every(value => value !== "0");
+
+
+  setCamposCompletosAD(camposCompletosActualizados);
+};
+
+const handleAgregarAdicional = () => {
+  actualizarCamposCompletos();
+
+  if (camposCompletosAD) {
+    toast.success('Adicional agregado');
     console.log("Agregar Adicional clicked");
-  };
+    // Agrega aquí la lógica para agregar el adicional
+  } else {
+    toast.error('Completa todos los campos antes de agregar.');
+  }
+};
+
 
 
 
@@ -155,8 +182,7 @@ function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicio
             <Grid container spacing={1} sx={{ paddingX: 3 }}>
               <Grid item xs={12} md={3} >
                 Tipo Asegurado
-                <select id={'tipo_asegurado_' + index.id} value={tipo_asegurado} onBlur={handletipo_aseguradoBlur} onChange={(e) => settipo_asegurado(e.target.value, index.id
-                )} style={{ height: 60 }} className="form-select clienteadicional rounded">
+                <select id={'tipo_asegurado_' + index.id} value={tiposAsegurado[index]} onChange={(e) => handleTipoAseguradoChange(e.target.value, index.id)} style={{ height: 60 }} className="form-select clienteadicional rounded">
                   <option value={'0'}>Seleccione una opción</option>
                   <option value={'AT'}>Titular</option>
                   <option value={'AC'}>Conyuge </option>
@@ -168,7 +194,7 @@ function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicio
               </Grid>
               <Grid item xs={12} md={3} >
                 Parentesco
-                <select id={'parentesco_' + index.id} onBlur={handlesetparentescoBlur} value={parentesco} onChange={(e) => setparentesco(e.target.value, index.id)} style={{ height: 60 }} className="form-select clienteadicional rounded">
+                <select id={'parentesco_' + index.id} value={tipoParentesco[index]} onChange={(e) => handleTipoParentescoChange(e.target.value, index.id)} style={{ height: 60 }} className="form-select clienteadicional rounded">
                   <option value={'0'}>Seleccione una opción</option>
                   <option value={'38'}>Conyuge </option>
                   <option value={'39'}>Hijo </option>
@@ -192,41 +218,37 @@ function ValidaAdicionales({ onDataComplete, datafull2, onChangesetCuantosAdicio
               </Grid>
               <Grid item xs={12} md={3} >
                 Fecha de Nacimiento:
-                <input id={'nacimiento_adicional_' + index.id} type="date" style={{ height: 60 }} required value={nacimiento_adicional} onChange={handleFechaNacimientoChange} onBlur={handlenacimiento_adicionalBlur} className="clienteadicional form-control " />
+                <input id={'nacimiento_adicional_' + index.id} type="date" style={{ height: 60 }} required  value={tipoNacimiento_adicional[index]} onChange={(e) => handleTipoNacimiento_adicionalChange(e.target.value, index.id)} onBlur={handlenacimiento_adicionalBlur} className="clienteadicional form-control " />
               </Grid>
               <Grid item xs={12} md={3} >
                 DNI
-                <input type="text" style={{ height: 60 }} onBlur={handleNumeroDocumentoBlur} className="form-control clienteadicionaladicional rounded" value={doc_adicional} inputMode="numeric" maxLength="8" onChange={(e) => { const inputValue = e.target.value.replace(/\D/g, ""); if (inputValue.length > 8) { e.target.value = inputValue.slice(0, 8) } else { e.target.value = inputValue } setdoc_adicional(e.target.value, index.id); }} id={'doc_adicional_' + index.id}
+                <input type="text" style={{ height: 60 }} onBlur={handleNumeroDocumentoBlur} className="form-control clienteadicionaladicional rounded" value={tipoDoc_adicional[index]} inputMode="numeric" maxLength="8" onChange={(e) => { const inputValue = e.target.value.replace(/\D/g, ""); if (inputValue.length > 8) { e.target.value = inputValue.slice(0, 8) } else { e.target.value = inputValue } handleTipodoc_adicionalChange(e.target.value, index.id); }} id={'doc_adicional_' + index.id}
                 />
               </Grid>
               <Grid item xs={12} md={3} >
                 Primer Nombre
-                <input id={'primer_nombre_adicional_' + index.id} value={primer_nombre_adicional} onChange={(e) => handleLettersOnlyChange(e, handlePrimerNombreChange)} onBlur={handlePrimerNombreBlur} className="clienteadicional form-control rounded " style={{ height: 60 }} />
+                <input id={'primer_nombre_adicional_' + index.id} value={tipoPrimer_nombre_adicional[index]} onChange={(e) => handleLettersOnlyChange(e, handleTipoPrimer_nombre_adicionalChange, index.id)} onBlur={handlePrimerNombreBlur} className="clienteadicional form-control rounded " style={{ height: 60 }} />
               </Grid>
               <Grid item xs={12} md={3} >
                 Segundo Nombre
-                <input id={'segundo_nombre_adicional_' + index.id} value={segundo_nombre_adicional} onChange={(e) => handleLettersOnlyChange(e, handleSegundoNombreChange)} onBlur={handleSegundoNombreBlur} className="clienteadicional form-control rounded " style={{ height: 60 }} />
+                <input id={'segundo_nombre_adicional_' + index.id} value={tipoSegundo_nombre_adicional[index]} onChange={(e) => handleLettersOnlyChange(e, handleTipoSegundo_nombre_adicionalChange, index.id)} onBlur={handleSegundoNombreBlur} className="clienteadicional form-control rounded " style={{ height: 60 }} />
               </Grid>
               <Grid item xs={12} md={3} >
                 Apellido Paterno
-                <input id={'apellido_p_adicional_' + index.id} value={apellido_p_adicional} onChange={(e) => handleLettersOnlyChange(e, handlePrimerApellidoChange)} onBlur={handlePrimerApellidoBlur} className="clienteadicional form-control rounded " style={{ height: 60 }} />
+                <input id={'apellido_p_adicional_' + index.id} value={tipoApellido_p_adicional[index]} onChange={(e) => handleLettersOnlyChange(e, handleTipoApellido_p_adicionalChange, index.id)} onBlur={handlePrimerApellidoBlur} className="clienteadicional form-control rounded " style={{ height: 60 }} />
               </Grid>
               <Grid item xs={12} md={3} >
                 Apellido Materno
-                <input id={'apellido_m_adicional_' + index.id} value={apellido_m_adicional} onChange={(e) => handleLettersOnlyChange(e, handleSegundoApellidoChange)} onBlur={handleSegundoApellidoBlur} className="clienteadicional form-control rounded " style={{ height: 60 }} />
+                <input id={'apellido_m_adicional_' + index.id} value={tipoApellido_m_adicional[index]} onChange={(e) => handleLettersOnlyChange(e, handleTipoApellido_m_adicionalChange, index.id)} onBlur={handleSegundoApellidoBlur} className="clienteadicional form-control rounded " style={{ height: 60 }} />
               </Grid>
              
             </Grid>
           </Grid>
         ))}
-        <Grid item xs={12} md={12} sx={{ padding: 1 }} container justifyContent="flex-end">
-          {botonAgregar && (<Stack direction="row" spacing={2}>
-            <Button variant="contained" color="info" onClick={() => handleAgregarAdicional()}>Agregar</Button>
-          </Stack>)}
-
-          {/* <Stack direction="row" spacing={2}>
-                <Button  variant="contained" color="info" onClick={() => { handleAgregarAdicional(); alert('Registro Actualizado') }}>Agregar</Button>
-              </Stack> */}
+        <Grid item xs={12} md={2} sx={{ padding: 1 }} container justifyContent="flex-end">
+        <Stack direction="row" spacing={2}>
+            <Button variant="contained" color="info" onClick={() => handleAgregarAdicional()} disabled={!camposCompletosAD}>Agregar</Button>
+          </Stack>
         </Grid>
 
 

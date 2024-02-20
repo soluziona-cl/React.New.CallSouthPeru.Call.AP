@@ -335,17 +335,11 @@ const Callintro = () => {
           <hr className="my-2" />
           {viewConecta && (
             <Grid>
-              {/* <Grid >
-                <Adicionales datafull={datafull} company={company} clave={token} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} />
-              </Grid> */}
               <hr />
-              {/* {adicionalCompleto && ( */}
                 <Grid>
-                  <Contesta datafull={datafull} tercerosComponent={<Terceros />} clave={token} 
-                  //company={company} 
+                  <Contesta datafull={datafull} clave={token} 
                   getToken={token} elapsedSeconds={elapsedSeconds} select_si_conecta_llamada={select_si_conecta_llamada} handleSelectChange={handleSelectChange} shouldScroll={scrollToNoContesta}></Contesta>
                 </Grid>
-              {/* )} */}
             </Grid>
           )}
         </Grid>

@@ -7,7 +7,7 @@ import { Box, InputLabel, CardContent, Card, Button, FormControl, Grid, Select, 
 import { CalendarContainer } from "react-datepicker";
 import ValidaAdicionales from "./ValidaAdicionales";
 
-function Adicionales({ handleAgregarAdicional, onDataComplete, company, datafull, clave, token, shouldScroll, elapsedSeconds, selectLlamada
+function Adicionales({  camposCompletosActualizados, company, datafull, clave, token, shouldScroll,  elapsedSeconds, selectLlamada
 }) {
 
     const [datosValidos, setDatosValidos] = useState("0");
@@ -80,7 +80,7 @@ function Adicionales({ handleAgregarAdicional, onDataComplete, company, datafull
             {select_cuantos_adicionales  !== '0' && (
             <Grid item xs={12} md={12}>
                 <ValidaAdicionales
-                    onDataComplete={onDataComplete} 
+                    camposCompletosActualizados={camposCompletosActualizados} 
                     onChangesetCuantosAdicionales={onChangesetCuantosAdicionales}
                     datafull2={datafull2}
                 ></ValidaAdicionales>

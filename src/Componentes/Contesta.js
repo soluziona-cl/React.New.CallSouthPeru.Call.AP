@@ -17,7 +17,6 @@ function Contesta({
   elapsedSeconds,
   select_si_conecta_llamada,
   handleSelectChange,
-  tercerosComponent,
   datafull,
   shouldScroll,
 }) {
@@ -36,21 +35,12 @@ function Contesta({
 
   const [selectLlamada, setSelectedLlamada] = useState("");
   const [token, setToken] = useState(clave);
-  const [
-    select_conecta_llamada_pregunta_no_interesa,
-    setselect_conecta_llamada_pregunta_no_interesa,
-  ] = useState("0");
+  const [select_conecta_llamada_pregunta_no_interesa,setselect_conecta_llamada_pregunta_no_interesa] = useState("0");
 
   const [setduracion, setselectduracion] = useState("0");
-  const [
-    select_conecta_llamada_pregunta_interesa,
-    setselect_conecta_llamada_pregunta_interesa,
-  ] = useState("0");
+  const [select_conecta_llamada_pregunta_interesa,setselect_conecta_llamada_pregunta_interesa] = useState("0");
   const [no_interesa, setno_interesa] = useState("0");
-
-  const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] =
-    useState(false); // Estado para controlar la habilitación del botón
-
+  const [botonDeshabilitado_guardar, setbotonDeshabilitado_guardar] = useState(false); // Estado para controlar la habilitación del botón
   const [optionListMotivo, setOptionListMotivo] = useState([]);
   const [optionocupacion, setOptionListOcupacion] = useState([]);
 
@@ -169,6 +159,10 @@ function Contesta({
 
     id.push(item_sucess_llamada);
 
+
+
+
+    
     try {
       const result = await axios.post(
         "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
@@ -270,10 +264,8 @@ function Contesta({
     }
   };
 
-  const [
-    selectConectaLlamadaPreguntaConfirma,
-    setSelectConectaLlamadaPreguntaConfirma,
-  ] = useState("");
+  const [selectConectaLlamadaPreguntaConfirma,setSelectConectaLlamadaPreguntaConfirma] = useState("");
+  const [camposCompletosAD, setCamposCompletosAD] = useState(false);
 
   const [camposCompletos, setCamposCompletos] = useState(false);
   const [optionValueOcupacion, setOcupacion] = useState("0");
@@ -442,7 +434,7 @@ function Contesta({
                 </Grid>
               </Grid>
               <Grid item xs={12} md={12} className="card my-3" >
-                <Adicionales datafull={datafull}  company={company} clave={token} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional}></Adicionales>
+                <Adicionales datafull={datafull}  company={company} clave={token} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} setCamposCompletosAD={setCamposCompletosAD}></Adicionales>
               </Grid>
              
               <Grid item xs={12} md={12} className="card my-3" >
@@ -459,38 +451,38 @@ function Contesta({
                     <option value={'0'}>Seleccione una opción</option>
                     <option value={'1'}>Si</option>
                     <option value={'2'}>No</option>
-                  </select>
+                    </select>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
+          )}
+          {select_si_conecta_llamada === "2" && (
+            <Grid container>
+              <Terceros
+                conecta={selectLlamada}
+                shouldScroll={shouldScroll}
+                select_si_conecta_llamada={select_si_conecta_llamada}
+                handleSelectChange={handleSelectChange}
+                elapsedSeconds={elapsedSeconds}
+                clave={clave}
+                datafull={datafull}
+              />
             </Grid>
           )}
- {select_si_conecta_llamada === "2" && (
-                    <Grid container>
-                        <Terceros
-                            conecta={selectLlamada}
-                            shouldScroll={shouldScroll}
-                            select_si_conecta_llamada={select_si_conecta_llamada}
-                            handleSelectChange={handleSelectChange}
-                            elapsedSeconds={elapsedSeconds}
-                            clave={clave}
-                            datafull={datafull}
-                        />
-                    </Grid>
-                )}
-                {select_si_conecta_llamada === "3" && (
-                    <Grid container justifyContent="flex-end">
-                        <Stack direction="row" spacing={2}>
-                            <Button variant="contained" color="success" className="btn text-white guardar mt-3 " value="GuardarRegistro" onClick={GuardarRegistro} disabled={!puedeClickear} style={{ background: "#8362D6" }}>Finalizar</Button>
-                        </Stack>
-                    </Grid>
-                )}
+          {select_si_conecta_llamada === "3" && (
+            <Grid container justifyContent="flex-end">
+              <Stack direction="row" spacing={2}>
+                <Button variant="contained" color="success" className="btn text-white guardar mt-3 " value="GuardarRegistro" onClick={GuardarRegistro} disabled={!puedeClickear} style={{ background: "#8362D6" }}>Finalizar</Button>
+              </Stack>
+            </Grid>
+          )}
 
           {(selectConectaLlamadaPreguntaConfirma == "1" ||
             selectConectaLlamadaPreguntaConfirma == "2") && (
               <Grid item xs={12} md={12} sx={{ padding: 1 }} container justifyContent="flex-end">
                 <Stack direction="row" spacing={2}>
-                  <Button disabled={!puedeClickear} variant="contained" value={GuardarRegistro} onClick={GuardarRegistro} style={{ background: "#8362D6" }}>Finalizar</Button>
+                  <Button disabled={!puedeClickear || !setCamposCompletosAD} variant="contained"  onClick={GuardarRegistro} style={{ background: "#8362D6" }}>Finalizar</Button>
                 </Stack>
               </Grid>
             )}

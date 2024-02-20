@@ -4,7 +4,7 @@ import { Box, MenuItem, InputLabel, CardContent, Card, Button, FormControl, Grid
 
 
 function DatosClientes({ company, clave, datafull, lead_id }) {
-
+  //console.log(lead_id)
 
   useEffect(() => {
     console.log(datafull)
