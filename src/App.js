@@ -8,7 +8,7 @@ import Index from "./Script";
 function App() {
 
   // const rutaservidor="/"; //Pruebas
-  const rutaservidor = "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro"; //Produccion
+  const rutaservidor = "/Orkesta/CallSouthPeru/NewCall/AccidentesPersonales"; //Produccion
 
   return (
     <Router>

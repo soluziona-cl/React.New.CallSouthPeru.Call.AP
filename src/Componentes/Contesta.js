@@ -2,13 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import * as bootstrap from "bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import TabsTabs from "./TabsTabs";
 import ValidaDatos from "./ValidaDatos";
 import Terceros from "./Terceros";
-import Tabsinformacion from "./TabsInfotmacion";
 import { Box, MenuItem, InputLabel, CardContent, Stack, Card, Button, FormControl, Grid, Select, TextField, Typography, FormControlLabel, Radio } from "@mui/material";
-import Adicionales from "./Adicionales";
-import ValidaAdicionales from "./ValidaAdicionales";
 
 function Contesta({
  // company,
@@ -95,11 +91,9 @@ function Contesta({
     let id = []; //final
     let item_sucess_llamada = {};
     let json_sucess_gestion = [];
-    let json_sucess_gestion2 = [];
     let json_sucess_gestion3 = [];
 
     let item_sucess_gestion = {};
-    let item_sucess_gestion2 = {};
     let item_sucess_gestion3 = {};
 
 
@@ -115,16 +109,9 @@ function Contesta({
       let valor = obj.value;
       item_sucess_gestion3[title] = valor;
     });
-    const preguntas2 = document.querySelectorAll(".clienteadicional");
-    preguntas2.forEach((obj) => {
-      let title = obj.id;
-      let valor = obj.value;
-      item_sucess_gestion2[title] = valor;
-    });
   
 
     json_sucess_gestion.push(item_sucess_gestion);
-    json_sucess_gestion2.push(item_sucess_gestion2);
     json_sucess_gestion3.push(item_sucess_gestion3);
 
 
@@ -148,7 +135,6 @@ function Contesta({
 
     item_sucess_llamada["gestion"] = json_sucess_gestion;
     item_sucess_llamada["cliente"] = json_sucess_gestion3;
-    item_sucess_llamada["adicionales"] = json_sucess_gestion2;
 
 
     id.push(item_sucess_llamada);
@@ -169,7 +155,7 @@ function Contesta({
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
           window.location.href =
-            "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/Fin";
+            "/Orkesta/CallSouthPeru/NewCall/AccidentesPersonales/Fin";
         }, 5000);
       }
     } catch (error) {
@@ -428,9 +414,6 @@ function Contesta({
                     </Box>
                   )}
                 </Grid>
-              </Grid>
-              <Grid item xs={12} md={12} className="card my-3" >
-                <Adicionales datafull={datafull}  company={company} clave={token} getToken={token} elapsedSeconds={elapsedSeconds} shouldScroll={scrollToNoContesta} handleAgregarAdicional={handleAgregarAdicional} setCamposCompletosAD={setCamposCompletosAD}></Adicionales>
               </Grid>
              
               <Grid item xs={12} md={12} className="card my-3" >

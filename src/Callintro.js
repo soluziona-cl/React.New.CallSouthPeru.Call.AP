@@ -16,21 +16,14 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import Contesta from "./Componentes/Contesta";
 import DatosClientes from "./Componentes/DatosClientes";
-import Terceros from "./Componentes/Terceros";
-import Adicionales from "./Componentes/Adicionales";
-
-
 import Encabezado from "./Componentes/Encabezado";
 
 
 registerLocale("es", es);
 
 
-
-
 const Callintro = () => {
   const [puedeClickear, setPuedeClickear] = useState(true);
-  const [adicional, setAdicional] = useState(false);
   const [viewNoContesta, setviewNoContesta] = useState(false)
 
   const handleNoConecta = (valor) => {
@@ -186,7 +179,6 @@ const Callintro = () => {
 
   const handleSelectChange = (value) => {
     setSelectSiConectaLlamada(value);
-    setAdicional()
   };
   const handleSelectChangeLoPensara = (value) => {
     setSelectSiConectaLlamada(value);
@@ -218,16 +210,9 @@ const Callintro = () => {
       let valor = obj.value;
       item_sucess_gestion3[title] = valor;
     });
-    const preguntas2 = document.querySelectorAll(".clienteadicional");
-    preguntas2.forEach((obj) => {
-      let title = obj.id;
-      let valor = obj.value;
-      item_sucess_gestion2[title] = valor;
-    });
   
 
     json_sucess_gestion.push(item_sucess_gestion);
-    json_sucess_gestion2.push(item_sucess_gestion2);
     json_sucess_gestion3.push(item_sucess_gestion3);
 
 
@@ -251,7 +236,6 @@ const Callintro = () => {
 
     item_sucess_llamada["gestion"] = json_sucess_gestion;
     item_sucess_llamada["cliente"] = json_sucess_gestion3;
-    item_sucess_llamada["adicionales"] = json_sucess_gestion2;
 
 
     id.push(item_sucess_llamada);
@@ -267,7 +251,7 @@ const Callintro = () => {
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro/Fin";
+          window.location.href = "/Orkesta/CallSouthPeru/NewCall/AccidentesPersonales/Fin";
         }, 5000);
       }
     } catch (error) {
@@ -304,7 +288,7 @@ const Callintro = () => {
       <Grid container sx={{ padding: 2 }} spacing={1}>
         <Grid item xs={12} md={12} sx={{ alignItems: 'center', background: 'black' }}>
           <FormControl fullWidth class="text-white  ms-3 ">
-            <Typography variant="h1" class="fw-bold "> Sonríe Seguro </Typography>
+            <Typography variant="h1" class="fw-bold "> Accidentes Personales</Typography>
             {datafull.map((data, index) => (
               <Typography variant="h5" key={index} className="col-lg-12 col-md-12 col-sm-12 my-1">
                 Tipo Base: {data.tipo_base.toUpperCase()}

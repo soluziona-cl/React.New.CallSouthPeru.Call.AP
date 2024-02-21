@@ -1,6 +1,6 @@
 {
-  "name": "soluziona_newcallsouth_sonrie_seguro",
-  "homepage": "/Orkesta/CallSouthPeru/NewCall/SonrieSeguro",
+  "name": "soluziona_newcallsouth_accidentes_personales",
+  "homepage": "/Orkesta/CallSouthPeru/NewCall/AccidentesPersonales",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
