@@ -147,7 +147,7 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
                 <option value="0">Seleccione una opción</option>
                 {optionSubRespuesta.map((item) => (
                   <option key={item.id} value={item.id}>
-                    {item.detalle} 
+                    {item.detalle}  
                   </option>
                 ))}
               </select>
@@ -158,11 +158,11 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           <Card>
             <CardContent>
               Comunica
-              <select className="form-control rounded gestion" id="tipificacion_comunica" style={{ height: 60 }}  onChange={handleChangeComunica} disabled={valueSubRespuesta !== '15'} value={valueComunica}>
+              <select className="form-control rounded gestion" id="tipificacion_comunica" style={{ height: 60 }}  onChange={handleChangeComunica} disabled={valueSubRespuesta !== '61'} value={valueComunica}>
                 <option value="0">Seleccione una opción</option>
                 {optionComunica.map((item) => (
                   <option key={item.id} value={item.id}>
-                    {item.detalle}
+                    {item.detalle}  
                   </option>
                 ))}
               </select>
@@ -170,7 +170,8 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           </Card>
         </Grid>
 
-        {(valueSubRespuesta !== '0' ) && (valueConecta === '2' || valueConecta === '3' ) && (
+        {(valueSubRespuesta === '62' || valueSubRespuesta === '63' || valueSubRespuesta === '64' || valueSubRespuesta === '65' || valueSubRespuesta === '66' || valueSubRespuesta === '67' || valueSubRespuesta === '68' ) && (
+
           <Grid item xs={12} md={12} container justifyContent="flex-end">
             <Stack direction="row" spacing={2}>
               <Button className="btn text-white guardar" variant="contained"
@@ -179,7 +180,7 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
           </Grid>
         )}
 
-        {(valueSubRespuesta !== '15' && valueConecta === '1') && (
+        {( valueSubRespuesta === '50' ||valueSubRespuesta === '51' || valueSubRespuesta === '52' || valueSubRespuesta === '53' || valueSubRespuesta === '54' || valueSubRespuesta === '55' || valueSubRespuesta === '56' || valueSubRespuesta === '57' || valueSubRespuesta === '58' || valueSubRespuesta === '59' || valueSubRespuesta === '60') && valueConecta === '47' && (
           <Grid item xs={12} md={12} container justifyContent="flex-end">
             <Stack direction="row" spacing={2}>
               <Button className="btn text-white guardar" variant="contained"
