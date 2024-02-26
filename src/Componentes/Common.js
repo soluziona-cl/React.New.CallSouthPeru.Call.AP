@@ -15,7 +15,7 @@ export const setUrl = () => {
 }
 
 export const setDireccion = () => {
-    const direccion = '/Orkesta/CallSouthPeru/Ventas/Call/AccidentesPersonales'
+    const direccion = '/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales'
     return direccion
 }
 
