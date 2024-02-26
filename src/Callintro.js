@@ -251,7 +251,7 @@ const Callintro = () => {
         toast.success("Registro Guardado Exitosamente");
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
-          window.location.href = "/Orkesta/CallSouthPeru/Call/AccidentesPersonales/Fin";
+          window.location.href = "/Orkesta/CallSouthPeru/Ventas/Call/AccidentesPersonales/Fin";
         }, 5000);
       }
     } catch (error) {

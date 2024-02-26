@@ -155,7 +155,7 @@ function Contesta({
         console.log("Registro Guardado Exitosamente");
         setTimeout(() => {
           window.location.href =
-            "/Orkesta/CallSouthPeru/Call/AccidentesPersonales/Fin";
+            "/Orkesta/CallSouthPeru/Ventas/Call/AccidentesPersonales/Fin";
         }, 5000);
       }
     } catch (error) {
