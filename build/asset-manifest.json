@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/css/main.dc048d47.css",
-    "main.js": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/js/main.fb74e467.js",
-    "index.html": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/index.html",
-    "main.dc048d47.css.map": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/css/main.dc048d47.css.map",
-    "main.fb74e467.js.map": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/js/main.fb74e467.js.map"
+    "main.css": "/Orkesta/CallSouthPeru/NewCallQA/AccidentesPersonales/static/css/main.dc048d47.css",
+    "main.js": "/Orkesta/CallSouthPeru/NewCallQA/AccidentesPersonales/static/js/main.8bec2448.js",
+    "index.html": "/Orkesta/CallSouthPeru/NewCallQA/AccidentesPersonales/index.html",
+    "main.dc048d47.css.map": "/Orkesta/CallSouthPeru/NewCallQA/AccidentesPersonales/static/css/main.dc048d47.css.map",
+    "main.8bec2448.js.map": "/Orkesta/CallSouthPeru/NewCallQA/AccidentesPersonales/static/js/main.8bec2448.js.map"
   },
   "entrypoints": [
     "static/css/main.dc048d47.css",
-    "static/js/main.fb74e467.js"
+    "static/js/main.8bec2448.js"
   ]
 }

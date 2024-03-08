@@ -27,7 +27,7 @@ const Index = () => {
   useEffect(() => {
     if (campaign_file === 'Chubb_AP') {
 
-      setHtmlFile('https://app.soluziona.pe/Orkesta/CallSouth/Ventas/Script/SonrieSeguro.html')
+      setHtmlFile('https://app.soluziona.cl/Orkesta/CallSouthPeru/NewCallScript/AP.html')
 
     } 
 
