@@ -127,7 +127,7 @@ function Terceros({  clave, onNoConectaChange, shouldScroll, conecta, elapsedSec
 
     try {
       const result = await axios.post(
-        "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
+        "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${clave}` } }
       );
@@ -152,7 +152,7 @@ function Terceros({  clave, onNoConectaChange, shouldScroll, conecta, elapsedSec
 
   const Company = async (company) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
+      "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );

@@ -98,7 +98,7 @@ const Callintro = () => {
 
   const ValidaCall = async () => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Validacall",//"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
+      "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Validacall",//"https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Validacall",
       { userName: "test", password: "test" }
     );
 
@@ -123,7 +123,7 @@ const Callintro = () => {
 
   const DatosCliente = async (lead, getToken) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/DatosCliente",
+      "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/DatosCliente",
       { dato: company, dato_1: lead },
       { headers: { Authorization: `Bearer ${getToken}` } }
     );
@@ -144,7 +144,7 @@ const Callintro = () => {
   //console.log(DatosCliente)
   const GuardaURL2 = async (url_id, getToken) => {
 
-    const result = await axios.post("https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/SaveURl/2", { dato: url_id }, { headers: { Authorization: `Bearer ${getToken}` } }
+    const result = await axios.post("https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/SaveURl/2", { dato: url_id }, { headers: { Authorization: `Bearer ${getToken}` } }
     );
 
     if (result.status === 200) {
@@ -155,7 +155,7 @@ const Callintro = () => {
 
   const Conecta = async (getToken) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/Conecta",
+      "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/Conecta",
       { dato: company },
       { headers: { Authorization: `Bearer ${getToken}` } }
     );
@@ -242,7 +242,7 @@ const Callintro = () => {
 
     try {
       const result = await axios.post(
-        "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
+        "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );

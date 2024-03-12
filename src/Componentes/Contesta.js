@@ -53,7 +53,7 @@ function Contesta({
   }, []);
   const Nointeresa = async () => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaClienteNoInteresa",
+      "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaClienteNoInteresa",
       { dato: "Chubb_Sonrie_Seguro" },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -145,7 +145,7 @@ function Contesta({
     
     try {
       const result = await axios.post(
-        "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
+        "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/GuardaGestion",
         { dato: id },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -221,7 +221,7 @@ function Contesta({
 
   const Company = async (company) => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
+      "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -234,7 +234,7 @@ function Contesta({
 
   const DataOcupacion = async () => {
     const result = await axios.post(
-      "https://app.soluziona.cl/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Profesiones",
+      "https://app.soluziona.pe/API_v1_prod/CallSouthPeru/APIVentas_Call/api/Ventas/Call/Profesiones",
       { dato: null },
       { headers: { Authorization: `Bearer ${clave}` } }
     );

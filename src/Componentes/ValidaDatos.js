@@ -87,7 +87,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
 
   const Departamento = async () => {
     const result = await axios.post(
-       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/listas",
+       "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/listas",
       { dato: "S21", dato_1: "", dato_2: "", dato_3: "" },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
@@ -123,7 +123,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
       setOptionValueMotivoDepartamento(valor);
 
       const result = await axios.post(
-         "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/listas",
+         "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/listas",
          //cambiar endpoint para ciudad y provincia y distrito
         {
           dato: "S22",
@@ -162,7 +162,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
       setOptionValueMotivoProvincia(valor);
 
       const result = await axios.post(
-         "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/listas",
+         "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/listas",
          //cambiar endpoint para ciudad y provincia y distrito
         {
           dato: "S23",
@@ -404,7 +404,7 @@ function ValidaDatos({ company, clave, elapsedSeconds, onDataComplete, datafull 
 
   const Company = async (company, clave) => {
     const result = await axios.post(
-       "https://app.soluziona.cl/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
+       "https://app.soluziona.pe/API_QA/Peru/Call/api/Ventas_CRM/Call/ConectaDetalle",
       { dato: company },
       { headers: { Authorization: `Bearer ${clave}` } }
     );
