@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/css/main.dc048d47.css",
-    "main.js": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/js/main.fb74e467.js",
+    "main.js": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/js/main.624fae1f.js",
     "index.html": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/index.html",
     "main.dc048d47.css.map": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/css/main.dc048d47.css.map",
-    "main.fb74e467.js.map": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/js/main.fb74e467.js.map"
+    "main.624fae1f.js.map": "/Orkesta/CallSouth/Ventas/Call/AccidentesPersonales/static/js/main.624fae1f.js.map"
   },
   "entrypoints": [
     "static/css/main.dc048d47.css",
-    "static/js/main.fb74e467.js"
+    "static/js/main.624fae1f.js"
   ]
 }
