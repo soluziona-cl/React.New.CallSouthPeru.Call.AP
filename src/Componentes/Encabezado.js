@@ -12,7 +12,9 @@ const url = setUrl()
 const endpoint_conecta = '/Call/Select/Nivel/P';
 const endpoint_subrespuesta = '/Call/Select/Nivel/H';
 
-function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPoscicionChange, data, DatosCliente, rut, HistorialLlamados, rut_entero, onUniversidadChange, onEstado, setViewConecta, GuardarRegistroNoContesta }) {
+function Encabezado({ company, clave, onClienteChange, onIndecisoChange, 
+  onPoscicionChange, data, DatosCliente, rut, HistorialLlamados, rut_entero, 
+  onUniversidadChange, onEstado, setViewConecta, GuardarRegistroNoContesta, setviewNoContesta }) {
   const [puedeClickear, setPuedeClickear] = useState(true);
 
   const [optionListConecta, setOptionListConecta] = useState([]);
@@ -47,6 +49,8 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
     setValueSubRespuesta(0)
     setValueComunica(0)
     setValueInteresa(0)
+    setviewNoContesta(false)
+    setViewConecta(false)
     if (selectedValue === "0") {
 
       alert("Debe Seleccionar Una Opcion");
@@ -72,6 +76,10 @@ function Encabezado({ company, clave, onClienteChange, onIndecisoChange, onPosci
     setValueSubRespuesta(selectedValue);
     setValueComunica(0)
     setValueInteresa(0)
+
+    setviewNoContesta(false)
+    setViewConecta(false)
+    
     if (selectedValue === "0") {
 
       alert("Debe Seleccionar Una Opcion");

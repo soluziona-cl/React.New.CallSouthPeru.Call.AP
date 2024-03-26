@@ -29,7 +29,11 @@ const Callintro = () => {
   const handleNoConecta = (valor) => {
     console.log(valor)
     setviewNoContesta(valor);
+
+    setViewConecta(false);
   };
+
+
   const [viewConecta, setViewConecta] = useState(false)
 
   const handleConecta = (valor) => {
@@ -37,6 +41,9 @@ const Callintro = () => {
     console.log(valor)
 
     setViewConecta(valor);
+    setviewNoContesta(false);
+
+
   };
 
   const { Alert } = bootstrap;
@@ -315,7 +322,11 @@ const Callintro = () => {
         <Grid item xs={7} sx={{ marginLeft: 3 }}>
           <Encabezado 
           company={company}
-           GuardarRegistroNoContesta={GuardarRegistroNoContesta} clave={token} getToken={token} setViewConecta={handleConecta} setviewNoContesta={handleNoConecta}> </Encabezado>
+          GuardarRegistroNoContesta={GuardarRegistroNoContesta} 
+          clave={token} 
+          getToken={token} 
+          setViewConecta={handleConecta} 
+          setviewNoContesta={handleNoConecta}> </Encabezado>
           <hr className="my-2" />
           {viewConecta && (
             <Grid>
