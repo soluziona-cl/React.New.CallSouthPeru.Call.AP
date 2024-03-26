@@ -25,6 +25,7 @@ registerLocale("es", es);
 const Callintro = () => {
   const [puedeClickear, setPuedeClickear] = useState(true);
   const [viewNoContesta, setviewNoContesta] = useState(false)
+  const [viewConecta, setViewConecta] = useState(false)
 
   const handleNoConecta = (valor) => {
     console.log(valor)
@@ -34,7 +35,6 @@ const Callintro = () => {
   };
 
 
-  const [viewConecta, setViewConecta] = useState(false)
 
   const handleConecta = (valor) => {
     // Lógica para agregar adicional y habilitar Contesta
